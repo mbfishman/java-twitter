@@ -39,10 +39,7 @@ public class JsonUtil {
       status.setCreatedAt(getDateFromJsonObject(jsonObject, "created_at"));
     }
     if (jsonObject.has("id")) {
-      status.setId(jsonObject.getLong("id"));
-    }
-    if (jsonObject.has("relative_created_at")) {
-      status.setRelativeCreatedAt(jsonObject.getString("relative_created_at"));
+      status.setId(jsonObject.getString("id"));
     }
     if (jsonObject.has("text")) {
       status.setText(jsonObject.getString("text"));
@@ -81,7 +78,7 @@ public class JsonUtil {
       user.setDescription(jsonObject.getString("description"));
     }
     if (jsonObject.has("id")) {
-      user.setId(jsonObject.getLong("id"));
+      user.setId(jsonObject.getString("id"));
     }
     if (jsonObject.has("location")) {
       user.setLocation(jsonObject.getString("location"));

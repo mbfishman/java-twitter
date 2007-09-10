@@ -10,15 +10,15 @@ public class UserTest {
   }
 
   private User newSampleUser() {
-    return new User("Indeterminate things", 673483L, "San Francisco, CA",
-        "DeWitt",
+    return new User("dewitt", null, "Indeterminate things",
         "http://twitter.com/system/user/profile_image/673483/normal/me.jpg",
-        "dewitt", newSampleStatus());
+        "San Francisco, CA",
+        "673483", "DeWitt", newSampleStatus(), null);
   }
 
   private Status newSampleStatus() {
     Status status = new Status();
-    status.setId(4212713L);
+    status.setId("4212713");
     return status;
   }
 
@@ -33,8 +33,8 @@ public class UserTest {
   @Test
   public void testId() {
     User user = new User();
-    user.setId(673483L);
-    assertEquals(673483L, user.getId());
+    user.setId("673483");
+    assertEquals("673483", user.getId());
   }
 
   @Test
@@ -77,9 +77,9 @@ public class UserTest {
     User user = new User();
     assertEquals(user, user);
     assertEquals(user, new User());
-    assertEquals(user, new User(null, null, null, null, null, null, null));
-    assertEquals(new User(null, null, null, null, null, null, null), new User(
-        null, null, null, null, null, null, null));
+    assertEquals(user, new User(null, null, null, null, null, null, null, null, null));
+    assertEquals(new User(null, null, null, null, null, null, null, null, null), new User(
+        null, null, null, null, null, null, null, null, null));
     assertEquals(newSampleUser(), newSampleUser());
   }
 
@@ -98,9 +98,9 @@ public class UserTest {
     assertEquals(user.hashCode(), user.hashCode());
     assertEquals(user.hashCode(), new User().hashCode());
     assertEquals(user.hashCode(), new User(null, null, null, null, null, null,
-        null).hashCode());
-    assertEquals(new User(null, null, null, null, null, null, null).hashCode(),
-        new User(null, null, null, null, null, null, null).hashCode());
+        null, null, null).hashCode());
+    assertEquals(new User(null, null, null, null, null, null, null, null, null).hashCode(),
+        new User(null, null, null, null, null, null, null, null, null).hashCode());
     assertEquals(newSampleUser().hashCode(), newSampleUser().hashCode());
   }
 
