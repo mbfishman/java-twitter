@@ -7,11 +7,37 @@ import org.apache.commons.lang.builder.ToStringStyle;
 
 public class User {
 
+  /*  {
+    "status": {
+     "text": "A few months late, I finally bought a copy of Dungen's _Tio Bitar_.  Only 3 minutes into it and sure enough, they're still the best.",
+     "created_at": "Tue Aug 21 22:09:01 +0000 2007",
+     "id": 218838062
+    },
+    "utc_offset": -28800,
+    "statuses_count": 76,
+    "name": "DeWitt",
+    "friends_count": 42,
+    "url": "http:\/\/unto.net\/",
+    "profile_sidebar_fill_color": "CCCCCC",
+    "profile_link_color": "666666",
+    "profile_image_url": "http:\/\/assets0.twitter.com\/system\/user\/profile_image\/673483\/normal\/me.jpg?1171965914",
+    "screen_name": "dewitt",
+    "profile_text_color": "121212",
+    "followers_count": 96,
+    "profile_sidebar_border_color": "333333",
+    "location": "San Francisco, CA",
+    "profile_background_color": "FFFFFF",
+    "favourites_count": 2,
+    "protected": false,
+    "id": 673483,
+    "description": "Indeterminate things"
+   }*/
+
   public User() {
   }
 
-  public User(String description, Long id, String location, String name,
-      String profileImageUrl, String screenName, Status status) {
+  public User(String screenName, String url, String description, String profileImageUrl,
+      boolean isProtected, String location, String id, String name, Status status) {
     setDescription(description);
     setId(id);
     setLocation(location);
@@ -20,8 +46,6 @@ public class User {
     setScreenName(screenName);
     setStatus(status);
   }
-
-
 
   private String description;
 
@@ -37,17 +61,17 @@ public class User {
     this.description = description;
   }
 
-  private Long id = null;
+  private String id = null;
 
   public boolean hasId() {
     return id != null;
   }
 
-  public Long getId() {
+  public String getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(String id) {
     this.id = id;
   }
 

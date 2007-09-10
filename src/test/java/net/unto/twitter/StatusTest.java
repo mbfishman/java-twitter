@@ -13,22 +13,22 @@ public class StatusTest {
   }
 
   private Status newSampleStatus() {
-    return new Status(new Date(1169853434000L), 4391023L,
+    return new Status(new Date(1169853434000L), "4391023",
         "about 10 minutes ago", "Canvas. JC Penny. Three ninety-eight.",
         newSampleUser());
   }
 
   private User newSampleUser() {
     User user = new User();
-    user.setId(718443L);
+    user.setId("718443");
     return user;
   }
 
   @Test
   public void testId() {
     Status status = new Status();
-    status.setId(4391023L);
-    assertEquals(4391023L, status.getId());
+    status.setId("4391023");
+    assertEquals("4391023", status.getId());
   }
 
   @Test
@@ -55,7 +55,6 @@ public class StatusTest {
   @Test
   public void testRelativeCreatedAt() {
     Status status = new Status();
-    status.setRelativeCreatedAt("about 10 minutes ago");
     assertEquals("about 10 minutes ago", status.getRelativeCreatedAt());
   }
 
