@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="0" skipped="0" tests="9" time="0.085" failures="0" name="net.unto.twitter.StatusTest">
+  <properties>
+    <property value="Java(TM) 2 Runtime Environment, Standard Edition" name="java.runtime.name"/>
+    <property value="/usr/lib/j2sdk1.5-sun/jre/lib/i386" name="sun.boot.library.path"/>
+    <property value="1.5.0_07-b03" name="java.vm.version"/>
+    <property value="Sun Microsystems Inc." name="java.vm.vendor"/>
+    <property value="http://java.sun.com/" name="java.vendor.url"/>
+    <property value=":" name="path.separator"/>
+    <property value="Java HotSpot(TM) Client VM" name="java.vm.name"/>
+    <property value="sun.io" name="file.encoding.pkg"/>
+    <property value="US" name="user.country"/>
+    <property value="unknown" name="sun.os.patch.level"/>
+    <property value="Java Virtual Machine Specification" name="java.vm.specification.name"/>
+    <property value="/home/dewitt/workspace/java-twitter" name="user.dir"/>
+    <property value="1.5.0_07-b03" name="java.runtime.version"/>
+    <property value="sun.awt.X11GraphicsEnvironment" name="java.awt.graphicsenv"/>
+    <property value="/home/dewitt/workspace/java-twitter" name="basedir"/>
+    <property value="/usr/lib/j2sdk1.5-sun/jre/lib/endorsed" name="java.endorsed.dirs"/>
+    <property value="i386" name="os.arch"/>
+    <property value="/tmp" name="java.io.tmpdir"/>
+    <property value="
+" name="line.separator"/>
+    <property value="Sun Microsystems Inc." name="java.vm.specification.vendor"/>
+    <property value="Linux" name="os.name"/>
+    <property value="ISO-8859-1" name="sun.jnu.encoding"/>
+    <property value="/usr/lib/j2sdk1.5-sun/jre/lib/i386/client:/usr/lib/j2sdk1.5-sun/jre/lib/i386:/usr/lib/j2sdk1.5-sun/jre/../lib/i386" name="java.library.path"/>
+    <property value="Java Platform API Specification" name="java.specification.name"/>
+    <property value="49.0" name="java.class.version"/>
+    <property value="HotSpot Client Compiler" name="sun.management.compiler"/>
+    <property value="2.6.18.5-gg3-mixed64-32" name="os.version"/>
+    <property value="/home/dewitt" name="user.home"/>
+    <property value="GMT-08:00" name="user.timezone"/>
+    <property value="sun.print.PSPrinterJob" name="java.awt.printerjob"/>
+    <property value="ISO-8859-1" name="file.encoding"/>
+    <property value="1.5" name="java.specification.version"/>
+    <property value="dewitt" name="user.name"/>
+    <property value="/home/dewitt/.m2/repository/org/codehaus/plexus/plexus-archiver/1.0-alpha-7/plexus-archiver-1.0-alpha-7.jar:/home/dewitt/.m2/repository/junit/junit/3.8.1/junit-3.8.1.jar:/home/dewitt/.m2/repository/org/codehaus/plexus/plexus-container-default/1.0-alpha-8/plexus-container-default-1.0-alpha-8.jar:/home/dewitt/.m2/repository/org/apache/maven/surefire/surefire-api/2.3/surefire-api-2.3.jar:/home/dewitt/.m2/repository/classworlds/classworlds/1.1-alpha-2/classworlds-1.1-alpha-2.jar:/home/dewitt/.m2/repository/org/codehaus/plexus/plexus-utils/1.1/plexus-utils-1.1.jar:/home/dewitt/.m2/repository/commons-lang/commons-lang/2.1/commons-lang-2.1.jar:/home/dewitt/.m2/repository/org/apache/maven/surefire/surefire-booter/2.3/surefire-booter-2.3.jar" name="java.class.path"/>
+    <property value="1.0" name="java.vm.specification.version"/>
+    <property value="32" name="sun.arch.data.model"/>
+    <property value="/usr/lib/j2sdk1.5-sun/jre" name="java.home"/>
+    <property value="Sun Microsystems Inc." name="java.specification.vendor"/>
+    <property value="en" name="user.language"/>
+    <property value="mixed mode" name="java.vm.info"/>
+    <property value="1.5.0_07" name="java.version"/>
+    <property value="/usr/lib/j2sdk1.5-sun/jre/lib/ext" name="java.ext.dirs"/>
+    <property value="/usr/lib/j2sdk1.5-sun/jre/lib/rt.jar:/usr/lib/j2sdk1.5-sun/jre/lib/i18n.jar:/usr/lib/j2sdk1.5-sun/jre/lib/sunrsasign.jar:/usr/lib/j2sdk1.5-sun/jre/lib/jsse.jar:/usr/lib/j2sdk1.5-sun/jre/lib/jce.jar:/usr/lib/j2sdk1.5-sun/jre/lib/charsets.jar:/usr/lib/j2sdk1.5-sun/jre/classes" name="sun.boot.class.path"/>
+    <property value="Sun Microsystems Inc." name="java.vendor"/>
+    <property value="/home/dewitt/.m2/repository" name="localRepository"/>
+    <property value="/" name="file.separator"/>
+    <property value="http://java.sun.com/cgi-bin/bugreport.cgi" name="java.vendor.url.bug"/>
+    <property value="little" name="sun.cpu.endian"/>
+    <property value="UnicodeLittle" name="sun.io.unicode.encoding"/>
+    <property value="" name="sun.cpu.isalist"/>
+  </properties>
+  <testcase time="0.002" name="testId"/>
+  <testcase time="0.041" name="testCreatedAtAsString"/>
+  <testcase time="0.002" name="testCreatedAtAsDate"/>
+  <testcase time="0.005" name="testText"/>
+  <testcase time="0.002" name="testRelativeCreatedAt"/>
+  <testcase time="0.002" name="testUser"/>
+  <testcase time="0.003" name="testEquals"/>
+  <testcase time="0.006" name="testNotEquals"/>
+  <testcase time="0.003" name="testHashCode"/>
+</testsuite>
