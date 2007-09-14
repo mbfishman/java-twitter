@@ -16,8 +16,7 @@ public class JsonUtilTest {
       + "\"kesuke\", \"url\": \"http:\\/\\/twitter.com\\/kesuke\"}}";
 
   @Test
-  public void testNewStatusArrayString() throws TwitterException {
-
+  public void testNewStatusArrayString() {
     // Status[] statuses = JsonUtil.newStatusArray(jsonString);
   }
 
