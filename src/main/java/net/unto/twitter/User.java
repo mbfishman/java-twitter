@@ -7,46 +7,107 @@ import org.apache.commons.lang.builder.ToStringStyle;
 
 public class User {
 
-  /*  {
-    "status": {
-     "text": "A few months late, I finally bought a copy of Dungen's _Tio Bitar_.  Only 3 minutes into it and sure enough, they're still the best.",
-     "created_at": "Tue Aug 21 22:09:01 +0000 2007",
-     "id": 218838062
-    },
-    "utc_offset": -28800,
-    "statuses_count": 76,
-    "name": "DeWitt",
-    "friends_count": 42,
-    "url": "http:\/\/unto.net\/",
-    "profile_sidebar_fill_color": "CCCCCC",
-    "profile_link_color": "666666",
-    "profile_image_url": "http:\/\/assets0.twitter.com\/system\/user\/profile_image\/673483\/normal\/me.jpg?1171965914",
-    "screen_name": "dewitt",
-    "profile_text_color": "121212",
-    "followers_count": 96,
-    "profile_sidebar_border_color": "333333",
-    "location": "San Francisco, CA",
-    "profile_background_color": "FFFFFF",
-    "favourites_count": 2,
-    "protected": false,
-    "id": 673483,
-    "description": "Indeterminate things"
-   }*/
-
   public User() {
   }
 
-  public User(String screenName, String url, String description, String profileImageUrl,
-      boolean isProtected, String location, String id, String name, Status status) {
-    setDescription(description);
-    setId(id);
-    setLocation(location);
-    setName(name);
-    setProfileImageUrl(profileImageUrl);
-    setScreenName(screenName);
-    setStatus(status);
+  private String utcOffset;
+
+  public boolean hasUtcOffset() {
+    return utcOffset != null;
+  }
+  
+  public String getUtcOffset() {
+    return utcOffset;
   }
 
+  public void setUtcOffset(String utcOffset) {
+    this.utcOffset = utcOffset;
+  }
+  
+  private Integer statusesCount;
+
+  public boolean hasStatusesCount() {
+    return statusesCount != null;
+  }
+  
+  public Integer getStatusesCount() {
+    return statusesCount;
+  }
+
+  public void setStatusesCount(Integer statusesCount) {
+    this.statusesCount = statusesCount;
+  }
+  
+  private Integer friendsCount;
+
+  public boolean hasFriendsCount() {
+    return friendsCount != null;
+  }
+  
+  public Integer getFriendsCount() {
+    return friendsCount;
+  }
+
+  public void setFriendsCount(Integer friendsCount) {
+    this.friendsCount = friendsCount;
+  }
+
+  private String url;
+
+  public boolean hasUrl() {
+    return url != null;
+  }
+  
+  public String getUrl() {
+    return url;
+  }
+
+  public void setUrl(String url) {
+    this.url = url;
+  }
+
+  private Integer followersCount;
+  
+  public boolean hasFollowersCount() {
+    return followersCount != null;
+  }
+
+  public Integer getFollowersCount() {
+    return followersCount;
+  }
+
+  public void setFollowersCount(Integer followersCount) {
+    this.followersCount = followersCount;
+  }
+
+  private Integer favoritesCount;
+  
+  public boolean hasFavoritesCount() {
+    return favoritesCount != null;
+  }
+  
+  public Integer getFavoritesCount() {
+    return favoritesCount;
+  }
+
+  public void setFavoritesCount(Integer favoritesCount) {
+    this.favoritesCount = favoritesCount;
+  }
+
+  private Boolean isProtected;
+  
+  public boolean hasProtected() {
+    return isProtected != null;
+  }
+  
+  public Boolean getIsProtected() {
+    return isProtected;
+  }
+
+  public void setIsProtected(Boolean isProtected) {
+    this.isProtected = isProtected;
+  }
+  
   private String description;
 
   public boolean hasDescription() {
@@ -144,39 +205,20 @@ public class User {
   public void setStatus(Status status) {
     this.status = status;
   }
-
+  
   @Override
   public String toString() {
-    return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE).append(
-        "description", getDescription()).append("id", getId()).append(
-        "location", getLocation()).append("name", getName()).append(
-        "profile_image_url", getProfileImageUrl()).append("screen_name",
-        getScreenName()).append("status",
-        hasStatus() ? getStatus().getId() : null).toString();
+    return ToStringBuilder.reflectionToString(this,
+        ToStringStyle.MULTI_LINE_STYLE);
   }
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj) {
-      return true;
-    }
-    if ((obj == null) || (!(obj instanceof User))) {
-      return false;
-    }
-    User user = (User) obj;
-    return new EqualsBuilder().append(getDescription(), user.getDescription())
-        .append(getId(), user.getId())
-        .append(getLocation(), user.getLocation()).append(getName(),
-            user.getName()).append(getProfileImageUrl(),
-            user.getProfileImageUrl()).append(getScreenName(),
-            user.getScreenName()).append(getStatus(), user.getStatus())
-        .isEquals();
+    return EqualsBuilder.reflectionEquals(this, obj);
   }
 
   @Override
   public int hashCode() {
-    return new HashCodeBuilder(17, 37).append(getDescription()).append(getId())
-        .append(getLocation()).append(getName()).append(getProfileImageUrl())
-        .append(getScreenName()).append(getStatus()).toHashCode();
+    return HashCodeBuilder.reflectionHashCode(this);
   }
 }
