@@ -34,7 +34,7 @@ public class Api {
   /**
    * Returns the 20 most recent statuses from non-protected users who have set a custom user icon.  Does not require authentication.
    * 
-   * @return an array of Status instances
+   * @return an array of {@link Status} instances
    * @throws TwitterException
    */
   public Status[] getPublicTimeline() throws TwitterException {
@@ -45,7 +45,7 @@ public class Api {
    * Returns the 20 most recent statuses from non-protected users who have set a custom user icon.  Does not require authentication.
    * 
    * @param sinceId Optional.  Returns only public statuses with an ID greater than (that is, more recent than) the specified ID.
-   * @return an array of Status instances
+   * @return an array of {@link Status} instances
    * @throws TwitterException
    */
   public Status[] getPublicTimeline(String sinceId) throws TwitterException {
@@ -62,7 +62,7 @@ public class Api {
   /**
    * Returns the 20 most recent statuses posted in the last 24 hours from the authenticating user and that user's friends.
    * 
-   * @return an array of Status instances
+   * @return an array of {@link Status} instances
    * @throws TwitterException
    */
   public Status[] getFriendsTimeline() throws TwitterException {
@@ -75,7 +75,7 @@ public class Api {
    * @param id  Optional.  Specifies the ID or screen name of the user for whom to return the friends_timeline
    * @param since Optional.  Narrows the returned results to just those statuses created after the specified HTTP-formatted date.
    * @param page Optional.  Gets the 20 next most recent statuses from the authenticating user and that user's friends.
-   * @return an array of Status instances
+   * @return an array of {@link Status} instances
    * @throws TwitterException
    */
   public Status[] getFriendsTimeline(String id, Date since, Integer page) throws TwitterException {
@@ -101,7 +101,7 @@ public class Api {
   /**
    * Returns the 20 most recent statuses posted in the last 24 hours from the authenticating user.
    * 
-   * @return an array of Status instances
+   * @return an array of {@link Status} instances
    * @throws TwitterException
    */
   public Status[] getUserTimeline() throws TwitterException {
@@ -115,7 +115,7 @@ public class Api {
    * @param count Optional.  Specifies the number of statuses to retrieve.  May not be greater than 20 for performance purposes.
    * @param since Optional.  Narrows the returned results to just those statuses created after the specified HTTP-formatted date.
    * @param page  Optional. Retrieves the 20 next most recent direct messages
-   * @return an array of Status instances
+   * @return an array of {@link Status} instances
    * @throws TwitterException
    */
   public Status[] getUserTimeline(String id, Integer count, Date since, Integer page) throws TwitterException {
@@ -145,7 +145,7 @@ public class Api {
    * Returns a single status, specified by the id parameter below.  The status's author will be returned inline.
    * 
    * @param id  Required.  The numerical ID of the status you're trying to retrieve.
-   * @return a Status instance
+   * @return a {@link Status} instance
    * @throws TwitterException
    */
   public Status showStatus(String id) throws TwitterException {
@@ -161,7 +161,7 @@ public class Api {
    * Updates the authenticating user's status.
    * 
    * @param text Required.  The text of your status update.  Must not be more than 160 characters and should not be more than 140 characters to ensure optimal display.
-   * @return a Status instance
+   * @return a {@link Status} instance
    * @throws TwitterException
    */
   public Status updateStatus(String status) throws TwitterException {
@@ -174,7 +174,7 @@ public class Api {
   /**
    * Returns the 20 most recent replies (status updates prefixed with @username posted by users who are friends with the user being replied to) to the authenticating user.  Replies are only available to the authenticating user; you can not request a list of replies to another user whether public or protected.
    * 
-   * @return an array of Status instances
+   * @return an array of {@link Status} instances
    * @throws TwitterException
    */
   public Status[] getReplies() throws TwitterException {
@@ -182,10 +182,10 @@ public class Api {
   }
   
   /**
-   * Returns the 20 most recent replies (status updates prefixed with @username posted by users who are friends with the user being replied to) to the authenticating user.  Replies are only available to the authenticating user; you can not request a list of replies to another user whether public or protected.
+   * Returns the 20 most recent replies (status updates prefixed with @username posted by users who are followers with the user being replied to) to the authenticating user.  Replies are only available to the authenticating user; you can not request a list of replies to another user whether public or protected.
    * 
    * @param page Optional. Retrieves the 20 next most recent replies.
-   * @return an array of Status instances
+   * @return an array of {@link Status} instances
    * @throws TwitterException
    */
   public Status[] getReplies(Integer page) throws TwitterException {
@@ -196,7 +196,7 @@ public class Api {
    * Destroys the status specified by the required ID parameter.  The authenticating user must be the author of the specified status.
    * 
    * @param id Required.  The ID of the status to destroy.
-   * @return a Status instance
+   * @return a {@link Status} instance
    * @throws TwitterException
    */
   public Status destroyStatus(String id) throws TwitterException {
@@ -207,30 +207,30 @@ public class Api {
   }
   
   /**
-   * Returns up to 100 of the authenticating user's friends who have most recently updated, each with current status inline. 
+   * Returns up to 100 of the people the authenticating user follows who have most recently updated, each with current status inline. 
    * 
-   * @return An array of User instances
+   * @return An array of {@link User} instances
    * @throws TwitterException
    */
-  public User[] getFriends() throws TwitterException {
-    return getFriends(null);
+  public User[] getFollowing() throws TwitterException {
+    return getFollowing(null);
   }
   
   /**
-   * Returns up to 100 of the authenticating user's friends who have most recently updated, each with current status inline. 
+   * Returns up to 100 of the people the authenticating user follows who have most recently updated, each with current status inline. 
    * 
-   * @param id Optional.  The ID or screen name of the user for whom to request a list of friends
-   * @return An array of User instances
+   * @param id Optional.  The ID or screen name of the user for whom to request a list of people they follow
+   * @return An array of {@link User} instances
    * @throws TwitterException
    */
-  public User[] getFriends(String id) throws TwitterException {
+  public User[] getFollowing(String id) throws TwitterException {
     throw new TwitterException("Method not implemented");
   }
 
   /**
    * Returns the authenticating user's followers, each with current status inline. 
    * 
-   * @return An array of User instances
+   * @return An array of {@link User} instances
    * @throws TwitterException
    */
   public User[] getFollowers() throws TwitterException {
@@ -241,7 +241,7 @@ public class Api {
    * Returns the authenticating user's followers, each with current status inline. 
    * 
    * @param lite Optional.  Prevents the inline inclusion of current status. 
-   * @return An array of User instances
+   * @return An array of {@link User} instances
    * @throws TwitterException
    */
   public User[] getFollowers(Boolean lite) throws TwitterException {
@@ -251,7 +251,7 @@ public class Api {
   /**
    * Returns a list of the users currently featured on the site with their current statuses inline.
    * 
-   * @return An array of User instances
+   * @return An array of {@link User} instances
    * @throws TwitterException
    */
   public User[] getFeatured() throws TwitterException {
@@ -262,7 +262,7 @@ public class Api {
    * Returns extended information of a given user, specified by ID or screen name as per the required id parameter below.
    * 
    * @param id Required.  The ID or screen name of a user. 
-   * @return A User instance
+   * @return A {@link User} instance
    * @throws TwitterException
    */
   public User showUser(String id) throws TwitterException {
@@ -272,47 +272,81 @@ public class Api {
     throw new TwitterException("Method not implemented");
   }
 
-
-  public Status postUpdate(String username, String password, String text)
-      throws TwitterException {
-    if (username == null) {
-      throw new IllegalArgumentException("Username must not be null");
-    }
-    if (password == null) {
-      throw new IllegalArgumentException("Password must not be null");
+  /**
+   * Returns a list of the 20 most recent direct messages sent to the authenticating user. 
+   *  
+   * @return An array of {@link DirectMessage} instances
+   * @throws TwitterException
+   */
+  public DirectMessage[] getDirectMessages() throws TwitterException {
+    return getDirectMessages(null, null, null);
+  }
+  
+  /**
+   * Returns a list of the 20 most recent direct messages sent to the authenticating user. 
+   *  
+   * @param since Optional.  Narrows the resulting list of direct messages to just those sent after the specified HTTP-formatted date.
+   * @param sinceId Optional.  Returns only direct messages with an ID greater than (that is, more recent than) the specified ID.
+   * @param page Optional. Retrieves the 20 next most recent direct messages. 
+   * @return An array of {@link DirectMessage} instances
+   * @throws TwitterException
+   */
+  public DirectMessage[] getDirectMessages(Date since, String sinceId, Integer page) throws TwitterException {
+    throw new TwitterException("Method not implemented");
+  }
+  
+  /**
+   * Returns a list of the 20 most recent direct messages sent by the authenticating user.
+   * 
+   * @throws TwitterException
+   */
+  public DirectMessage[] getSentDirectMessages() throws TwitterException {
+    return getSentDirectMessages(null, null, null);
+  }
+  
+  /**
+   * Returns a list of the 20 most recent direct messages sent by the authenticating user.
+   * 
+   * @param since Optional.  Narrows the resulting list of direct messages to just those sent after the specified HTTP-formatted date.
+   * @param sinceId Optional.  Returns only sent direct messages with an ID greater than (that is, more recent than) the specified ID.
+   * @param page Optional. Retrieves the 20 next most recent direct messages sent. 
+   * @return An array of {@link DirectMessage} instances
+   * @throws TwitterException
+   */
+  public DirectMessage[] getSentDirectMessages(Date since, String sinceId, Integer page) throws TwitterException {
+    throw new TwitterException("Method not implemented");
+  }
+  
+  /**
+   * Sends a new direct message to the specified user from the authenticating user.
+   * 
+   * @param user Required.  The ID or screen name of the recipient user.
+   * @param text  Required.  The text of your direct message.
+   * @return A {@link DirectMessage} instance
+   */
+  public DirectMessage newDirectMessage(String user, String text) throws TwitterException {
+    if (user == null) {
+      throw new TwitterException("user required");
     }
     if (text == null) {
-      throw new IllegalArgumentException("Status text must not be null");
+      throw new TwitterException("text required");
     }
-    HttpClient httpClient = new HttpClient();
-    HttpMethod method = new PostMethod(
-        "http://twitter.com/statuses/update.json");
-    NameValuePair textParameter = new NameValuePair("status", text);
-    method.setQueryString(new NameValuePair[] {textParameter});
-    String jsonString = executeHttpMethod(httpClient, method);
-    return JsonUtil.newStatus(jsonString);
+    throw new TwitterException("Method not implemented");
   }
-
-
-  private String executeHttpMethod(HttpClient client, HttpMethod method)
-      throws TwitterException {
-    try {
-      int statusCode = client.executeMethod(method);
-      if (statusCode != HttpStatus.SC_OK) {
-        throw new TwitterException("Expected 200 OK. Received " + statusCode);
-      }
-      String responseBody = method.getResponseBodyAsString();
-      if (responseBody == null) {
-        throw new TwitterException("Expected response body, got null");
-      }
-      return responseBody;
-    } catch (HttpException e) {
-      throw new TwitterException(e);
-    } catch (IOException e) {
-      throw new TwitterException(e);
-    } finally {
-      method.releaseConnection();
+  
+  
+  /**
+   * Destroys the direct message specified in the required ID parameter.  The authenticating user must be the recipient of the specified direct message.
+   * 
+   * @param id Required.  The ID of the direct message to destroy. 
+   * @return A {@link DirectMessage} instance
+   * @throws TwitterException
+   */
+  public DirectMessage destroyDirectMessage(String id) throws TwitterException {
+    if (id == null) {
+      throw new TwitterException("id required");
     }
+    throw new TwitterException("Method not implemented");
   }
   
   public void setCredentials(String username, String password) {
@@ -343,7 +377,7 @@ public class Api {
     return this.manager;
   }
   
-  public void setHttpConnectionManager(HttpConnectionManager manager) {
+  protected void setHttpConnectionManager(HttpConnectionManager manager) {
     this.manager = manager;
   }
   
@@ -354,6 +388,10 @@ public class Api {
       this.httpClient = new HttpClient(getHttpConnectionManager());
     }
     return this.httpClient;
+  }
+  
+  protected void setHttpClient(HttpClient httpClient) {
+    this.httpClient = httpClient;
   }
   
   private String execute(HttpMethod method) throws TwitterException {
