@@ -64,5 +64,19 @@
       <version>2.2.2</version>
     </dependency>
   </dependencies>
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <configuration>
+          <links>
+            <link>http://java.sun.com/j2se/1.5/docs/api</link>
+            <link>http://jakarta.apache.org/commons/httpclient/apidocs</link>
+          </links>
+      </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
 </project>
 

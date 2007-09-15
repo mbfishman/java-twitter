@@ -8,14 +8,6 @@ public class ApiTest {
 
   @Test
   public void testGetPublicTimeline() throws TwitterException {
-//    HttpConnectionManager mock = createNiceMock(HttpConnectionManager.class);
-//    replay(mock);
-    Api api = new Api();
-//    api.setHttpConnectionManager(mock);
-    Status[] statuses = api.getPublicTimeline();
-    for (int i = 0; i < statuses.length; i++) {
-      System.out.println(statuses[i]);
-    }
   }
 
   @Test
