@@ -349,6 +349,90 @@ public class Api {
     throw new TwitterException("Method not implemented");
   }
   
+  
+  /**
+   * Adds the user specified in the ID parameter to the list of users that the authenticating user is following.
+   * 
+   * @param id Required.  The ID or screen name of the user to start following. 
+   * @return A {@link User} instance
+   * @throws TwitterException
+   */
+  public User startFollowing(String id) throws TwitterException {
+    if (id == null) {
+      throw new TwitterException("id required");
+    }
+    throw new TwitterException("Method not implemented");
+  }
+  
+  /**
+   * Removes the user specified in the ID parameter from the list of users that the authenticating user is following.
+   * 
+   * @param id Required.  The ID or screen name of the user to stop following. 
+   * @return A {@link User} instance
+   * @throws TwitterException
+   */
+  public User stopFollowing(String id) throws TwitterException {
+    if (id == null) {
+      throw new TwitterException("id required");
+    }
+    throw new TwitterException("Method not implemented");
+  }
+  
+  /**
+   * Returns the 20 most recent favorite statuses for the authenticating user or user specified by the ID parameter.
+   * 
+   * @return an array of {@link Status} instances
+   */
+  public Status[] getFavorites() throws TwitterException {
+    return getFavorites(null, null);
+  }
+  
+  /**
+   * Returns the 20 most recent favorite statuses for the authenticating user or user specified by the ID parameter.
+   * 
+   * @param id Optional.  The ID or screen name of the user for whom to request a list of favorite statuses.   
+   * @param page Optional. Retrieves the 20 next most recent favorite statuses.
+   * @return an array of {@link Status} instances
+   */
+  public Status[] getFavorites(String id, Integer page) throws TwitterException {
+    throw new TwitterException("Method not implemented");
+  }
+  
+  /**
+   * Favorites the status specified in the ID parameter as the authenticating user.  
+   * 
+   * @param id Required.  The ID of the status to favorite.
+   * @return a {@link Status} instance
+   * @throws TwitterException
+   */
+  public Status createFavorite(String id) throws TwitterException {
+    if (id == null) {
+      throw new TwitterException("id required");
+    }
+    throw new TwitterException("Method not implemented");
+  }
+  
+  /**
+   * Un-favorites the status specified in the ID parameter as the authenticating user. 
+   * 
+   * @param id Required.  The ID of the status to un-favorite.
+   * @return a {@link Status} instance
+   * @throws TwitterException
+   */
+  public Status destroyFavorite(String id) throws TwitterException {
+    if (id == null) {
+      throw new TwitterException("id required");
+    }
+    throw new TwitterException("Method not implemented");
+  }
+  
+  
+  /**
+   * Use the specified username and password to authenticate as a user.
+   * 
+   * @param username the Twitter username
+   * @param password the Twitter password
+   */
   public void setCredentials(String username, String password) {
     if (username == null) {
       throw new IllegalArgumentException("Username must not be null");
