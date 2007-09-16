@@ -39,12 +39,16 @@ public class JsonUtil {
     if (jsonObject.has("id")) {
       status.setId(jsonObject.getString("id"));
     }
-    if (jsonObject.has("text")) {
-      status.setText(jsonObject.getString("text"));
+    if (jsonObject.has("source")) {
+      status.setSource(jsonObject.getString("source"));
     }
     if (jsonObject.has("user")) {
       status.setUser(newUser(jsonObject.getJSONObject("user")));
     }
+    if (jsonObject.has("text")) {
+      status.setText(jsonObject.getString("text"));
+    }
+
     return status;
   }
 
@@ -72,23 +76,41 @@ public class JsonUtil {
       return null;
     }
     User user = new User();
-    if (jsonObject.has("description")) {
-      user.setDescription(jsonObject.getString("description"));
-    }
     if (jsonObject.has("id")) {
       user.setId(jsonObject.getString("id"));
-    }
-    if (jsonObject.has("location")) {
-      user.setLocation(jsonObject.getString("location"));
     }
     if (jsonObject.has("name")) {
       user.setName(jsonObject.getString("name"));
     }
+    if (jsonObject.has("location")) {
+      user.setLocation(jsonObject.getString("location"));
+    }
+    if (jsonObject.has("description")) {
+      user.setDescription(jsonObject.getString("description"));
+    }
     if (jsonObject.has("profile_image_url")) {
       user.setProfileImageUrl(jsonObject.getString("profile_image_url"));
     }
-    if (jsonObject.has("screen_name")) {
-      user.setScreenName(jsonObject.getString("screen_name"));
+    if (jsonObject.has("url")) {
+      user.setUrl(jsonObject.getString("url"));
+    }
+    if (jsonObject.has("protected")) {
+      user.setIsProtected(jsonObject.getBoolean("protected"));
+    }
+    if (jsonObject.has("friends_count")) {
+      user.setFollowingCount(jsonObject.getInt("friends_count"));
+    }
+    if (jsonObject.has("favorites_count")) {
+      user.setFavoritesCount(jsonObject.getInt("favorites_count"));
+    }
+    if (jsonObject.has("utc_offset")) {
+      user.setUtcOffset(jsonObject.getInt("utc_offset"));
+    }
+    if (jsonObject.has("statuses_count")) {
+      user.setStatusesCount(jsonObject.getInt("statuses_count"));
+    }
+    if (jsonObject.has("followers_count")) {
+      user.setFollowersCount(jsonObject.getInt("followers_count"));
     }
     if (jsonObject.has("status")) {
       user.setStatus(newStatus(jsonObject.getJSONObject("status")));

@@ -198,9 +198,14 @@ public class Api {
    */
   public Status[] getReplies(Integer page) throws TwitterException {
     requireCredentials();
-    // TODO(dewitt): Implement
     String url = "http://twitter.com/statuses/replies.json";
-    throw new TwitterException("Method not implemented");
+    HttpMethod method = new GetMethod(url);
+    List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+    if (page != null) {
+      parameters.add(new NameValuePair("page", page.toString()));
+    }
+    method.setQueryString((NameValuePair[])parameters.toArray(new NameValuePair[parameters.size()]));
+    return JsonUtil.newStatusArray(execute(method));
   }
   
   /**
@@ -239,8 +244,15 @@ public class Api {
    * @throws TwitterException
    */
   public User[] getFollowing(String id) throws TwitterException {
-    // TODO(dewitt): Implement
-    throw new TwitterException("Method not implemented");
+    requireCredentials();
+    String url;
+    if (id == null) {
+      url = "http://twitter.com/statuses/friends.json";
+    } else {
+      url = String.format("http://twitter.com/statuses/friends/%s.json", id);
+    }
+    HttpMethod method = new GetMethod(url);
+    return JsonUtil.newUserArray(execute(method));
   }
 
   /**
@@ -261,8 +273,15 @@ public class Api {
    * @throws TwitterException
    */
   public User[] getFollowers(Boolean lite) throws TwitterException {
-    // TODO(dewitt): Implement
-    throw new TwitterException("Method not implemented");
+    requireCredentials();
+    String url = "http://twitter.com/statuses/followers.json";
+    List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+    if (lite != null && lite == Boolean.TRUE) {
+      parameters.add(new NameValuePair("lite", "true"));
+    }
+    HttpMethod method = new GetMethod(url);
+    method.setQueryString((NameValuePair[])parameters.toArray(new NameValuePair[parameters.size()]));
+    return JsonUtil.newUserArray(execute(method));
   }
   
   /**
@@ -272,8 +291,9 @@ public class Api {
    * @throws TwitterException
    */
   public User[] getFeatured() throws TwitterException {
-    // TODO(dewitt): Implement
-    throw new TwitterException("Method not implemented");
+    String url = "http://twitter.com/statuses/featured.json";
+    HttpMethod method = new GetMethod(url);
+    return JsonUtil.newUserArray(execute(method));
   }
  
   /**
@@ -287,8 +307,9 @@ public class Api {
     if (id == null) {
       throw new IllegalArgumentException("id required");
     }
-    // TODO(dewitt): Implement
-    throw new TwitterException("Method not implemented");
+    String url = String.format("http://twitter.com/users/show/%s.json", id);
+    HttpMethod method = new GetMethod(url);
+    return JsonUtil.newUser(execute(method));
   }
 
   /**
@@ -552,11 +573,15 @@ public class Api {
     Api api = new Api();
 
 //    api.updateStatus("Моё судно на воздушной подушке полно угрей");
-    Status[] statuses = api.getUserTimeline();
-    for (Status status : statuses) {
-      System.out.println(status);
+//    Status[] statuses = api.getReplies();
+ //   for (Status status : statuses) {
+ //     System.out.println(status);
 //      System.out.println(status.getText());
-    }
+//    }
 //    System.out.println(api.destroyStatus(271586842L));
+//    System.out.println(api.showUser("dewitt"));
+    for (User user : api.getFollowers()) {
+      System.out.println(user);
+    }
   }
 }

@@ -10,17 +10,17 @@ public class User {
   public User() {
   }
 
-  private String utcOffset;
+  private Integer utcOffset;
 
   public boolean hasUtcOffset() {
     return utcOffset != null;
   }
   
-  public String getUtcOffset() {
+  public Integer getUtcOffset() {
     return utcOffset;
   }
 
-  public void setUtcOffset(String utcOffset) {
+  public void setUtcOffset(Integer utcOffset) {
     this.utcOffset = utcOffset;
   }
   
@@ -38,18 +38,18 @@ public class User {
     this.statusesCount = statusesCount;
   }
   
-  private Integer friendsCount;
+  private Integer followingCount;
 
-  public boolean hasFriendsCount() {
-    return friendsCount != null;
+  public boolean hasFollowingCount() {
+    return followingCount != null;
   }
   
-  public Integer getFriendsCount() {
-    return friendsCount;
+  public Integer getFollowingCount() {
+    return followingCount;
   }
 
-  public void setFriendsCount(Integer friendsCount) {
-    this.friendsCount = friendsCount;
+  public void setFollowingCount(Integer followingCount) {
+    this.followingCount = followingCount;
   }
 
   private String url;
@@ -208,8 +208,7 @@ public class User {
   
   @Override
   public String toString() {
-    return ToStringBuilder.reflectionToString(this,
-        ToStringStyle.MULTI_LINE_STYLE);
+    return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
   }
 
   @Override

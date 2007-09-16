@@ -9,7 +9,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 
-class Status {
+public class Status {
 
   public Status() {
   }
@@ -29,7 +29,7 @@ class Status {
   }
 
   public void setCreatedAt(String createdAtString) {
-    setCreatedAt(parseTwitterDateString(createdAtString));
+    setCreatedAt(parseTwitterDateTimeString(createdAtString));
   }
 
   public String getRelativeCreatedAt() {
@@ -95,7 +95,7 @@ class Status {
   
   private final static DateTimeFormatter TWITTER_DATE_FORMATTER = DateTimeFormat.forPattern("EEE MMM dd HH:mm:ss Z yyyy");
   
-  private DateTime parseTwitterDateString(String twitterDateString) {
+  private DateTime parseTwitterDateTimeString(String twitterDateString) {
     try {
       return TWITTER_DATE_FORMATTER.parseDateTime(twitterDateString);
     } catch (IllegalArgumentException e) {
@@ -106,12 +106,11 @@ class Status {
 
   @Override
   public String toString() {
-    return ToStringBuilder.reflectionToString(this,
-        ToStringStyle.MULTI_LINE_STYLE);
+    return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
   }
 
   @Override
-  public boolean equals(Object obj) {
+  public boolean equals(Object obj) { 
     return EqualsBuilder.reflectionEquals(this, obj);
   }
 
@@ -119,5 +118,4 @@ class Status {
   public int hashCode() {
     return HashCodeBuilder.reflectionHashCode(this);
   }
-
 }
