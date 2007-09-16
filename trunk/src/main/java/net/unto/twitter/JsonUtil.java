@@ -6,7 +6,7 @@ import net.sf.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JsonUtil {
+class JsonUtil {
 
   public final static Status[] newStatusArray(String jsonString)
       throws TwitterException {
