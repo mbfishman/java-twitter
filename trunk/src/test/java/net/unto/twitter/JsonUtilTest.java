@@ -28,7 +28,7 @@ public class JsonUtilTest {
   @Test
   public void testNewStatusString() throws TwitterException {
     Status status = JsonUtil.newStatus(STATUS_JSON_STRING);
-    assertEquals(4391023L, status.getId());
+    assertEquals(4391023L, (long)status.getId());
   }
 
   @Test

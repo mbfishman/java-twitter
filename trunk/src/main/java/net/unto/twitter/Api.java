@@ -1,7 +1,6 @@
 package net.unto.twitter;
 
 import org.apache.commons.httpclient.Credentials;
-import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpConnectionManager;
 import org.apache.commons.httpclient.HttpException;
@@ -167,10 +166,10 @@ public class Api {
    * @throws TwitterException
    */
   public Status updateStatus(String status) throws TwitterException {
-    requireCredentials();
     if (status == null) {
       throw new IllegalArgumentException("status required");
     }
+    requireCredentials();
     String url = "http://twitter.com/statuses/update.json";
     HttpMethod method = new PostMethod(url);
     List<NameValuePair> parameters = new ArrayList<NameValuePair>();
@@ -216,10 +215,10 @@ public class Api {
    * @throws TwitterException
    */
   public Status destroyStatus(Long id) throws TwitterException {
-    requireCredentials();
     if (id == null) {
       throw new IllegalArgumentException("id required");
     }
+    requireCredentials();
     String url = String.format("http://twitter.com/statuses/destroy/%d.json", id);
     System.out.println(url);
     HttpMethod method = new PostMethod(url);
@@ -332,8 +331,21 @@ public class Api {
    * @throws TwitterException
    */
   public DirectMessage[] getDirectMessages(DateTime since, String sinceId, Integer page) throws TwitterException {
-    // TODO(dewitt): Implement
-    throw new TwitterException("Method not implemented");
+    requireCredentials();
+    String url = "http://twitter.com/direct_messages.json";
+    List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+    if (since != null) {
+      parameters.add(new NameValuePair("since", since.toString()));
+    }
+    if (sinceId != null) {
+      parameters.add(new NameValuePair("since_id", sinceId));
+    }
+    if (page != null) {
+      parameters.add(new NameValuePair("page", page.toString()));
+    }
+    HttpMethod method = new GetMethod(url);
+    method.setQueryString((NameValuePair[])parameters.toArray(new NameValuePair[parameters.size()]));
+    return JsonUtil.newDirectMessageArray(execute(method));
   }
   
   /**
@@ -342,7 +354,6 @@ public class Api {
    * @throws TwitterException
    */
   public DirectMessage[] getSentDirectMessages() throws TwitterException {
-    // TODO(dewitt): Implement
     return getSentDirectMessages(null, null, null);
   }
   
@@ -356,8 +367,21 @@ public class Api {
    * @throws TwitterException
    */
   public DirectMessage[] getSentDirectMessages(DateTime since, String sinceId, Integer page) throws TwitterException {
-    // TODO(dewitt): Implement
-    throw new TwitterException("Method not implemented");
+    requireCredentials();
+    String url = "http://twitter.com/direct_messages/sent.json";
+    List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+    if (since != null) {
+      parameters.add(new NameValuePair("since", since.toString()));
+    }
+    if (sinceId != null) {
+      parameters.add(new NameValuePair("since_id", sinceId));
+    }
+    if (page != null) {
+      parameters.add(new NameValuePair("page", page.toString()));
+    }
+    HttpMethod method = new GetMethod(url);
+    method.setQueryString((NameValuePair[])parameters.toArray(new NameValuePair[parameters.size()]));
+    return JsonUtil.newDirectMessageArray(execute(method));
   }
   
   /**
@@ -374,8 +398,14 @@ public class Api {
     if (text == null) {
       throw new IllegalArgumentException("text required");
     }
-    // TODO(dewitt): Implement
-    throw new TwitterException("Method not implemented");
+    requireCredentials();
+    String url = "http://twitter.com/direct_messages/new.json";
+    HttpMethod method = new PostMethod(url);
+    List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+    parameters.add(new NameValuePair("user", user));
+    parameters.add(new NameValuePair("text", text));
+    method.setQueryString((NameValuePair[])parameters.toArray(new NameValuePair[parameters.size()]));
+    return JsonUtil.newDirectMessage(execute(method));
   }
   
   
@@ -386,12 +416,15 @@ public class Api {
    * @return A {@link DirectMessage} instance
    * @throws TwitterException
    */
-  public DirectMessage destroyDirectMessage(String id) throws TwitterException {
+  public DirectMessage destroyDirectMessage(Long id) throws TwitterException {
     if (id == null) {
       throw new IllegalArgumentException("id required");
     }
-    // TODO(dewitt): Implement
-    throw new TwitterException("Method not implemented");
+    requireCredentials();
+    String url = String.format("http://twitter.com/direct_messages/destroy/%d.json", id);
+    System.out.println(url);
+    HttpMethod method = new PostMethod(url);
+    return JsonUtil.newDirectMessage(execute(method));
   }
   
   
@@ -406,6 +439,7 @@ public class Api {
     if (id == null) {
       throw new IllegalArgumentException("id required");
     }
+    requireCredentials();
     // TODO(dewitt): Implement
     throw new TwitterException("Method not implemented");
   }
@@ -421,6 +455,7 @@ public class Api {
     if (id == null) {
       throw new IllegalArgumentException("id required");
     }
+    requireCredentials();
     // TODO(dewitt): Implement
     throw new TwitterException("Method not implemented");
   }
@@ -572,6 +607,12 @@ public class Api {
   public static void main(String[] argv) throws TwitterException {
     Api api = new Api();
 
+   for (DirectMessage directMessage : api.getDirectMessages( )) {
+      System.out.println(directMessage);
+   }
+//    for (Status status : api.getReplies()) {
+//     System.out.println(status);
+//    }
 //    api.updateStatus("Моё судно на воздушной подушке полно угрей");
 //    Status[] statuses = api.getReplies();
  //   for (Status status : statuses) {
@@ -580,8 +621,8 @@ public class Api {
 //    }
 //    System.out.println(api.destroyStatus(271586842L));
 //    System.out.println(api.showUser("dewitt"));
-    for (User user : api.getFollowers()) {
-      System.out.println(user);
-    }
+//    for (User user : api.getFollowers()) {
+//      System.out.println(user);
+//    }
   }
 }

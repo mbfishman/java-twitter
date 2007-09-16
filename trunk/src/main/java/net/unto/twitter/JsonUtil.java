@@ -37,7 +37,7 @@ public class JsonUtil {
       status.setCreatedAt(jsonObject.getString("created_at"));
     }
     if (jsonObject.has("id")) {
-      status.setId(jsonObject.getString("id"));
+      status.setId(jsonObject.getLong("id"));
     }
     if (jsonObject.has("source")) {
       status.setSource(jsonObject.getString("source"));
@@ -77,7 +77,7 @@ public class JsonUtil {
     }
     User user = new User();
     if (jsonObject.has("id")) {
-      user.setId(jsonObject.getString("id"));
+      user.setId(jsonObject.getLong("id"));
     }
     if (jsonObject.has("name")) {
       user.setName(jsonObject.getString("name"));
@@ -116,5 +116,56 @@ public class JsonUtil {
       user.setStatus(newStatus(jsonObject.getJSONObject("status")));
     }
     return user;
+  }
+  
+  public final static DirectMessage[] newDirectMessageArray(String jsonString) throws TwitterException {
+    return newDirectMessageArray(JSONArray.fromObject(jsonString));
+  }
+
+  public final static DirectMessage[] newDirectMessageArray(JSONArray jsonArray) throws TwitterException {
+    List<DirectMessage> directMessageList = new ArrayList<DirectMessage>();
+    for (int i = 0; i < jsonArray.size(); i++) {
+      directMessageList.add(newDirectMessage(jsonArray.getJSONObject(i)));
+    }
+    return directMessageList.toArray(new DirectMessage[directMessageList.size()]);
+  }
+
+  public final static DirectMessage newDirectMessage(String jsonString) throws TwitterException {
+    return newDirectMessage(JSONObject.fromObject(jsonString));
+  }
+
+  public final static DirectMessage newDirectMessage(JSONObject jsonObject) throws TwitterException {
+    if (jsonObject == null) {
+      return null;
+    }
+    DirectMessage directMessage = new DirectMessage();
+    if (jsonObject.has("sender_screen_name")) {
+      directMessage.setSenderScreenName(jsonObject.getString("sender_screen_name"));
+    }
+    if (jsonObject.has("recipient_id")) {
+      directMessage.setRecipientId(jsonObject.getLong("recipient_id"));
+    }
+    if (jsonObject.has("sender")) {
+      directMessage.setSender(newUser(jsonObject.getJSONObject("sender")));
+    }
+    if (jsonObject.has("created_at")) {
+      directMessage.setCreatedAt(jsonObject.getString("created_at"));
+    }
+    if (jsonObject.has("recipient_screen_name")) {
+      directMessage.setRecipientScreenName(jsonObject.getString("recipient_screen_name"));
+    }
+    if (jsonObject.has("recipient")) {
+      directMessage.setRecipient(newUser(jsonObject.getJSONObject("recipient")));
+    }
+    if (jsonObject.has("text")) {
+      directMessage.setText(jsonObject.getString("text"));
+    }
+    if (jsonObject.has("sender_id")) {
+      directMessage.setSenderId(jsonObject.getLong("sender_id"));
+    }
+    if (jsonObject.has("id")) {
+      directMessage.setId(jsonObject.getLong("id"));
+    }
+    return directMessage;
   }
 }
