@@ -4,33 +4,32 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
-public class Status {
+class Status {
 
   public Status() {
   }
   
-  private Date createdAt;
+  private DateTime createdAt;
 
   public boolean hasCreatedAt() {
     return createdAt != null;
   }
 
-  public Date getCreatedAt() {
+  public DateTime getCreatedAt() {
     return createdAt;
   }
 
-  public void setCreatedAt(Date createdAt) {
+  public void setCreatedAt(DateTime createdAt) {
     this.createdAt = createdAt;
   }
 
-  public void setCreatedAt(String createdAtString) throws ParseException {
-    setCreatedAt(getTwitterDateFormat().parse(createdAtString));
+  public void setCreatedAt(String createdAtString) {
+    setCreatedAt(parseTwitterDateString(createdAtString));
   }
 
   public String getRelativeCreatedAt() {
@@ -94,10 +93,15 @@ public class Status {
     this.user = user;
   }
   
-  protected static DateFormat getTwitterDateFormat() {
-    // Dates are in the form: "Fri Mar 09 18:59:02 +0000 2007"
-    // As date formats instances are not synchronized, created a new one
-    return new SimpleDateFormat("EEE MMM d H:m:s Z yyyy");
+  private final static DateTimeFormatter TWITTER_DATE_FORMATTER = DateTimeFormat.forPattern("EEE MMM dd HH:mm:ss Z yyyy");
+  
+  private DateTime parseTwitterDateString(String twitterDateString) {
+    try {
+      return TWITTER_DATE_FORMATTER.parseDateTime(twitterDateString);
+    } catch (IllegalArgumentException e) {
+      System.err.println(String.format("Could not parse date string '%s'", twitterDateString));
+      return null;
+    }
   }
 
   @Override

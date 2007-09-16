@@ -3,9 +3,7 @@ package net.unto.twitter;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class JsonUtil {
@@ -36,7 +34,7 @@ public class JsonUtil {
     }
     Status status = new Status();
     if (jsonObject.has("created_at")) {
-      status.setCreatedAt(getDateFromJsonObject(jsonObject, "created_at"));
+      status.setCreatedAt(jsonObject.getString("created_at"));
     }
     if (jsonObject.has("id")) {
       status.setId(jsonObject.getString("id"));
@@ -96,18 +94,5 @@ public class JsonUtil {
       user.setStatus(newStatus(jsonObject.getJSONObject("status")));
     }
     return user;
-  }
-
-  private static Date getDateFromJsonObject(JSONObject jsonObject, String key)
-      throws TwitterException {
-    if (jsonObject.has(key)) {
-      String dateString = jsonObject.getString(key);
-      try {
-        return Status.getTwitterDateFormat().parse(dateString);
-      } catch (ParseException e) {
-        throw new TwitterException(e);
-      }
-    }
-    return null;
   }
 }
