@@ -1,10 +1,182 @@
 package net.unto.twitter;
 
-/*
- [{"sender_screen_name":"mfagan","recipient_id":673483,"sender":{"url":"http:\/\/faganm.com\/","name":"mfagan","screen_name":"mfagan","description":"","profile_image_url":"http:\/\/assets2.twitter.com\/system\/user\/profile_image\/677403\/normal\/me_with_hat.jpg?1171966071","location":"Canada","id":677403,"protected":false},"created_at":"Mon Jan 22 01:52:35 +0000 2007","recipient_screen_name":"dewitt","recipient":{"url":"http:\/\/unto.net\/","name":"DeWitt","screen_name":"dewitt","description":"Indeterminate things","profile_image_url":"http:\/\/assets0.twitter.com\/system\/user\/profile_image\/673483\/normal\/me.jpg?1171965914","location":"San Francisco, CA","id":673483,"protected":false},"text":"1) I read your post on twitter\r\n2) I figure i may as well get an account\r\n3) about an hour later you've added me as a friend...  that shouldn't even be possible","sender_id":677403,"id":205913}]
- */
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+import org.joda.time.DateTime;
 
 public class DirectMessage
 {
+  private String senderScreenName;
+  
+  private Long recipientId;
+  
+  private User sender;
+  
+  private DateTime createdAt;
+  
+  private String recipientScreenName;
+  
+  private User recipient;
+  
+  private String text;
+  
+  private Long senderId;
+  
+  private Long id;
 
+  public String getSenderScreenName( )
+  {
+    return senderScreenName;
+  }
+
+  public void setSenderScreenName( String senderScreenName )
+  {
+    this.senderScreenName = senderScreenName;
+  }
+  
+  public boolean hasSenderScreenName( )
+  {
+    return senderScreenName != null;
+  }
+
+  public Long getRecipientId( )
+  {
+    return recipientId;
+  }
+
+  public void setRecipientId( Long recipientId )
+  {
+    this.recipientId = recipientId;
+  }
+
+  public boolean hasRecipientId( )
+  {
+    return recipientId != null;
+  }
+  
+  public User getSender( )
+  {
+    return sender;
+  }
+
+  public void setSender( User sender )
+  {
+    this.sender = sender;
+  }
+
+  public boolean hasSender( )
+  {
+    return sender != null;
+  }
+  
+  public DateTime getCreatedAt( )
+  {
+    return createdAt;
+  }
+
+  public void setCreatedAt( DateTime createdAt )
+  {
+    this.createdAt = createdAt;
+  }
+
+  public void setCreatedAt(String createdAtString) {
+    setCreatedAt(TwitterUtil.parseTwitterDateTimeString(createdAtString));
+  }
+  
+  public boolean hasCreatedAt( )
+  {
+    return createdAt != null;
+  }
+  
+  public String getRecipientScreenName( )
+  {
+    return recipientScreenName;
+  }
+
+  public void setRecipientScreenName( String recipientScreenName )
+  {
+    this.recipientScreenName = recipientScreenName;
+  }
+
+  public boolean hasRecipientScreenName( )
+  {
+    return recipientScreenName != null;
+  }
+  
+  public User getRecipient( )
+  {
+    return recipient;
+  }
+
+  public void setRecipient( User recipient )
+  {
+    this.recipient = recipient;
+  }
+
+  public boolean hasRecipient( )
+  {
+    return recipient != null;
+  }
+  
+  public String getText( )
+  {
+    return text;
+  }
+
+  public void setText( String text )
+  {
+    this.text = text;
+  }
+
+  public boolean hasText( )
+  {
+    return text != null;
+  }
+  
+  public Long getSenderId( )
+  {
+    return senderId;
+  }
+
+  public void setSenderId( Long senderId )
+  {
+    this.senderId = senderId;
+  }
+
+  public boolean hasSenderId( )
+  {
+    return senderId != null;
+  }
+  
+  public Long getId( )
+  {
+    return id;
+  }
+
+  public void setId( Long id )
+  {
+    this.id = id;
+  }
+  
+  public boolean hasId( )
+  {
+    return id != null;
+  }
+  
+  @Override
+  public String toString() {
+    return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+  }
+
+  @Override
+  public boolean equals(Object obj) { 
+    return EqualsBuilder.reflectionEquals(this, obj);
+  }
+
+  @Override
+  public int hashCode() {
+    return HashCodeBuilder.reflectionHashCode(this);
+  }
 }

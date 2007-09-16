@@ -29,7 +29,7 @@ public class Status {
   }
 
   public void setCreatedAt(String createdAtString) {
-    setCreatedAt(parseTwitterDateTimeString(createdAtString));
+    setCreatedAt(TwitterUtil.parseTwitterDateTimeString(createdAtString));
   }
 
   public String getRelativeCreatedAt() {
@@ -37,17 +37,17 @@ public class Status {
     return null;
   }
 
-  private String id;
+  private Long id;
 
   public boolean hasId() {
     return id != null;
   }
 
-  public String getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -92,17 +92,7 @@ public class Status {
   public void setUser(User user) {
     this.user = user;
   }
-  
-  private final static DateTimeFormatter TWITTER_DATE_FORMATTER = DateTimeFormat.forPattern("EEE MMM dd HH:mm:ss Z yyyy");
-  
-  private DateTime parseTwitterDateTimeString(String twitterDateString) {
-    try {
-      return TWITTER_DATE_FORMATTER.parseDateTime(twitterDateString);
-    } catch (IllegalArgumentException e) {
-      System.err.println(String.format("Could not parse date string '%s'", twitterDateString));
-      return null;
-    }
-  }
+ 
 
   @Override
   public String toString() {

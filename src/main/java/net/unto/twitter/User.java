@@ -122,17 +122,17 @@ public class User {
     this.description = description;
   }
 
-  private String id = null;
+  private Long id = null;
 
   public boolean hasId() {
     return id != null;
   }
 
-  public String getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
