@@ -6,6 +6,11 @@ import net.sf.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A class to convert JSON strings to Java class instances.
+ * 
+ * @author dewitt@google.com
+ */
 class JsonUtil {
 
   public final static Status[] newStatusArray(String jsonString)

@@ -1,16 +1,20 @@
 package net.unto.twitter;
 
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
+import static org.easymock.EasyMock.*;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.CharBuffer;
-
-import org.easymock.EasyMock;
 import org.junit.Test;
 
+/**
+ * Unit tests for the ApiTest class.
+ * 
+ * @author dewitt@google.com
+ */
 public class ApiTest {
 
   @Test
@@ -20,44 +24,53 @@ public class ApiTest {
     String json = readTestData("public-timeline.json");
     String url = "http://twitter.com/statuses/public_timeline.json";
     Parameter[] parameters = new Parameter[] {new Parameter("since_id", null)};
-    EasyMock.expect(mockTwitterHttpManager.get(EasyMock.eq(url), EasyMock.aryEq(parameters))).andReturn(json);
-    EasyMock.replay(mockTwitterHttpManager);
+    expect(mockTwitterHttpManager.get(eq(url), aryEq(parameters))).andReturn(json);
+    replay(mockTwitterHttpManager);
     api.setTwitterHttpManager(mockTwitterHttpManager);
     Status[] statuses = api.getPublicTimeline();
-    assert(10 == statuses.length);
-    EasyMock.verify(mockTwitterHttpManager);
+    assertEquals(20, statuses.length);
+    assertEquals(301231062, (long)statuses[0].getId());
+    assertEquals("I should sleep or else...", statuses[0].getText());
+    assertEquals(3188291, (long)statuses[0].getUser().getId());
+    verify(mockTwitterHttpManager);
   }
-
+  
   @Test
-  public void testGetUserTimelineLong() {
-    fail("Not yet implemented");
+  public void testGetFriendsTimeline() throws TwitterException, IOException {
+    Api api = new Api();
+    api.setCredentials("javaclient", "xxyzzy");
+    TwitterHttpManager mockTwitterHttpManager = getMockTwitterHttpManager();
+    String json = readTestData("friends-timeline-javaclient.json");
+    String url = "http://twitter.com/statuses/friends_timeline.json";
+    Parameter[] parameters = new Parameter[] {new Parameter("since", null), new Parameter("page", null)};
+    expect(mockTwitterHttpManager.get(eq(url), aryEq(parameters))).andReturn(json);
+    expect(mockTwitterHttpManager.hasCredentials()).andReturn(true);
+    replay(mockTwitterHttpManager);
+    api.setTwitterHttpManager(mockTwitterHttpManager);
+    Status[] statuses = api.getFriendsTimeline();
+    assertEquals(1, statuses.length);
+    assertEquals(303230492, (long)statuses[0].getId());
+    assertEquals(673483, (long)statuses[0].getUser().getId());
+    verify(mockTwitterHttpManager);
   }
-
+  
   @Test
-  public void testGetUserTimelineLongInt() {
-    fail("Not yet implemented");
+  public void testGetFriendsTimelineString() throws TwitterException, IOException {
+    Api api = new Api();
+    TwitterHttpManager mockTwitterHttpManager = getMockTwitterHttpManager();
+    String json = readTestData("friends-timeline-javaclient.json");
+    String url = "http://twitter.com/statuses/friends_timeline/javaclient.json";
+    Parameter[] parameters = new Parameter[] {new Parameter("since", null), new Parameter("page", null)};
+    expect(mockTwitterHttpManager.get(eq(url), aryEq(parameters))).andReturn(json);
+    replay(mockTwitterHttpManager);
+    api.setTwitterHttpManager(mockTwitterHttpManager);
+    Status[] statuses = api.getFriendsTimeline("javaclient");
+    assertEquals(1, statuses.length);
+    assertEquals(303230492, (long)statuses[0].getId());
+    assertEquals(673483, (long)statuses[0].getUser().getId());
+    verify(mockTwitterHttpManager);
   }
-
-  @Test
-  public void testGetFriendsTimeline() {
-    fail("Not yet implemented");
-  }
-
-  @Test
-  public void testGetFriends() {
-    fail("Not yet implemented");
-  }
-
-  @Test
-  public void testGetFollowers() {
-    fail("Not yet implemented");
-  }
-
-  @Test
-  public void testPostUpdate() {
-    fail("Not yet implemented");
-  }
-
+  
   private String TEST_DATA_DIR = "src/test/data/";
   
   private int MAX_TEST_DATA_FILE_SIZE = 16384;
@@ -75,6 +88,6 @@ public class ApiTest {
   }
   
   private TwitterHttpManager getMockTwitterHttpManager() {
-    return EasyMock.createMock(TwitterHttpManager.class);
+    return createMock(TwitterHttpManager.class);
   }
 }
