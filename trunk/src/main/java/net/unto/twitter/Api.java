@@ -5,7 +5,7 @@ import org.joda.time.DateTime;
 /**
  * Instances of the Api class provide access to the Twitter web service.
  * 
- * @author dewitt
+ * @author dewitt@google.com
  */
 public class Api {
   
@@ -64,16 +64,27 @@ public class Api {
   /**
    * Returns the 20 most recent statuses posted in the last 24 hours from the authenticating user and that user's friends.
    * 
-   * @param id  Optional.  Specifies the ID or screen name of the user for whom to return the friends_timeline
+   * @param id  Optional.  Specifies the ID or screen name of the user for whom to return the friends_timeline.  Requires credentials if the id is not set, or if the id is private.
+   * @return an array of {@link Status} instances
+   * @throws TwitterException
+   */
+  public Status[] getFriendsTimeline(String id) throws TwitterException {
+    return getFriendsTimeline(id, null, null);
+  }
+  
+  /**
+   * Returns the 20 most recent statuses posted in the last 24 hours from the authenticating user and that user's friends.
+   * 
+   * @param id  Optional.  Specifies the ID or screen name of the user for whom to return the friends_timeline.  Requires credentials if the id is not set, or if the id is private.
    * @param since Optional.  Narrows the returned results to just those statuses created after the specified HTTP-formatted date.
    * @param page Optional.  Gets the 20 next most recent statuses from the authenticating user and that user's friends.
    * @return an array of {@link Status} instances
    * @throws TwitterException
    */
   public Status[] getFriendsTimeline(String id, DateTime since, Integer page) throws TwitterException {
-    requireCredentials();
     String url;
     if (id == null) {
+      requireCredentials();
       url = "http://twitter.com/statuses/friends_timeline.json";
     } else {
       url = String.format("http://twitter.com/statuses/friends_timeline/%s.json", id);
@@ -454,12 +465,22 @@ public class Api {
     getTwitterHttpManager( ).clearCredentials( );
   }
   
+  /**
+   * Throw an exception if setCredentials(username, password) has not been called first.
+   * 
+   * @throws TwitterException
+   */
   private void requireCredentials() throws TwitterException {
     if (!getTwitterHttpManager().hasCredentials()) {
       throw new TwitterException("Authentication required.  Please call api.setCredentials first.");
     }
   }
   
+  /**
+   * Get an instance of a TwitterHttpManager.  Instantiates a new SimpleTwitterHttpManager if none is set.
+   * 
+   * @return an instance of a TwitterHttpManager.
+   */
   private TwitterHttpManager getTwitterHttpManager() {
     if (twitterHttpManager == null) {
       twitterHttpManager = new SimpleTwitterHttpManager();
@@ -467,14 +488,12 @@ public class Api {
     return twitterHttpManager;
   }
   
+  /**
+   * Set the private instance of the TwitterHttpManager.
+   * 
+   * @param twitterHttpManager the TwitterHttpManager for this client to use.
+   */
   protected void setTwitterHttpManager(TwitterHttpManager twitterHttpManager) {
     this.twitterHttpManager = twitterHttpManager;
-  }
-  
-  public static void main(String[] argv) throws TwitterException {
-    Api api = new Api();
-    for (Status status : api.getPublicTimeline()) {
-      System.out.println(status);
-    }
   }
 }

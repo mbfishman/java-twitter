@@ -17,6 +17,15 @@ import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 
+/**
+ * An implementation of the TwitterHttpManager interface using the Apache Commons HttpClient library.
+ * 
+ * @author dewitt@google.com
+ */
+/**
+ * @author dewitt
+ *
+ */
 class SimpleTwitterHttpManager implements TwitterHttpManager
 {
   private final AuthScope AUTH_SCOPE = new AuthScope("twitter.com", 80, AuthScope.ANY_REALM);
@@ -25,9 +34,10 @@ class SimpleTwitterHttpManager implements TwitterHttpManager
  
   private HttpConnectionManager manager = null;
   
-  public SimpleTwitterHttpManager() {
-    
-  }
+  /**
+   * Construct a new {@link SimpleTwitterHttpManager} instance.
+   */
+  public SimpleTwitterHttpManager() { }
 
   private HttpConnectionManager getHttpConnectionManager() {
     if (this.manager == null) {
@@ -40,47 +50,57 @@ class SimpleTwitterHttpManager implements TwitterHttpManager
     this.manager = manager;
   }
   
+  /* (non-Javadoc)
+   * @see net.unto.twitter.TwitterHttpManager#get(java.lang.String)
+   */
   public String get( String url ) throws TwitterException {
     return get(url, null);
   }
 
+  /* (non-Javadoc)
+   * @see net.unto.twitter.TwitterHttpManager#get(java.lang.String, net.unto.twitter.Parameter[])
+   */
   public String get(String url, Parameter[] parameters) throws TwitterException {
     return execute(new GetMethod(url), parameters);
   }
 
+  /* (non-Javadoc)
+   * @see net.unto.twitter.TwitterHttpManager#post(java.lang.String)
+   */
   public String post(String url) throws TwitterException {
     return post(url, null);
   }
 
+  /* (non-Javadoc)
+   * @see net.unto.twitter.TwitterHttpManager#post(java.lang.String, net.unto.twitter.Parameter[])
+   */
   public String post(String url, Parameter[] parameters) throws TwitterException {
     return execute(new PostMethod(url), parameters);
   }
 
-  /**
-   * Use the specified username and password to authenticate as a user.
-   * 
-   * @param username the Twitter username
-   * @param password the Twitter password
+  /* (non-Javadoc)
+   * @see net.unto.twitter.TwitterHttpManager#setCredentials(java.lang.String, java.lang.String)
    */
   public void setCredentials(String username, String password) {
     assert(username != null);
     assert(password != null);
     setCredentials(new UsernamePasswordCredentials(username, password));
   }
-  
-  /**
-   * Use the specified {@link Credentials} to authenticate as a user.
-   * 
-   * @param credentials the Twitter username and passwords credentials
-   */
+
   private void setCredentials(Credentials credentials) {
      this.credentials = credentials;
   }
   
+  /* (non-Javadoc)
+   * @see net.unto.twitter.TwitterHttpManager#clearCredentials()
+   */
   public void clearCredentials( ) {
     this.credentials = null;
   }
 
+  /* (non-Javadoc)
+   * @see net.unto.twitter.TwitterHttpManager#hasCredentials()
+   */
   public boolean hasCredentials( ) {
     return credentials != null;
   }
