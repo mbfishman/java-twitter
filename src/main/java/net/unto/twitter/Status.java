@@ -1,17 +1,23 @@
 package net.unto.twitter;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.joda.time.DateTime;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Status {
 
   public Status() {
   }
-  
+
   private DateTime createdAt;
 
   public boolean hasCreatedAt() {
@@ -50,19 +56,19 @@ public class Status {
   }
 
   private String source;
-  
+
   public boolean hasSource() {
     return source != null;
   }
-  
+
   public String getSource() {
     return source;
   }
-  
+
   public void setSource(String source) {
     this.source = source;
   }
-  
+
   private String text;
 
   public boolean hasText() {
@@ -90,15 +96,59 @@ public class Status {
   public void setUser(User user) {
     this.user = user;
   }
- 
 
-  @Override
-  public String toString() {
-    return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+  public final static Status[] newArrayFromJsonString(String jsonString)
+      throws TwitterException {
+    return newArrayFromJsonArray(JSONArray.fromObject(jsonString));
+  }
+
+  public final static Status[] newArrayFromJsonArray(JSONArray jsonArray)
+      throws TwitterException {
+    List<Status> statusList = new ArrayList<Status>();
+    for (int i = 0; i < jsonArray.size(); i++) {
+      statusList.add(newFromJsonObject(jsonArray.getJSONObject(i)));
+    }
+    return statusList.toArray(new Status[statusList.size()]);
+  }
+
+  public final static Status newFromJsonString(String jsonString)
+      throws TwitterException {
+    return newFromJsonObject(JSONObject.fromObject(jsonString));
+  }
+
+  public final static Status newFromJsonObject(JSONObject jsonObject)
+      throws TwitterException {
+    if (jsonObject == null) {
+      return null;
+    }
+    Status status = new Status();
+    if (jsonObject.has("created_at")) {
+      status.setCreatedAt(jsonObject.getString("created_at"));
+    }
+    if (jsonObject.has("id")) {
+      status.setId(jsonObject.getLong("id"));
+    }
+    if (jsonObject.has("source")) {
+      status.setSource(jsonObject.getString("source"));
+    }
+    if (jsonObject.has("user")) {
+      status.setUser(User.newFromJsonObject(jsonObject.getJSONObject("user")));
+    }
+    if (jsonObject.has("text")) {
+      status.setText(jsonObject.getString("text"));
+    }
+
+    return status;
   }
 
   @Override
-  public boolean equals(Object obj) { 
+  public String toString() {
+    return ToStringBuilder.reflectionToString(this,
+        ToStringStyle.MULTI_LINE_STYLE);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
     return EqualsBuilder.reflectionEquals(this, obj);
   }
 

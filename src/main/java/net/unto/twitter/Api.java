@@ -48,7 +48,7 @@ public class Api {
     String url = "http://twitter.com/statuses/public_timeline.json";
     Parameter[] parameters = { new Parameter("since_id", sinceId) };
     String response = getTwitterHttpManager().get(url, parameters);
-    return JsonUtil.newStatusArray(response);
+    return Status.newArrayFromJsonString(response);
   }
   
   /**
@@ -91,7 +91,7 @@ public class Api {
     }
     Parameter[] parameters = { new Parameter("since", since),  new Parameter("page", page)};
     String response = getTwitterHttpManager().get(url, parameters);
-    return JsonUtil.newStatusArray(response);
+    return Status.newArrayFromJsonString(response);
   }
   
   /**
@@ -124,7 +124,7 @@ public class Api {
     }
     Parameter[] parameters = { new Parameter("since", since), new Parameter("count", count), new Parameter("page", page)};
     String response = getTwitterHttpManager().get(url, parameters);
-    return JsonUtil.newStatusArray(response);
+    return Status.newArrayFromJsonString(response);
   }
 
   /**
@@ -137,7 +137,7 @@ public class Api {
   public Status showStatus(long id) throws TwitterException {
     String url = String.format("http://twitter.com/statuses/show/%d.json", id);
     String response = getTwitterHttpManager().get(url);
-    return JsonUtil.newStatus(response);
+    return Status.newFromJsonString(response);
   }
   
   /**
@@ -153,7 +153,7 @@ public class Api {
     String url = "http://twitter.com/statuses/update.json";
     Parameter[] parameters = { new Parameter("status", status) };
     String response = getTwitterHttpManager().post(url, parameters);
-    return JsonUtil.newStatus(response);
+    return Status.newFromJsonString(response);
   }
   
   /**
@@ -178,7 +178,7 @@ public class Api {
     String url = "http://twitter.com/statuses/replies.json";
     Parameter[] parameters = {new Parameter("page", page)};
     String response = getTwitterHttpManager().get(url, parameters);
-    return JsonUtil.newStatusArray(response);
+    return Status.newArrayFromJsonString(response);
   }
   
   /**
@@ -192,7 +192,7 @@ public class Api {
     requireCredentials();
     String url = String.format("http://twitter.com/statuses/destroy/%d.json", id);
     String response = getTwitterHttpManager().post(url);
-    return JsonUtil.newStatus(response);
+    return Status.newFromJsonString(response);
   }
   
   /**
@@ -221,7 +221,7 @@ public class Api {
       url = String.format("http://twitter.com/statuses/friends/%s.json", id);
     }
     String response = getTwitterHttpManager().get(url);
-    return JsonUtil.newUserArray(response);
+    return User.newArrayFromJsonString(response);
   }
 
   /**
@@ -246,7 +246,7 @@ public class Api {
     String url = "http://twitter.com/statuses/followers.json";
     Parameter[] parameters = {new Parameter("lite", lite)};
     String response = getTwitterHttpManager().get(url, parameters);
-    return JsonUtil.newUserArray(response);
+    return User.newArrayFromJsonString(response);
   }
   
   /**
@@ -258,7 +258,7 @@ public class Api {
   public User[] getFeatured() throws TwitterException {
     String url = "http://twitter.com/statuses/featured.json";
     String response = getTwitterHttpManager().get(url);
-    return JsonUtil.newUserArray(response);
+    return User.newArrayFromJsonString(response);
   }
  
   /**
@@ -272,7 +272,7 @@ public class Api {
     assert(id != null);
     String url = String.format("http://twitter.com/users/show/%s.json", id);
     String response = getTwitterHttpManager().get(url);
-    return JsonUtil.newUser(response);
+    return User.newFromJsonString(response);
   }
 
   /**
@@ -299,7 +299,7 @@ public class Api {
     String url = "http://twitter.com/direct_messages.json";
     Parameter[] parameters = { new Parameter("since", since), new Parameter("since_id", sinceId), new Parameter("page", page)};
     String response = getTwitterHttpManager().get(url, parameters);
-    return JsonUtil.newDirectMessageArray(response);
+    return DirectMessage.newArrayFromJsonString(response);
   }
   
   /**
@@ -325,7 +325,7 @@ public class Api {
     String url = "http://twitter.com/direct_messages/sent.json";
     Parameter[] parameters = { new Parameter("since", since), new Parameter("since_id", sinceId), new Parameter("page", page)};
     String response = getTwitterHttpManager().get(url, parameters);
-    return JsonUtil.newDirectMessageArray(response);
+    return DirectMessage.newArrayFromJsonString(response);
   }
   
   /**
@@ -342,7 +342,7 @@ public class Api {
     String url = "http://twitter.com/direct_messages/new.json";
     Parameter[] parameters = { new Parameter("user", user), new Parameter("text", text) };
     String response = getTwitterHttpManager().post(url, parameters);
-    return JsonUtil.newDirectMessage(response);
+    return DirectMessage.newFromJsonString(response);
   }
   
   
@@ -357,7 +357,7 @@ public class Api {
     requireCredentials();
     String url = String.format("http://twitter.com/direct_messages/destroy/%d.json", id);
     String response = getTwitterHttpManager().post(url);
-    return JsonUtil.newDirectMessage(response);
+    return DirectMessage.newFromJsonString(response);
   }
   
   
@@ -373,7 +373,7 @@ public class Api {
     requireCredentials();
     String url = String.format("http://twitter.com/friendships/create/%s.json", id);
     String response = getTwitterHttpManager().post(url);
-    return JsonUtil.newUser(response);
+    return User.newFromJsonString(response);
   }
   
   /**
@@ -388,7 +388,7 @@ public class Api {
     requireCredentials();
     String url = String.format("http://twitter.com/friendships/destroy/%s.json", id);
     String response = getTwitterHttpManager().post(url);
-    return JsonUtil.newUser(response);
+    return User.newFromJsonString(response);
   }
   
   /**
@@ -416,7 +416,7 @@ public class Api {
     }
     Parameter[] parameters = {new Parameter("page", page)};
     String response = getTwitterHttpManager().get(url, parameters);
-    return JsonUtil.newStatusArray(response);
+    return Status.newArrayFromJsonString(response);
   }
   
   /**
@@ -430,7 +430,7 @@ public class Api {
     requireCredentials();
     String url = String.format("http://twitter.com/favorites/create/%d.json", id);
     String response = getTwitterHttpManager().post(url);
-    return JsonUtil.newStatus(response);
+    return Status.newFromJsonString(response);
   }
   
   /**
@@ -444,7 +444,7 @@ public class Api {
     requireCredentials();
     String url = String.format("http://twitter.com/favorites/destroy/%d.json", id);
     String response = getTwitterHttpManager().post(url);
-    return JsonUtil.newStatus(response);
+    return Status.newFromJsonString(response);
   }
   
  
