@@ -5,7 +5,7 @@ import org.joda.time.DateTime;
 /**
  * Instances of the Api class provide access to the Twitter web service.
  * 
- * @author dewitt@google.com
+ * @author DeWitt Clinton <dewitt@unto.net>
  */
 public class Api {
 
