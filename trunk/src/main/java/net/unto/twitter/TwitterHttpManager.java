@@ -3,7 +3,7 @@ package net.unto.twitter;
 /**
  * A generic HTTP connection interface.
  * 
- * @author dewitt@google.com
+ * @author DeWitt Clinton <dewitt@unto.net>
  */
 interface TwitterHttpManager
 {

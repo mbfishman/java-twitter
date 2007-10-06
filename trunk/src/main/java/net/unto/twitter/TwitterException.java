@@ -3,7 +3,7 @@ package net.unto.twitter;
 /**
  * An exception wrapper for the Twitter API library.
  * 
- * @author dewitt@google.com
+ * @author DeWitt Clinton <dewitt@unto.net>
  */
 public class TwitterException extends Exception {
 

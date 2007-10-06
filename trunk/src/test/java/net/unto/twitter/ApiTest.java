@@ -13,7 +13,7 @@ import org.junit.Test;
 /**
  * Unit tests for the ApiTest class.
  * 
- * @author dewitt@google.com
+ * @author DeWitt Clinton <dewitt@unto.net>
  */
 public class ApiTest {
 

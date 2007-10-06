@@ -8,7 +8,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
 /**
  * A class to represent key/value request parameters in the query string and headers.
  * 
- * @author dewitt@google.com
+ * @author DeWitt Clinton <dewitt@unto.net>
  */
 final class Parameter
 {
