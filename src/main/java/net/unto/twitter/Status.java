@@ -15,7 +15,7 @@ import java.util.List;
 
 public class Status {
 
-  public Status() {
+  protected Status() {
   }
 
   private DateTime createdAt;
@@ -97,12 +97,12 @@ public class Status {
     this.user = user;
   }
 
-  public final static Status[] newArrayFromJsonString(String jsonString)
+  protected final static Status[] newArrayFromJsonString(String jsonString)
       throws TwitterException {
     return newArrayFromJsonArray(JSONArray.fromObject(jsonString));
   }
 
-  public final static Status[] newArrayFromJsonArray(JSONArray jsonArray)
+  protected final static Status[] newArrayFromJsonArray(JSONArray jsonArray)
       throws TwitterException {
     List<Status> statusList = new ArrayList<Status>();
     for (int i = 0; i < jsonArray.size(); i++) {
@@ -111,12 +111,12 @@ public class Status {
     return statusList.toArray(new Status[statusList.size()]);
   }
 
-  public final static Status newFromJsonString(String jsonString)
+  protected final static Status newFromJsonString(String jsonString)
       throws TwitterException {
     return newFromJsonObject(JSONObject.fromObject(jsonString));
   }
 
-  public final static Status newFromJsonObject(JSONObject jsonObject)
+  protected final static Status newFromJsonObject(JSONObject jsonObject)
       throws TwitterException {
     if (jsonObject == null) {
       return null;

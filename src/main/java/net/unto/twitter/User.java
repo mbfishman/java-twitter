@@ -13,7 +13,7 @@ import java.util.List;
 
 public class User {
 
-  public User() {
+  protected User() {
   }
 
   private Integer utcOffset;
@@ -212,12 +212,12 @@ public class User {
     this.status = status;
   }
 
-  public final static User[] newArrayFromJsonString(String jsonString)
+  protected final static User[] newArrayFromJsonString(String jsonString)
       throws TwitterException {
     return newArrayFromJsonArray(JSONArray.fromObject(jsonString));
   }
 
-  public final static User[] newArrayFromJsonArray(JSONArray jsonArray)
+  protected final static User[] newArrayFromJsonArray(JSONArray jsonArray)
       throws TwitterException {
     List<User> userList = new ArrayList<User>();
     for (int i = 0; i < jsonArray.size(); i++) {
@@ -226,12 +226,12 @@ public class User {
     return userList.toArray(new User[userList.size()]);
   }
 
-  public final static User newFromJsonString(String jsonString)
+  protected final static User newFromJsonString(String jsonString)
       throws TwitterException {
     return newFromJsonObject(JSONObject.fromObject(jsonString));
   }
 
-  public final static User newFromJsonObject(JSONObject jsonObject)
+  protected final static User newFromJsonObject(JSONObject jsonObject)
       throws TwitterException {
     if (jsonObject == null) {
       return null;

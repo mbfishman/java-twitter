@@ -62,7 +62,9 @@
             <link>http://jakarta.apache.org/commons/httpclient/apidocs</link>
             <link>http://joda-time.sourceforge.net/api-release/</link>
           </links>
+          <show>public</show>
       </configuration>
+
       </plugin>
     </plugins>
   </reporting>

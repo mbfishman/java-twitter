@@ -12,7 +12,39 @@ import org.joda.time.DateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <p>
+ * Represents private messages passed directly between Twitter users.
+ * </p>
+ * 
+ * <p>
+ * Instances of DirectMessage are created automatically via the Api. End users
+ * are not expected to construct instances of DirectMessage.
+ * </p>
+ * 
+ * <p>
+ * This class exposes the following properties:
+ * </p>
+ * 
+ * <ul>
+ * <li>getSenderScreenName()</li>
+ * <li>getRecipientId()</li>
+ * <li>getSender()</li>
+ * <li>getCreatedAt()</li>
+ * <li>getRecipientScreenName()</li>
+ * <li>getRecipient()</li>
+ * <li>getText()</li>
+ * <li>getSenderId()</li>
+ * <li>getId()</li>
+ * </ul>
+ * 
+ * @author DeWitt Clinton <dewitt@unto.net>
+ */
 public class DirectMessage {
+
+  protected DirectMessage() {
+  }
+
   private String senderScreenName;
 
   private Long recipientId;
@@ -31,51 +63,88 @@ public class DirectMessage {
 
   private Long id;
 
+  /**
+   * Return the screen name of the sender of this direct message.
+   * 
+   * @return the screen name of the sender of this direct message.
+   */
   public String getSenderScreenName() {
     return senderScreenName;
   }
 
-  public void setSenderScreenName(String senderScreenName) {
+  protected void setSenderScreenName(String senderScreenName) {
     this.senderScreenName = senderScreenName;
   }
 
+  /**
+   * Return true of the screen name of the sender of this direct message has
+   * been set.
+   * 
+   * @return true of the screen name of the sender of this direct message has
+   *         been set.
+   */
   public boolean hasSenderScreenName() {
     return senderScreenName != null;
   }
 
+  /**
+   * Return the user id of the recipient of this direct message.
+   * 
+   * @return the user id of the recipient of this direct message.
+   */
   public Long getRecipientId() {
     return recipientId;
   }
 
-  public void setRecipientId(Long recipientId) {
+  protected void setRecipientId(Long recipientId) {
     this.recipientId = recipientId;
   }
 
+  /**
+   * Return true if the recipient id of this direct message has been set.
+   * 
+   * @return true if the recipient id of this direct message has been set.
+   */
   public boolean hasRecipientId() {
     return recipientId != null;
   }
 
+  /**
+   * Return the {@link User} instance representing the sender of this direct message.
+   * 
+   * @return the {@link User} instance representing the sender of this direct message.
+   */
   public User getSender() {
     return sender;
   }
 
-  public void setSender(User sender) {
+  protected void setSender(User sender) {
     this.sender = sender;
   }
 
+  /**
+   * Return true if the {@link User} instance representing the sender of this direct message has been set.
+   *  
+   * @return true if the {@link User} instance representing the sender of this direct message has been set.
+   */
   public boolean hasSender() {
     return sender != null;
   }
 
+  /**
+   * Return the {@link DateTime} instance representing the time at which this direct message was sent.
+   * 
+   * @return the {@link DateTime} instance representing the time at which this direct message was sent.
+   */
   public DateTime getCreatedAt() {
     return createdAt;
   }
 
-  public void setCreatedAt(DateTime createdAt) {
+  protected void setCreatedAt(DateTime createdAt) {
     this.createdAt = createdAt;
   }
 
-  public void setCreatedAt(String createdAtString) {
+  protected void setCreatedAt(String createdAtString) {
     setCreatedAt(TwitterUtil.parseTwitterDateTimeString(createdAtString));
   }
 
@@ -87,7 +156,7 @@ public class DirectMessage {
     return recipientScreenName;
   }
 
-  public void setRecipientScreenName(String recipientScreenName) {
+  protected void setRecipientScreenName(String recipientScreenName) {
     this.recipientScreenName = recipientScreenName;
   }
 
@@ -111,7 +180,7 @@ public class DirectMessage {
     return text;
   }
 
-  public void setText(String text) {
+  protected void setText(String text) {
     this.text = text;
   }
 
@@ -123,7 +192,7 @@ public class DirectMessage {
     return senderId;
   }
 
-  public void setSenderId(Long senderId) {
+  protected void setSenderId(Long senderId) {
     this.senderId = senderId;
   }
 
@@ -135,7 +204,7 @@ public class DirectMessage {
     return id;
   }
 
-  public void setId(Long id) {
+  protected void setId(Long id) {
     this.id = id;
   }
 
@@ -143,13 +212,13 @@ public class DirectMessage {
     return id != null;
   }
 
-  public final static DirectMessage[] newArrayFromJsonString(String jsonString)
-      throws TwitterException {
+  protected final static DirectMessage[] newArrayFromJsonString(
+      String jsonString) throws TwitterException {
     return newArrayFromJsonArray(JSONArray.fromObject(jsonString));
   }
 
-  public final static DirectMessage[] newArrayFromJsonArray(JSONArray jsonArray)
-      throws TwitterException {
+  protected final static DirectMessage[] newArrayFromJsonArray(
+      JSONArray jsonArray) throws TwitterException {
     List<DirectMessage> directMessageList = new ArrayList<DirectMessage>();
     for (int i = 0; i < jsonArray.size(); i++) {
       directMessageList.add(newFromJsonObject(jsonArray.getJSONObject(i)));
@@ -158,12 +227,12 @@ public class DirectMessage {
         .toArray(new DirectMessage[directMessageList.size()]);
   }
 
-  public final static DirectMessage newFromJsonString(String jsonString)
+  protected final static DirectMessage newFromJsonString(String jsonString)
       throws TwitterException {
     return newFromJsonObject(JSONObject.fromObject(jsonString));
   }
 
-  public final static DirectMessage newFromJsonObject(JSONObject jsonObject)
+  protected final static DirectMessage newFromJsonObject(JSONObject jsonObject)
       throws TwitterException {
     if (jsonObject == null) {
       return null;
