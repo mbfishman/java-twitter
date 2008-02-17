@@ -9,6 +9,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.joda.time.DateTime;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +41,9 @@ import java.util.List;
  * 
  * @author DeWitt Clinton <dewitt@unto.net>
  */
-public class DirectMessage {
+public class DirectMessage implements Serializable {
+
+  private static final long serialVersionUID = 1L;
 
   protected DirectMessage() {
   }
