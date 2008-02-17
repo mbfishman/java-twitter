@@ -11,7 +11,7 @@ This library provides a pure Java interface for the Twitter API.
 Twitter (http://twitter.com) provides a service that allows people to
 connect via the web, IM, and SMS.  Twitter exposes a web services API 
 (http://twitter.com/help/api) and this library is intended to make
-it even easier for python programmers to use. 
+it even easier for java programmers to use. 
 
 ==Using==
 
@@ -72,10 +72,22 @@ Run the following:
   $ mvn package 
 }}}
 
-The JAR file will appear in:
+The JAR file will be generated as:
 
-  target/
-  
+  target/twitter-0.0.1.jar
+
+==Javadocs==
+
+Generate the javadocs for the project with:
+
+{{{
+  $ mvn javadoc:javadoc
+}}}
+
+The generated javadocs can be found at:
+
+  target/site/apidocs/index.html
+
 ==More Information==
 
 Please visit http://groups.google.com/group/java-twitter for more discussion.
