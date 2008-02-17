@@ -429,14 +429,17 @@ public class Api {
 
 
   /**
-   * Adds the user specified in the ID parameter to the list of users that the
-   * authenticating user is following.
+   * Befriends the user specified in the ID parameter as the authenticating
+   * user.
    * 
-   * @param id Required. The ID or screen name of the user to start following.
-   * @return A {@link User} instance
+   * This method is probably equivalent to the newer <code>follow</code> api
+   * method, but it is unclear in the documentation.
+   * 
+   * @param id Required. The ID or screen name of the user to befriend.
+   * @return A {@link User} instance representing the befriended user
    * @throws TwitterException
    */
-  public User startFollowing(String id) throws TwitterException {
+  public User createFriendship(String id) throws TwitterException {
     assert (id != null);
     requireCredentials();
     String url = String.format("http://twitter.com/friendships/create/%s.json",
@@ -446,14 +449,18 @@ public class Api {
   }
 
   /**
-   * Removes the user specified in the ID parameter from the list of users that
-   * the authenticating user is following.
+   * Discontinues friendship with the user specified in the ID parameter as the
+   * authenticating user.
    * 
-   * @param id Required. The ID or screen name of the user to stop following.
+   * This method is probably equivalent to the newer <code>leave</code> api
+   * method, but it is unclear in the documentation.
+   * 
+   * @param id Required. The ID or screen name of the user with whom to
+   *        discontinue friendship.
    * @return A {@link User} instance
    * @throws TwitterException
    */
-  public User stopFollowing(String id) throws TwitterException {
+  public User destroyFriendship(String id) throws TwitterException {
     assert (id != null);
     requireCredentials();
     String url = String.format(
@@ -523,6 +530,40 @@ public class Api {
         id);
     String response = getTwitterHttpManager().post(url);
     return Status.newFromJsonString(response);
+  }
+
+  /**
+   * Enables notifications for updates from the specified user to the
+   * authenticating user.
+   * 
+   * @param id Required. The ID or screen name of the user to follow.
+   * @return A {@link User} instance representing the specified user
+   * @throws TwitterException
+   */
+  public User follow(String id) throws TwitterException {
+    assert (id != null);
+    requireCredentials();
+    String url = String.format(
+        "http://twitter.com/notifications/follow/%s.json", id);
+    String response = getTwitterHttpManager().post(url);
+    return User.newFromJsonString(response);
+  }
+
+  /**
+   * Disables notifications for updates from the specified user to the
+   * authenticating user.
+   * 
+   * @param id Required. The ID or screen name of the user to leave.
+   * @return A {@link User} instance representing the specified user
+   * @throws TwitterException
+   */
+  public User leave(String id) throws TwitterException {
+    assert (id != null);
+    requireCredentials();
+    String url = String.format(
+        "http://twitter.com/notifications/leave/%s.json", id);
+    String response = getTwitterHttpManager().post(url);
+    return User.newFromJsonString(response);
   }
 
 

@@ -9,11 +9,14 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.joda.time.DateTime;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Status {
+public class Status implements Serializable {
+
+  private static final long serialVersionUID = 1L;
 
   protected Status() {
   }

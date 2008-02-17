@@ -8,10 +8,13 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User {
+public class User implements Serializable {
+
+  private static final long serialVersionUID = 1L;
 
   protected User() {
   }
@@ -272,6 +275,9 @@ public class User {
     }
     if (jsonObject.has("followers_count")) {
       user.setFollowersCount(jsonObject.getInt("followers_count"));
+    }
+    if (jsonObject.has("screen_name")) {
+      user.setScreenName(jsonObject.getString("screen_name"));
     }
     if (jsonObject.has("status")) {
       user.setStatus(Status.newFromJsonObject(jsonObject
