@@ -14,7 +14,7 @@ public final class TwitterProtos {
       com.google.protobuf.Descriptors.FileDescriptor
       buildDescriptor() {
     java.lang.String descriptorData =
-      "\n\rtwitter.proto\022\007twitter\"\254\004\n\004User\022\n\n\002id\030" +
+      "\n\rtwitter.proto\022\007twitter\"\256\004\n\004User\022\n\n\002id\030" +
       "\001 \001(\004\022\014\n\004name\030\002 \001(\t\022\023\n\013screen_name\030\003 \001(\t" +
       "\022\020\n\010location\030\004 \001(\t\022\023\n\013description\030\005 \001(\t\022" +
       "&\n\007profile\030\006 \001(\0132\025.twitter.User.Profile\022" +
@@ -23,24 +23,24 @@ public final class TwitterProtos {
       "\022\n\ncreated_at\030\013 \001(\t\022\027\n\017favorites_count\030\014" +
       " \001(\r\022\022\n\nutc_offset\030\r \001(\021\022\021\n\ttime_zone\030\016 " +
       "\001(\t\022\021\n\tfollowing\030\017 \001(\010\022\025\n\rnotifications\030" +
-      "\020 \001(\010\022\032\n\022total_status_count\030\021 \001(\r\022!\n\010sta" +
-      "tuses\030\022 \003(\0132\017.twitter.Status\032\230\001\n\007Profile" +
-      "\022\021\n\timage_url\030\001 \001(\t\022\030\n\020background_color\030" +
-      "\002 \001(\t\022\022\n\ntext_color\030\003 \001(\t\022\022\n\nlink_color\030" +
-      "\004 \001(\t\022\032\n\022sidebar_fill_color\030\005 \001(\t\022\034\n\024sid" +
-      "ebar_border_color\030\006 \001(\t\"\305\001\n\006Status\022\022\n\ncr" +
-      "eated_at\030\001 \001(\t\022\n\n\002id\030\002 \001(\004\022\014\n\004text\030\003 \001(\t" +
-      "\022\016\n\006source\030\004 \001(\t\022\021\n\ttruncated\030\005 \001(\010\022\035\n\025i" +
-      "n_reply_to_status_id\030\006 \001(\004\022\033\n\023in_reply_t" +
-      "o_user_id\030\007 \001(\004\022\021\n\tfavorited\030\010 \001(\010\022\033\n\004us" +
-      "er\030\t \001(\0132\r.twitter.User\"\342\001\n\rDirectMessag" +
-      "e\022\n\n\002id\030\001 \001(\004\022\014\n\004text\030\002 \001(\t\022\021\n\tsender_id" +
-      "\030\003 \001(\004\022\024\n\014recipient_id\030\004 \001(\004\022\022\n\ncreated_" +
-      "at\030\005 \001(\t\022\032\n\022sender_screen_name\030\006 \001(\t\022\035\n\025" +
-      "recipient_screen_name\030\007 \001(\t\022\035\n\006sender\030\010 " +
-      "\001(\0132\r.twitter.User\022 \n\trecipient\030\t \001(\0132\r." +
-      "twitter.UserB!\n\020net.unto.twitterB\rTwitte" +
-      "rProtos";
+      "\020 \001(\010\022\034\n\024total_statuses_count\030\021 \001(\r\022!\n\010s" +
+      "tatuses\030\022 \003(\0132\017.twitter.Status\032\230\001\n\007Profi" +
+      "le\022\021\n\timage_url\030\001 \001(\t\022\030\n\020background_colo" +
+      "r\030\002 \001(\t\022\022\n\ntext_color\030\003 \001(\t\022\022\n\nlink_colo" +
+      "r\030\004 \001(\t\022\032\n\022sidebar_fill_color\030\005 \001(\t\022\034\n\024s" +
+      "idebar_border_color\030\006 \001(\t\"\305\001\n\006Status\022\022\n\n" +
+      "created_at\030\001 \001(\t\022\n\n\002id\030\002 \001(\004\022\014\n\004text\030\003 \001" +
+      "(\t\022\016\n\006source\030\004 \001(\t\022\021\n\ttruncated\030\005 \001(\010\022\035\n" +
+      "\025in_reply_to_status_id\030\006 \001(\004\022\033\n\023in_reply" +
+      "_to_user_id\030\007 \001(\004\022\021\n\tfavorited\030\010 \001(\010\022\033\n\004" +
+      "user\030\t \001(\0132\r.twitter.User\"\342\001\n\rDirectMess" +
+      "age\022\n\n\002id\030\001 \001(\004\022\014\n\004text\030\002 \001(\t\022\021\n\tsender_" +
+      "id\030\003 \001(\004\022\024\n\014recipient_id\030\004 \001(\004\022\022\n\ncreate" +
+      "d_at\030\005 \001(\t\022\032\n\022sender_screen_name\030\006 \001(\t\022\035" +
+      "\n\025recipient_screen_name\030\007 \001(\t\022\035\n\006sender\030" +
+      "\010 \001(\0132\r.twitter.User\022 \n\trecipient\030\t \001(\0132" +
+      "\r.twitter.UserB!\n\020net.unto.twitterB\rTwit" +
+      "terProtos";
     try {
       return com.google.protobuf.Descriptors.FileDescriptor
         .internalBuildGeneratedFileFrom(descriptorData,
@@ -449,11 +449,11 @@ public final class TwitterProtos {
     public boolean hasNotifications() { return hasNotifications; }
     public boolean getNotifications() { return notifications_; }
     
-    // optional uint32 total_status_count = 17;
-    private boolean hasTotalStatusCount;
-    private int totalStatusCount_ = 0;
-    public boolean hasTotalStatusCount() { return hasTotalStatusCount; }
-    public int getTotalStatusCount() { return totalStatusCount_; }
+    // optional uint32 total_statuses_count = 17;
+    private boolean hasTotalStatusesCount;
+    private int totalStatusesCount_ = 0;
+    public boolean hasTotalStatusesCount() { return hasTotalStatusesCount; }
+    public int getTotalStatusesCount() { return totalStatusesCount_; }
     
     // repeated .twitter.Status statuses = 18;
     private java.util.List<net.unto.twitter.TwitterProtos.Status> statuses_ =
@@ -880,21 +880,21 @@ public final class TwitterProtos {
         return this;
       }
       
-      // optional uint32 total_status_count = 17;
-      public boolean hasTotalStatusCount() {
-        return result.hasTotalStatusCount();
+      // optional uint32 total_statuses_count = 17;
+      public boolean hasTotalStatusesCount() {
+        return result.hasTotalStatusesCount();
       }
-      public int getTotalStatusCount() {
-        return result.getTotalStatusCount();
+      public int getTotalStatusesCount() {
+        return result.getTotalStatusesCount();
       }
-      public Builder setTotalStatusCount(int value) {
-        result.hasTotalStatusCount = true;
-        result.totalStatusCount_ = value;
+      public Builder setTotalStatusesCount(int value) {
+        result.hasTotalStatusesCount = true;
+        result.totalStatusesCount_ = value;
         return this;
       }
-      public Builder clearTotalStatusCount() {
-        result.hasTotalStatusCount = false;
-        result.totalStatusCount_ = 0;
+      public Builder clearTotalStatusesCount() {
+        result.hasTotalStatusesCount = false;
+        result.totalStatusesCount_ = 0;
         return this;
       }
       
@@ -1697,7 +1697,7 @@ public final class TwitterProtos {
       internal_static_twitter_User_fieldAccessorTable = new
         com.google.protobuf.GeneratedMessage.FieldAccessorTable(
           internal_static_twitter_User_descriptor,
-          new java.lang.String[] { "Id", "Name", "ScreenName", "Location", "Description", "Profile", "Url", "Protected", "FollowersCount", "FriendsCount", "CreatedAt", "FavoritesCount", "UtcOffset", "TimeZone", "Following", "Notifications", "TotalStatusCount", "Statuses", },
+          new java.lang.String[] { "Id", "Name", "ScreenName", "Location", "Description", "Profile", "Url", "Protected", "FollowersCount", "FriendsCount", "CreatedAt", "FavoritesCount", "UtcOffset", "TimeZone", "Following", "Notifications", "TotalStatusesCount", "Statuses", },
           net.unto.twitter.TwitterProtos.User.class,
           net.unto.twitter.TwitterProtos.User.Builder.class);
   private static final com.google.protobuf.Descriptors.Descriptor
