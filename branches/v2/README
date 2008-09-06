@@ -27,6 +27,7 @@ The java-twitter library requires that the following runtime dependencies are in
   * [http://jakarta.apache.org/httpcomponents/httpclient-3.x/ Apache Jakarta Commons HttpClient]
   * [http://joda-time.sourceforge.net/ Joda Time]
   * [http://json-lib.sourceforge.net/ Json-lib]
+  * [http://code.google.com/p/protobuf/ Protocol Buffers]
 
 ===Examples===
 
@@ -75,6 +76,24 @@ Run the following:
 The JAR file will be generated as:
 
   target/twitter-0.0.1.jar
+
+==Protocol Buffers==
+
+A pre-generated .java file representing the Twitter protocol buffers is checked in as:
+
+  src/main/java/net/unto/twitter/TwitterProtos.java
+
+If you would like to compile your own, the source file is checked in as:
+
+  src/main/proto/twitter.proto
+
+To generate the corresponding .java file, download and build the protocol buffer compiler from:
+
+  http://code.google.com/p/protobuf/
+
+And run:
+
+  protoc --proto_path=src/main/proto/ --java_out=src/main/java/net/unto/twitter/ src/main/proto/twitter.proto
 
 ==Javadocs==
 
