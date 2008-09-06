@@ -1,0 +1,58 @@
+package twitter;
+
+option java_package = "net.unto.twitter";
+option java_outer_classname = "TwitterProtos";
+       
+message User {
+  optional uint64 id = 1;
+  optional string name = 2;
+  optional string screen_name = 3;
+  optional string location = 4;
+  optional string description = 5;
+  optional Profile profile = 6;
+  optional string url = 7;
+  optional bool protected = 8;
+  optional uint32 followers_count = 9;
+  optional uint32 friends_count = 10;
+  optional string created_at = 11;
+  optional uint32 favorites_count = 12;
+  optional sint32 utc_offset = 13;
+  optional string time_zone = 14;
+  optional bool following = 15;
+  optional bool notifications = 16;
+  optional uint32 total_status_count = 17;
+  repeated Status statuses = 18;
+
+  message Profile {
+    optional string image_url = 1;
+    optional string background_color = 2;
+    optional string text_color = 3;
+    optional string link_color = 4;
+    optional string sidebar_fill_color = 5;
+    optional string sidebar_border_color = 6; 
+  }
+}
+
+message Status {
+  optional string created_at = 1;
+  optional uint64 id = 2;
+  optional string text = 3;
+  optional string source = 4;
+  optional bool truncated = 5;
+  optional uint64 in_reply_to_status_id = 6;
+  optional uint64 in_reply_to_user_id = 7;
+  optional bool favorited = 8;
+  optional User user = 9;
+}
+
+message DirectMessage {
+  optional uint64 id = 1;
+  optional string text = 2;
+  optional uint64 sender_id = 3;
+  optional uint64 recipient_id = 4;
+  optional string created_at = 5;
+  optional string sender_screen_name = 6;
+  optional string recipient_screen_name = 7;
+  optional User sender = 8;
+  optional User recipient = 9;
+}
