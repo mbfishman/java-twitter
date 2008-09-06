@@ -5,6 +5,12 @@
   <artifactId>twitter</artifactId>
   <version>0.0.1</version>
   <description>A Java wrapper around the Twitter API.</description>
+  <repositories>
+    <repository>
+      <id>google-maven-repository</id>
+      <url>http://google-maven-repository.googlecode.com/svn/repository/</url>
+    </repository>
+  </repositories>
   <build>
     <plugins>
       <plugin>
@@ -21,6 +27,11 @@
       <groupId>commons-httpclient</groupId>
       <artifactId>commons-httpclient</artifactId>
       <version>3.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.protobuf</groupId>
+      <artifactId>protobuf-java</artifactId>
+      <version>2.0.1</version>
     </dependency>
     <dependency>
       <groupId>commons-lang</groupId>
