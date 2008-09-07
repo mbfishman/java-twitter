@@ -72,6 +72,7 @@
             <link>http://java.sun.com/j2se/1.5/docs/api</link>
             <link>http://jakarta.apache.org/commons/httpclient/apidocs</link>
             <link>http://joda-time.sourceforge.net/api-release/</link>
+	    <link>http://code.google.com/apis/protocolbuffers/docs/reference/java/</link>
           </links>
           <show>public</show>
       </configuration>
