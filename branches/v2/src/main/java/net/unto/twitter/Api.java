@@ -1,5 +1,11 @@
 package net.unto.twitter;
 
+import java.util.List;
+
+import net.unto.twitter.TwitterProtos.User;
+import net.unto.twitter.TwitterProtos.Status;
+import net.unto.twitter.TwitterProtos.DirectMessage;
+
 import org.joda.time.DateTime;
 
 /**
@@ -31,10 +37,10 @@ public class Api {
    * Returns the 20 most recent statuses from non-protected users who have set a
    * custom user icon. Does not require authentication.
    * 
-   * @return an array of {@link Status} instances
+   * @return an array of {@link OrigStatus} instances
    * @throws TwitterException
    */
-  public Status[] getPublicTimeline() throws TwitterException {
+  public List<Status> getPublicTimeline() throws TwitterException {
     return getPublicTimeline(null);
   }
 
@@ -44,24 +50,24 @@ public class Api {
    * 
    * @param sinceId Optional. Returns only public statuses with an ID greater
    *        than (that is, more recent than) the specified ID.
-   * @return an array of {@link Status} instances
+   * @return an array of {@link OrigStatus} instances
    * @throws TwitterException
    */
-  public Status[] getPublicTimeline(Long sinceId) throws TwitterException {
+  public List<Status> getPublicTimeline(Long sinceId) throws TwitterException {
     String url = "http://twitter.com/statuses/public_timeline.json";
     Parameter[] parameters = {new Parameter("since_id", sinceId)};
     String response = getTwitterHttpManager().get(url, parameters);
-    return Status.newArrayFromJsonString(response);
+    return JsonUtil.newStatusList(response);
   }
 
   /**
    * Returns the 20 most recent statuses posted in the last 24 hours from the
    * authenticating user and that user's friends.
    * 
-   * @return an array of {@link Status} instances
+   * @return an array of {@link OrigStatus} instances
    * @throws TwitterException
    */
-  public Status[] getFriendsTimeline() throws TwitterException {
+  public List<Status> getFriendsTimeline() throws TwitterException {
     return getFriendsTimeline(null, null, null);
   }
 
@@ -72,10 +78,10 @@ public class Api {
    * @param id Optional. Specifies the ID or screen name of the user for whom to
    *        return the friends_timeline. Requires credentials if the id is not
    *        set, or if the id is private.
-   * @return an array of {@link Status} instances
+   * @return an array of {@link OrigStatus} instances
    * @throws TwitterException
    */
-  public Status[] getFriendsTimeline(String id) throws TwitterException {
+  public List<Status> getFriendsTimeline(String id) throws TwitterException {
     return getFriendsTimeline(id, null, null);
   }
 
@@ -90,10 +96,10 @@ public class Api {
    *        created after the specified HTTP-formatted date.
    * @param page Optional. Gets the 20 next most recent statuses from the
    *        authenticating user and that user's friends.
-   * @return an array of {@link Status} instances
+   * @return an array of {@link OrigStatus} instances
    * @throws TwitterException
    */
-  public Status[] getFriendsTimeline(String id, DateTime since, Integer page)
+  public List<Status> getFriendsTimeline(String id, DateTime since, Integer page)
       throws TwitterException {
     String url;
     if (id == null) {
@@ -106,17 +112,17 @@ public class Api {
     Parameter[] parameters = {
         new Parameter("since", since), new Parameter("page", page)};
     String response = getTwitterHttpManager().get(url, parameters);
-    return Status.newArrayFromJsonString(response);
+    return JsonUtil.newStatusList(response);
   }
 
   /**
    * Returns the 20 most recent statuses posted in the last 24 hours from the
    * authenticating user.
    * 
-   * @return an array of {@link Status} instances
+   * @return an array of {@link OrigStatus} instances
    * @throws TwitterException
    */
-  public Status[] getUserTimeline() throws TwitterException {
+  public List<Status> getUserTimeline() throws TwitterException {
     return getUserTimeline(null, null, null, null);
   }
 
@@ -131,10 +137,10 @@ public class Api {
    * @param since Optional. Narrows the returned results to just those statuses
    *        created after the specified HTTP-formatted date.
    * @param page Optional. Retrieves the 20 next most recent direct messages
-   * @return an array of {@link Status} instances
+   * @return an array of {@link OrigStatus} instances
    * @throws TwitterException
    */
-  public Status[] getUserTimeline(String id, Integer count, DateTime since,
+  public List<Status> getUserTimeline(String id, Integer count, DateTime since,
       Integer page) throws TwitterException {
     requireCredentials();
     String url;
@@ -148,7 +154,7 @@ public class Api {
         new Parameter("since", since), new Parameter("count", count),
         new Parameter("page", page)};
     String response = getTwitterHttpManager().get(url, parameters);
-    return Status.newArrayFromJsonString(response);
+    return JsonUtil.newStatusList(response);
   }
 
   /**
@@ -157,13 +163,13 @@ public class Api {
    * 
    * @param id Required. The numerical ID of the status you're trying to
    *        retrieve.
-   * @return a {@link Status} instance
+   * @return a {@link OrigStatus} instance
    * @throws TwitterException
    */
   public Status showStatus(long id) throws TwitterException {
     String url = String.format("http://twitter.com/statuses/show/%d.json", id);
     String response = getTwitterHttpManager().get(url);
-    return Status.newFromJsonString(response);
+    return JsonUtil.newStatus(response);
   }
 
   /**
@@ -172,7 +178,7 @@ public class Api {
    * @param status Required. The text of your status update. Must not be more
    *        than 160 characters and should not be more than 140 characters to
    *        ensure optimal display.
-   * @return a {@link Status} instance
+   * @return a {@link OrigStatus} instance
    * @throws TwitterException
    */
   public Status updateStatus(String status) throws TwitterException {
@@ -181,7 +187,7 @@ public class Api {
     String url = "http://twitter.com/statuses/update.json";
     Parameter[] parameters = {new Parameter("status", status)};
     String response = getTwitterHttpManager().post(url, parameters);
-    return Status.newFromJsonString(response);
+    return JsonUtil.newStatus(response);
   }
 
   /**
@@ -192,10 +198,10 @@ public class Api {
    *           authenticating user; you can not request a list of replies to
    *           another user whether public or protected.
    * 
-   * @return an array of {@link Status} instances
+   * @return an array of {@link OrigStatus} instances
    * @throws TwitterException
    */
-  public Status[] getReplies() throws TwitterException {
+  public List<Status> getReplies() throws TwitterException {
     return getReplies(null);
   }
 
@@ -208,15 +214,15 @@ public class Api {
    *           another user whether public or protected.
    * 
    * @param page Optional. Retrieves the 20 next most recent replies.
-   * @return an array of {@link Status} instances
+   * @return an array of {@link OrigStatus} instances
    * @throws TwitterException
    */
-  public Status[] getReplies(Integer page) throws TwitterException {
+  public List<Status> getReplies(Integer page) throws TwitterException {
     requireCredentials();
     String url = "http://twitter.com/statuses/replies.json";
     Parameter[] parameters = {new Parameter("page", page)};
     String response = getTwitterHttpManager().get(url, parameters);
-    return Status.newArrayFromJsonString(response);
+    return JsonUtil.newStatusList(response);
   }
 
   /**
@@ -224,7 +230,7 @@ public class Api {
    * authenticating user must be the author of the specified status.
    * 
    * @param id Required. The ID of the status to destroy.
-   * @return a {@link Status} instance
+   * @return a {@link OrigStatus} instance
    * @throws TwitterException
    */
   public Status destroyStatus(long id) throws TwitterException {
@@ -232,7 +238,7 @@ public class Api {
     String url = String.format("http://twitter.com/statuses/destroy/%d.json",
         id);
     String response = getTwitterHttpManager().post(url);
-    return Status.newFromJsonString(response);
+    return JsonUtil.newStatus(response);
   }
 
   /**
@@ -242,7 +248,7 @@ public class Api {
    * @return An array of {@link User} instances
    * @throws TwitterException
    */
-  public User[] getFollowing() throws TwitterException {
+  public List<User> getFollowing() throws TwitterException {
     return getFollowing(null);
   }
 
@@ -255,7 +261,7 @@ public class Api {
    * @return An array of {@link User} instances
    * @throws TwitterException
    */
-  public User[] getFollowing(String id) throws TwitterException {
+  public List<User> getFollowing(String id) throws TwitterException {
     requireCredentials();
     String url;
     if (id == null) {
@@ -264,7 +270,7 @@ public class Api {
       url = String.format("http://twitter.com/statuses/friends/%s.json", id);
     }
     String response = getTwitterHttpManager().get(url);
-    return User.newArrayFromJsonString(response);
+    return JsonUtil.newUserList(response);
   }
 
   /**
@@ -274,7 +280,7 @@ public class Api {
    * @return An array of {@link User} instances
    * @throws TwitterException
    */
-  public User[] getFollowers() throws TwitterException {
+  public List<User> getFollowers() throws TwitterException {
     return getFollowers(false);
   }
 
@@ -286,12 +292,12 @@ public class Api {
    * @return An array of {@link User} instances
    * @throws TwitterException
    */
-  public User[] getFollowers(Boolean lite) throws TwitterException {
+  public List<User> getFollowers(Boolean lite) throws TwitterException {
     requireCredentials();
     String url = "http://twitter.com/statuses/followers.json";
     Parameter[] parameters = {new Parameter("lite", lite)};
     String response = getTwitterHttpManager().get(url, parameters);
-    return User.newArrayFromJsonString(response);
+    return JsonUtil.newUserList(response);
   }
 
   /**
@@ -301,10 +307,10 @@ public class Api {
    * @return An array of {@link User} instances
    * @throws TwitterException
    */
-  public User[] getFeatured() throws TwitterException {
+  public List<User> getFeatured() throws TwitterException {
     String url = "http://twitter.com/statuses/featured.json";
     String response = getTwitterHttpManager().get(url);
-    return User.newArrayFromJsonString(response);
+    return JsonUtil.newUserList(response);
   }
 
   /**
@@ -319,7 +325,7 @@ public class Api {
     assert (id != null);
     String url = String.format("http://twitter.com/users/show/%s.json", id);
     String response = getTwitterHttpManager().get(url);
-    return User.newFromJsonString(response);
+    return JsonUtil.newUser(response);
   }
 
   /**
@@ -329,7 +335,7 @@ public class Api {
    * @return An array of {@link DirectMessage} instances
    * @throws TwitterException
    */
-  public DirectMessage[] getDirectMessages() throws TwitterException {
+  public List<DirectMessage> getDirectMessages() throws TwitterException {
     return getDirectMessages(null, null, null);
   }
 
@@ -345,7 +351,7 @@ public class Api {
    * @return An array of {@link DirectMessage} instances
    * @throws TwitterException
    */
-  public DirectMessage[] getDirectMessages(DateTime since, String sinceId,
+  public List<DirectMessage> getDirectMessages(DateTime since, String sinceId,
       Integer page) throws TwitterException {
     requireCredentials();
     String url = "http://twitter.com/direct_messages.json";
@@ -353,7 +359,7 @@ public class Api {
         new Parameter("since", since), new Parameter("since_id", sinceId),
         new Parameter("page", page)};
     String response = getTwitterHttpManager().get(url, parameters);
-    return DirectMessage.newArrayFromJsonString(response);
+    return JsonUtil.newDirectMessageList(response);
   }
 
   /**
@@ -362,7 +368,7 @@ public class Api {
    * 
    * @throws TwitterException
    */
-  public DirectMessage[] getSentDirectMessages() throws TwitterException {
+  public List<DirectMessage> getSentDirectMessages() throws TwitterException {
     return getSentDirectMessages(null, null, null);
   }
 
@@ -379,7 +385,7 @@ public class Api {
    * @return An array of {@link DirectMessage} instances
    * @throws TwitterException
    */
-  public DirectMessage[] getSentDirectMessages(DateTime since, String sinceId,
+  public List<DirectMessage> getSentDirectMessages(DateTime since, String sinceId,
       Integer page) throws TwitterException {
     requireCredentials();
     String url = "http://twitter.com/direct_messages/sent.json";
@@ -387,7 +393,7 @@ public class Api {
         new Parameter("since", since), new Parameter("since_id", sinceId),
         new Parameter("page", page)};
     String response = getTwitterHttpManager().get(url, parameters);
-    return DirectMessage.newArrayFromJsonString(response);
+    return JsonUtil.newDirectMessageList(response);
   }
 
   /**
@@ -407,7 +413,7 @@ public class Api {
     Parameter[] parameters = {
         new Parameter("user", user), new Parameter("text", text)};
     String response = getTwitterHttpManager().post(url, parameters);
-    return DirectMessage.newFromJsonString(response);
+    return JsonUtil.newDirectMessage(response);
   }
 
 
@@ -424,7 +430,7 @@ public class Api {
     String url = String.format(
         "http://twitter.com/direct_messages/destroy/%d.json", id);
     String response = getTwitterHttpManager().post(url);
-    return DirectMessage.newFromJsonString(response);
+    return JsonUtil.newDirectMessage(response);
   }
 
 
@@ -445,7 +451,7 @@ public class Api {
     String url = String.format("http://twitter.com/friendships/create/%s.json",
         id);
     String response = getTwitterHttpManager().post(url);
-    return User.newFromJsonString(response);
+    return JsonUtil.newUser(response);
   }
 
   /**
@@ -466,16 +472,16 @@ public class Api {
     String url = String.format(
         "http://twitter.com/friendships/destroy/%s.json", id);
     String response = getTwitterHttpManager().post(url);
-    return User.newFromJsonString(response);
+    return JsonUtil.newUser(response);
   }
 
   /**
    * Returns the 20 most recent favorite statuses for the authenticating user or
    * user specified by the ID parameter.
    * 
-   * @return an array of {@link Status} instances
+   * @return an array of {@link OrigStatus} instances
    */
-  public Status[] getFavorites() throws TwitterException {
+  public List<Status> getFavorites() throws TwitterException {
     return getFavorites(null, null);
   }
 
@@ -486,9 +492,9 @@ public class Api {
    * @param id Optional. The ID or screen name of the user for whom to request a
    *        list of favorite statuses.
    * @param page Optional. Retrieves the 20 next most recent favorite statuses.
-   * @return an array of {@link Status} instances
+   * @return an array of {@link OrigStatus} instances
    */
-  public Status[] getFavorites(String id, Integer page) throws TwitterException {
+  public List<Status> getFavorites(String id, Integer page) throws TwitterException {
     String url;
     if (id == null) {
       url = "http://twitter.com/favorites.json";
@@ -497,7 +503,7 @@ public class Api {
     }
     Parameter[] parameters = {new Parameter("page", page)};
     String response = getTwitterHttpManager().get(url, parameters);
-    return Status.newArrayFromJsonString(response);
+    return JsonUtil.newStatusList(response);
   }
 
   /**
@@ -505,7 +511,7 @@ public class Api {
    * user.
    * 
    * @param id Required. The ID of the status to favorite.
-   * @return a {@link Status} instance
+   * @return a {@link OrigStatus} instance
    * @throws TwitterException
    */
   public Status createFavorite(long id) throws TwitterException {
@@ -513,7 +519,7 @@ public class Api {
     String url = String.format("http://twitter.com/favorites/create/%d.json",
         id);
     String response = getTwitterHttpManager().post(url);
-    return Status.newFromJsonString(response);
+    return JsonUtil.newStatus(response);
   }
 
   /**
@@ -521,7 +527,7 @@ public class Api {
    * user.
    * 
    * @param id Required. The ID of the status to un-favorite.
-   * @return a {@link Status} instance
+   * @return a {@link OrigStatus} instance
    * @throws TwitterException
    */
   public Status destroyFavorite(long id) throws TwitterException {
@@ -529,7 +535,7 @@ public class Api {
     String url = String.format("http://twitter.com/favorites/destroy/%d.json",
         id);
     String response = getTwitterHttpManager().post(url);
-    return Status.newFromJsonString(response);
+    return JsonUtil.newStatus(response);
   }
 
   /**
@@ -546,7 +552,7 @@ public class Api {
     String url = String.format(
         "http://twitter.com/notifications/follow/%s.json", id);
     String response = getTwitterHttpManager().post(url);
-    return User.newFromJsonString(response);
+    return JsonUtil.newUser(response);
   }
 
   /**
@@ -563,7 +569,7 @@ public class Api {
     String url = String.format(
         "http://twitter.com/notifications/leave/%s.json", id);
     String response = getTwitterHttpManager().post(url);
-    return User.newFromJsonString(response);
+    return JsonUtil.newUser(response);
   }
 
 
@@ -618,4 +624,5 @@ public class Api {
   protected void setTwitterHttpManager(TwitterHttpManager twitterHttpManager) {
     this.twitterHttpManager = twitterHttpManager;
   }
+
 }

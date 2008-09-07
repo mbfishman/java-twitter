@@ -8,6 +8,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.CharBuffer;
+import java.util.List;
+
+import net.unto.twitter.TwitterProtos.Status;
+
 import org.junit.Test;
 
 /**
@@ -27,11 +31,11 @@ public class ApiTest {
     expect(mockTwitterHttpManager.get(eq(url), aryEq(parameters))).andReturn(json);
     replay(mockTwitterHttpManager);
     api.setTwitterHttpManager(mockTwitterHttpManager);
-    Status[] statuses = api.getPublicTimeline();
-    assertEquals(20, statuses.length);
-    assertEquals(301231062, (long)statuses[0].getId());
-    assertEquals("I should sleep or else...", statuses[0].getText());
-    assertEquals(3188291, (long)statuses[0].getUser().getId());
+    List<Status> statuses = api.getPublicTimeline();
+    assertTrue(20 == statuses.size());
+    assertTrue(301231062L == statuses.get(0).getId());
+    assertEquals("I should sleep or else...", statuses.get(0).getText());
+    assertTrue(3188291L == statuses.get(0).getUser().getId());
     verify(mockTwitterHttpManager);
   }
   
@@ -47,10 +51,10 @@ public class ApiTest {
     expect(mockTwitterHttpManager.hasCredentials()).andReturn(true);
     replay(mockTwitterHttpManager);
     api.setTwitterHttpManager(mockTwitterHttpManager);
-    Status[] statuses = api.getFriendsTimeline();
-    assertEquals(1, statuses.length);
-    assertEquals(303230492, (long)statuses[0].getId());
-    assertEquals(673483, (long)statuses[0].getUser().getId());
+    List<Status> statuses = api.getFriendsTimeline();
+    assertTrue(1 == statuses.size());
+    assertTrue(303230492L == statuses.get(0).getId());
+    assertTrue(673483L == statuses.get(0).getUser().getId());
     verify(mockTwitterHttpManager);
   }
   
@@ -64,10 +68,10 @@ public class ApiTest {
     expect(mockTwitterHttpManager.get(eq(url), aryEq(parameters))).andReturn(json);
     replay(mockTwitterHttpManager);
     api.setTwitterHttpManager(mockTwitterHttpManager);
-    Status[] statuses = api.getFriendsTimeline("javaclient");
-    assertEquals(1, statuses.length);
-    assertEquals(303230492, (long)statuses[0].getId());
-    assertEquals(673483, (long)statuses[0].getUser().getId());
+    List<Status> statuses = api.getFriendsTimeline("javaclient");
+    assertTrue(1 == statuses.size());
+    assertTrue(303230492L == statuses.get(0).getId());
+    assertTrue(673483L == statuses.get(0).getUser().getId());
     verify(mockTwitterHttpManager);
   }
   
