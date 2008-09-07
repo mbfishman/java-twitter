@@ -20,8 +20,8 @@ message User {
   optional string time_zone = 14;
   optional bool following = 15;
   optional bool notifications = 16;
-  optional uint32 total_statuses_count = 17;
-  repeated Status statuses = 18;
+  optional uint32 statuses_count = 17;
+  optional Status status = 18;
 
   message Profile {
     optional string image_url = 1;
