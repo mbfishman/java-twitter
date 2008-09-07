@@ -14,7 +14,7 @@ class JsonUtil {
   private JsonUtil() {
   }
   
-  protected final static User newUser(JSONObject jsonObject) throws TwitterException {
+  private final static User newUser(JSONObject jsonObject) throws TwitterException {
     if (jsonObject == null) {
       return null;
     }
@@ -78,7 +78,7 @@ class JsonUtil {
     return newUserList(JSONArray.fromObject(jsonString));
   }
 
-  protected final static List<User> newUserList(JSONArray jsonArray) throws TwitterException {
+  private final static List<User> newUserList(JSONArray jsonArray) throws TwitterException {
     List<User> users = new ArrayList<User>(jsonArray.size());
     for (int i = 0; i < jsonArray.size(); i++) {
       users.add(newUser(jsonArray.getJSONObject(i)));
@@ -90,7 +90,7 @@ class JsonUtil {
     return newUser(JSONObject.fromObject(jsonString));
   }
 
-  protected final static User.Profile newUserProfile(JSONObject jsonObject) throws TwitterException {
+  private final static User.Profile newUserProfile(JSONObject jsonObject) throws TwitterException {
     if (jsonObject == null) {
       return null;
     }
@@ -120,7 +120,7 @@ class JsonUtil {
     return newStatus(JSONObject.fromObject(jsonString));
   }
   
-  protected final static Status newStatus(JSONObject jsonObject) throws TwitterException {
+  private final static Status newStatus(JSONObject jsonObject) throws TwitterException {
     if (jsonObject == null) {
       return null;
     }
@@ -160,7 +160,7 @@ class JsonUtil {
     return newStatusList(JSONArray.fromObject(jsonString));
   }
 
-  protected final static List<Status> newStatusList(JSONArray jsonArray) throws TwitterException {
+  private final static List<Status> newStatusList(JSONArray jsonArray) throws TwitterException {
     List<Status> statuses = new ArrayList<Status>(jsonArray.size());
     for (int i = 0; i < jsonArray.size(); i++) {
       statuses.add(newStatus(jsonArray.getJSONObject(i)));
@@ -168,7 +168,7 @@ class JsonUtil {
     return statuses;
   }
   
-  protected final static DirectMessage newDirectMessage(JSONObject jsonObject) throws TwitterException {
+  private final static DirectMessage newDirectMessage(JSONObject jsonObject) throws TwitterException {
     if (jsonObject == null) {
       return null;
     }
@@ -208,7 +208,7 @@ class JsonUtil {
     return newDirectMessageList(JSONArray.fromObject(jsonString));
   }
 
-  protected final static List<DirectMessage> newDirectMessageList(JSONArray jsonArray) throws TwitterException {
+  private final static List<DirectMessage> newDirectMessageList(JSONArray jsonArray) throws TwitterException {
     List<DirectMessage> directMessages = new ArrayList<DirectMessage>(jsonArray.size());
     for (int i = 0; i < jsonArray.size(); i++) {
       directMessages.add(newDirectMessage(jsonArray.getJSONObject(i)));
