@@ -26,10 +26,63 @@ import org.apache.commons.httpclient.methods.PostMethod;
  * 
  * @author DeWitt Clinton <dewitt@unto.net>
  */
-class TwitterHttpManager implements HttpManager {
+public class TwitterHttpManager implements HttpManager {
  
-  private static final AuthScope AUTH_SCOPE = new AuthScope("twitter.com", 80,
-      AuthScope.ANY_REALM);
+  public static Builder builder() {
+    return new Builder();
+  }
+  
+  public static class Builder {
+
+    private Credentials credentials = null;
+    private String password = null;
+    private String username = null;
+    private HttpConnectionManager httpConnectionManager = null;
+    private AuthScope authScope = null;
+
+    Builder() {}
+    
+    public TwitterHttpManager build() {
+      return new TwitterHttpManager(this);
+    }
+    
+    public Builder credentials(Credentials credentials) {
+      assert(username == null);
+      assert(password == null);
+      this.credentials = credentials;
+      return this;
+    }
+    
+    public Builder username(String username) {
+      assert(credentials == null);
+      this.username = username;
+      if (password != null) {
+        credentials = new UsernamePasswordCredentials(username, password);
+      }
+      return this;
+    }
+    
+    public Builder httpConnectionManager(HttpConnectionManager httpConnectionManager) {
+      this.httpConnectionManager = httpConnectionManager;
+      return this;
+    }
+    
+    public Builder authScope(AuthScope authScope) {
+      this.authScope = authScope;
+      return this;
+    }
+    
+    public Builder password(String password) {
+      assert(credentials == null);
+      this.password = password;
+      if (username != null) {
+        credentials = new UsernamePasswordCredentials(username, password);
+      }
+      return this;
+    }
+  }
+  
+  private AuthScope authScope = null;
 
   private HttpConnectionManager connectionManager = null;
 
@@ -38,18 +91,16 @@ class TwitterHttpManager implements HttpManager {
   /**
    * Construct a new {@link TwitterHttpManager} instance.
    */
-  public TwitterHttpManager(String username, String password) {
-    assert username != null;
-    assert password != null;
-    credentials = new UsernamePasswordCredentials(username, password);
-    connectionManager = new MultiThreadedHttpConnectionManager();
+  public TwitterHttpManager(Builder builder) {
+    authScope = builder.authScope != null ? builder.authScope : AuthScope.ANY;
+    connectionManager = builder.httpConnectionManager != null ?
+        builder.httpConnectionManager :
+        new MultiThreadedHttpConnectionManager();
+    credentials = builder.credentials;
   }
-
-  /**
-   * Construct a new {@link TwitterHttpManager} instance.
-   */
-  public TwitterHttpManager() {
-    connectionManager = new MultiThreadedHttpConnectionManager();
+  
+  public boolean hasCredentials() {
+    return credentials != null;
   }
   
   /*
@@ -58,8 +109,9 @@ class TwitterHttpManager implements HttpManager {
    * @see net.unto.twitter.TwitterHttpManager#get(java.lang.String)
    */
   public String get(Url url) throws TwitterException {
-    assert url != null;
-    GetMethod method = new GetMethod(url.getBaseUrl());
+    assert(url != null);
+    String uri = UrlUtil.assemble(url);
+    GetMethod method = new GetMethod(uri);
     method.setQueryString(getParametersAsNamedValuePairArray(url));
     method.getParams().setCookiePolicy(CookiePolicy.BROWSER_COMPATIBILITY);
     return execute(method);
@@ -71,8 +123,9 @@ class TwitterHttpManager implements HttpManager {
    * @see net.unto.twitter.TwitterHttpManager#post(java.lang.String)
    */
   public String post(Url url) throws TwitterException {
-    assert url != null;
-    PostMethod method = new PostMethod(url.getBaseUrl());
+    assert(url != null);
+    String uri = UrlUtil.assemble(url);
+    PostMethod method = new PostMethod(uri);
     method.setQueryString(getParametersAsNamedValuePairArray(url));
     method.getParams().setCookiePolicy(CookiePolicy.BROWSER_COMPATIBILITY);
     return execute(method);
@@ -94,7 +147,7 @@ class TwitterHttpManager implements HttpManager {
 
     HttpClient httpClient = new HttpClient(connectionManager);
     if (credentials != null) {
-      httpClient.getState().setCredentials(AUTH_SCOPE, credentials);
+      httpClient.getState().setCredentials(authScope, credentials);
       httpClient.getParams().setAuthenticationPreemptive(true);
     } else {
       httpClient.getParams().setAuthenticationPreemptive(false);

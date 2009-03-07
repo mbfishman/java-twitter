@@ -9,6 +9,8 @@ import net.unto.twitter.UtilProtos.Url;
  */
 public interface HttpManager
 {
+  boolean hasCredentials();
+  
   /**
    * Perform an HTTP GET request to the specified URL.
    * 

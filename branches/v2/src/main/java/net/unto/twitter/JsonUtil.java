@@ -9,7 +9,7 @@ import net.unto.twitter.TwitterProtos.User;
 import net.unto.twitter.TwitterProtos.Status;
 import net.unto.twitter.TwitterProtos.DirectMessage;
 
-class JsonUtil {
+public class JsonUtil {
   
   private JsonUtil() {
   }
@@ -74,7 +74,7 @@ class JsonUtil {
     return builder.build();
   }
 
-  final static List<User> newUserList(String jsonString) throws TwitterException {
+  public final static List<User> newUserList(String jsonString) throws TwitterException {
     return newUserList(JSONArray.fromObject(jsonString));
   }
 
@@ -116,7 +116,7 @@ class JsonUtil {
     return builder.build();
   }
   
-  final static Status newStatus(String jsonString) throws TwitterException {
+  public final static Status newStatus(String jsonString) throws TwitterException {
     return newStatus(JSONObject.fromObject(jsonString));
   }
   
@@ -156,7 +156,7 @@ class JsonUtil {
     return builder.build();
   }
   
-  final static List<Status> newStatusList(String jsonString) throws TwitterException {
+  public final static List<Status> newStatusList(String jsonString) throws TwitterException {
     return newStatusList(JSONArray.fromObject(jsonString));
   }
 
