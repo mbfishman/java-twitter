@@ -11,6 +11,7 @@ import java.nio.CharBuffer;
 import java.util.List;
 
 import net.unto.twitter.TwitterProtos.Status;
+import net.unto.twitter.UtilProtos.Url;
 
 import org.junit.Test;
 
@@ -23,15 +24,15 @@ public class ApiTest {
 
   @Test
   public void testGetPublicTimeline() throws TwitterException, IOException {
-    Api api = new Api();
-    TwitterHttpManager mockTwitterHttpManager = getMockTwitterHttpManager();
+    HttpManager mockTwitterHttpManager = getMockTwitterHttpManager();
+    Api api = Api.builder().httpManager(mockTwitterHttpManager).build();
     String json = readTestData("public-timeline.json");
-    String url = "http://twitter.com/statuses/public_timeline.json";
-    Parameter[] parameters = new Parameter[] {new Parameter("since_id", null)};
-    expect(mockTwitterHttpManager.get(eq(url), aryEq(parameters))).andReturn(json);
+    Url url = Url.newBuilder()
+        .setBaseUrl("http://twitter.com/statuses/public_timeline.json")
+        .build();
+    expect(mockTwitterHttpManager.get(url)).andReturn(json);
     replay(mockTwitterHttpManager);
-    api.setTwitterHttpManager(mockTwitterHttpManager);
-    List<Status> statuses = api.getPublicTimeline();
+    List<Status> statuses = api.PublicTimeline().get();
     assertTrue(20 == statuses.size());
     assertTrue(301231062L == statuses.get(0).getId());
     assertEquals("I should sleep or else...", statuses.get(0).getText());
@@ -41,34 +42,17 @@ public class ApiTest {
   
   @Test
   public void testGetFriendsTimeline() throws TwitterException, IOException {
-    Api api = new Api();
-    api.setCredentials("javaclient", "xxyzzy");
-    TwitterHttpManager mockTwitterHttpManager = getMockTwitterHttpManager();
+    HttpManager mockTwitterHttpManager = getMockTwitterHttpManager();
+    Api api = Api.builder().httpManager(mockTwitterHttpManager).build();
+    //    api.setCredentials("javaclient", "xxyzzy");
     String json = readTestData("friends-timeline-javaclient.json");
-    String url = "http://twitter.com/statuses/friends_timeline.json";
-    Parameter[] parameters = new Parameter[] {new Parameter("since", null), new Parameter("page", null)};
-    expect(mockTwitterHttpManager.get(eq(url), aryEq(parameters))).andReturn(json);
-    expect(mockTwitterHttpManager.hasCredentials()).andReturn(true);
+    Url url = Url.newBuilder()
+        .setBaseUrl("http://twitter.com/statuses/friends_timeline.json")
+        .build();
+    expect(mockTwitterHttpManager.get(url)).andReturn(json);
+    //    expect(mockTwitterHttpManager.hasCredentials()).andReturn(true);
     replay(mockTwitterHttpManager);
-    api.setTwitterHttpManager(mockTwitterHttpManager);
-    List<Status> statuses = api.getFriendsTimeline();
-    assertTrue(1 == statuses.size());
-    assertTrue(303230492L == statuses.get(0).getId());
-    assertTrue(673483L == statuses.get(0).getUser().getId());
-    verify(mockTwitterHttpManager);
-  }
-  
-  @Test
-  public void testGetFriendsTimelineString() throws TwitterException, IOException {
-    Api api = new Api();
-    TwitterHttpManager mockTwitterHttpManager = getMockTwitterHttpManager();
-    String json = readTestData("friends-timeline-javaclient.json");
-    String url = "http://twitter.com/statuses/friends_timeline/javaclient.json";
-    Parameter[] parameters = new Parameter[] {new Parameter("since", null), new Parameter("page", null)};
-    expect(mockTwitterHttpManager.get(eq(url), aryEq(parameters))).andReturn(json);
-    replay(mockTwitterHttpManager);
-    api.setTwitterHttpManager(mockTwitterHttpManager);
-    List<Status> statuses = api.getFriendsTimeline("javaclient");
+    List<Status> statuses = api.FriendsTimeline().get();
     assertTrue(1 == statuses.size());
     assertTrue(303230492L == statuses.get(0).getId());
     assertTrue(673483L == statuses.get(0).getUser().getId());
@@ -91,7 +75,7 @@ public class ApiTest {
     return charBuffer.toString();
   }
   
-  private TwitterHttpManager getMockTwitterHttpManager() {
-    return createMock(TwitterHttpManager.class);
+  private HttpManager getMockTwitterHttpManager() {
+    return createMock(HttpManager.class);
   }
 }

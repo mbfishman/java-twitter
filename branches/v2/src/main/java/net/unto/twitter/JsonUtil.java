@@ -74,7 +74,7 @@ class JsonUtil {
     return builder.build();
   }
 
-  protected final static List<User> newUserList(String jsonString) throws TwitterException {
+  final static List<User> newUserList(String jsonString) throws TwitterException {
     return newUserList(JSONArray.fromObject(jsonString));
   }
 
@@ -86,11 +86,11 @@ class JsonUtil {
     return users;
   }
 
-  protected final static User newUser(String jsonString) throws TwitterException {
+  final static User newUser(String jsonString) throws TwitterException {
     return newUser(JSONObject.fromObject(jsonString));
   }
 
-  private final static User.Profile newUserProfile(JSONObject jsonObject) throws TwitterException {
+  private final static User.Profile newUserProfile(JSONObject jsonObject) {
     if (jsonObject == null) {
       return null;
     }
@@ -116,7 +116,7 @@ class JsonUtil {
     return builder.build();
   }
   
-  protected final static Status newStatus(String jsonString) throws TwitterException {
+  final static Status newStatus(String jsonString) throws TwitterException {
     return newStatus(JSONObject.fromObject(jsonString));
   }
   
@@ -156,7 +156,7 @@ class JsonUtil {
     return builder.build();
   }
   
-  protected final static List<Status> newStatusList(String jsonString) throws TwitterException {
+  final static List<Status> newStatusList(String jsonString) throws TwitterException {
     return newStatusList(JSONArray.fromObject(jsonString));
   }
 
@@ -204,7 +204,7 @@ class JsonUtil {
     return builder.build();
   }
   
-  protected final static List<DirectMessage> newDirectMessageList(String jsonString) throws TwitterException {
+  final static List<DirectMessage> newDirectMessageList(String jsonString) throws TwitterException {
     return newDirectMessageList(JSONArray.fromObject(jsonString));
   }
 
@@ -216,7 +216,7 @@ class JsonUtil {
     return directMessages;
   }
 
-  protected final static DirectMessage newDirectMessage(String jsonString) throws TwitterException {
+  final static DirectMessage newDirectMessage(String jsonString) throws TwitterException {
     return newDirectMessage(JSONObject.fromObject(jsonString));
   }
 }

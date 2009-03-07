@@ -37,8 +37,8 @@ Connect to Twitter and print out the latest public messages:
   import net.unto.twitter.Api;
   import net.unto.twitter.Status;
    
-  Api api = new Api();
-  for (Status status : api.getPublicTimeline()) {
+  Api api = Api.builder().build();
+  for (Status status : api.PublicTimeline().get()) {
     System.out.println(String.format("%s wrote '%s'", status.getUser().getName(), status.getText()));
   }
 }}}
@@ -48,8 +48,8 @@ Send a Twitter message:
 {{{
   import net.unto.twitter.Api;
   
-  Api api = new Api("username", "password");
-  api.updateStatus("This is a test message.");
+  Api api = Api.builder().username("username").password("password").build();
+  api.UpdateStatus("This is a test message.").post();
 }}}
 
 

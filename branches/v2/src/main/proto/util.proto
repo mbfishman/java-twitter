@@ -1,0 +1,14 @@
+package twitter;
+
+option java_package = "net.unto.twitter";
+option java_outer_classname = "UtilProtos";
+       
+message Url {
+  required string base_url = 1;
+  repeated Parameter parameters = 2;
+  
+  message Parameter {
+    required string name = 1;
+    optional string value = 2;
+  }
+}
