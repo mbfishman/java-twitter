@@ -15,6 +15,7 @@ public class FollowersRequest extends AbstractRequest<FollowersRequest> {
 
   public FollowersRequest() {
     path = "/statuses/followers.json";
+    authorizationRequired = true;
   }
 
   /**
@@ -27,6 +28,7 @@ public class FollowersRequest extends AbstractRequest<FollowersRequest> {
   public FollowersRequest id(String id) {
     assert (id != null);
     path = String.format("statuses/followers/%s.json", id);
+    authorizationRequired = false; 
     return this;
   }
 

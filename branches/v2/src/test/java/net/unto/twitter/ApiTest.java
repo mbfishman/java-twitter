@@ -28,7 +28,10 @@ public class ApiTest {
     Api api = Api.builder().httpManager(mockTwitterHttpManager).build();
     String json = readTestData("public-timeline.json");
     Url url = Url.newBuilder()
-        .setBaseUrl("http://twitter.com/statuses/public_timeline.json")
+        .setScheme(Url.Scheme.HTTP)
+        .setHost("twitter.com")
+        .setPort(80)
+        .setPath("/statuses/public_timeline.json")
         .build();
     expect(mockTwitterHttpManager.get(url)).andReturn(json);
     replay(mockTwitterHttpManager);
@@ -43,14 +46,18 @@ public class ApiTest {
   @Test
   public void testGetFriendsTimeline() throws TwitterException, IOException {
     HttpManager mockTwitterHttpManager = getMockTwitterHttpManager();
-    Api api = Api.builder().httpManager(mockTwitterHttpManager).build();
-    //    api.setCredentials("javaclient", "xxyzzy");
+    Api api = Api.builder()
+        .httpManager(mockTwitterHttpManager)
+        .build();
     String json = readTestData("friends-timeline-javaclient.json");
     Url url = Url.newBuilder()
-        .setBaseUrl("http://twitter.com/statuses/friends_timeline.json")
+        .setScheme(Url.Scheme.HTTP)
+        .setHost("twitter.com")
+        .setPort(80)
+        .setPath("/statuses/friends_timeline.json")
         .build();
     expect(mockTwitterHttpManager.get(url)).andReturn(json);
-    //    expect(mockTwitterHttpManager.hasCredentials()).andReturn(true);
+    expect(mockTwitterHttpManager.hasCredentials()).andReturn(true);
     replay(mockTwitterHttpManager);
     List<Status> statuses = api.FriendsTimeline().get();
     assertTrue(1 == statuses.size());

@@ -12,11 +12,13 @@ public class UserTimelineRequest extends AbstractRequest<UserTimelineRequest> {
 
   public UserTimelineRequest() {
     path = "/statuses/user_timeline.json";
+    authorizationRequired = true; 
   }
 
   public UserTimelineRequest id(String id) {
     assert(id != null);
     path = String.format("/statuses/user_timeline/%s.json", id);
+    authorizationRequired = false; 
     return this;
   }
   

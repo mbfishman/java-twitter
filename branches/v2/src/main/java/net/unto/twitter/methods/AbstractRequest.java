@@ -21,6 +21,8 @@ abstract class AbstractRequest<RequestType extends AbstractRequest> {
 
   private Url baseUrl = Api.DEFAULT_BASE_URL;
   
+  boolean authorizationRequired = false;
+  
   public RequestType httpManager(HttpManager httpManager) {
     this.httpManager = httpManager;
     return (RequestType)this;  // Safe conversion because RequestType extends AbstractRequest
@@ -61,13 +63,23 @@ abstract class AbstractRequest<RequestType extends AbstractRequest> {
     return (RequestType)this;
   }
   
-  void requireCredentials() {}
+  void requireCredentials() throws TwitterException {
+    if (!getHttpManager().hasCredentials()) {
+      throw new TwitterException("Authorization required.");
+    }
+  }
   
   String getJson() throws TwitterException {
+    if (authorizationRequired) {
+      requireCredentials();
+    }
     return getHttpManager().get(buildUrl());
   }
   
   String postJson() throws TwitterException {
+    if (authorizationRequired) {
+      requireCredentials();
+    }
    return getHttpManager().post(buildUrl());
   }
 }

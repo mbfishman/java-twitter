@@ -11,6 +11,7 @@ public class UpdateStatusRequest extends AbstractRequest<UpdateStatusRequest> {
     assert(status.length() > 0);
     assert(status.length() <= 160);
     path = "/statuses/update.json";
+    authorizationRequired = true;
     // TODO(dewitt): Verify URL encoding
     parameter("status", status);
   }
@@ -20,7 +21,6 @@ public class UpdateStatusRequest extends AbstractRequest<UpdateStatusRequest> {
   }
   
   public Status post() throws TwitterException {
-    // TODO(dewitt): Must be authenticated
     return JsonUtil.newStatus(postJson());
   }
 }

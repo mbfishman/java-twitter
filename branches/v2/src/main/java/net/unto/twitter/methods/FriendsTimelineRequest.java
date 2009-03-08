@@ -12,6 +12,7 @@ public class FriendsTimelineRequest extends AbstractRequest<FriendsTimelineReque
   
   public FriendsTimelineRequest() {
     path = "/statuses/friends_timeline.json";
+    authorizationRequired = true;
   }
 
   public FriendsTimelineRequest since(DateTime since) {
@@ -32,7 +33,6 @@ public class FriendsTimelineRequest extends AbstractRequest<FriendsTimelineReque
   }
 
   public List<Status> get() throws TwitterException {
-    // TODO(dewitt): Must be authenticated
     return JsonUtil.newStatusList(getJson());
   }
 }

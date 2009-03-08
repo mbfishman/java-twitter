@@ -10,11 +10,13 @@ public class FriendsRequest extends AbstractRequest<FriendsRequest> {
 
   public FriendsRequest() {
     path = "/statuses/friends.json";
+    authorizationRequired = true;
   }
 
   public FriendsRequest id(String id) {
     assert (id != null);
     path = String.format("/statuses/friends/%s.json", id);
+    authorizationRequired = false; 
     return this;
   }
 

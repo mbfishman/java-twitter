@@ -8,6 +8,7 @@ public class DestroyStatusRequest extends AbstractRequest<DestroyStatusRequest> 
 
   public DestroyStatusRequest(long id) {
     path = String.format("/statuses/destroy/%s.json", id);
+    authorizationRequired = true; 
   }
 
   public Status post() throws TwitterException {
