@@ -35,7 +35,7 @@ public class ApiTest {
         .build();
     expect(mockTwitterHttpManager.get(url)).andReturn(json);
     replay(mockTwitterHttpManager);
-    List<Status> statuses = api.PublicTimeline().build().get();
+    List<Status> statuses = api.publicTimeline().build().get();
     assertTrue(20 == statuses.size());
     assertTrue(301231062L == statuses.get(0).getId());
     assertEquals("I should sleep or else...", statuses.get(0).getText());
@@ -59,7 +59,7 @@ public class ApiTest {
     expect(mockTwitterHttpManager.get(url)).andReturn(json);
     expect(mockTwitterHttpManager.hasCredentials()).andReturn(true);
     replay(mockTwitterHttpManager);
-    List<Status> statuses = api.FriendsTimeline().build().get();
+    List<Status> statuses = api.friendsTimeline().build().get();
     assertTrue(1 == statuses.size());
     assertTrue(303230492L == statuses.get(0).getId());
     assertTrue(673483L == statuses.get(0).getUser().getId());

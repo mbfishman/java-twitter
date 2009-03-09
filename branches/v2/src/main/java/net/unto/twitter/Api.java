@@ -2,6 +2,8 @@ package net.unto.twitter;
 
 import net.unto.twitter.UtilProtos.Url;
 import net.unto.twitter.UtilProtos.Url.Scheme;
+import net.unto.twitter.methods.CreateFriendshipRequest;
+import net.unto.twitter.methods.DestroyDirectMessageRequest;
 import net.unto.twitter.methods.DestroyStatusRequest;
 import net.unto.twitter.methods.DirectMessagesRequest;
 import net.unto.twitter.methods.FollowersRequest;
@@ -341,6 +343,45 @@ public class Api {
       String status) {
     NewDirectMessageRequest.Builder builder = NewDirectMessageRequest.builder(
         user, status);
+    setDefaults(builder);
+    return builder;
+  }
+
+  /**
+   * Destroys the direct message specified in the required ID parameter. The
+   * authenticating user must be the recipient of the specified direct message.
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * <code>DirectMessage directMessage = api.destroyDirectMessage(12345).build().post();</code>
+   * </p>
+   * 
+   * @param id The ID of the direct message to destroy.
+   * @return {@link DestroyDirectMessageRequest.Builder}
+   */
+  public DestroyDirectMessageRequest.Builder destroyDirectMessage(long id) {
+    DestroyDirectMessageRequest.Builder builder = DestroyDirectMessageRequest
+        .builder(id);
+    setDefaults(builder);
+    return builder;
+  }
+  
+  /**
+   * Befriends the user specified in the ID parameter as the authenticating user. 
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * <code>User user = api.createFriendship("dewitt").build().post();</code>
+   * </p>
+   * 
+   * @param id  The ID or screen name of the user to befriend
+   * @return {@link CreateFriendshipRequest.Builder}
+   */
+  public CreateFriendshipRequest.Builder createFriendship(String id) {
+    CreateFriendshipRequest.Builder builder = CreateFriendshipRequest
+        .builder(id);
     setDefaults(builder);
     return builder;
   }
