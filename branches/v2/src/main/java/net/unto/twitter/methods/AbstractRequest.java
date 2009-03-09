@@ -5,7 +5,6 @@ import java.util.List;
 
 import net.unto.twitter.Api;
 import net.unto.twitter.HttpManager;
-import net.unto.twitter.TwitterException;
 import net.unto.twitter.UrlUtil;
 import net.unto.twitter.UtilProtos.Url;
 
@@ -15,7 +14,7 @@ abstract class AbstractRequest implements Request {
 
   Url url;
 
-  AbstractRequest(Builder<?> builder) throws TwitterException {
+  AbstractRequest(Builder<?> builder) {
     assert (builder.path != null);
     assert (builder.host != null);
     assert (builder.port > 0);
@@ -24,7 +23,7 @@ abstract class AbstractRequest implements Request {
     httpManager = builder.httpManager == null ? Api.DEFAULT_HTTP_MANAGER
         : builder.httpManager;
     if (builder.authorizationRequired && !httpManager.hasCredentials()) {
-      throw new TwitterException("Authorization required.");
+      throw new IllegalStateException("Authorization required.");
     }
     url = Url.newBuilder().setScheme(builder.scheme).setHost(builder.host)
         .setPort(builder.port).setPath(builder.path).addAllParameters(
@@ -33,11 +32,7 @@ abstract class AbstractRequest implements Request {
 
   @Override
   public final String toString() {
-    try {
-      return UrlUtil.assemble(url);
-    } catch (TwitterException e) {
-      return e.toString();
-    }
+     return UrlUtil.assemble(url);
   }
 
   public static abstract class Builder<BuilderType extends Builder<?>>
@@ -104,11 +99,11 @@ abstract class AbstractRequest implements Request {
     }
   }
 
-  String getJson() throws TwitterException {
+  String getJson()  {
     return httpManager.get(url);
   }
 
-  String postJson() throws TwitterException {
+  String postJson() {
     return httpManager.post(url);
   }
 }

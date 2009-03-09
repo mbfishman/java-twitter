@@ -5,7 +5,6 @@ import java.util.List;
 import org.joda.time.DateTime;
 
 import net.unto.twitter.JsonUtil;
-import net.unto.twitter.TwitterException;
 import net.unto.twitter.TwitterProtos.Status;
 
 public final class RepliesRequest extends AbstractRequest {
@@ -14,7 +13,7 @@ public final class RepliesRequest extends AbstractRequest {
     return new Builder();
   }
   
-  RepliesRequest(Builder builder) throws TwitterException {
+  RepliesRequest(Builder builder) {
     super(builder);
   }
   
@@ -25,7 +24,7 @@ public final class RepliesRequest extends AbstractRequest {
       authorizationRequired(true);
     }
     
-    public RepliesRequest build() throws TwitterException {
+    public RepliesRequest build() {
       return new RepliesRequest(this);
     }
 
@@ -43,7 +42,7 @@ public final class RepliesRequest extends AbstractRequest {
     }    
   }
   
-  public List<Status> get() throws TwitterException {
+  public List<Status> get() {
     return JsonUtil.newStatusList(getJson());
   }
 }

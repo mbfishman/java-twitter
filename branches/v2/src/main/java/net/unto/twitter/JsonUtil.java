@@ -14,7 +14,7 @@ public class JsonUtil {
   private JsonUtil() {
   }
   
-  private final static User newUser(JSONObject jsonObject) throws TwitterException {
+  private final static User newUser(JSONObject jsonObject) {
     if (jsonObject == null) {
       return null;
     }
@@ -74,11 +74,11 @@ public class JsonUtil {
     return builder.build();
   }
 
-  public final static List<User> newUserList(String jsonString) throws TwitterException {
+  public final static List<User> newUserList(String jsonString) {
     return newUserList(JSONArray.fromObject(jsonString));
   }
 
-  private final static List<User> newUserList(JSONArray jsonArray) throws TwitterException {
+  private final static List<User> newUserList(JSONArray jsonArray) {
     List<User> users = new ArrayList<User>(jsonArray.size());
     for (int i = 0; i < jsonArray.size(); i++) {
       users.add(newUser(jsonArray.getJSONObject(i)));
@@ -86,7 +86,7 @@ public class JsonUtil {
     return users;
   }
 
-  final static User newUser(String jsonString) throws TwitterException {
+  final static User newUser(String jsonString) {
     return newUser(JSONObject.fromObject(jsonString));
   }
 
@@ -116,11 +116,11 @@ public class JsonUtil {
     return builder.build();
   }
   
-  public final static Status newStatus(String jsonString) throws TwitterException {
+  public final static Status newStatus(String jsonString) {
     return newStatus(JSONObject.fromObject(jsonString));
   }
   
-  private final static Status newStatus(JSONObject jsonObject) throws TwitterException {
+  private final static Status newStatus(JSONObject jsonObject) {
     if (jsonObject == null) {
       return null;
     }
@@ -156,11 +156,11 @@ public class JsonUtil {
     return builder.build();
   }
   
-  public final static List<Status> newStatusList(String jsonString) throws TwitterException {
+  public final static List<Status> newStatusList(String jsonString) {
     return newStatusList(JSONArray.fromObject(jsonString));
   }
 
-  private final static List<Status> newStatusList(JSONArray jsonArray) throws TwitterException {
+  private final static List<Status> newStatusList(JSONArray jsonArray) {
     List<Status> statuses = new ArrayList<Status>(jsonArray.size());
     for (int i = 0; i < jsonArray.size(); i++) {
       statuses.add(newStatus(jsonArray.getJSONObject(i)));
@@ -168,7 +168,7 @@ public class JsonUtil {
     return statuses;
   }
   
-  private final static DirectMessage newDirectMessage(JSONObject jsonObject) throws TwitterException {
+  private final static DirectMessage newDirectMessage(JSONObject jsonObject) {
     if (jsonObject == null) {
       return null;
     }
@@ -204,11 +204,11 @@ public class JsonUtil {
     return builder.build();
   }
   
-  final static List<DirectMessage> newDirectMessageList(String jsonString) throws TwitterException {
+  final static List<DirectMessage> newDirectMessageList(String jsonString) {
     return newDirectMessageList(JSONArray.fromObject(jsonString));
   }
 
-  private final static List<DirectMessage> newDirectMessageList(JSONArray jsonArray) throws TwitterException {
+  private final static List<DirectMessage> newDirectMessageList(JSONArray jsonArray) {
     List<DirectMessage> directMessages = new ArrayList<DirectMessage>(jsonArray.size());
     for (int i = 0; i < jsonArray.size(); i++) {
       directMessages.add(newDirectMessage(jsonArray.getJSONObject(i)));
@@ -216,7 +216,7 @@ public class JsonUtil {
     return directMessages;
   }
 
-  final static DirectMessage newDirectMessage(String jsonString) throws TwitterException {
+  final static DirectMessage newDirectMessage(String jsonString)  {
     return newDirectMessage(JSONObject.fromObject(jsonString));
   }
 }

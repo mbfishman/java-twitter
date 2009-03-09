@@ -8,13 +8,13 @@ public class UrlUtil {
 
   private UrlUtil() {}
   
-  public static String assemble(Url url) throws TwitterException {
+  public static String assemble(Url url)  {
     String scheme = url.getScheme() == Url.Scheme.HTTP ? "http" : "https";
     try {
       URI uri = new URI(scheme, null, url.getHost(), url.getPort(), url.getPath());
       return uri.toString();
     } catch (URIException e) {
-      throw new TwitterException(e);
-    }
+      throw new IllegalStateException(e);
+    } 
   }
 }

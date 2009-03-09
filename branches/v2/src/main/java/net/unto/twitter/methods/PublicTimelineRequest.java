@@ -3,7 +3,6 @@ package net.unto.twitter.methods;
 import java.util.List;
 
 import net.unto.twitter.JsonUtil;
-import net.unto.twitter.TwitterException;
 import net.unto.twitter.TwitterProtos.Status;
 
 public final class PublicTimelineRequest extends AbstractRequest {
@@ -12,7 +11,7 @@ public final class PublicTimelineRequest extends AbstractRequest {
     return new Builder();
   }
   
-  PublicTimelineRequest(Builder builder) throws TwitterException {
+  PublicTimelineRequest(Builder builder) {
     super(builder);
   }
   
@@ -23,7 +22,7 @@ public final class PublicTimelineRequest extends AbstractRequest {
       authorizationRequired(false);
     }
     
-    public PublicTimelineRequest build() throws TwitterException {
+    public PublicTimelineRequest build() {
       return new PublicTimelineRequest(this);
     }
 
@@ -32,7 +31,7 @@ public final class PublicTimelineRequest extends AbstractRequest {
     }
   }
   
-  public List<Status> get() throws TwitterException {
+  public List<Status> get() {
     return JsonUtil.newStatusList(getJson());
   }
 }

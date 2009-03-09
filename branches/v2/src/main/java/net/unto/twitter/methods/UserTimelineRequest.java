@@ -3,7 +3,6 @@ package net.unto.twitter.methods;
 import java.util.List;
 
 import net.unto.twitter.JsonUtil;
-import net.unto.twitter.TwitterException;
 import net.unto.twitter.TwitterProtos.Status;
 
 import org.joda.time.DateTime;
@@ -14,7 +13,7 @@ public final class UserTimelineRequest extends AbstractRequest {
     return new Builder();
   }
   
-  UserTimelineRequest(Builder builder) throws TwitterException {
+  UserTimelineRequest(Builder builder) {
     super(builder);
   }
   
@@ -25,7 +24,7 @@ public final class UserTimelineRequest extends AbstractRequest {
       authorizationRequired(true);
     }
     
-    public UserTimelineRequest build() throws TwitterException {
+    public UserTimelineRequest build() {
       return new UserTimelineRequest(this);
     }
     
@@ -48,7 +47,7 @@ public final class UserTimelineRequest extends AbstractRequest {
     
   }
   
-  public List<Status> get() throws TwitterException {
+  public List<Status> get() {
     return JsonUtil.newStatusList(getJson());
   }
 }

@@ -15,7 +15,33 @@ import net.unto.twitter.methods.UserTimelineRequest;
 
 /**
  * Instances of the Api class provide access to the Twitter web service.
+ * <p>
+ * The Api class acts a factory for individual Api requests. The Api class and
+ * request methods attempt to provide sensible defaults when possible, and rely
+ * on standard builder patterns to customize each as required.
+ * </p>
+ * <p>
+ * Example usage:
+ * <p>
  * 
+ * <pre>
+ *   Api api = Api.DEFAULT_API;
+ *   List&lt;Status&gt; statuses = api.PublicTimeline().build().get();
+ *   for (Status status : statuses) {
+ *     System.out.println(status.getText());
+ *   }
+ * </pre>
+ * 
+ * <p>
+ * A more involved example:
+ * </p>
+ * 
+ * <pre>
+ *   Api api = Api.builder().username("username").password("password").build();
+ *   Status = api.UpdateStatus("Hello Twitter").inReplyToStatusId(12345).build().post();
+ *   System.out.println(status.getText());
+ * </pre>
+ *
  * @author DeWitt Clinton <dewitt@unto.net>
  */
 public class Api {
@@ -29,17 +55,21 @@ public class Api {
   public static final HttpManager DEFAULT_HTTP_MANAGER = TwitterHttpManager
       .builder().build();
 
+  public static final Api DEFAULT_API = Api.builder().build();
+
   public static class Builder {
 
-    public Api build() throws TwitterException {
+    public Api build() {
       if ((username != null) && (password == null)) {
-        throw new TwitterException("Password must be set if username is set.");
+        throw new IllegalStateException(
+            "Password must be set if username is set.");
       }
       if ((password != null) && (username == null)) {
-        throw new TwitterException("Username must be set if password is set.");
+        throw new IllegalStateException(
+            "Username must be set if password is set.");
       }
       if ((username != null) && (httpManager != null)) {
-        throw new TwitterException(
+        throw new IllegalStateException(
             "Only one of httpManager and username can be set.");
       }
       return new Api(this);

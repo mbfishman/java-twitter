@@ -1,7 +1,6 @@
 package net.unto.twitter.methods;
 
 import net.unto.twitter.JsonUtil;
-import net.unto.twitter.TwitterException;
 import net.unto.twitter.TwitterProtos.Status;
 
 public final class DestroyStatusRequest extends AbstractRequest {
@@ -10,7 +9,7 @@ public final class DestroyStatusRequest extends AbstractRequest {
     return new Builder(id);
   }
   
-  DestroyStatusRequest(Builder builder) throws TwitterException {
+  DestroyStatusRequest(Builder builder)  {
     super(builder);
   }
   
@@ -21,12 +20,12 @@ public final class DestroyStatusRequest extends AbstractRequest {
       authorizationRequired(true);
     }
     
-    public DestroyStatusRequest build() throws TwitterException {
+    public DestroyStatusRequest build() {
       return new DestroyStatusRequest(this);
     }
   }
 
-  public Status post() throws TwitterException {
+  public Status post() {
     return JsonUtil.newStatus(postJson());
   }
 }

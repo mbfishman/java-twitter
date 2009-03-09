@@ -23,7 +23,7 @@ import org.junit.Test;
 public class ApiTest {
 
   @Test
-  public void testGetPublicTimeline() throws TwitterException, IOException {
+  public void testGetPublicTimeline() throws IOException {
     HttpManager mockTwitterHttpManager = getMockTwitterHttpManager();
     Api api = Api.builder().httpManager(mockTwitterHttpManager).build();
     String json = readTestData("public-timeline.json");
@@ -44,7 +44,7 @@ public class ApiTest {
   }
   
   @Test
-  public void testGetFriendsTimeline() throws TwitterException, IOException {
+  public void testGetFriendsTimeline() throws IOException {
     HttpManager mockTwitterHttpManager = getMockTwitterHttpManager();
     Api api = Api.builder()
         .httpManager(mockTwitterHttpManager)

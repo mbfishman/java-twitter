@@ -8,12 +8,11 @@ final class TwitterUtil {
   public final static DateTimeFormatter TWITTER_DATE_FORMATTER = DateTimeFormat
       .forPattern("EEE MMM dd HH:mm:ss Z yyyy");
 
-  public final static DateTime parseTwitterDateTimeString(
-      String twitterDateString) throws TwitterException {
+  public final static DateTime parseTwitterDateTimeString(String twitterDateString) {
     try {
       return TWITTER_DATE_FORMATTER.parseDateTime(twitterDateString);
     } catch (IllegalArgumentException e) {
-      throw new TwitterException(String.format("Could not parse date string '%s'",
+      throw new IllegalStateException(String.format("Could not parse date string '%s'",
           twitterDateString));
     }
   }

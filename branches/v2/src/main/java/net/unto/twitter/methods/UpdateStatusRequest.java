@@ -1,9 +1,7 @@
 package net.unto.twitter.methods;
 
 import net.unto.twitter.JsonUtil;
-import net.unto.twitter.TwitterException;
 import net.unto.twitter.TwitterProtos.Status;
-import net.unto.twitter.methods.RepliesRequest.Builder;
 
 /**
  * Updates the authenticating user's status. Requires the status parameter
@@ -24,7 +22,7 @@ public final class UpdateStatusRequest extends AbstractRequest {
     return new Builder(status);
   }
 
-  UpdateStatusRequest(Builder builder) throws TwitterException {
+  UpdateStatusRequest(Builder builder) {
     super(builder);
   }
 
@@ -62,12 +60,12 @@ public final class UpdateStatusRequest extends AbstractRequest {
      * 
      * @see net.unto.twitter.methods.Request.Builder#build()
      */
-    public UpdateStatusRequest build() throws TwitterException {
+    public UpdateStatusRequest build() {
       return new UpdateStatusRequest(this);
     }
   }
 
-  public Status post() throws TwitterException {
+  public Status post() {
     return JsonUtil.newStatus(postJson());
   }
 }

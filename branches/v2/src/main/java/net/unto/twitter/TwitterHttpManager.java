@@ -108,7 +108,7 @@ public class TwitterHttpManager implements HttpManager {
    * 
    * @see net.unto.twitter.TwitterHttpManager#get(java.lang.String)
    */
-  public String get(Url url) throws TwitterException {
+  public String get(Url url) {
     assert(url != null);
     String uri = UrlUtil.assemble(url);
     GetMethod method = new GetMethod(uri);
@@ -122,7 +122,7 @@ public class TwitterHttpManager implements HttpManager {
    * 
    * @see net.unto.twitter.TwitterHttpManager#post(java.lang.String)
    */
-  public String post(Url url) throws TwitterException {
+  public String post(Url url) {
     assert(url != null);
     String uri = UrlUtil.assemble(url);
     PostMethod method = new PostMethod(uri);
@@ -142,8 +142,7 @@ public class TwitterHttpManager implements HttpManager {
     return out.toArray(new NameValuePair[out.size()]);
   }
 
-  private String execute(HttpMethod method)
-      throws TwitterException {
+  private String execute(HttpMethod method) {
 
     HttpClient httpClient = new HttpClient(connectionManager);
     if (credentials != null) {
@@ -158,17 +157,17 @@ public class TwitterHttpManager implements HttpManager {
       if (statusCode != HttpStatus.SC_OK) {
         String error = String.format("Expected 200 OK. Received %d %s",
             statusCode, HttpStatus.getStatusText(statusCode));
-        throw new TwitterException(error);
+        throw new RuntimeException(error);
       }
       String responseBody = method.getResponseBodyAsString();
       if (responseBody == null) {
-        throw new TwitterException("Expected response body, got null");
+        throw new RuntimeException("Expected response body, got null");
       }
       return responseBody;
     } catch (HttpException e) {
-      throw new TwitterException(e);
+      throw new RuntimeException(e);
     } catch (IOException e) {
-      throw new TwitterException(e);
+      throw new RuntimeException(e);
     } finally {
       method.releaseConnection();
     }

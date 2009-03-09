@@ -3,7 +3,6 @@ package net.unto.twitter.methods;
 import java.util.List;
 
 import net.unto.twitter.JsonUtil;
-import net.unto.twitter.TwitterException;
 import net.unto.twitter.TwitterProtos.User;
 
 /**
@@ -17,7 +16,7 @@ public final class FollowersRequest extends AbstractRequest {
     return new Builder();
   }
   
-  FollowersRequest(Builder builder) throws TwitterException {
+  FollowersRequest(Builder builder) {
     super(builder);
   }
   
@@ -52,7 +51,7 @@ public final class FollowersRequest extends AbstractRequest {
       return parameter("page", Integer.toString(page));
     }
     
-    public FollowersRequest build() throws TwitterException {
+    public FollowersRequest build()  {
       return new FollowersRequest(this);
     }    
   }
@@ -67,7 +66,7 @@ public final class FollowersRequest extends AbstractRequest {
    * @return {@link List} of {@link User}
    * @throws TwitterException
    */
-  public List<User> get() throws TwitterException {
+  public List<User> get() {
     return JsonUtil.newUserList(getJson());
   }
 }

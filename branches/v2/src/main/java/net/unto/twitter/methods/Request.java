@@ -1,7 +1,6 @@
 package net.unto.twitter.methods;
 
 import net.unto.twitter.HttpManager;
-import net.unto.twitter.TwitterException;
 import net.unto.twitter.UtilProtos.Url;
 
 public interface Request {
@@ -11,6 +10,6 @@ public interface Request {
     Builder host(String host);
     Builder port(int port);
     Builder scheme(Url.Scheme scheme);
-    Request build() throws TwitterException;
+    Request build();
   }
 }
