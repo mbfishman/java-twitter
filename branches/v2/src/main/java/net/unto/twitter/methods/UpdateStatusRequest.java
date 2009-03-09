@@ -3,6 +3,8 @@ package net.unto.twitter.methods;
 import net.unto.twitter.JsonUtil;
 import net.unto.twitter.TwitterProtos.Status;
 
+// http://apiwiki.twitter.com/REST+API+Documentation#update
+  
 /**
  * Updates the authenticating user's status. Requires the status parameter
  * specified below. Request must be a POST. A status update with text identical

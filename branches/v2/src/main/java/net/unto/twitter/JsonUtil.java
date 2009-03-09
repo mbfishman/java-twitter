@@ -86,7 +86,7 @@ public class JsonUtil {
     return users;
   }
 
-  final static User newUser(String jsonString) {
+  public final static User newUser(String jsonString) {
     return newUser(JSONObject.fromObject(jsonString));
   }
 
@@ -204,7 +204,7 @@ public class JsonUtil {
     return builder.build();
   }
   
-  final static List<DirectMessage> newDirectMessageList(String jsonString) {
+  public final static List<DirectMessage> newDirectMessageList(String jsonString) {
     return newDirectMessageList(JSONArray.fromObject(jsonString));
   }
 

@@ -5,6 +5,8 @@ import java.util.List;
 import net.unto.twitter.JsonUtil;
 import net.unto.twitter.TwitterProtos.User;
 
+// http://apiwiki.twitter.com/REST+API+Documentation#followers
+  
 /**
  * Returns the authenticating user's followers, each with current status inline.
  * They are ordered by the order in which they joined Twitter (this is going to
@@ -62,9 +64,6 @@ public final class FollowersRequest extends AbstractRequest {
    * Returns the authenticating user's followers, each with current status
    * inline. They are ordered by the order in which they joined Twitter (this is
    * going to be changed).
-   * 
-   * @return {@link List} of {@link User}
-   * @throws TwitterException
    */
   public List<User> get() {
     return JsonUtil.newUserList(getJson());

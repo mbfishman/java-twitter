@@ -7,6 +7,8 @@ import net.unto.twitter.TwitterProtos.Status;
 
 import org.joda.time.DateTime;
 
+// http://apiwiki.twitter.com/REST+API+Documentation#friendstimeline
+
 public final class FriendsTimelineRequest extends AbstractRequest {
   
   public static Builder builder() {

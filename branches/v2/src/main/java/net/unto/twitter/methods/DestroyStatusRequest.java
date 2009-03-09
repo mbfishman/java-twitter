@@ -3,6 +3,8 @@ package net.unto.twitter.methods;
 import net.unto.twitter.JsonUtil;
 import net.unto.twitter.TwitterProtos.Status;
 
+// http://apiwiki.twitter.com/REST+API+Documentation#destroy
+  
 public final class DestroyStatusRequest extends AbstractRequest {
   
   public static Builder builder(long id) {

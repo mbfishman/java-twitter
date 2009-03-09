@@ -46,12 +46,19 @@ message Status {
 }
 
 message DirectMessage {
+  // a permanent unique id referencing an object, such as user or status
   optional uint64 id = 1;
+  // escaped and HTML encoded status body
   optional string text = 2;
+  // unique id of the user that sent a direct message (see id)
   optional uint64 sender_id = 3;
+  // unique id of the user that received a direct message (see id)
   optional uint64 recipient_id = 4;
+  // timestamp of element creation, either status or user
   optional string created_at = 5;
+  // display name of the user that sent a direct message (see screen_name)
   optional string sender_screen_name = 6;
+  // display name of the user that sent a direct message (see screen_name)
   optional string recipient_screen_name = 7;
   optional User sender = 8;
   optional User recipient = 9;

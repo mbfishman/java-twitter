@@ -3,6 +3,7 @@ package net.unto.twitter;
 import net.unto.twitter.UtilProtos.Url;
 import net.unto.twitter.UtilProtos.Url.Scheme;
 import net.unto.twitter.methods.DestroyStatusRequest;
+import net.unto.twitter.methods.DirectMessagesRequest;
 import net.unto.twitter.methods.FollowersRequest;
 import net.unto.twitter.methods.FriendsRequest;
 import net.unto.twitter.methods.FriendsTimelineRequest;
@@ -10,6 +11,7 @@ import net.unto.twitter.methods.PublicTimelineRequest;
 import net.unto.twitter.methods.RepliesRequest;
 import net.unto.twitter.methods.Request;
 import net.unto.twitter.methods.ShowStatusRequest;
+import net.unto.twitter.methods.ShowUserRequest;
 import net.unto.twitter.methods.UpdateStatusRequest;
 import net.unto.twitter.methods.UserTimelineRequest;
 
@@ -220,7 +222,7 @@ public class Api {
     return builder;
   }
 
-   void setDefaults(Request.Builder builder) {
+  void setDefaults(Request.Builder builder) {
     builder.httpManager(httpManager);
     builder.host(host);
     builder.port(port);
@@ -256,6 +258,45 @@ public class Api {
 
   public UserTimelineRequest.Builder UserTimeline() {
     UserTimelineRequest.Builder builder = UserTimelineRequest.builder();
+    setDefaults(builder);
+    return builder;
+  }
+
+  /**
+   * Returns extended information of a given user, specified by ID or screen
+   * name as per the required id parameter below. This information includes
+   * design settings, so third party developers can theme their widgets
+   * according to a given user's preferences. You must be properly authenticated
+   * to request the page of a protected user.
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * <code>User user = api.ShowUser().id("dewitt").build().get();</code>
+   * </p>
+   * 
+   * @return {@link UpdateStatusRequest.Builder}
+   */
+  public ShowUserRequest.Builder ShowUser() {
+    ShowUserRequest.Builder builder = ShowUserRequest.builder();
+    setDefaults(builder);
+    return builder;
+  }
+
+  /**
+   * Returns a list of the 20 most recent direct messages sent to the
+   * authenticating user.
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * <code>List<DirectMessages> directMessages = api.DirectMessages().build().get();</code>
+   * </p>
+   * 
+   * @return {@link UpdateStatusRequest.Builder}
+   */
+  public DirectMessagesRequest.Builder DirectMessages() {
+    DirectMessagesRequest.Builder builder = DirectMessagesRequest.builder();
     setDefaults(builder);
     return builder;
   }

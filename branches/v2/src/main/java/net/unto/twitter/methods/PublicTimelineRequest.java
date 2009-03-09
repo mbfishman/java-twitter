@@ -5,6 +5,8 @@ import java.util.List;
 import net.unto.twitter.JsonUtil;
 import net.unto.twitter.TwitterProtos.Status;
 
+// http://apiwiki.twitter.com/REST+API+Documentation#publictimeline
+
 public final class PublicTimelineRequest extends AbstractRequest {
   
   public static Builder builder() {
