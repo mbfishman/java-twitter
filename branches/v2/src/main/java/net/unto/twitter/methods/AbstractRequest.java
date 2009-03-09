@@ -10,6 +10,70 @@ import net.unto.twitter.UtilProtos.Url;
 
 abstract class AbstractRequest implements Request {
 
+  public static abstract class Builder<BuilderType extends Builder<?>>
+      implements Request.Builder {
+
+    boolean authorizationRequired = false;
+    String host = Api.DEFAULT_HOST;
+    HttpManager httpManager;
+    List<Url.Parameter> parameters = new ArrayList<Url.Parameter>();
+    String path = null;
+    int port = Api.DEFAULT_PORT;
+    Url.Scheme scheme = Api.DEFAULT_SCHEME;
+
+    @SuppressWarnings("unchecked")
+    BuilderType authorizationRequired(boolean authorizationRequired) {
+      this.authorizationRequired = authorizationRequired;
+      return (BuilderType) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public BuilderType host(String host) {
+      this.host = host;
+      // Safe conversion because BuilderType extends Builder
+      return (BuilderType) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public BuilderType httpManager(HttpManager httpManager) {
+      this.httpManager = httpManager;
+      // Safe conversion because BuilderType extends Builder
+      return (BuilderType) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    BuilderType parameter(String name, String value) {
+      assert (name != null);
+      assert (name.length() > 0);
+      assert (value != null);
+      Url.Parameter parameter = Url.Parameter.newBuilder().setName(name)
+          .setValue(value).build();
+      parameters.add(parameter);
+      // Safe conversion because BuilderType extends Builder
+      return (BuilderType) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    BuilderType path(String path) {
+      this.path = path;
+      return (BuilderType) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public BuilderType port(int port) {
+      this.port = port;
+      // Safe conversion because BuilderType extends Builder
+      return (BuilderType) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public BuilderType scheme(Url.Scheme scheme) {
+      this.scheme = scheme;
+      // Safe conversion because BuilderType extends Builder
+      return (BuilderType) this;
+    }
+  }
+
   HttpManager httpManager;
 
   Url url;
@@ -30,80 +94,16 @@ abstract class AbstractRequest implements Request {
             builder.parameters).build();
   }
 
-  @Override
-  public final String toString() {
-     return UrlUtil.assemble(url);
-  }
-
-  public static abstract class Builder<BuilderType extends Builder<?>>
-      implements Request.Builder {
-
-    String path = null;
-    HttpManager httpManager;
-    boolean authorizationRequired = false;
-    String host = Api.DEFAULT_HOST;
-    int port = Api.DEFAULT_PORT;
-    Url.Scheme scheme = Api.DEFAULT_SCHEME;
-    List<Url.Parameter> parameters = new ArrayList<Url.Parameter>();
-
-    @SuppressWarnings("unchecked")
-    public BuilderType httpManager(HttpManager httpManager) {
-      this.httpManager = httpManager;
-      // Safe conversion because BuilderType extends Builder
-      return (BuilderType) this;
-    }
-
-    @SuppressWarnings("unchecked")
-    public BuilderType host(String host) {
-      this.host = host;
-      // Safe conversion because BuilderType extends Builder
-      return (BuilderType) this;
-    }
-
-    @SuppressWarnings("unchecked")
-    public BuilderType port(int port) {
-      this.port = port;
-      // Safe conversion because BuilderType extends Builder
-      return (BuilderType) this;
-    }
-
-    @SuppressWarnings("unchecked")
-    public BuilderType scheme(Url.Scheme scheme) {
-      this.scheme = scheme;
-      // Safe conversion because BuilderType extends Builder
-      return (BuilderType) this;
-    }
-
-    @SuppressWarnings("unchecked")
-    BuilderType parameter(String name, String value) {
-      assert (name != null);
-      assert (name.length() > 0);
-      assert (value != null);
-      Url.Parameter parameter = Url.Parameter.newBuilder().setName(name)
-          .setValue(value).build();
-      parameters.add(parameter);
-      // Safe conversion because BuilderType extends Builder
-      return (BuilderType) this;
-    }
-    
-    @SuppressWarnings("unchecked")
-    BuilderType path(String path) {
-      this.path = path;
-      return (BuilderType) this;
-    }
-    
-    @SuppressWarnings("unchecked")
-    BuilderType authorizationRequired(boolean authorizationRequired) {
-      this.authorizationRequired = authorizationRequired;
-      return (BuilderType) this;
-    }
-  }
-
-  String getJson()  {
+  String getJson() {
     return httpManager.get(url);
   }
 
   String postJson() {
     return httpManager.post(url);
+  }
+
+  @Override
+  public final String toString() {
+    return UrlUtil.assemble(url);
   }
 }

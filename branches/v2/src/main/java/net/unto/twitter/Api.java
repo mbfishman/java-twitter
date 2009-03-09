@@ -25,11 +25,11 @@ import net.unto.twitter.methods.UserTimelineRequest;
  * <p>
  * 
  * <pre>
- *   Api api = Api.DEFAULT_API;
- *   List&lt;Status&gt; statuses = api.PublicTimeline().build().get();
- *   for (Status status : statuses) {
- *     System.out.println(status.getText());
- *   }
+ * Api api = Api.DEFAULT_API;
+ * List&lt;Status&gt; statuses = api.PublicTimeline().build().get();
+ * for (Status status : statuses) {
+ *   System.out.println(status.getText());
+ * }
  * </pre>
  * 
  * <p>
@@ -37,27 +37,25 @@ import net.unto.twitter.methods.UserTimelineRequest;
  * </p>
  * 
  * <pre>
- *   Api api = Api.builder().username("username").password("password").build();
- *   Status = api.UpdateStatus("Hello Twitter").inReplyToStatusId(12345).build().post();
- *   System.out.println(status.getText());
+ * Api api = Api.builder().username(&quot;username&quot;).password(&quot;password&quot;).build();
+ * Status = api.UpdateStatus(&quot;Hello Twitter&quot;).inReplyToStatusId(12345).build()
+ *     .post();
+ * System.out.println(status.getText());
  * </pre>
- *
+ * 
  * @author DeWitt Clinton <dewitt@unto.net>
  */
 public class Api {
 
-  public static final String DEFAULT_HOST = "twitter.com";
-
-  public static final int DEFAULT_PORT = 80;
-
-  public static final Url.Scheme DEFAULT_SCHEME = Url.Scheme.HTTP;
-
-  public static final HttpManager DEFAULT_HTTP_MANAGER = TwitterHttpManager
-      .builder().build();
-
-  public static final Api DEFAULT_API = Api.builder().build();
-
   public static class Builder {
+
+    private String host = DEFAULT_HOST;
+
+    private HttpManager httpManager = DEFAULT_HTTP_MANAGER;
+    private String password = null;
+    private int port = DEFAULT_PORT;
+    private Url.Scheme scheme = DEFAULT_SCHEME;
+    private String username = null;
 
     public Api build() {
       if ((username != null) && (password == null)) {
@@ -75,30 +73,18 @@ public class Api {
       return new Api(this);
     }
 
-    private HttpManager httpManager = DEFAULT_HTTP_MANAGER;
-    private String host = DEFAULT_HOST;
-    private int port = DEFAULT_PORT;
-    private Url.Scheme scheme = DEFAULT_SCHEME;
-    private String username = null;
-    private String password = null;
+    public Builder host(String host) {
+      this.host = host;
+      return this;
+    }
 
     public Builder httpManager(HttpManager httpManager) {
       this.httpManager = httpManager;
       return this;
     }
 
-    public Builder username(String username) {
-      this.username = username;
-      return this;
-    }
-
     public Builder password(String password) {
       this.password = password;
-      return this;
-    }
-
-    public Builder host(String host) {
-      this.host = host;
       return this;
     }
 
@@ -111,13 +97,31 @@ public class Api {
       this.scheme = scheme;
       return this;
     }
+
+    public Builder username(String username) {
+      this.username = username;
+      return this;
+    }
   }
+
+  public static final Api DEFAULT_API = Api.builder().build();
+
+  public static final String DEFAULT_HOST = "twitter.com";
+
+  public static final HttpManager DEFAULT_HTTP_MANAGER = TwitterHttpManager
+      .builder().build();
+
+  public static final int DEFAULT_PORT = 80;
+
+  public static final Url.Scheme DEFAULT_SCHEME = Url.Scheme.HTTP;
 
   public static Builder builder() {
     return new Builder();
   }
 
   private String host;
+
+  private HttpManager httpManager = null;
 
   private int port;
 
@@ -140,17 +144,60 @@ public class Api {
     scheme = builder.scheme;
   }
 
-  private HttpManager httpManager = null;
-
-  void setDefaults(Request.Builder builder) {
-    builder.httpManager(httpManager);
-    builder.host(host);
-    builder.port(port);
-    builder.scheme(scheme);
+  /**
+   * Destroys the status specified by the required ID parameter. The
+   * authenticating user must be the author of the specified status.
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * <code>Status status = api.DestroyStatus(12345).build().post();</code>
+   * </p>
+   * 
+   * @param id The ID of the status to destroy.
+   * @return {@link DestroyStatusRequest.Builder}
+   */
+  public DestroyStatusRequest.Builder DestroyStatus(long id) {
+    DestroyStatusRequest.Builder builder = DestroyStatusRequest.builder(id);
+    setDefaults(builder);
+    return builder;
   }
 
-  public PublicTimelineRequest.Builder PublicTimeline() {
-    PublicTimelineRequest.Builder builder = PublicTimelineRequest.builder();
+  /**
+   * Returns the authenticating user's followers, each with current status
+   * inline. They are ordered by the order in which they joined Twitter (this is
+   * going to be changed).
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * <code>List<User> followers = api.Followers().build().get();</code>
+   * </p>
+   * 
+   * @return {@link FollowersRequest.Builder}
+   */
+  public FollowersRequest.Builder Followers() {
+    FollowersRequest.Builder builder = FollowersRequest.builder();
+    setDefaults(builder);
+    return builder;
+  }
+
+  /**
+   * Returns the authenticating user's friends, each with current status inline.
+   * They are ordered by the order in which they were added as friends. It's
+   * also possible to request another user's recent friends list via the id
+   * parameter below.
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * <code>List<User> friends = api.Friends().build().get();</code>
+   * </p>
+   * 
+   * @return {@link FriendsRequest.Builder}
+   */
+  public FriendsRequest.Builder Friends() {
+    FriendsRequest.Builder builder = FriendsRequest.builder();
     setDefaults(builder);
     return builder;
   }
@@ -161,10 +208,23 @@ public class Api {
     return builder;
   }
 
-  public UserTimelineRequest.Builder UserTimeline() {
-    UserTimelineRequest.Builder builder = UserTimelineRequest.builder();
+  public PublicTimelineRequest.Builder PublicTimeline() {
+    PublicTimelineRequest.Builder builder = PublicTimelineRequest.builder();
     setDefaults(builder);
     return builder;
+  }
+
+  public RepliesRequest.Builder Replies() {
+    RepliesRequest.Builder builder = RepliesRequest.builder();
+    setDefaults(builder);
+    return builder;
+  }
+
+   void setDefaults(Request.Builder builder) {
+    builder.httpManager(httpManager);
+    builder.host(host);
+    builder.port(port);
+    builder.scheme(scheme);
   }
 
   public ShowStatusRequest.Builder ShowStatus(long id) {
@@ -194,66 +254,8 @@ public class Api {
     return builder;
   }
 
-  public RepliesRequest.Builder Replies() {
-    RepliesRequest.Builder builder = RepliesRequest.builder();
-    setDefaults(builder);
-    return builder;
-  }
-
-  /**
-   * Destroys the status specified by the required ID parameter. The
-   * authenticating user must be the author of the specified status.
-   * <p>
-   * Example usage:
-   * </p>
-   * <p>
-   * <code>Status status = api.DestroyStatus(12345).build().post();</code>
-   * </p>
-   * 
-   * @param id The ID of the status to destroy.
-   * @return {@link DestroyStatusRequest.Builder}
-   */
-  public DestroyStatusRequest.Builder DestroyStatus(long id) {
-    DestroyStatusRequest.Builder builder = DestroyStatusRequest.builder(id);
-    setDefaults(builder);
-    return builder;
-  }
-
-  /**
-   * Returns the authenticating user's friends, each with current status inline.
-   * They are ordered by the order in which they were added as friends. It's
-   * also possible to request another user's recent friends list via the id
-   * parameter below.
-   * <p>
-   * Example usage:
-   * </p>
-   * <p>
-   * <code>List<User> friends = api.Friends().build().get();</code>
-   * </p>
-   * 
-   * @return {@link FriendsRequest.Builder}
-   */
-  public FriendsRequest.Builder Friends() {
-    FriendsRequest.Builder builder = FriendsRequest.builder();
-    setDefaults(builder);
-    return builder;
-  }
-
-  /**
-   * Returns the authenticating user's followers, each with current status
-   * inline. They are ordered by the order in which they joined Twitter (this is
-   * going to be changed).
-   * <p>
-   * Example usage:
-   * </p>
-   * <p>
-   * <code>List<User> followers = api.Followers().build().get();</code>
-   * </p>
-   * 
-   * @return {@link FollowersRequest.Builder}
-   */
-  public FollowersRequest.Builder Followers() {
-    FollowersRequest.Builder builder = FollowersRequest.builder();
+  public UserTimelineRequest.Builder UserTimeline() {
+    UserTimelineRequest.Builder builder = UserTimelineRequest.builder();
     setDefaults(builder);
     return builder;
   }
