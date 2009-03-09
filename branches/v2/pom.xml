@@ -61,6 +61,11 @@
       <version>2.3</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.google.collections</groupId>
+      <artifactId>google-collections</artifactId>
+      <version>0.9</version>
+    </dependency>
   </dependencies>
   <reporting>
     <plugins>

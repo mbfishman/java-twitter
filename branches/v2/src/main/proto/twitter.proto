@@ -93,3 +93,9 @@ message DirectMessage {
   optional User sender = 8;
   optional User recipient = 9;
 }
+
+enum Device {
+  NONE = 0;
+  SMS = 1;
+  IM = 2;
+}

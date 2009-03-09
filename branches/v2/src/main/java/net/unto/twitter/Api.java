@@ -1,5 +1,6 @@
 package net.unto.twitter;
 
+import net.unto.twitter.TwitterProtos.Device;
 import net.unto.twitter.UtilProtos.Url;
 import net.unto.twitter.UtilProtos.Url.Scheme;
 import net.unto.twitter.methods.CreateFriendshipRequest;
@@ -21,6 +22,7 @@ import net.unto.twitter.methods.Request;
 import net.unto.twitter.methods.SentDirectMessagesRequest;
 import net.unto.twitter.methods.ShowStatusRequest;
 import net.unto.twitter.methods.ShowUserRequest;
+import net.unto.twitter.methods.UpdateDeliveryDeviceRequest;
 import net.unto.twitter.methods.UpdateStatusRequest;
 import net.unto.twitter.methods.UserTimelineRequest;
 import net.unto.twitter.methods.VerifyCredentialsRequest;
@@ -438,7 +440,8 @@ public class Api {
   }
 
   /**
-   * Returns an array of numeric IDs for every user the specified user is following.
+   * Returns an array of numeric IDs for every user the specified user is
+   * following.
    * 
    * <p>
    * Example usage:
@@ -454,15 +457,17 @@ public class Api {
     setDefaults(builder);
     return builder;
   }
-  
+
   /**
-   * Returns an array of numeric IDs for every user the specified user is followed by.
+   * Returns an array of numeric IDs for every user the specified user is
+   * followed by.
    * <p>
    * Example usage:
    * </p>
    * <p>
    * <code>long[] followers = api.followerIds().build().get();</code>
    * </p>
+   * 
    * @return {@link FollowerIdsRequest.Builder}
    */
   public FollowerIdsRequest.Builder followerIds() {
@@ -470,18 +475,20 @@ public class Api {
     setDefaults(builder);
     return builder;
   }
-  
+
   /**
-   * Returns a representation of the requesting user if authentication was successful.
+   * Returns a representation of the requesting user if authentication was
+   * successful.
    * 
    * @return {@link VerifyCredentialsRequest.Builder}
    */
   public VerifyCredentialsRequest.Builder verifyCredentials() {
-    VerifyCredentialsRequest.Builder builder = VerifyCredentialsRequest.builder();
+    VerifyCredentialsRequest.Builder builder = VerifyCredentialsRequest
+        .builder();
     setDefaults(builder);
     return builder;
   }
-  
+
   /**
    * Ends the session of the authenticating user.
    * 
@@ -489,6 +496,26 @@ public class Api {
    */
   public EndSessionRequest.Builder endSession() {
     EndSessionRequest.Builder builder = EndSessionRequest.builder();
+    setDefaults(builder);
+    return builder;
+  }
+
+  /**
+   * Sets which device Twitter delivers updates to for the authenticating user.
+   * Sending none as the device parameter will disable IM or SMS updates.
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * <code>User user = api.updateDeliveryDevice(Device.SMS).build().post();</code>
+   * </p>
+   * 
+   * @param device Must be one of: sms, im, none.
+   * @return {@link UpdateDeliveryDeviceRequest.Builder}
+   */
+  public UpdateDeliveryDeviceRequest.Builder updateDeliveryDevice(Device device) {
+    UpdateDeliveryDeviceRequest.Builder builder = UpdateDeliveryDeviceRequest
+        .builder(device);
     setDefaults(builder);
     return builder;
   }

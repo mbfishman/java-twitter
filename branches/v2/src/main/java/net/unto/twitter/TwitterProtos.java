@@ -7,6 +7,60 @@ public final class TwitterProtos {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
+  public static enum Device {
+    NONE(0, 0),
+    SMS(1, 1),
+    IM(2, 2),
+    ;
+    
+    
+    public final int getNumber() { return value; }
+    
+    public static Device valueOf(int value) {
+      switch (value) {
+        case 0: return NONE;
+        case 1: return SMS;
+        case 2: return IM;
+        default: return null;
+      }
+    }
+    
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(index);
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return net.unto.twitter.TwitterProtos.getDescriptor().getEnumTypes().get(0);
+    }
+    
+    private static final Device[] VALUES = {
+      NONE, SMS, IM, 
+    };
+    public static Device valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      return VALUES[desc.getIndex()];
+    }
+    private final int index;
+    private final int value;
+    private Device(int index, int value) {
+      this.index = index;
+      this.value = value;
+    }
+    
+    static {
+      net.unto.twitter.TwitterProtos.getDescriptor();
+    }
+  }
+  
   public static final class User extends
       com.google.protobuf.GeneratedMessage {
     // Use User.newBuilder() to construct.
@@ -1713,8 +1767,8 @@ public final class TwitterProtos {
       "(\t\022\032\n\022sender_screen_name\030\006 \001(\t\022\035\n\025recipi" +
       "ent_screen_name\030\007 \001(\t\022\035\n\006sender\030\010 \001(\0132\r." +
       "twitter.User\022 \n\trecipient\030\t \001(\0132\r.twitte" +
-      "r.UserB!\n\020net.unto.twitterB\rTwitterProto" +
-      "s";
+      "r.User*#\n\006Device\022\010\n\004NONE\020\000\022\007\n\003SMS\020\001\022\006\n\002I" +
+      "M\020\002B!\n\020net.unto.twitterB\rTwitterProtos";
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
         public com.google.protobuf.ExtensionRegistry assignDescriptors(
