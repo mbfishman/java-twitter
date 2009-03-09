@@ -8,38 +8,48 @@ import net.unto.twitter.TwitterProtos.Status;
 
 import org.joda.time.DateTime;
 
-public class UserTimelineRequest extends AbstractRequest<UserTimelineRequest> {
-
-  public UserTimelineRequest() {
-    path = "/statuses/user_timeline.json";
-    authorizationRequired = true; 
-  }
-
-  public UserTimelineRequest id(String id) {
-    assert(id != null);
-    path = String.format("/statuses/user_timeline/%s.json", id);
-    authorizationRequired = false; 
-    return this;
+public final class UserTimelineRequest extends AbstractRequest {
+  
+  public static Builder builder() {
+    return new Builder();
   }
   
-  public UserTimelineRequest since(DateTime since) {
-    assert (since != null);
-    return parameter("since", since.toString());
+  UserTimelineRequest(Builder builder) throws TwitterException {
+    super(builder);
   }
+  
+  public static final class Builder extends AbstractRequest.Builder<Builder> {
 
-  public UserTimelineRequest sinceId(long sinceId) {
-    return parameter("since_id", Long.toString(sinceId));
+    Builder() {
+      path("/statuses/user_timeline.json");
+      authorizationRequired(true);
+    }
+    
+    public UserTimelineRequest build() throws TwitterException {
+      return new UserTimelineRequest(this);
+    }
+    
+    public Builder since(DateTime since) {
+      assert (since != null);
+      return parameter("since", since.toString());
+    }
+
+    public Builder sinceId(long sinceId) {
+      return parameter("since_id", Long.toString(sinceId));
+    }
+
+    public Builder count(int count) {
+      return parameter("count", Integer.toString(count));
+    }
+
+    public Builder page(int page) {
+      return parameter("page", Integer.toString(page));
+    }
+    
   }
-
-  public UserTimelineRequest count(int count) {
-    return parameter("count", Integer.toString(count));
-  }
-
-  public UserTimelineRequest page(int page) {
-    return parameter("page", Integer.toString(page));
-  }
-
+  
   public List<Status> get() throws TwitterException {
     return JsonUtil.newStatusList(getJson());
   }
 }
+

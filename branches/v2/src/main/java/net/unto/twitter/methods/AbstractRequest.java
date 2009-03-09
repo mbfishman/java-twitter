@@ -6,80 +6,109 @@ import java.util.List;
 import net.unto.twitter.Api;
 import net.unto.twitter.HttpManager;
 import net.unto.twitter.TwitterException;
-import net.unto.twitter.TwitterHttpManager;
+import net.unto.twitter.UrlUtil;
 import net.unto.twitter.UtilProtos.Url;
 
+abstract class AbstractRequest implements Request {
 
-@SuppressWarnings("unchecked")  
-abstract class AbstractRequest<RequestType extends AbstractRequest> {
+  HttpManager httpManager;
 
-  HttpManager httpManager = null;
+  Url url;
 
-  List<Url.Parameter> parameters = new ArrayList<Url.Parameter>();
-
-  String path = null;
-
-  private Url baseUrl = Api.DEFAULT_BASE_URL;
-  
-  boolean authorizationRequired = false;
-  
-  public RequestType httpManager(HttpManager httpManager) {
-    this.httpManager = httpManager;
-    return (RequestType)this;  // Safe conversion because RequestType extends AbstractRequest
-  }
-  
-  public RequestType baseUrl(Url baseUrl) {
-    this.baseUrl = baseUrl;
-    return (RequestType)this;
-  }
-  
-  HttpManager getHttpManager() {
-    return httpManager != null ?
-        httpManager :
-        TwitterHttpManager.builder().build();
-  }
-  
-  Url buildUrl() {
-    assert(baseUrl != null);
-    assert(path != null);
-    return Url.newBuilder()
-        .setScheme(baseUrl.getScheme())
-        .setHost(baseUrl.getHost())
-        .setPort(baseUrl.getPort())
-        .setPath(path)
-        .addAllParameters(parameters)
-        .build();
-  }
-  
-  RequestType parameter(String name, String value) {
-    assert(name != null);
-    assert(name.length() > 0);
-    assert(value != null);
-    parameters.add(
-        Url.Parameter.newBuilder()
-            .setName(name)
-            .setValue(value)
-            .build());
-    return (RequestType)this;
-  }
-  
-  void requireCredentials() throws TwitterException {
-    if (!getHttpManager().hasCredentials()) {
+  AbstractRequest(Builder<?> builder) throws TwitterException {
+    assert (builder.path != null);
+    assert (builder.host != null);
+    assert (builder.port > 0);
+    assert (builder.scheme != null);
+    assert (builder.parameters != null);
+    httpManager = builder.httpManager == null ? Api.DEFAULT_HTTP_MANAGER
+        : builder.httpManager;
+    if (builder.authorizationRequired && !httpManager.hasCredentials()) {
       throw new TwitterException("Authorization required.");
     }
+    url = Url.newBuilder().setScheme(builder.scheme).setHost(builder.host)
+        .setPort(builder.port).setPath(builder.path).addAllParameters(
+            builder.parameters).build();
   }
-  
+
+  @Override
+  public final String toString() {
+    try {
+      return UrlUtil.assemble(url);
+    } catch (TwitterException e) {
+      return e.toString();
+    }
+  }
+
+  public static abstract class Builder<BuilderType extends Builder<?>>
+      implements Request.Builder {
+
+    String path = null;
+    HttpManager httpManager;
+    boolean authorizationRequired = false;
+    String host = Api.DEFAULT_HOST;
+    int port = Api.DEFAULT_PORT;
+    Url.Scheme scheme = Api.DEFAULT_SCHEME;
+    List<Url.Parameter> parameters = new ArrayList<Url.Parameter>();
+
+    @SuppressWarnings("unchecked")
+    public BuilderType httpManager(HttpManager httpManager) {
+      this.httpManager = httpManager;
+      // Safe conversion because BuilderType extends Builder
+      return (BuilderType) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public BuilderType host(String host) {
+      this.host = host;
+      // Safe conversion because BuilderType extends Builder
+      return (BuilderType) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public BuilderType port(int port) {
+      this.port = port;
+      // Safe conversion because BuilderType extends Builder
+      return (BuilderType) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public BuilderType scheme(Url.Scheme scheme) {
+      this.scheme = scheme;
+      // Safe conversion because BuilderType extends Builder
+      return (BuilderType) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    BuilderType parameter(String name, String value) {
+      assert (name != null);
+      assert (name.length() > 0);
+      assert (value != null);
+      Url.Parameter parameter = Url.Parameter.newBuilder().setName(name)
+          .setValue(value).build();
+      parameters.add(parameter);
+      // Safe conversion because BuilderType extends Builder
+      return (BuilderType) this;
+    }
+    
+    @SuppressWarnings("unchecked")
+    BuilderType path(String path) {
+      this.path = path;
+      return (BuilderType) this;
+    }
+    
+    @SuppressWarnings("unchecked")
+    BuilderType authorizationRequired(boolean authorizationRequired) {
+      this.authorizationRequired = authorizationRequired;
+      return (BuilderType) this;
+    }
+  }
+
   String getJson() throws TwitterException {
-    if (authorizationRequired) {
-      requireCredentials();
-    }
-    return getHttpManager().get(buildUrl());
+    return httpManager.get(url);
   }
-  
+
   String postJson() throws TwitterException {
-    if (authorizationRequired) {
-      requireCredentials();
-    }
-   return getHttpManager().post(buildUrl());
+    return httpManager.post(url);
   }
 }

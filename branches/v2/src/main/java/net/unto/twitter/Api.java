@@ -1,12 +1,14 @@
 package net.unto.twitter;
 
 import net.unto.twitter.UtilProtos.Url;
+import net.unto.twitter.UtilProtos.Url.Scheme;
 import net.unto.twitter.methods.DestroyStatusRequest;
 import net.unto.twitter.methods.FollowersRequest;
 import net.unto.twitter.methods.FriendsRequest;
 import net.unto.twitter.methods.FriendsTimelineRequest;
 import net.unto.twitter.methods.PublicTimelineRequest;
 import net.unto.twitter.methods.RepliesRequest;
+import net.unto.twitter.methods.Request;
 import net.unto.twitter.methods.ShowStatusRequest;
 import net.unto.twitter.methods.UpdateStatusRequest;
 import net.unto.twitter.methods.UserTimelineRequest;
@@ -19,13 +21,14 @@ import net.unto.twitter.methods.UserTimelineRequest;
 
 public class Api {
 
-  public final static Url DEFAULT_BASE_URL = 
-    Url.newBuilder()
-      .setScheme(Url.Scheme.HTTP)
-      .setHost("twitter.com")
-      .setPort(80)
-      .setPath("/")
-      .build();
+  public static final String DEFAULT_HOST = "twitter.com";
+  
+  public static final int DEFAULT_PORT = 80;
+  
+  public static final Url.Scheme DEFAULT_SCHEME = Url.Scheme.HTTP;
+  
+  public static final HttpManager DEFAULT_HTTP_MANAGER = TwitterHttpManager.builder()
+  .build();
   
   public static class Builder {
 
@@ -43,10 +46,12 @@ public class Api {
       return new Api(this);
     }
 
-    private HttpManager httpManager = null;
+    private HttpManager httpManager = DEFAULT_HTTP_MANAGER;
+    private String host = DEFAULT_HOST;
+    private int port = DEFAULT_PORT;
+    private Url.Scheme scheme = DEFAULT_SCHEME;
     private String username = null;
     private String password = null;
-    private Url baseUrl = DEFAULT_BASE_URL;
 
     public Builder httpManager(HttpManager httpManager) {
       this.httpManager = httpManager;
@@ -62,9 +67,19 @@ public class Api {
       this.password = password;
       return this;
     }
+
+    public Builder host(String host) {
+      this.host = host;
+      return this;
+    }
+
+    public Builder port(int port) {
+      this.port = port;
+      return this;
+    }
     
-    public Builder baseUrl(Url baseUrl) {
-      this.baseUrl = baseUrl;
+    public Builder scheme(Url.Scheme scheme) {
+      this.scheme = scheme;
       return this;
     }
   }
@@ -72,10 +87,17 @@ public class Api {
   public static Builder builder() {
     return new Builder();
   }
+  
+  private String host;
 
-  private Url baseUrl = null;
+  private int port;
+
+  private Scheme scheme;
 
   private Api(Builder builder) {
+    assert(builder.host != null);
+    assert(builder.port > 0);
+    assert(builder.scheme != null);
     if (builder.httpManager != null) {
       this.httpManager = builder.httpManager;
     } else if (builder.username != null && builder.password != null) {
@@ -83,34 +105,54 @@ public class Api {
     } else {
       this.httpManager = TwitterHttpManager.builder().build();
     }
-    assert(builder.baseUrl != null);
-    this.baseUrl = builder.baseUrl;
+    host = builder.host;
+    port = builder.port;
+    scheme = builder.scheme;
   }
 
   private HttpManager httpManager = null;
 
-  public PublicTimelineRequest PublicTimeline() {
-    return new PublicTimelineRequest().httpManager(httpManager).baseUrl(baseUrl);
+  void setDefaults(Request.Builder builder) {
+    builder.httpManager(httpManager);
+    builder.host(host);
+    builder.port(port);
+    builder.scheme(scheme);
+  }
+  
+  public PublicTimelineRequest.Builder PublicTimeline() {
+    PublicTimelineRequest.Builder builder = PublicTimelineRequest.builder();
+    setDefaults(builder);
+    return builder;
   }
 
-  public FriendsTimelineRequest FriendsTimeline() {
-    return new FriendsTimelineRequest().httpManager(httpManager).baseUrl(baseUrl);
+  public FriendsTimelineRequest.Builder FriendsTimeline() {
+    FriendsTimelineRequest.Builder builder = FriendsTimelineRequest.builder();
+    setDefaults(builder);
+    return builder;
   }
 
-  public UserTimelineRequest UserTimeline() {
-    return new UserTimelineRequest().httpManager(httpManager).baseUrl(baseUrl);
+  public UserTimelineRequest.Builder UserTimeline() {
+    UserTimelineRequest.Builder builder = UserTimelineRequest.builder();
+    setDefaults(builder);
+    return builder;
   }
 
-  public ShowStatusRequest ShowStatus(long id) {
-    return new ShowStatusRequest(id).httpManager(httpManager).baseUrl(baseUrl);
+  public ShowStatusRequest.Builder ShowStatus(long id) {
+    ShowStatusRequest.Builder builder = ShowStatusRequest.builder(id);
+    setDefaults(builder);
+    return builder;
   }
 
-  public UpdateStatusRequest UpdateStatus(String status) {
-    return new UpdateStatusRequest(status).httpManager(httpManager).baseUrl(baseUrl);
+  public UpdateStatusRequest.Builder UpdateStatus(String status) {
+    UpdateStatusRequest.Builder builder = UpdateStatusRequest.builder(status);
+    setDefaults(builder);
+    return builder;
   }
 
-  public RepliesRequest Replies() {
-    return new RepliesRequest().httpManager(httpManager).baseUrl(baseUrl);
+  public RepliesRequest.Builder Replies() {
+    RepliesRequest.Builder builder = RepliesRequest.builder();
+    setDefaults(builder);
+    return builder;
   }
 
   /**
@@ -120,14 +162,16 @@ public class Api {
    * Example usage:
    * </p>
    * <p>
-   * <code>Status status = api.DestroyStatus(12345).post();</code>
+   * <code>Status status = api.DestroyStatus(12345).build().post();</code>
    * </p>
    * 
    * @param id The ID of the status to destroy.
-   * @return {@link DestroyStatusRequest}
+   * @return {@link DestroyStatusRequest.Builder}
    */
-  public DestroyStatusRequest DestroyStatus(long id) {
-    return new DestroyStatusRequest(id).httpManager(httpManager).baseUrl(baseUrl);
+  public DestroyStatusRequest.Builder DestroyStatus(long id) {
+    DestroyStatusRequest.Builder builder = DestroyStatusRequest.builder(id);
+    setDefaults(builder);
+    return builder;
   }
 
   /**
@@ -139,13 +183,15 @@ public class Api {
    * Example usage:
    * </p>
    * <p>
-   * <code>List<User> friends = api.Friends().get();</code>
+   * <code>List<User> friends = api.Friends().build().get();</code>
    * </p>
    * 
-   * @return {@link FriendsRequest}
+   * @return {@link FriendsRequest.Builder}
    */
-  public FriendsRequest Friends() {
-    return new FriendsRequest().httpManager(httpManager).baseUrl(baseUrl);
+  public FriendsRequest.Builder Friends() {
+    FriendsRequest.Builder builder = FriendsRequest.builder();
+    setDefaults(builder);
+    return builder;
   }
 
   /**
@@ -156,12 +202,14 @@ public class Api {
    * Example usage:
    * </p>
    * <p>
-   * <code>List<User> followers = api.Followers().get();</code>
+   * <code>List<User> followers = api.Followers().build().get();</code>
    * </p>
    * 
-   * @return {@link FollowersRequest}
+   * @return {@link FollowersRequest.Builder}
    */
-  public FollowersRequest Followers() {
-    return new FollowersRequest().httpManager(httpManager).baseUrl(baseUrl);
+  public FollowersRequest.Builder Followers() {
+    FollowersRequest.Builder builder = FollowersRequest.builder();
+    setDefaults(builder);
+    return builder;
   }
 }

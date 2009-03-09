@@ -8,31 +8,48 @@ import net.unto.twitter.TwitterProtos.Status;
 
 import org.joda.time.DateTime;
 
-public class FriendsTimelineRequest extends AbstractRequest<FriendsTimelineRequest> {
+public final class FriendsTimelineRequest extends AbstractRequest {
   
-  public FriendsTimelineRequest() {
-    path = "/statuses/friends_timeline.json";
-    authorizationRequired = true;
+  public static Builder builder() {
+    return new Builder();
   }
-
-  public FriendsTimelineRequest since(DateTime since) {
-    assert (since != null);
-    return parameter("since", since.toString());
+  
+  FriendsTimelineRequest(Builder builder) throws TwitterException {
+    super(builder);
   }
+  
+  public static final class Builder extends AbstractRequest.Builder<Builder> {
 
-  public FriendsTimelineRequest sinceId(long sinceId) {
-    return parameter("since_id", Long.toString(sinceId));
+    Builder() {
+      path("/statuses/friends_timeline.json");
+      authorizationRequired(true);
+    }
+    
+    public FriendsTimelineRequest build() throws TwitterException {
+      return new FriendsTimelineRequest(this);
+    }
+    
+    public Builder since(DateTime since) {
+      assert (since != null);
+      return parameter("since", since.toString());
+    }
+
+    public Builder sinceId(long sinceId) {
+      return parameter("since_id", Long.toString(sinceId));
+    }
+
+    public Builder count(int count) {
+      return parameter("count", Integer.toString(count));
+    }
+
+    public Builder page(int page) {
+      return parameter("page", Integer.toString(page));
+    }
+    
   }
-
-  public FriendsTimelineRequest count(int count) {
-    return parameter("count", Integer.toString(count));
-  }
-
-  public FriendsTimelineRequest page(int page) {
-    return parameter("page", Integer.toString(page));
-  }
-
+  
   public List<Status> get() throws TwitterException {
     return JsonUtil.newStatusList(getJson());
   }
 }
+
