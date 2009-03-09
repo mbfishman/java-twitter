@@ -172,4 +172,8 @@ public class TwitterHttpManager implements HttpManager {
       method.releaseConnection();
     }
   }
+
+  public void clearCredentials() {
+    this.credentials = null;
+  }
 }

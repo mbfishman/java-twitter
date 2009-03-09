@@ -7,6 +7,7 @@ import net.unto.twitter.methods.DestroyDirectMessageRequest;
 import net.unto.twitter.methods.DestroyFriendshipRequest;
 import net.unto.twitter.methods.DestroyStatusRequest;
 import net.unto.twitter.methods.DirectMessagesRequest;
+import net.unto.twitter.methods.EndSessionRequest;
 import net.unto.twitter.methods.FollowerIdsRequest;
 import net.unto.twitter.methods.FollowersRequest;
 import net.unto.twitter.methods.FriendIdsRequest;
@@ -22,6 +23,7 @@ import net.unto.twitter.methods.ShowStatusRequest;
 import net.unto.twitter.methods.ShowUserRequest;
 import net.unto.twitter.methods.UpdateStatusRequest;
 import net.unto.twitter.methods.UserTimelineRequest;
+import net.unto.twitter.methods.VerifyCredentialsRequest;
 
 /**
  * Instances of the Api class provide access to the Twitter web service.
@@ -438,6 +440,13 @@ public class Api {
   /**
    * Returns an array of numeric IDs for every user the specified user is following.
    * 
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * <code>long[] following = api.friendIds().build().get();</code>
+   * </p>
+   * 
    * @return {@link FriendIdsRequest.Builder}
    */
   public FriendIdsRequest.Builder friendIds() {
@@ -448,11 +457,38 @@ public class Api {
   
   /**
    * Returns an array of numeric IDs for every user the specified user is followed by.
-   * 
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * <code>long[] followers = api.followerIds().build().get();</code>
+   * </p>
    * @return {@link FollowerIdsRequest.Builder}
    */
   public FollowerIdsRequest.Builder followerIds() {
     FollowerIdsRequest.Builder builder = FollowerIdsRequest.builder();
+    setDefaults(builder);
+    return builder;
+  }
+  
+  /**
+   * Returns a representation of the requesting user if authentication was successful.
+   * 
+   * @return {@link VerifyCredentialsRequest.Builder}
+   */
+  public VerifyCredentialsRequest.Builder verifyCredentials() {
+    VerifyCredentialsRequest.Builder builder = VerifyCredentialsRequest.builder();
+    setDefaults(builder);
+    return builder;
+  }
+  
+  /**
+   * Ends the session of the authenticating user.
+   * 
+   * @return {@link EndSessionRequest.Builder}
+   */
+  public EndSessionRequest.Builder endSession() {
+    EndSessionRequest.Builder builder = EndSessionRequest.builder();
     setDefaults(builder);
     return builder;
   }
