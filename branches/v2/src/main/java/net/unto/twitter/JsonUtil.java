@@ -216,7 +216,7 @@ public class JsonUtil {
     return directMessages;
   }
 
-  final static DirectMessage newDirectMessage(String jsonString)  {
+  public final static DirectMessage newDirectMessage(String jsonString)  {
     return newDirectMessage(JSONObject.fromObject(jsonString));
   }
 }

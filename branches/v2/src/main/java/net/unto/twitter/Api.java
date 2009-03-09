@@ -7,9 +7,11 @@ import net.unto.twitter.methods.DirectMessagesRequest;
 import net.unto.twitter.methods.FollowersRequest;
 import net.unto.twitter.methods.FriendsRequest;
 import net.unto.twitter.methods.FriendsTimelineRequest;
+import net.unto.twitter.methods.NewDirectMessageRequest;
 import net.unto.twitter.methods.PublicTimelineRequest;
 import net.unto.twitter.methods.RepliesRequest;
 import net.unto.twitter.methods.Request;
+import net.unto.twitter.methods.SentDirectMessagesRequest;
 import net.unto.twitter.methods.ShowStatusRequest;
 import net.unto.twitter.methods.ShowUserRequest;
 import net.unto.twitter.methods.UpdateStatusRequest;
@@ -28,7 +30,7 @@ import net.unto.twitter.methods.UserTimelineRequest;
  * 
  * <pre>
  * Api api = Api.DEFAULT_API;
- * List&lt;Status&gt; statuses = api.PublicTimeline().build().get();
+ * List&lt;Status&gt; statuses = api.publicTimeline().build().get();
  * for (Status status : statuses) {
  *   System.out.println(status.getText());
  * }
@@ -40,7 +42,7 @@ import net.unto.twitter.methods.UserTimelineRequest;
  * 
  * <pre>
  * Api api = Api.builder().username(&quot;username&quot;).password(&quot;password&quot;).build();
- * Status = api.UpdateStatus(&quot;Hello Twitter&quot;).inReplyToStatusId(12345).build()
+ * Status = api.updateStatus(&quot;Hello Twitter&quot;).inReplyToStatusId(12345).build()
  *     .post();
  * System.out.println(status.getText());
  * </pre>
@@ -153,13 +155,13 @@ public class Api {
    * Example usage:
    * </p>
    * <p>
-   * <code>Status status = api.DestroyStatus(12345).build().post();</code>
+   * <code>Status status = api.destroyStatus(12345).build().post();</code>
    * </p>
    * 
    * @param id The ID of the status to destroy.
    * @return {@link DestroyStatusRequest.Builder}
    */
-  public DestroyStatusRequest.Builder DestroyStatus(long id) {
+  public DestroyStatusRequest.Builder destroyStatus(long id) {
     DestroyStatusRequest.Builder builder = DestroyStatusRequest.builder(id);
     setDefaults(builder);
     return builder;
@@ -173,12 +175,12 @@ public class Api {
    * Example usage:
    * </p>
    * <p>
-   * <code>List<User> followers = api.Followers().build().get();</code>
+   * <code>List<User> followers = api.followers().build().get();</code>
    * </p>
    * 
    * @return {@link FollowersRequest.Builder}
    */
-  public FollowersRequest.Builder Followers() {
+  public FollowersRequest.Builder followers() {
     FollowersRequest.Builder builder = FollowersRequest.builder();
     setDefaults(builder);
     return builder;
@@ -193,30 +195,30 @@ public class Api {
    * Example usage:
    * </p>
    * <p>
-   * <code>List<User> friends = api.Friends().build().get();</code>
+   * <code>List<User> friends = api.friends().build().get();</code>
    * </p>
    * 
    * @return {@link FriendsRequest.Builder}
    */
-  public FriendsRequest.Builder Friends() {
+  public FriendsRequest.Builder friends() {
     FriendsRequest.Builder builder = FriendsRequest.builder();
     setDefaults(builder);
     return builder;
   }
 
-  public FriendsTimelineRequest.Builder FriendsTimeline() {
+  public FriendsTimelineRequest.Builder friendsTimeline() {
     FriendsTimelineRequest.Builder builder = FriendsTimelineRequest.builder();
     setDefaults(builder);
     return builder;
   }
 
-  public PublicTimelineRequest.Builder PublicTimeline() {
+  public PublicTimelineRequest.Builder publicTimeline() {
     PublicTimelineRequest.Builder builder = PublicTimelineRequest.builder();
     setDefaults(builder);
     return builder;
   }
 
-  public RepliesRequest.Builder Replies() {
+  public RepliesRequest.Builder replies() {
     RepliesRequest.Builder builder = RepliesRequest.builder();
     setDefaults(builder);
     return builder;
@@ -229,7 +231,7 @@ public class Api {
     builder.scheme(scheme);
   }
 
-  public ShowStatusRequest.Builder ShowStatus(long id) {
+  public ShowStatusRequest.Builder showStatus(long id) {
     ShowStatusRequest.Builder builder = ShowStatusRequest.builder(id);
     setDefaults(builder);
     return builder;
@@ -243,20 +245,20 @@ public class Api {
    * Example usage:
    * </p>
    * <p>
-   * <code>Status status = api.UpdateStatus("Hello Twitter").build().post();</code>
+   * <code>Status status = api.updateStatus("Hello Twitter").build().post();</code>
    * </p>
    * 
    * @param status The text of your status update. Should not be more than 140
    *        characters.
    * @return {@link UpdateStatusRequest.Builder}
    */
-  public UpdateStatusRequest.Builder UpdateStatus(String status) {
+  public UpdateStatusRequest.Builder updateStatus(String status) {
     UpdateStatusRequest.Builder builder = UpdateStatusRequest.builder(status);
     setDefaults(builder);
     return builder;
   }
 
-  public UserTimelineRequest.Builder UserTimeline() {
+  public UserTimelineRequest.Builder userTimeline() {
     UserTimelineRequest.Builder builder = UserTimelineRequest.builder();
     setDefaults(builder);
     return builder;
@@ -272,12 +274,12 @@ public class Api {
    * Example usage:
    * </p>
    * <p>
-   * <code>User user = api.ShowUser().id("dewitt").build().get();</code>
+   * <code>User user = api.showUser().id("dewitt").build().get();</code>
    * </p>
    * 
-   * @return {@link UpdateStatusRequest.Builder}
+   * @return {@link ShowUserRequest.Builder}
    */
-  public ShowUserRequest.Builder ShowUser() {
+  public ShowUserRequest.Builder showUser() {
     ShowUserRequest.Builder builder = ShowUserRequest.builder();
     setDefaults(builder);
     return builder;
@@ -290,13 +292,55 @@ public class Api {
    * Example usage:
    * </p>
    * <p>
-   * <code>List<DirectMessages> directMessages = api.DirectMessages().build().get();</code>
+   * <code>List<DirectMessages> directMessages = api.directMessages().build().get();</code>
    * </p>
    * 
-   * @return {@link UpdateStatusRequest.Builder}
+   * @return {@link DirectMessagesRequest.Builder}
    */
-  public DirectMessagesRequest.Builder DirectMessages() {
+  public DirectMessagesRequest.Builder directMessages() {
     DirectMessagesRequest.Builder builder = DirectMessagesRequest.builder();
+    setDefaults(builder);
+    return builder;
+  }
+
+  /**
+   * Returns a list of the 20 most recent direct messages sent by the
+   * authenticating user.
+   * 
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * <code>List<DirectMessages> directMessages = api.sentDirectMessages().build().get();</code>
+   * </p>
+   * 
+   * @return {@link SentDirectMessagesRequest.Builder}
+   */
+  public SentDirectMessagesRequest.Builder sentDirectMessages() {
+    SentDirectMessagesRequest.Builder builder = SentDirectMessagesRequest
+        .builder();
+    setDefaults(builder);
+    return builder;
+  }
+
+  /**
+   * Sends a new direct message to the specified user from the authenticating
+   * user.
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * <code>DirectMessage directMessage = api.newDirectMessage("dewitt", "Hello DeWitt").build().post();</code>
+   * </p>
+   * 
+   * @param status The text of your status update. Should not be more than 140
+   *        characters.
+   * @return {@link NewDirectMessageRequest.Builder}
+   */
+  public NewDirectMessageRequest.Builder newDirectMessage(String user,
+      String status) {
+    NewDirectMessageRequest.Builder builder = NewDirectMessageRequest.builder(
+        user, status);
     setDefaults(builder);
     return builder;
   }

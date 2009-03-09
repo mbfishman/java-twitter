@@ -32,58 +32,6 @@ public final class UtilProtos {
       return net.unto.twitter.UtilProtos.internal_static_twitter_Url_fieldAccessorTable;
     }
     
-    public static enum Scheme {
-      HTTP(0, 0),
-      HTTPS(1, 1),
-      ;
-      
-      
-      public final int getNumber() { return value; }
-      
-      public static Scheme valueOf(int value) {
-        switch (value) {
-          case 0: return HTTP;
-          case 1: return HTTPS;
-          default: return null;
-        }
-      }
-      
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return net.unto.twitter.UtilProtos.Url.getDescriptor().getEnumTypes().get(0);
-      }
-      
-      private static final Scheme[] VALUES = {
-        HTTP, HTTPS, 
-      };
-      public static Scheme valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-      private final int index;
-      private final int value;
-      private Scheme(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-      
-      static {
-        net.unto.twitter.UtilProtos.getDescriptor();
-      }
-    }
-    
     public static final class Parameter extends
         com.google.protobuf.GeneratedMessage {
       // Use Parameter.newBuilder() to construct.
@@ -273,31 +221,13 @@ public final class UtilProtos {
       }
     }
     
-    // required .twitter.Url.Scheme scheme = 1;
-    private boolean hasScheme;
-    private net.unto.twitter.UtilProtos.Url.Scheme scheme_ = net.unto.twitter.UtilProtos.Url.Scheme.HTTP;
-    public boolean hasScheme() { return hasScheme; }
-    public net.unto.twitter.UtilProtos.Url.Scheme getScheme() { return scheme_; }
+    // required string base_url = 1;
+    private boolean hasBaseUrl;
+    private java.lang.String baseUrl_ = "";
+    public boolean hasBaseUrl() { return hasBaseUrl; }
+    public java.lang.String getBaseUrl() { return baseUrl_; }
     
-    // required string host = 2;
-    private boolean hasHost;
-    private java.lang.String host_ = "";
-    public boolean hasHost() { return hasHost; }
-    public java.lang.String getHost() { return host_; }
-    
-    // required int32 port = 3;
-    private boolean hasPort;
-    private int port_ = 0;
-    public boolean hasPort() { return hasPort; }
-    public int getPort() { return port_; }
-    
-    // required string path = 4;
-    private boolean hasPath;
-    private java.lang.String path_ = "";
-    public boolean hasPath() { return hasPath; }
-    public java.lang.String getPath() { return path_; }
-    
-    // repeated .twitter.Url.Parameter parameters = 5;
+    // repeated .twitter.Url.Parameter parameters = 2;
     private java.util.List<net.unto.twitter.UtilProtos.Url.Parameter> parameters_ =
       java.util.Collections.emptyList();
     public java.util.List<net.unto.twitter.UtilProtos.Url.Parameter> getParametersList() {
@@ -422,79 +352,25 @@ public final class UtilProtos {
       }
       
       
-      // required .twitter.Url.Scheme scheme = 1;
-      public boolean hasScheme() {
-        return result.hasScheme();
+      // required string base_url = 1;
+      public boolean hasBaseUrl() {
+        return result.hasBaseUrl();
       }
-      public net.unto.twitter.UtilProtos.Url.Scheme getScheme() {
-        return result.getScheme();
+      public java.lang.String getBaseUrl() {
+        return result.getBaseUrl();
       }
-      public Builder setScheme(net.unto.twitter.UtilProtos.Url.Scheme value) {
-        result.hasScheme = true;
-        result.scheme_ = value;
+      public Builder setBaseUrl(java.lang.String value) {
+        result.hasBaseUrl = true;
+        result.baseUrl_ = value;
         return this;
       }
-      public Builder clearScheme() {
-        result.hasScheme = false;
-        result.scheme_ = net.unto.twitter.UtilProtos.Url.Scheme.HTTP;
-        return this;
-      }
-      
-      // required string host = 2;
-      public boolean hasHost() {
-        return result.hasHost();
-      }
-      public java.lang.String getHost() {
-        return result.getHost();
-      }
-      public Builder setHost(java.lang.String value) {
-        result.hasHost = true;
-        result.host_ = value;
-        return this;
-      }
-      public Builder clearHost() {
-        result.hasHost = false;
-        result.host_ = "";
+      public Builder clearBaseUrl() {
+        result.hasBaseUrl = false;
+        result.baseUrl_ = "";
         return this;
       }
       
-      // required int32 port = 3;
-      public boolean hasPort() {
-        return result.hasPort();
-      }
-      public int getPort() {
-        return result.getPort();
-      }
-      public Builder setPort(int value) {
-        result.hasPort = true;
-        result.port_ = value;
-        return this;
-      }
-      public Builder clearPort() {
-        result.hasPort = false;
-        result.port_ = 0;
-        return this;
-      }
-      
-      // required string path = 4;
-      public boolean hasPath() {
-        return result.hasPath();
-      }
-      public java.lang.String getPath() {
-        return result.getPath();
-      }
-      public Builder setPath(java.lang.String value) {
-        result.hasPath = true;
-        result.path_ = value;
-        return this;
-      }
-      public Builder clearPath() {
-        result.hasPath = false;
-        result.path_ = "";
-        return this;
-      }
-      
-      // repeated .twitter.Url.Parameter parameters = 5;
+      // repeated .twitter.Url.Parameter parameters = 2;
       public java.util.List<net.unto.twitter.UtilProtos.Url.Parameter> getParametersList() {
         return java.util.Collections.unmodifiableList(result.parameters_);
       }
@@ -564,13 +440,11 @@ public final class UtilProtos {
       descriptor;
   static {
     java.lang.String descriptorData =
-      "\n\nutil.proto\022\007twitter\"\311\001\n\003Url\022#\n\006scheme\030" +
-      "\001 \002(\0162\023.twitter.Url.Scheme\022\014\n\004host\030\002 \002(\t" +
-      "\022\014\n\004port\030\003 \002(\005\022\014\n\004path\030\004 \002(\t\022*\n\nparamete" +
-      "rs\030\005 \003(\0132\026.twitter.Url.Parameter\032(\n\tPara" +
-      "meter\022\014\n\004name\030\001 \002(\t\022\r\n\005value\030\002 \001(\t\"\035\n\006Sc" +
-      "heme\022\010\n\004HTTP\020\000\022\t\n\005HTTPS\020\001B\036\n\020net.unto.tw" +
-      "itterB\nUtilProtos";
+      "\n\nutil.proto\022\007twitter\"m\n\003Url\022\020\n\010base_url" +
+      "\030\001 \002(\t\022*\n\nparameters\030\002 \003(\0132\026.twitter.Url" +
+      ".Parameter\032(\n\tParameter\022\014\n\004name\030\001 \002(\t\022\r\n" +
+      "\005value\030\002 \001(\tB\036\n\020net.unto.twitterB\nUtilPr" +
+      "otos";
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
         public com.google.protobuf.ExtensionRegistry assignDescriptors(
@@ -581,7 +455,7 @@ public final class UtilProtos {
           internal_static_twitter_Url_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_twitter_Url_descriptor,
-              new java.lang.String[] { "Scheme", "Host", "Port", "Path", "Parameters", },
+              new java.lang.String[] { "BaseUrl", "Parameters", },
               net.unto.twitter.UtilProtos.Url.class,
               net.unto.twitter.UtilProtos.Url.Builder.class);
           internal_static_twitter_Url_Parameter_descriptor =
