@@ -31,7 +31,7 @@ public final class UpdateDeliveryDeviceRequest extends AbstractRequest {
   public static final class Builder extends AbstractRequest.Builder<Builder> {
 
     Builder(Device device) {
-      path = "/account/update_delivery_device.json";
+      path("/account/update_delivery_device.json");
       authorizationRequired(true);
       parameter("device", DEVICE_NAMES.get(device));
     }

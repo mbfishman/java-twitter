@@ -16,7 +16,7 @@ public final class EndSessionRequest extends AbstractRequest {
   public static final class Builder extends AbstractRequest.Builder<Builder> {
 
     Builder() {
-      path = "/account/end_session.json";
+      path("/account/end_session.json");
       authorizationRequired(true);
     }
     

@@ -25,8 +25,8 @@ public final class FollowersRequest extends AbstractRequest {
   public static final class Builder extends AbstractRequest.Builder<Builder> {
 
     Builder() {
-      path = "/statuses/followers.json";
-      authorizationRequired = true;
+      path("/statuses/followers.json");
+      authorizationRequired(true);
     }
     
     /**

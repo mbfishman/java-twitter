@@ -18,7 +18,7 @@ public final class FollowerIdsRequest extends AbstractRequest {
   public static final class Builder extends AbstractRequest.Builder<Builder> {
 
     Builder() {
-      path = "/followers/ids.json";
+      path("/followers/ids.json");
       authorizationRequired(true);
     }
     

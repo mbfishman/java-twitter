@@ -19,7 +19,7 @@ public final class VerifyCredentialsRequest extends AbstractRequest {
   public static final class Builder extends AbstractRequest.Builder<Builder> {
 
     Builder() {
-      path = "/account/verify_credentials.json";
+      path("/account/verify_credentials.json");
       authorizationRequired(true);
     }
     
