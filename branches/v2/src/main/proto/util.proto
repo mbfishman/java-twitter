@@ -4,8 +4,16 @@ option java_package = "net.unto.twitter";
 option java_outer_classname = "UtilProtos";
        
 message Url {
-  required string base_url = 1;
-  repeated Parameter parameters = 2;
+  required Scheme scheme = 1;
+  required string host = 2;
+  required int32 port = 3;
+  required string path = 4;
+  repeated Parameter parameters = 5;
+  
+  enum Scheme {
+    HTTP = 0;
+    HTTPS = 1;
+  }
   
   message Parameter {
     required string name = 1;
