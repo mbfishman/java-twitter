@@ -66,7 +66,6 @@ public final class FriendsRequest extends AbstractRequest {
    * going to be changed).
    * 
    * @return {@link List} of {@link User}
-   * @throws TwitterException
    */
   public List<User> get() {
     return JsonUtil.newUserList(getJson());

@@ -4,11 +4,15 @@ import net.unto.twitter.UtilProtos.Url;
 import net.unto.twitter.UtilProtos.Url.Scheme;
 import net.unto.twitter.methods.CreateFriendshipRequest;
 import net.unto.twitter.methods.DestroyDirectMessageRequest;
+import net.unto.twitter.methods.DestroyFriendshipRequest;
 import net.unto.twitter.methods.DestroyStatusRequest;
 import net.unto.twitter.methods.DirectMessagesRequest;
+import net.unto.twitter.methods.FollowerIdsRequest;
 import net.unto.twitter.methods.FollowersRequest;
+import net.unto.twitter.methods.FriendIdsRequest;
 import net.unto.twitter.methods.FriendsRequest;
 import net.unto.twitter.methods.FriendsTimelineRequest;
+import net.unto.twitter.methods.FriendshipExistsRequest;
 import net.unto.twitter.methods.NewDirectMessageRequest;
 import net.unto.twitter.methods.PublicTimelineRequest;
 import net.unto.twitter.methods.RepliesRequest;
@@ -366,9 +370,10 @@ public class Api {
     setDefaults(builder);
     return builder;
   }
-  
+
   /**
-   * Befriends the user specified in the ID parameter as the authenticating user. 
+   * Befriends the user specified in the ID parameter as the authenticating
+   * user.
    * <p>
    * Example usage:
    * </p>
@@ -376,12 +381,78 @@ public class Api {
    * <code>User user = api.createFriendship("dewitt").build().post();</code>
    * </p>
    * 
-   * @param id  The ID or screen name of the user to befriend
+   * @param id The ID or screen name of the user to befriend
    * @return {@link CreateFriendshipRequest.Builder}
    */
   public CreateFriendshipRequest.Builder createFriendship(String id) {
     CreateFriendshipRequest.Builder builder = CreateFriendshipRequest
         .builder(id);
+    setDefaults(builder);
+    return builder;
+  }
+
+  /**
+   * Discontinues friendship with the user specified in the ID parameter as the
+   * authenticating user
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * <code>User user = api.destroyFriendship("dewitt").build().post();</code>
+   * </p>
+   * 
+   * @param id The ID or screen name of the user with whom to discontinue
+   *        friendship.
+   * @return {@link DestroyFriendshipRequest.Builder}
+   */
+  public DestroyFriendshipRequest.Builder destroyFriendship(String id) {
+    DestroyFriendshipRequest.Builder builder = DestroyFriendshipRequest
+        .builder(id);
+    setDefaults(builder);
+    return builder;
+  }
+
+  /**
+   * Tests if a friendship exists between two users.
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * <code>boolean friendshipExists = api.friendshipExists("ev", "biz).build().post();</code>
+   * </p>
+   * 
+   * @param userA The ID or screen_name of the first user to test friendship
+   *        for.
+   * @param userB The ID or screen_name of the second user to test friendship
+   *        for.
+   * @return {@link FriendshipExistsRequest.Builder}
+   */
+  public FriendshipExistsRequest.Builder friendshipExists(String userA,
+      String userB) {
+    FriendshipExistsRequest.Builder builder = FriendshipExistsRequest.builder(
+        userA, userB);
+    setDefaults(builder);
+    return builder;
+  }
+
+  /**
+   * Returns an array of numeric IDs for every user the specified user is following.
+   * 
+   * @return {@link FriendIdsRequest.Builder}
+   */
+  public FriendIdsRequest.Builder friendIds() {
+    FriendIdsRequest.Builder builder = FriendIdsRequest.builder();
+    setDefaults(builder);
+    return builder;
+  }
+  
+  /**
+   * Returns an array of numeric IDs for every user the specified user is followed by.
+   * 
+   * @return {@link FollowerIdsRequest.Builder}
+   */
+  public FollowerIdsRequest.Builder followerIds() {
+    FollowerIdsRequest.Builder builder = FollowerIdsRequest.builder();
     setDefaults(builder);
     return builder;
   }

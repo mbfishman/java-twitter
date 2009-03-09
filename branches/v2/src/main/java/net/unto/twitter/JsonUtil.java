@@ -219,4 +219,16 @@ public class JsonUtil {
   public final static DirectMessage newDirectMessage(String jsonString)  {
     return newDirectMessage(JSONObject.fromObject(jsonString));
   }
+  
+  public final static long[] newLongArray(String jsonString) {
+    return newLongArray(JSONArray.fromObject(jsonString));
+  }
+  
+  private final static long[] newLongArray(JSONArray jsonArray) {
+    long[] longs = new long[jsonArray.size()];
+    for (int i = 0; i < jsonArray.size(); i++) {
+      longs[i] = jsonArray.getLong(i);
+    }
+    return longs;
+  } 
 }
