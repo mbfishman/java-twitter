@@ -18,18 +18,17 @@ import net.unto.twitter.methods.UserTimelineRequest;
  * 
  * @author DeWitt Clinton <dewitt@unto.net>
  */
-
 public class Api {
 
   public static final String DEFAULT_HOST = "twitter.com";
-  
+
   public static final int DEFAULT_PORT = 80;
-  
+
   public static final Url.Scheme DEFAULT_SCHEME = Url.Scheme.HTTP;
-  
-  public static final HttpManager DEFAULT_HTTP_MANAGER = TwitterHttpManager.builder()
-  .build();
-  
+
+  public static final HttpManager DEFAULT_HTTP_MANAGER = TwitterHttpManager
+      .builder().build();
+
   public static class Builder {
 
     public Api build() throws TwitterException {
@@ -77,7 +76,7 @@ public class Api {
       this.port = port;
       return this;
     }
-    
+
     public Builder scheme(Url.Scheme scheme) {
       this.scheme = scheme;
       return this;
@@ -87,7 +86,7 @@ public class Api {
   public static Builder builder() {
     return new Builder();
   }
-  
+
   private String host;
 
   private int port;
@@ -95,13 +94,14 @@ public class Api {
   private Scheme scheme;
 
   private Api(Builder builder) {
-    assert(builder.host != null);
-    assert(builder.port > 0);
-    assert(builder.scheme != null);
+    assert (builder.host != null);
+    assert (builder.port > 0);
+    assert (builder.scheme != null);
     if (builder.httpManager != null) {
       this.httpManager = builder.httpManager;
     } else if (builder.username != null && builder.password != null) {
-      this.httpManager = TwitterHttpManager.builder().username(builder.username).password(builder.password).build();
+      this.httpManager = TwitterHttpManager.builder()
+          .username(builder.username).password(builder.password).build();
     } else {
       this.httpManager = TwitterHttpManager.builder().build();
     }
@@ -118,7 +118,7 @@ public class Api {
     builder.port(port);
     builder.scheme(scheme);
   }
-  
+
   public PublicTimelineRequest.Builder PublicTimeline() {
     PublicTimelineRequest.Builder builder = PublicTimelineRequest.builder();
     setDefaults(builder);
@@ -143,6 +143,21 @@ public class Api {
     return builder;
   }
 
+  /**
+   * Updates the authenticating user's status. Requires the status parameter
+   * specified below. Request must be a POST. A status update with text
+   * identical to the authenticating user's current status will be ignored.
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * <code>Status status = api.UpdateStatus("Hello Twitter").build().post();</code>
+   * </p>
+   * 
+   * @param status The text of your status update. Should not be more than 140
+   *        characters.
+   * @return {@link UpdateStatusRequest.Builder}
+   */
   public UpdateStatusRequest.Builder UpdateStatus(String status) {
     UpdateStatusRequest.Builder builder = UpdateStatusRequest.builder(status);
     setDefaults(builder);
