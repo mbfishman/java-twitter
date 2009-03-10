@@ -1,8 +1,5 @@
 package net.unto.twitter.methods;
 
-import net.unto.twitter.JsonUtil;
-import net.unto.twitter.TwitterProtos.User;
-
 /**
  * Tests if a friendship exists between two users.
  */

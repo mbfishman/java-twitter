@@ -52,8 +52,7 @@ import net.unto.twitter.methods.VerifyCredentialsRequest;
  * 
  * <pre>
  * Api api = Api.builder().username(&quot;username&quot;).password(&quot;password&quot;).build();
- * Status = api.updateStatus(&quot;Hello Twitter&quot;).inReplyToStatusId(12345).build()
- *     .post();
+ * Status status = api.updateStatus(&quot;Hello Twitter&quot;).inReplyToStatusId(12345).build().post();
  * System.out.println(status.getText());
  * </pre>
  * 
