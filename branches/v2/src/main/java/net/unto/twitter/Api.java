@@ -22,6 +22,7 @@ import net.unto.twitter.methods.Request;
 import net.unto.twitter.methods.SentDirectMessagesRequest;
 import net.unto.twitter.methods.ShowStatusRequest;
 import net.unto.twitter.methods.ShowUserRequest;
+import net.unto.twitter.methods.TrendsRequest;
 import net.unto.twitter.methods.UpdateDeliveryDeviceRequest;
 import net.unto.twitter.methods.UpdateStatusRequest;
 import net.unto.twitter.methods.UserTimelineRequest;
@@ -52,7 +53,8 @@ import net.unto.twitter.methods.VerifyCredentialsRequest;
  * 
  * <pre>
  * Api api = Api.builder().username(&quot;username&quot;).password(&quot;password&quot;).build();
- * Status status = api.updateStatus(&quot;Hello Twitter&quot;).inReplyToStatusId(12345).build().post();
+ * Status status = api.updateStatus(&quot;Hello Twitter&quot;).inReplyToStatusId(12345)
+ *     .build().post();
  * System.out.println(status.getText());
  * </pre>
  * 
@@ -518,4 +520,24 @@ public class Api {
     setDefaults(builder);
     return builder;
   }
+
+  /**
+   * Returns the top ten queries that are currently trending on Twitter. The
+   * response includes the time of the request, the name of each trending topic,
+   * and the url to the Twitter Search results page for that topic.
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * <code>Trends trends = api.trends().build().get();</code>
+   * </p>
+   * 
+   * @return {@link TrendsRequest.Builder}
+   */
+  public TrendsRequest.Builder trends() {
+    TrendsRequest.Builder builder = TrendsRequest.builder();
+    setDefaults(builder);
+    return builder;
+  }
+
 }

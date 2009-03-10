@@ -1713,6 +1713,420 @@ public final class TwitterProtos {
     }
   }
   
+  public static final class Trends extends
+      com.google.protobuf.GeneratedMessage {
+    // Use Trends.newBuilder() to construct.
+    private Trends() {}
+    
+    private static final Trends defaultInstance = new Trends();
+    public static Trends getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public Trends getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return net.unto.twitter.TwitterProtos.internal_static_twitter_Trends_descriptor;
+    }
+    
+    @Override
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return net.unto.twitter.TwitterProtos.internal_static_twitter_Trends_fieldAccessorTable;
+    }
+    
+    public static final class Trend extends
+        com.google.protobuf.GeneratedMessage {
+      // Use Trend.newBuilder() to construct.
+      private Trend() {}
+      
+      private static final Trend defaultInstance = new Trend();
+      public static Trend getDefaultInstance() {
+        return defaultInstance;
+      }
+      
+      public Trend getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+      
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return net.unto.twitter.TwitterProtos.internal_static_twitter_Trends_Trend_descriptor;
+      }
+      
+      @Override
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return net.unto.twitter.TwitterProtos.internal_static_twitter_Trends_Trend_fieldAccessorTable;
+      }
+      
+      // required string name = 1;
+      private boolean hasName;
+      private java.lang.String name_ = "";
+      public boolean hasName() { return hasName; }
+      public java.lang.String getName() { return name_; }
+      
+      // required string url = 2;
+      private boolean hasUrl;
+      private java.lang.String url_ = "";
+      public boolean hasUrl() { return hasUrl; }
+      public java.lang.String getUrl() { return url_; }
+      
+      public static net.unto.twitter.TwitterProtos.Trends.Trend parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data).buildParsed();
+      }
+      public static net.unto.twitter.TwitterProtos.Trends.Trend parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistry extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data, extensionRegistry)
+                 .buildParsed();
+      }
+      public static net.unto.twitter.TwitterProtos.Trends.Trend parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data).buildParsed();
+      }
+      public static net.unto.twitter.TwitterProtos.Trends.Trend parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistry extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data, extensionRegistry)
+                 .buildParsed();
+      }
+      public static net.unto.twitter.TwitterProtos.Trends.Trend parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input).buildParsed();
+      }
+      public static net.unto.twitter.TwitterProtos.Trends.Trend parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistry extensionRegistry)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input, extensionRegistry)
+                 .buildParsed();
+      }
+      public static net.unto.twitter.TwitterProtos.Trends.Trend parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input).buildParsed();
+      }
+      public static net.unto.twitter.TwitterProtos.Trends.Trend parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistry extensionRegistry)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input, extensionRegistry)
+                 .buildParsed();
+      }
+      
+      public static Builder newBuilder() { return new Builder(); }
+      public Builder newBuilderForType() { return new Builder(); }
+      public static Builder newBuilder(net.unto.twitter.TwitterProtos.Trends.Trend prototype) {
+        return new Builder().mergeFrom(prototype);
+      }
+      
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder> {
+        // Construct using net.unto.twitter.TwitterProtos.Trends.Trend.newBuilder()
+        private Builder() {}
+        
+        net.unto.twitter.TwitterProtos.Trends.Trend result = new net.unto.twitter.TwitterProtos.Trends.Trend();
+        
+        @Override
+        protected net.unto.twitter.TwitterProtos.Trends.Trend internalGetResult() {
+          return result;
+        }
+        
+        @Override
+        public Builder clear() {
+          result = new net.unto.twitter.TwitterProtos.Trends.Trend();
+          return this;
+        }
+        
+        @Override
+        public Builder clone() {
+          return new Builder().mergeFrom(result);
+        }
+        
+        @Override
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return net.unto.twitter.TwitterProtos.Trends.Trend.getDescriptor();
+        }
+        
+        public net.unto.twitter.TwitterProtos.Trends.Trend getDefaultInstanceForType() {
+          return net.unto.twitter.TwitterProtos.Trends.Trend.getDefaultInstance();
+        }
+        
+        public net.unto.twitter.TwitterProtos.Trends.Trend build() {
+          if (!isInitialized()) {
+            throw new com.google.protobuf.UninitializedMessageException(
+              result);
+          }
+          return buildPartial();
+        }
+        
+        private net.unto.twitter.TwitterProtos.Trends.Trend buildParsed()
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          if (!isInitialized()) {
+            throw new com.google.protobuf.UninitializedMessageException(
+              result).asInvalidProtocolBufferException();
+          }
+          return buildPartial();
+        }
+        
+        public net.unto.twitter.TwitterProtos.Trends.Trend buildPartial() {
+          net.unto.twitter.TwitterProtos.Trends.Trend returnMe = result;
+          result = null;
+          return returnMe;
+        }
+        
+        
+        // required string name = 1;
+        public boolean hasName() {
+          return result.hasName();
+        }
+        public java.lang.String getName() {
+          return result.getName();
+        }
+        public Builder setName(java.lang.String value) {
+          result.hasName = true;
+          result.name_ = value;
+          return this;
+        }
+        public Builder clearName() {
+          result.hasName = false;
+          result.name_ = "";
+          return this;
+        }
+        
+        // required string url = 2;
+        public boolean hasUrl() {
+          return result.hasUrl();
+        }
+        public java.lang.String getUrl() {
+          return result.getUrl();
+        }
+        public Builder setUrl(java.lang.String value) {
+          result.hasUrl = true;
+          result.url_ = value;
+          return this;
+        }
+        public Builder clearUrl() {
+          result.hasUrl = false;
+          result.url_ = "";
+          return this;
+        }
+      }
+      
+      static {
+        net.unto.twitter.TwitterProtos.getDescriptor();
+      }
+    }
+    
+    // optional string as_of = 1;
+    private boolean hasAsOf;
+    private java.lang.String asOf_ = "";
+    public boolean hasAsOf() { return hasAsOf; }
+    public java.lang.String getAsOf() { return asOf_; }
+    
+    // repeated .twitter.Trends.Trend trends = 2;
+    private java.util.List<net.unto.twitter.TwitterProtos.Trends.Trend> trends_ =
+      java.util.Collections.emptyList();
+    public java.util.List<net.unto.twitter.TwitterProtos.Trends.Trend> getTrendsList() {
+      return trends_;
+    }
+    public int getTrendsCount() { return trends_.size(); }
+    public net.unto.twitter.TwitterProtos.Trends.Trend getTrends(int index) {
+      return trends_.get(index);
+    }
+    
+    public static net.unto.twitter.TwitterProtos.Trends parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static net.unto.twitter.TwitterProtos.Trends parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.unto.twitter.TwitterProtos.Trends parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static net.unto.twitter.TwitterProtos.Trends parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.unto.twitter.TwitterProtos.Trends parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static net.unto.twitter.TwitterProtos.Trends parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.unto.twitter.TwitterProtos.Trends parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static net.unto.twitter.TwitterProtos.Trends parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return new Builder(); }
+    public Builder newBuilderForType() { return new Builder(); }
+    public static Builder newBuilder(net.unto.twitter.TwitterProtos.Trends prototype) {
+      return new Builder().mergeFrom(prototype);
+    }
+    
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> {
+      // Construct using net.unto.twitter.TwitterProtos.Trends.newBuilder()
+      private Builder() {}
+      
+      net.unto.twitter.TwitterProtos.Trends result = new net.unto.twitter.TwitterProtos.Trends();
+      
+      @Override
+      protected net.unto.twitter.TwitterProtos.Trends internalGetResult() {
+        return result;
+      }
+      
+      @Override
+      public Builder clear() {
+        result = new net.unto.twitter.TwitterProtos.Trends();
+        return this;
+      }
+      
+      @Override
+      public Builder clone() {
+        return new Builder().mergeFrom(result);
+      }
+      
+      @Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return net.unto.twitter.TwitterProtos.Trends.getDescriptor();
+      }
+      
+      public net.unto.twitter.TwitterProtos.Trends getDefaultInstanceForType() {
+        return net.unto.twitter.TwitterProtos.Trends.getDefaultInstance();
+      }
+      
+      public net.unto.twitter.TwitterProtos.Trends build() {
+        if (!isInitialized()) {
+          throw new com.google.protobuf.UninitializedMessageException(
+            result);
+        }
+        return buildPartial();
+      }
+      
+      private net.unto.twitter.TwitterProtos.Trends buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        if (!isInitialized()) {
+          throw new com.google.protobuf.UninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return buildPartial();
+      }
+      
+      public net.unto.twitter.TwitterProtos.Trends buildPartial() {
+        if (result.trends_ != java.util.Collections.EMPTY_LIST) {
+          result.trends_ =
+            java.util.Collections.unmodifiableList(result.trends_);
+        }
+        net.unto.twitter.TwitterProtos.Trends returnMe = result;
+        result = null;
+        return returnMe;
+      }
+      
+      
+      // optional string as_of = 1;
+      public boolean hasAsOf() {
+        return result.hasAsOf();
+      }
+      public java.lang.String getAsOf() {
+        return result.getAsOf();
+      }
+      public Builder setAsOf(java.lang.String value) {
+        result.hasAsOf = true;
+        result.asOf_ = value;
+        return this;
+      }
+      public Builder clearAsOf() {
+        result.hasAsOf = false;
+        result.asOf_ = "";
+        return this;
+      }
+      
+      // repeated .twitter.Trends.Trend trends = 2;
+      public java.util.List<net.unto.twitter.TwitterProtos.Trends.Trend> getTrendsList() {
+        return java.util.Collections.unmodifiableList(result.trends_);
+      }
+      public int getTrendsCount() {
+        return result.getTrendsCount();
+      }
+      public net.unto.twitter.TwitterProtos.Trends.Trend getTrends(int index) {
+        return result.getTrends(index);
+      }
+      public Builder setTrends(int index, net.unto.twitter.TwitterProtos.Trends.Trend value) {
+        result.trends_.set(index, value);
+        return this;
+      }
+      public Builder setTrends(int index, net.unto.twitter.TwitterProtos.Trends.Trend.Builder builderForValue) {
+        result.trends_.set(index, builderForValue.build());
+        return this;
+      }
+      public Builder addTrends(net.unto.twitter.TwitterProtos.Trends.Trend value) {
+        if (result.trends_.isEmpty()) {
+          result.trends_ = new java.util.ArrayList<net.unto.twitter.TwitterProtos.Trends.Trend>();
+        }
+        result.trends_.add(value);
+        return this;
+      }
+      public Builder addTrends(net.unto.twitter.TwitterProtos.Trends.Trend.Builder builderForValue) {
+        if (result.trends_.isEmpty()) {
+          result.trends_ = new java.util.ArrayList<net.unto.twitter.TwitterProtos.Trends.Trend>();
+        }
+        result.trends_.add(builderForValue.build());
+        return this;
+      }
+      public Builder addAllTrends(
+          java.lang.Iterable<? extends net.unto.twitter.TwitterProtos.Trends.Trend> values) {
+        if (result.trends_.isEmpty()) {
+          result.trends_ = new java.util.ArrayList<net.unto.twitter.TwitterProtos.Trends.Trend>();
+        }
+        super.addAll(values, result.trends_);
+        return this;
+      }
+      public Builder clearTrends() {
+        result.trends_ = java.util.Collections.emptyList();
+        return this;
+      }
+    }
+    
+    static {
+      net.unto.twitter.TwitterProtos.getDescriptor();
+    }
+  }
+  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_twitter_User_descriptor;
   private static
@@ -1733,6 +2147,16 @@ public final class TwitterProtos {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_twitter_DirectMessage_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_twitter_Trends_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_twitter_Trends_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_twitter_Trends_Trend_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_twitter_Trends_Trend_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1767,8 +2191,11 @@ public final class TwitterProtos {
       "(\t\022\032\n\022sender_screen_name\030\006 \001(\t\022\035\n\025recipi" +
       "ent_screen_name\030\007 \001(\t\022\035\n\006sender\030\010 \001(\0132\r." +
       "twitter.User\022 \n\trecipient\030\t \001(\0132\r.twitte" +
-      "r.User*#\n\006Device\022\010\n\004NONE\020\000\022\007\n\003SMS\020\001\022\006\n\002I" +
-      "M\020\002B!\n\020net.unto.twitterB\rTwitterProtos";
+      "r.User\"b\n\006Trends\022\r\n\005as_of\030\001 \001(\t\022%\n\006trend" +
+      "s\030\002 \003(\0132\025.twitter.Trends.Trend\032\"\n\005Trend\022" +
+      "\014\n\004name\030\001 \002(\t\022\013\n\003url\030\002 \002(\t*#\n\006Device\022\010\n\004" +
+      "NONE\020\000\022\007\n\003SMS\020\001\022\006\n\002IM\020\002B!\n\020net.unto.twit" +
+      "terB\rTwitterProtos";
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
         public com.google.protobuf.ExtensionRegistry assignDescriptors(
@@ -1806,6 +2233,22 @@ public final class TwitterProtos {
               new java.lang.String[] { "Id", "Text", "SenderId", "RecipientId", "CreatedAt", "SenderScreenName", "RecipientScreenName", "Sender", "Recipient", },
               net.unto.twitter.TwitterProtos.DirectMessage.class,
               net.unto.twitter.TwitterProtos.DirectMessage.Builder.class);
+          internal_static_twitter_Trends_descriptor =
+            getDescriptor().getMessageTypes().get(3);
+          internal_static_twitter_Trends_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_twitter_Trends_descriptor,
+              new java.lang.String[] { "AsOf", "Trends", },
+              net.unto.twitter.TwitterProtos.Trends.class,
+              net.unto.twitter.TwitterProtos.Trends.Builder.class);
+          internal_static_twitter_Trends_Trend_descriptor =
+            internal_static_twitter_Trends_descriptor.getNestedTypes().get(0);
+          internal_static_twitter_Trends_Trend_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_twitter_Trends_Trend_descriptor,
+              new java.lang.String[] { "Name", "Url", },
+              net.unto.twitter.TwitterProtos.Trends.Trend.class,
+              net.unto.twitter.TwitterProtos.Trends.Trend.Builder.class);
           return null;
         }
       };

@@ -94,6 +94,16 @@ message DirectMessage {
   optional User recipient = 9;
 }
 
+message Trends {
+  optional string as_of = 1;
+  repeated Trend trends = 2;
+  
+  message Trend {
+    optional string name = 1;
+    optional string url = 2;
+  }
+}
+
 enum Device {
   NONE = 0;
   SMS = 1;

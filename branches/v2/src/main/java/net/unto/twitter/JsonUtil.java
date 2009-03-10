@@ -5,9 +5,11 @@ import java.util.List;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.unto.twitter.TwitterProtos.Trends;
 import net.unto.twitter.TwitterProtos.User;
 import net.unto.twitter.TwitterProtos.Status;
 import net.unto.twitter.TwitterProtos.DirectMessage;
+import net.unto.twitter.TwitterProtos.Trends.Trend;
 
 public class JsonUtil {
   
@@ -230,5 +232,41 @@ public class JsonUtil {
       longs[i] = jsonArray.getLong(i);
     }
     return longs;
-  } 
+  }
+  
+  public final static Trends newTrends(String jsonString) {
+    return newTrends(JSONObject.fromObject(jsonString));
+  }
+  
+  private final static Trends newTrends(JSONObject jsonObject) {
+    if (jsonObject == null) {
+      return null;
+    }
+    Trends.Builder builder = Trends.newBuilder();
+    if (jsonObject.has("as_of")) {
+      builder.setAsOf(jsonObject.getString("as_of"));
+    }
+    if (jsonObject.has("trends")) {
+      JSONArray trendsJsonArray = jsonObject.getJSONArray("trends");
+      for (int i = 0; i < trendsJsonArray.size(); i++) {
+        builder.addTrends(newTrend(trendsJsonArray.getJSONObject(i)));
+      }
+    }
+    return builder.build();
+  }
+
+  private final static Trend newTrend(JSONObject jsonObject) {
+    if (jsonObject == null) {
+      return null;
+    }
+    Trends.Trend.Builder builder = Trends.Trend.newBuilder();
+    if (jsonObject.has("name")) {
+      builder.setName(jsonObject.getString("name"));
+    }
+    if (jsonObject.has("url")) {
+      builder.setUrl(jsonObject.getString("url"));
+    }
+    return builder.build();
+  }
+
 }
