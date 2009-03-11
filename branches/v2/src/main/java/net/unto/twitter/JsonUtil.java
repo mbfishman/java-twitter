@@ -5,6 +5,8 @@ import java.util.List;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.unto.twitter.TwitterProtos.Results;
+import net.unto.twitter.TwitterProtos.Results.Result;
 import net.unto.twitter.TwitterProtos.Trends;
 import net.unto.twitter.TwitterProtos.User;
 import net.unto.twitter.TwitterProtos.Status;
@@ -269,4 +271,83 @@ public class JsonUtil {
     return builder.build();
   }
 
+  public final static Results newResults(String jsonString) {
+    return newResults(JSONObject.fromObject(jsonString));
+  }
+  
+  private final static Results newResults(JSONObject jsonObject) {
+    if (jsonObject == null) {
+      return null;
+    }
+    Results.Builder builder = Results.newBuilder();
+    if (jsonObject.has("completed_in")) {
+      builder.setCompletedIn(jsonObject.getDouble("completed_in"));
+    }
+    if (jsonObject.has("max_id")) {
+      builder.setMaxId(jsonObject.getLong("max_id"));
+    }
+    if (jsonObject.has("next_page")) {
+      builder.setNextPage(jsonObject.getString("next_page"));
+    }
+    if (jsonObject.has("page")) {
+      builder.setPage(jsonObject.getInt("page"));
+    }
+    if (jsonObject.has("query")) {
+      builder.setQuery(jsonObject.getString("query"));
+    }
+    if (jsonObject.has("refresh_url")) {
+      builder.setRefreshUrl(jsonObject.getString("refresh_url"));
+    }
+    if (jsonObject.has("results")) {
+      JSONArray resultsJsonArray = jsonObject.getJSONArray("results");
+      for (int i = 0; i < resultsJsonArray.size(); i++) {
+        builder.addResults(newResult(resultsJsonArray.getJSONObject(i)));
+      }
+    }
+    return builder.build();
+  }
+
+  private final static Result newResult(JSONObject jsonObject) {
+    if (jsonObject == null) {
+      return null;
+    }
+    Results.Result.Builder builder = Results.Result.newBuilder();
+    if (jsonObject.has("created_at")) {
+      builder.setCreatedAt(jsonObject.getString("created_at"));
+    }
+    if (jsonObject.has("from_user_id")) {
+      builder.setFromUserId(jsonObject.getLong("from_user_id"));
+    }
+    if (jsonObject.has("from_user")) {
+      builder.setFromUser(jsonObject.getString("from_user"));
+    }
+    if (jsonObject.has("id")) {
+      builder.setId(jsonObject.getLong("id"));
+    }
+    if (jsonObject.has("iso_language_code")) {
+      builder.setIsoLanguageCode(jsonObject.getString("iso_language_code"));
+    }
+    if (jsonObject.has("profile_image_url")) {
+      builder.setProfileImageUrl(jsonObject.getString("profile_image_url"));
+    }
+    if (jsonObject.has("source")) {
+      builder.setSource(jsonObject.getString("source"));
+    }
+    if (jsonObject.has("text")) {
+      builder.setText(jsonObject.getString("text"));
+    }
+    if (jsonObject.has("to_user_id")) {
+      builder.setToUserId(jsonObject.getLong("to_user_id"));
+    }
+    if (jsonObject.has("to_user")) {
+      builder.setToUser(jsonObject.getString("to_user"));
+    }
+    if (jsonObject.has("results_per_page")) {
+      builder.setResultsPerPage(jsonObject.getInt("results_per_page"));
+    }
+    if (jsonObject.has("since_id")) {
+      builder.setSinceId(jsonObject.getLong("since_id"));
+    }
+    return builder.build();
+  }
 }

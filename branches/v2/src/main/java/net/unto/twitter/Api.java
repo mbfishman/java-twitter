@@ -19,6 +19,7 @@ import net.unto.twitter.methods.NewDirectMessageRequest;
 import net.unto.twitter.methods.PublicTimelineRequest;
 import net.unto.twitter.methods.RepliesRequest;
 import net.unto.twitter.methods.Request;
+import net.unto.twitter.methods.SearchRequest;
 import net.unto.twitter.methods.SentDirectMessagesRequest;
 import net.unto.twitter.methods.ShowStatusRequest;
 import net.unto.twitter.methods.ShowUserRequest;
@@ -529,7 +530,12 @@ public class Api {
    * Example usage:
    * </p>
    * <p>
-   * <code>Trends trends = api.trends().build().get();</code>
+   * <pre>
+   * Trends trends = api.trends().build().get();
+   * for (Trend trend : trends.getTrends()) {
+   *   System.out.println(trend.getName());
+   * }
+   * </pre>
    * </p>
    * 
    * @return {@link TrendsRequest.Builder}
@@ -540,4 +546,26 @@ public class Api {
     return builder;
   }
 
+  /**
+   * Returns tweets that match a specified query.  You can use a variety of search operators in your query.
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * <pre>
+   * Results results = api.search("@dewitt").build().get();
+   * for (Result result : results.getResults()) {
+   *   System.out.println(result.getText());
+   * }
+   * </pre>
+   * </p>
+   * 
+   * @return {@link SearchRequest.Builder}
+   */
+  public SearchRequest.Builder search(String query) {
+    SearchRequest.Builder builder = SearchRequest.builder(query);
+    setDefaults(builder);
+    return builder;
+  }
+  
 }
