@@ -1,6 +1,7 @@
 package net.unto.twitter;
 
 import net.unto.twitter.TwitterProtos.Device;
+import net.unto.twitter.TwitterProtos.Geocode;
 import net.unto.twitter.UtilProtos.Url;
 import net.unto.twitter.UtilProtos.Url.Scheme;
 import net.unto.twitter.methods.CreateFriendshipRequest;
@@ -25,6 +26,7 @@ import net.unto.twitter.methods.ShowStatusRequest;
 import net.unto.twitter.methods.ShowUserRequest;
 import net.unto.twitter.methods.TrendsRequest;
 import net.unto.twitter.methods.UpdateDeliveryDeviceRequest;
+import net.unto.twitter.methods.UpdateProfileColorsRequest;
 import net.unto.twitter.methods.UpdateStatusRequest;
 import net.unto.twitter.methods.UserTimelineRequest;
 import net.unto.twitter.methods.VerifyCredentialsRequest;
@@ -530,12 +532,14 @@ public class Api {
    * Example usage:
    * </p>
    * <p>
+   * 
    * <pre>
    * Trends trends = api.trends().build().get();
    * for (Trend trend : trends.getTrends()) {
    *   System.out.println(trend.getName());
    * }
    * </pre>
+   * 
    * </p>
    * 
    * @return {@link TrendsRequest.Builder}
@@ -547,17 +551,20 @@ public class Api {
   }
 
   /**
-   * Returns tweets that match a specified query.  You can use a variety of search operators in your query.
+   * Returns tweets that match a specified query. You can use a variety of
+   * search operators in your query.
    * <p>
    * Example usage:
    * </p>
    * <p>
+   * 
    * <pre>
-   * Results results = api.search("@dewitt").build().get();
+   * Results results = api.search(&quot;@dewitt&quot;).build().get();
    * for (Result result : results.getResults()) {
    *   System.out.println(result.getText());
    * }
    * </pre>
+   * 
    * </p>
    * 
    * @return {@link SearchRequest.Builder}
@@ -567,5 +574,17 @@ public class Api {
     setDefaults(builder);
     return builder;
   }
-  
+
+  /**
+   * Sets one or more hex values that control the color scheme of the
+   * authenticating user's profile page on twitter.com.
+   * 
+   * @return {@link UpdateProfileColorsRequest.Builder}
+   */
+  public UpdateProfileColorsRequest.Builder updateProfileColors() {
+    UpdateProfileColorsRequest.Builder builder = UpdateProfileColorsRequest
+        .builder();
+    setDefaults(builder);
+    return builder;
+  }
 }

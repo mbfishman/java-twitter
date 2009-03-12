@@ -1,15 +1,12 @@
 package net.unto.twitter.methods;
 
-import com.google.common.collect.ImmutableMap;
+import java.util.Map;
 
 import net.unto.twitter.JsonUtil;
-import net.unto.twitter.TwitterProtos.Device;
 import net.unto.twitter.TwitterProtos.Geocode;
 import net.unto.twitter.TwitterProtos.Results;
-import net.unto.twitter.TwitterProtos.Trends;
-import net.unto.twitter.methods.PublicTimelineRequest.Builder;
 
-import java.util.Map;
+import com.google.common.collect.ImmutableMap;
 
 public final class SearchRequest extends AbstractRequest {
 
