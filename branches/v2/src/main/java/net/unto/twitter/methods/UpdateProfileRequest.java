@@ -89,7 +89,7 @@ public final class UpdateProfileRequest extends AbstractRequest {
     }
   }
 
-  public User get() {
+  public User post() {
     return JsonUtil.newUser(postJson());
   }
 }

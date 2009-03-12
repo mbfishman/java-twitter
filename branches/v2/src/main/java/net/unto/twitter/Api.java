@@ -3,8 +3,10 @@ package net.unto.twitter;
 import net.unto.twitter.TwitterProtos.Device;
 import net.unto.twitter.UtilProtos.Url;
 import net.unto.twitter.UtilProtos.Url.Scheme;
+import net.unto.twitter.methods.CreateBlockRequest;
 import net.unto.twitter.methods.CreateFavoriteRequest;
 import net.unto.twitter.methods.CreateFriendshipRequest;
+import net.unto.twitter.methods.DestroyBlockRequest;
 import net.unto.twitter.methods.DestroyDirectMessageRequest;
 import net.unto.twitter.methods.DestroyFavoriteRequest;
 import net.unto.twitter.methods.DestroyFriendshipRequest;
@@ -12,12 +14,14 @@ import net.unto.twitter.methods.DestroyStatusRequest;
 import net.unto.twitter.methods.DirectMessagesRequest;
 import net.unto.twitter.methods.EndSessionRequest;
 import net.unto.twitter.methods.FavoritesRequest;
+import net.unto.twitter.methods.FollowRequest;
 import net.unto.twitter.methods.FollowerIdsRequest;
 import net.unto.twitter.methods.FollowersRequest;
 import net.unto.twitter.methods.FriendIdsRequest;
 import net.unto.twitter.methods.FriendsRequest;
 import net.unto.twitter.methods.FriendsTimelineRequest;
 import net.unto.twitter.methods.FriendshipExistsRequest;
+import net.unto.twitter.methods.LeaveRequest;
 import net.unto.twitter.methods.NewDirectMessageRequest;
 import net.unto.twitter.methods.PublicTimelineRequest;
 import net.unto.twitter.methods.RateLimitStatusRequest;
@@ -27,6 +31,7 @@ import net.unto.twitter.methods.SearchRequest;
 import net.unto.twitter.methods.SentDirectMessagesRequest;
 import net.unto.twitter.methods.ShowStatusRequest;
 import net.unto.twitter.methods.ShowUserRequest;
+import net.unto.twitter.methods.TestRequest;
 import net.unto.twitter.methods.TrendsRequest;
 import net.unto.twitter.methods.UpdateDeliveryDeviceRequest;
 import net.unto.twitter.methods.UpdateProfileBackgroundImageRequest;
@@ -844,6 +849,95 @@ public class Api {
    */
   public DestroyFavoriteRequest.Builder destroyFavorite(long id) {
     DestroyFavoriteRequest.Builder builder = DestroyFavoriteRequest.builder(id);
+    setDefaults(builder);
+    return builder;
+  }
+  
+  /**
+   * Enables notifications for updates from the specified user to the authenticating user.  Returns the specified user when successful.
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * <code>User following = api.follow("dewitt").build().post();</code>
+   * </p>
+   * 
+   * @param id The ID or screen name of the user to follow.
+   * @return A FollowRequest.Builder.
+   */
+  public FollowRequest.Builder follow(String id) {
+    FollowRequest.Builder builder = FollowRequest.builder(id);
+    setDefaults(builder);
+    return builder;
+  }
+  
+  /**
+   * Disables notifications for updates from the specified user to the authenticating user.  Returns the specified user when successful.
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * <code>User notFollowing = api.leave("dewitt").build().post();</code>
+   * </p>
+   * 
+   * @param id The ID or screen name of the user to leave.
+   * @return A LeaveRequest.Builder.
+   */
+  public LeaveRequest.Builder leave(String id) {
+    LeaveRequest.Builder builder = LeaveRequest.builder(id);
+    setDefaults(builder);
+    return builder;
+  }
+  
+  /**
+   * Blocks the user specified in the ID parameter as the authenticating user.  Returns the blocked user in the requested format when successful.
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * <code>User blocked = api.createBlock("dewitt").build().post();</code>
+   * </p>
+   * 
+   * @param id The ID or screen_name of the user to block.
+   * @return A CreateBlockRequest.Builder.
+   */
+  public CreateBlockRequest.Builder createBlock(String id) {
+    CreateBlockRequest.Builder builder = CreateBlockRequest.builder(id);
+    setDefaults(builder);
+    return builder;
+  }
+  
+  /**
+   * Un-blocks the user specified in the ID parameter as the authenticating user.  Returns the un-blocked user in the requested format when successful.  
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * <code>User unblocked = api.destroyBlock("dewitt").build().post();</code>
+   * </p>
+   * 
+   * @param id The ID or screen_name of the user to un-block.
+   * @return A DestroyBlockRequest.Builder.
+   */
+  public DestroyBlockRequest.Builder destroyBlock(String id) {
+    DestroyBlockRequest.Builder builder = DestroyBlockRequest.builder(id);
+    setDefaults(builder);
+    return builder;
+  }
+  
+  /**
+   * Returns the string "ok" in the requested format with a 200 OK HTTP status code.
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * <code>String ok = api.test().build().get();</code>
+   * </p>
+   * 
+   * @return A TestRequest.Builder.
+   */
+  public TestRequest.Builder test() {
+    TestRequest.Builder builder = TestRequest.builder();
     setDefaults(builder);
     return builder;
   }
