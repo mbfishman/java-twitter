@@ -1,7 +1,6 @@
 package net.unto.twitter;
 
 import net.unto.twitter.TwitterProtos.Device;
-import net.unto.twitter.TwitterProtos.Geocode;
 import net.unto.twitter.UtilProtos.Url;
 import net.unto.twitter.UtilProtos.Url.Scheme;
 import net.unto.twitter.methods.CreateFriendshipRequest;
@@ -177,7 +176,7 @@ public class Api {
    * </p>
    * 
    * @param id The ID of the status to destroy.
-   * @return {@link DestroyStatusRequest.Builder}
+   * @return A DestroyStatusRequest.Builder.
    */
   public DestroyStatusRequest.Builder destroyStatus(long id) {
     DestroyStatusRequest.Builder builder = DestroyStatusRequest.builder(id);
@@ -190,13 +189,16 @@ public class Api {
    * inline. They are ordered by the order in which they joined Twitter (this is
    * going to be changed).
    * <p>
+   * Supports the <code>id</code> and <code>page</code> optional parameters.
+   * </p>
+   * <p>
    * Example usage:
    * </p>
    * <p>
    * <code>List<User> followers = api.followers().build().get();</code>
    * </p>
    * 
-   * @return {@link FollowersRequest.Builder}
+   * @return A FollowersRequest.Builder supporting the <code>id</code> and <code>page</code> optional parameters.
    */
   public FollowersRequest.Builder followers() {
     FollowersRequest.Builder builder = FollowersRequest.builder();
@@ -210,13 +212,16 @@ public class Api {
    * also possible to request another user's recent friends list via the id
    * parameter below.
    * <p>
+   * Supports the <code>id</code> optional parameter.
+   * </p>
+   * <p>
    * Example usage:
    * </p>
    * <p>
    * <code>List<User> friends = api.friends().build().get();</code>
    * </p>
    * 
-   * @return {@link FriendsRequest.Builder}
+   * @return A FriendsRequest.Builder supporting the <code>id</code> optional parameter.
    */
   public FriendsRequest.Builder friends() {
     FriendsRequest.Builder builder = FriendsRequest.builder();
@@ -224,18 +229,61 @@ public class Api {
     return builder;
   }
 
+  /**
+   * Returns the 20 most recent statuses posted by the authenticating user and
+   * that user's friends. This is the equivalent of /home on the Web.
+   * <p>
+   * Supports the <code>count</code>, <code>page</code>, <code>since</code>, and <code>sinceId</code> optional parameters.
+   * </p>
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * <code>List<Status> friendsTimeline = api.friendsTimeline().build().get();</code>
+   * </p>
+   * 
+   * @return A FriendsTimelineRequest.Builder supporting the <code>count</code>, <code>page</code>, <code>since</code>, and <code>sinceId</code> optional parameters.
+   */
   public FriendsTimelineRequest.Builder friendsTimeline() {
     FriendsTimelineRequest.Builder builder = FriendsTimelineRequest.builder();
     setDefaults(builder);
     return builder;
   }
 
+  /**
+   * Returns the 20 most recent statuses from non-protected users who have set a
+   * custom user icon. Does not require authentication. Note that the public
+   * timeline is cached for 60 seconds so requesting it more often than that is
+   * a waste of resources.
+   * 
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * <code>List<Status> publicTimeline = api.publicTimeline().build().get();</code>
+   * </p>
+   * 
+   * @return {@link PublicTimelineRequest.Builder}
+   */
   public PublicTimelineRequest.Builder publicTimeline() {
     PublicTimelineRequest.Builder builder = PublicTimelineRequest.builder();
     setDefaults(builder);
     return builder;
   }
 
+  /**
+   * Returns the 20 most recent @replies (status updates prefixed with
+   * 
+   * @username) for the authenticating user.
+   *            <p>
+   *            Example usage:
+   *            </p>
+   *            <p>
+   *            <code>List<Status> replies = api.replies().build().get();</code>
+   *            </p>
+   * 
+   * @return {@link RepliesRequest.Builder}
+   */
   public RepliesRequest.Builder replies() {
     RepliesRequest.Builder builder = RepliesRequest.builder();
     setDefaults(builder);
@@ -249,6 +297,19 @@ public class Api {
     builder.scheme(scheme);
   }
 
+  /**
+   * Returns a single status, specified by the id parameter below. The status's
+   * author will be returned inline.
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * <code>Status status = api.showStatus().build().get();</code>
+   * </p>
+   * 
+   * @param id The numerical ID of the status you're trying to retrieve.
+   * @return {@link RepliesRequest.Builder}
+   */
   public ShowStatusRequest.Builder showStatus(long id) {
     ShowStatusRequest.Builder builder = ShowStatusRequest.builder(id);
     setDefaults(builder);
@@ -276,6 +337,20 @@ public class Api {
     return builder;
   }
 
+  /**
+   * Returns the 20 most recent statuses posted from the authenticating user.
+   * It's also possible to request another user's timeline via the id parameter
+   * below. This is the equivalent of the Web /archive page for your own user,
+   * or the profile page for a third party.
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * <code>List<Status> userTimeline = api.userTimeline().build().get();</code>
+   * </p>
+   * 
+   * @return {@link UserTimelineRequest.Builder}
+   */
   public UserTimelineRequest.Builder userTimeline() {
     UserTimelineRequest.Builder builder = UserTimelineRequest.builder();
     setDefaults(builder);
@@ -691,10 +766,11 @@ public class Api {
    * <p>
    * 
    * <pre>
-   * User user = api.updateProfile().name("DeWitt Clinton").build().post();
+   * User user = api.updateProfile().name(&quot;DeWitt Clinton&quot;).build().post();
    * </pre>
    * 
    * </p>
+   * 
    * @return {@link UpdateProfileRequest.Builder}
    */
   public UpdateProfileRequest.Builder updateProfile() {
