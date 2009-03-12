@@ -7,6 +7,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.unto.twitter.TwitterProtos.Results;
 import net.unto.twitter.TwitterProtos.Results.Result;
+import net.unto.twitter.TwitterProtos.RateLimitStatus;
 import net.unto.twitter.TwitterProtos.Trends;
 import net.unto.twitter.TwitterProtos.User;
 import net.unto.twitter.TwitterProtos.Status;
@@ -347,6 +348,30 @@ public class JsonUtil {
     }
     if (jsonObject.has("since_id")) {
       builder.setSinceId(jsonObject.getLong("since_id"));
+    }
+    return builder.build();
+  }
+
+  public static RateLimitStatus newRateLimitStatus(String jsonString) {
+    return newRateLimitStatus(JSONObject.fromObject(jsonString));
+  }
+  
+  private final static RateLimitStatus newRateLimitStatus(JSONObject jsonObject) {
+    if (jsonObject == null) {
+      return null;
+    }
+    RateLimitStatus.Builder builder = RateLimitStatus.newBuilder();
+    if (jsonObject.has("hourly_limit")) {
+      builder.setHourlyLimit(jsonObject.getInt("hourly_limit"));
+    }
+    if (jsonObject.has("reset_time")) {
+      builder.setResetTime(jsonObject.getString("reset_time"));
+    }
+    if (jsonObject.has("reset_time_in_seconds")) {
+      builder.setResetTimeInSeconds(jsonObject.getLong("reset_time_in_seconds"));
+    }
+    if (jsonObject.has("remaining_hits")) {
+      builder.setRemainingHits(jsonObject.getLong("remaining_hits"));
     }
     return builder.build();
   }

@@ -146,3 +146,14 @@ message Geocode {
     KILOMETERS = 1;
   }
 }
+
+message RateLimitStatus {
+  // maximum number of API calls a user is allowed in an hour
+  optional sint32 hourly_limit = 1;
+  // time when a user's API call allocation resets
+  optional string reset_time = 2;
+  // Unix time when a user's API call allocation resets
+  optional uint64 reset_time_in_seconds = 3;
+  // number of API calls remaining for a user
+  optional uint64 remaining_hits = 4;
+}

@@ -18,6 +18,7 @@ import net.unto.twitter.methods.FriendsTimelineRequest;
 import net.unto.twitter.methods.FriendshipExistsRequest;
 import net.unto.twitter.methods.NewDirectMessageRequest;
 import net.unto.twitter.methods.PublicTimelineRequest;
+import net.unto.twitter.methods.RateLimitStatusRequest;
 import net.unto.twitter.methods.RepliesRequest;
 import net.unto.twitter.methods.Request;
 import net.unto.twitter.methods.SearchRequest;
@@ -581,6 +582,15 @@ public class Api {
    * Sets one or more hex values that control the color scheme of the
    * authenticating user's profile page on twitter.com.
    * 
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * 
+   * <pre>
+   * User user = api.updateProfileColors().profileBackgroundColor("FFFFFF").build().post();
+   * </pre>
+   *
    * @return {@link UpdateProfileColorsRequest.Builder}
    */
   public UpdateProfileColorsRequest.Builder updateProfileColors() {
@@ -600,7 +610,7 @@ public class Api {
    * 
    * <pre>
    * File file = new File(&quot;profile_image.png&quot;);
-   * User user = api.updateProfileImage(FileUtils.readFileToByteArray());
+   * User user = api.updateProfileImage(FileUtils.readFileToByteArray()).build().post();
    * </pre>
    * 
    * </p>
@@ -624,7 +634,7 @@ public class Api {
    * 
    * <pre>
    * File file = new File(&quot;profile_background_image.png&quot;);
-   * User user = api.updateProfileBackgroundImage(FileUtils.readFileToByteArray());
+   * User user = api.updateProfileBackgroundImage(FileUtils.readFileToByteArray()).build().post();
    * </pre>
    * 
    * </p>
@@ -638,4 +648,32 @@ public class Api {
     setDefaults(builder);
     return builder;
   }
+
+  /**
+   * Returns the remaining number of API requests available to the requesting
+   * user before the API limit is reached for the current hour. Calls to
+   * rate_limit_status do not count against the rate limit. If authentication
+   * credentials are provided, the rate limit status for the authenticating user
+   * is returned. Otherwise, the rate limit status for the requester's IP
+   * address is returned.
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * 
+   * <pre>
+   * RateLimitStatus rateLimitStatus = api.rateLimitStatus().build().get();
+   * System.out.println(rateLimitStatus.getRemainingHits());
+   * </pre>
+   * 
+   * </p>
+   * 
+   * @return {@link UpdateProfileBackgroundImageRequest.Builder}
+   */
+  public RateLimitStatusRequest.Builder rateLimitStatus() {
+    RateLimitStatusRequest.Builder builder = RateLimitStatusRequest.builder();
+    setDefaults(builder);
+    return builder;
+  }
+
 }

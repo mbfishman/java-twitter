@@ -3190,6 +3190,243 @@ public final class TwitterProtos {
     }
   }
   
+  public static final class RateLimitStatus extends
+      com.google.protobuf.GeneratedMessage {
+    // Use RateLimitStatus.newBuilder() to construct.
+    private RateLimitStatus() {}
+    
+    private static final RateLimitStatus defaultInstance = new RateLimitStatus();
+    public static RateLimitStatus getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public RateLimitStatus getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return net.unto.twitter.TwitterProtos.internal_static_twitter_RateLimitStatus_descriptor;
+    }
+    
+    @Override
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return net.unto.twitter.TwitterProtos.internal_static_twitter_RateLimitStatus_fieldAccessorTable;
+    }
+    
+    // optional sint32 hourly_limit = 1;
+    private boolean hasHourlyLimit;
+    private int hourlyLimit_ = 0;
+    public boolean hasHourlyLimit() { return hasHourlyLimit; }
+    public int getHourlyLimit() { return hourlyLimit_; }
+    
+    // optional string reset_time = 2;
+    private boolean hasResetTime;
+    private java.lang.String resetTime_ = "";
+    public boolean hasResetTime() { return hasResetTime; }
+    public java.lang.String getResetTime() { return resetTime_; }
+    
+    // optional uint64 reset_time_in_seconds = 3;
+    private boolean hasResetTimeInSeconds;
+    private long resetTimeInSeconds_ = 0L;
+    public boolean hasResetTimeInSeconds() { return hasResetTimeInSeconds; }
+    public long getResetTimeInSeconds() { return resetTimeInSeconds_; }
+    
+    // optional uint64 remaining_hits = 4;
+    private boolean hasRemainingHits;
+    private long remainingHits_ = 0L;
+    public boolean hasRemainingHits() { return hasRemainingHits; }
+    public long getRemainingHits() { return remainingHits_; }
+    
+    public static net.unto.twitter.TwitterProtos.RateLimitStatus parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static net.unto.twitter.TwitterProtos.RateLimitStatus parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.unto.twitter.TwitterProtos.RateLimitStatus parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static net.unto.twitter.TwitterProtos.RateLimitStatus parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.unto.twitter.TwitterProtos.RateLimitStatus parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static net.unto.twitter.TwitterProtos.RateLimitStatus parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.unto.twitter.TwitterProtos.RateLimitStatus parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static net.unto.twitter.TwitterProtos.RateLimitStatus parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return new Builder(); }
+    public Builder newBuilderForType() { return new Builder(); }
+    public static Builder newBuilder(net.unto.twitter.TwitterProtos.RateLimitStatus prototype) {
+      return new Builder().mergeFrom(prototype);
+    }
+    
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> {
+      // Construct using net.unto.twitter.TwitterProtos.RateLimitStatus.newBuilder()
+      private Builder() {}
+      
+      net.unto.twitter.TwitterProtos.RateLimitStatus result = new net.unto.twitter.TwitterProtos.RateLimitStatus();
+      
+      @Override
+      protected net.unto.twitter.TwitterProtos.RateLimitStatus internalGetResult() {
+        return result;
+      }
+      
+      @Override
+      public Builder clear() {
+        result = new net.unto.twitter.TwitterProtos.RateLimitStatus();
+        return this;
+      }
+      
+      @Override
+      public Builder clone() {
+        return new Builder().mergeFrom(result);
+      }
+      
+      @Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return net.unto.twitter.TwitterProtos.RateLimitStatus.getDescriptor();
+      }
+      
+      public net.unto.twitter.TwitterProtos.RateLimitStatus getDefaultInstanceForType() {
+        return net.unto.twitter.TwitterProtos.RateLimitStatus.getDefaultInstance();
+      }
+      
+      public net.unto.twitter.TwitterProtos.RateLimitStatus build() {
+        if (!isInitialized()) {
+          throw new com.google.protobuf.UninitializedMessageException(
+            result);
+        }
+        return buildPartial();
+      }
+      
+      private net.unto.twitter.TwitterProtos.RateLimitStatus buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        if (!isInitialized()) {
+          throw new com.google.protobuf.UninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return buildPartial();
+      }
+      
+      public net.unto.twitter.TwitterProtos.RateLimitStatus buildPartial() {
+        net.unto.twitter.TwitterProtos.RateLimitStatus returnMe = result;
+        result = null;
+        return returnMe;
+      }
+      
+      
+      // optional sint32 hourly_limit = 1;
+      public boolean hasHourlyLimit() {
+        return result.hasHourlyLimit();
+      }
+      public int getHourlyLimit() {
+        return result.getHourlyLimit();
+      }
+      public Builder setHourlyLimit(int value) {
+        result.hasHourlyLimit = true;
+        result.hourlyLimit_ = value;
+        return this;
+      }
+      public Builder clearHourlyLimit() {
+        result.hasHourlyLimit = false;
+        result.hourlyLimit_ = 0;
+        return this;
+      }
+      
+      // optional string reset_time = 2;
+      public boolean hasResetTime() {
+        return result.hasResetTime();
+      }
+      public java.lang.String getResetTime() {
+        return result.getResetTime();
+      }
+      public Builder setResetTime(java.lang.String value) {
+        result.hasResetTime = true;
+        result.resetTime_ = value;
+        return this;
+      }
+      public Builder clearResetTime() {
+        result.hasResetTime = false;
+        result.resetTime_ = "";
+        return this;
+      }
+      
+      // optional uint64 reset_time_in_seconds = 3;
+      public boolean hasResetTimeInSeconds() {
+        return result.hasResetTimeInSeconds();
+      }
+      public long getResetTimeInSeconds() {
+        return result.getResetTimeInSeconds();
+      }
+      public Builder setResetTimeInSeconds(long value) {
+        result.hasResetTimeInSeconds = true;
+        result.resetTimeInSeconds_ = value;
+        return this;
+      }
+      public Builder clearResetTimeInSeconds() {
+        result.hasResetTimeInSeconds = false;
+        result.resetTimeInSeconds_ = 0L;
+        return this;
+      }
+      
+      // optional uint64 remaining_hits = 4;
+      public boolean hasRemainingHits() {
+        return result.hasRemainingHits();
+      }
+      public long getRemainingHits() {
+        return result.getRemainingHits();
+      }
+      public Builder setRemainingHits(long value) {
+        result.hasRemainingHits = true;
+        result.remainingHits_ = value;
+        return this;
+      }
+      public Builder clearRemainingHits() {
+        result.hasRemainingHits = false;
+        result.remainingHits_ = 0L;
+        return this;
+      }
+    }
+    
+    static {
+      net.unto.twitter.TwitterProtos.getDescriptor();
+    }
+  }
+  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_twitter_User_descriptor;
   private static
@@ -3235,6 +3472,11 @@ public final class TwitterProtos {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_twitter_Geocode_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_twitter_RateLimitStatus_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_twitter_RateLimitStatus_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -3285,9 +3527,12 @@ public final class TwitterProtos {
       "\007Geocode\022\020\n\010latitude\030\001 \002(\001\022\021\n\tlongitude\030" +
       "\002 \002(\001\022\016\n\006radius\030\003 \002(\r\022#\n\004unit\030\004 \002(\0162\025.tw" +
       "itter.Geocode.Unit\"!\n\004Unit\022\t\n\005MILES\020\000\022\016\n" +
-      "\nKILOMETERS\020\001*#\n\006Device\022\010\n\004NONE\020\000\022\007\n\003SMS" +
-      "\020\001\022\006\n\002IM\020\002B!\n\020net.unto.twitterB\rTwitterP" +
-      "rotos";
+      "\nKILOMETERS\020\001\"r\n\017RateLimitStatus\022\024\n\014hour" +
+      "ly_limit\030\001 \001(\021\022\022\n\nreset_time\030\002 \001(\t\022\035\n\025re" +
+      "set_time_in_seconds\030\003 \001(\004\022\026\n\016remaining_h" +
+      "its\030\004 \001(\004*#\n\006Device\022\010\n\004NONE\020\000\022\007\n\003SMS\020\001\022\006" +
+      "\n\002IM\020\002B!\n\020net.unto.twitterB\rTwitterProto" +
+      "s";
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
         public com.google.protobuf.ExtensionRegistry assignDescriptors(
@@ -3365,6 +3610,14 @@ public final class TwitterProtos {
               new java.lang.String[] { "Latitude", "Longitude", "Radius", "Unit", },
               net.unto.twitter.TwitterProtos.Geocode.class,
               net.unto.twitter.TwitterProtos.Geocode.Builder.class);
+          internal_static_twitter_RateLimitStatus_descriptor =
+            getDescriptor().getMessageTypes().get(6);
+          internal_static_twitter_RateLimitStatus_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_twitter_RateLimitStatus_descriptor,
+              new java.lang.String[] { "HourlyLimit", "ResetTime", "ResetTimeInSeconds", "RemainingHits", },
+              net.unto.twitter.TwitterProtos.RateLimitStatus.class,
+              net.unto.twitter.TwitterProtos.RateLimitStatus.Builder.class);
           return null;
         }
       };
