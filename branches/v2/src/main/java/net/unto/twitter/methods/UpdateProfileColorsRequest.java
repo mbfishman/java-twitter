@@ -86,7 +86,7 @@ public final class UpdateProfileColorsRequest extends AbstractRequest {
 
   }
 
-  public User get() {
+  public User post() {
     return JsonUtil.newUser(postJson());
   }
 }

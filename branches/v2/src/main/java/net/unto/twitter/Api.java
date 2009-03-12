@@ -30,6 +30,7 @@ import net.unto.twitter.methods.UpdateDeliveryDeviceRequest;
 import net.unto.twitter.methods.UpdateProfileBackgroundImageRequest;
 import net.unto.twitter.methods.UpdateProfileColorsRequest;
 import net.unto.twitter.methods.UpdateProfileImageRequest;
+import net.unto.twitter.methods.UpdateProfileRequest;
 import net.unto.twitter.methods.UpdateStatusRequest;
 import net.unto.twitter.methods.UserTimelineRequest;
 import net.unto.twitter.methods.VerifyCredentialsRequest;
@@ -588,9 +589,10 @@ public class Api {
    * <p>
    * 
    * <pre>
-   * User user = api.updateProfileColors().profileBackgroundColor("FFFFFF").build().post();
+   * User user = api.updateProfileColors().profileBackgroundColor(&quot;FFFFFF&quot;).build()
+   *     .post();
    * </pre>
-   *
+   * 
    * @return {@link UpdateProfileColorsRequest.Builder}
    */
   public UpdateProfileColorsRequest.Builder updateProfileColors() {
@@ -610,7 +612,8 @@ public class Api {
    * 
    * <pre>
    * File file = new File(&quot;profile_image.png&quot;);
-   * User user = api.updateProfileImage(FileUtils.readFileToByteArray()).build().post();
+   * User user = api.updateProfileImage(FileUtils.readFileToByteArray()).build()
+   *     .post();
    * </pre>
    * 
    * </p>
@@ -634,7 +637,8 @@ public class Api {
    * 
    * <pre>
    * File file = new File(&quot;profile_background_image.png&quot;);
-   * User user = api.updateProfileBackgroundImage(FileUtils.readFileToByteArray()).build().post();
+   * User user = api.updateProfileBackgroundImage(FileUtils.readFileToByteArray())
+   *     .build().post();
    * </pre>
    * 
    * </p>
@@ -668,7 +672,7 @@ public class Api {
    * 
    * </p>
    * 
-   * @return {@link UpdateProfileBackgroundImageRequest.Builder}
+   * @return {@link RateLimitStatusRequest.Builder}
    */
   public RateLimitStatusRequest.Builder rateLimitStatus() {
     RateLimitStatusRequest.Builder builder = RateLimitStatusRequest.builder();
@@ -676,4 +680,26 @@ public class Api {
     return builder;
   }
 
+  /**
+   * Sets values that users are able to set under the "Account" tab of their
+   * settings page. Only the parameters specified will be updated; to only
+   * update the "name" attribute, for example, only include that parameter in
+   * your request.
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * 
+   * <pre>
+   * User user = api.updateProfile().name("DeWitt Clinton").build().post();
+   * </pre>
+   * 
+   * </p>
+   * @return {@link UpdateProfileRequest.Builder}
+   */
+  public UpdateProfileRequest.Builder updateProfile() {
+    UpdateProfileRequest.Builder builder = UpdateProfileRequest.builder();
+    setDefaults(builder);
+    return builder;
+  }
 }
