@@ -26,7 +26,9 @@ import net.unto.twitter.methods.ShowStatusRequest;
 import net.unto.twitter.methods.ShowUserRequest;
 import net.unto.twitter.methods.TrendsRequest;
 import net.unto.twitter.methods.UpdateDeliveryDeviceRequest;
+import net.unto.twitter.methods.UpdateProfileBackgroundImageRequest;
 import net.unto.twitter.methods.UpdateProfileColorsRequest;
+import net.unto.twitter.methods.UpdateProfileImageRequest;
 import net.unto.twitter.methods.UpdateStatusRequest;
 import net.unto.twitter.methods.UserTimelineRequest;
 import net.unto.twitter.methods.VerifyCredentialsRequest;
@@ -584,6 +586,55 @@ public class Api {
   public UpdateProfileColorsRequest.Builder updateProfileColors() {
     UpdateProfileColorsRequest.Builder builder = UpdateProfileColorsRequest
         .builder();
+    setDefaults(builder);
+    return builder;
+  }
+
+  /**
+   * Updates the authenticating user's profile image. Expects raw multipart
+   * data, not a URL to an image.
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * 
+   * <pre>
+   * File file = new File(&quot;profile_image.png&quot;);
+   * User user = api.updateProfileImage(FileUtils.readFileToByteArray());
+   * </pre>
+   * 
+   * </p>
+   * 
+   * @return {@link UpdateProfileImageRequest.Builder}
+   */
+  public UpdateProfileImageRequest.Builder updateProfileImage(byte[] imageData) {
+    UpdateProfileImageRequest.Builder builder = UpdateProfileImageRequest
+        .builder(imageData);
+    setDefaults(builder);
+    return builder;
+  }
+
+  /**
+   * Updates the authenticating user's profile background image. Expects raw
+   * multipart data, not a URL to an image.
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * 
+   * <pre>
+   * File file = new File(&quot;profile_background_image.png&quot;);
+   * User user = api.updateProfileBackgroundImage(FileUtils.readFileToByteArray());
+   * </pre>
+   * 
+   * </p>
+   * 
+   * @return {@link UpdateProfileBackgroundImageRequest.Builder}
+   */
+  public UpdateProfileBackgroundImageRequest.Builder updateProfileBackgroundImage(
+      byte[] imageData) {
+    UpdateProfileBackgroundImageRequest.Builder builder = UpdateProfileBackgroundImageRequest
+        .builder(imageData);
     setDefaults(builder);
     return builder;
   }
