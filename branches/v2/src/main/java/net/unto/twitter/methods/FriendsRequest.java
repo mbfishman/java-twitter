@@ -26,7 +26,7 @@ public final class FriendsRequest extends AbstractRequest {
 
     Builder() {
       path("/statuses/friends.json");
-      authorizationRequired = true;
+      authorizationRequired(true);
     }
     
     /**
@@ -39,7 +39,7 @@ public final class FriendsRequest extends AbstractRequest {
     public Builder id(String id) {
       assert (id != null);
       path(String.format("/statuses/friends/%s.json", id));
-      authorizationRequired = false; 
+      authorizationRequired(false); 
       return this;
     }
     

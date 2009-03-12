@@ -3,12 +3,15 @@ package net.unto.twitter;
 import net.unto.twitter.TwitterProtos.Device;
 import net.unto.twitter.UtilProtos.Url;
 import net.unto.twitter.UtilProtos.Url.Scheme;
+import net.unto.twitter.methods.CreateFavoriteRequest;
 import net.unto.twitter.methods.CreateFriendshipRequest;
 import net.unto.twitter.methods.DestroyDirectMessageRequest;
+import net.unto.twitter.methods.DestroyFavoriteRequest;
 import net.unto.twitter.methods.DestroyFriendshipRequest;
 import net.unto.twitter.methods.DestroyStatusRequest;
 import net.unto.twitter.methods.DirectMessagesRequest;
 import net.unto.twitter.methods.EndSessionRequest;
+import net.unto.twitter.methods.FavoritesRequest;
 import net.unto.twitter.methods.FollowerIdsRequest;
 import net.unto.twitter.methods.FollowersRequest;
 import net.unto.twitter.methods.FriendIdsRequest;
@@ -198,7 +201,8 @@ public class Api {
    * <code>List<User> followers = api.followers().build().get();</code>
    * </p>
    * 
-   * @return A FollowersRequest.Builder supporting the <code>id</code> and <code>page</code> optional parameters.
+   * @return A FollowersRequest.Builder supporting the <code>id</code> and
+   *         <code>page</code> optional parameters.
    */
   public FollowersRequest.Builder followers() {
     FollowersRequest.Builder builder = FollowersRequest.builder();
@@ -212,7 +216,7 @@ public class Api {
    * also possible to request another user's recent friends list via the id
    * parameter below.
    * <p>
-   * Supports the <code>id</code> optional parameter.
+   * Supports the <code>id</code> and <code>page</code> optional parameters.
    * </p>
    * <p>
    * Example usage:
@@ -221,7 +225,8 @@ public class Api {
    * <code>List<User> friends = api.friends().build().get();</code>
    * </p>
    * 
-   * @return A FriendsRequest.Builder supporting the <code>id</code> optional parameter.
+   * @return A FriendsRequest.Builder supporting the <code>id</code> and
+   *         <code>page</code> optional parameters.
    */
   public FriendsRequest.Builder friends() {
     FriendsRequest.Builder builder = FriendsRequest.builder();
@@ -233,7 +238,8 @@ public class Api {
    * Returns the 20 most recent statuses posted by the authenticating user and
    * that user's friends. This is the equivalent of /home on the Web.
    * <p>
-   * Supports the <code>count</code>, <code>page</code>, <code>since</code>, and <code>sinceId</code> optional parameters.
+   * Supports the <code>count</code>, <code>page</code>, <code>since</code>, and
+   * <code>sinceId</code> optional parameters.
    * </p>
    * <p>
    * Example usage:
@@ -242,7 +248,9 @@ public class Api {
    * <code>List<Status> friendsTimeline = api.friendsTimeline().build().get();</code>
    * </p>
    * 
-   * @return A FriendsTimelineRequest.Builder supporting the <code>count</code>, <code>page</code>, <code>since</code>, and <code>sinceId</code> optional parameters.
+   * @return A FriendsTimelineRequest.Builder supporting the <code>count</code>,
+   *         <code>page</code>, <code>since</code>, and <code>sinceId</code>
+   *         optional parameters.
    */
   public FriendsTimelineRequest.Builder friendsTimeline() {
     FriendsTimelineRequest.Builder builder = FriendsTimelineRequest.builder();
@@ -775,6 +783,67 @@ public class Api {
    */
   public UpdateProfileRequest.Builder updateProfile() {
     UpdateProfileRequest.Builder builder = UpdateProfileRequest.builder();
+    setDefaults(builder);
+    return builder;
+  }
+
+  /**
+   * Returns the 20 most recent favorite statuses for the authenticating user or
+   * user specified by the ID parameter in the requested format.
+   * <p>
+   * Supports the <code>id</code> and <code>page</code> optional parameters.
+   * </p>
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * <code>List<Status> favorites = api.favorites().build().get();</code>
+   * </p>
+   * 
+   * @return A FavoritesRequest.Builder supporting the <code>id</code> and
+   *         <code>page</code> optional parameters.
+   */
+  public FavoritesRequest.Builder favorites() {
+    FavoritesRequest.Builder builder = FavoritesRequest.builder();
+    setDefaults(builder);
+    return builder;
+  }
+
+  /**
+   * Favorites the status specified in the ID parameter as the authenticating
+   * user. Returns the favorite status when successful.
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * <code>Status favorite = api.createFavorite(12345).build().post();</code>
+   * </p>
+   * 
+   * @param id The ID of the status to favorite.
+   * @return A CreateFavoriteRequest.Builder.
+   */
+  public CreateFavoriteRequest.Builder createFavorite(long id) {
+    CreateFavoriteRequest.Builder builder = CreateFavoriteRequest.builder(id);
+    setDefaults(builder);
+    return builder;
+  }
+
+  /**
+   * Un-favorites the status specified in the ID parameter as the authenticating
+   * user. Returns the un-favorited status in the requested format when
+   * successful.
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * <code>Status favorite = api.destroyFavorite(12345).build().post();</code>
+   * </p>
+   * 
+   * @param id The ID of the status to un-favorite
+   * @return A DestroyFavoriteRequest.Builder.
+   */
+  public DestroyFavoriteRequest.Builder destroyFavorite(long id) {
+    DestroyFavoriteRequest.Builder builder = DestroyFavoriteRequest.builder(id);
     setDefaults(builder);
     return builder;
   }
