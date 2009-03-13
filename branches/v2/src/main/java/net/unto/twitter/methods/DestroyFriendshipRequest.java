@@ -23,7 +23,7 @@ public final class DestroyFriendshipRequest extends AbstractRequest {
      */
     Builder(String id) {
       assert(id != null);
-      path(String.format("/friendships/create/%s.json", id));
+      path(String.format("/friendships/destroy/%s.json", id));
       authorizationRequired(true);
     }
 

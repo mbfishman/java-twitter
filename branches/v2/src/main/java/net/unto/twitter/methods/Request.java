@@ -12,4 +12,6 @@ public interface Request {
     Builder scheme(Url.Scheme scheme);
     Request build();
   }
+  
+  Url toUrl();
 }

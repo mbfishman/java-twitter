@@ -106,4 +106,9 @@ abstract class AbstractRequest implements Request {
   public final String toString() {
     return UrlUtil.assemble(url);
   }
+  
+  // For testing
+  public final Url toUrl() {
+    return url;
+  }
 }

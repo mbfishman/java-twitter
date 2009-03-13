@@ -3,6 +3,7 @@ package net.unto.twitter.methods;
 import java.util.List;
 
 import net.unto.twitter.JsonUtil;
+import net.unto.twitter.TwitterUtil;
 import net.unto.twitter.TwitterProtos.Status;
 
 import org.joda.time.DateTime;
@@ -30,9 +31,15 @@ public final class UserTimelineRequest extends AbstractRequest {
       return new UserTimelineRequest(this);
     }
     
+    public Builder id(String id) {
+      assert (id != null);
+      path(String.format("/statuses/user_timeline/%s.json", id));
+      return this;
+    }
+
     public Builder since(DateTime since) {
       assert (since != null);
-      return parameter("since", since.toString());
+      return parameter("since", TwitterUtil.toString(since));
     }
 
     public Builder sinceId(long sinceId) {

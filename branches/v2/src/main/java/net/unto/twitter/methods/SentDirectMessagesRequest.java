@@ -3,6 +3,7 @@ package net.unto.twitter.methods;
 import java.util.List;
 
 import net.unto.twitter.JsonUtil;
+import net.unto.twitter.TwitterUtil;
 import net.unto.twitter.TwitterProtos.DirectMessage;
 
 import org.joda.time.DateTime;
@@ -42,7 +43,7 @@ public final class SentDirectMessagesRequest extends AbstractRequest {
      */
     public Builder since(DateTime since) {
       assert (since != null);
-      return parameter("since", since.toString());
+      return parameter("since", TwitterUtil.toString(since));
     }
 
     /**

@@ -25,8 +25,8 @@ public final class ShowUserRequest extends AbstractRequest {
   public static final class Builder extends AbstractRequest.Builder<Builder> {
 
     Builder() {
-      // One of id, email, userId, or screenName must be set
-      authorizationRequired(false);
+      // One of id, userId, or screenName must be set
+      authorizationRequired(true);
       path(null);
     }
 
@@ -40,26 +40,10 @@ public final class ShowUserRequest extends AbstractRequest {
       assert (id != null);
       if (path != null) {
         throw new IllegalStateException(
-            "Only one of id, email, userId, or screenName may be set.");
+            "Only one of id, userId, or screenName may be set.");
       }
       path(String.format("/users/show/%s.json", id));
       return this;
-    }
-
-    /**
-     * The email address of a user.
-     *
-     * @param email The email address of a user.
-     * @return {@link Builder}
-     */
-    public Builder email(String email) {
-      assert (email != null);
-      if (path != null) {
-        throw new IllegalStateException(
-            "Only one of id, email, userId, or screenName may be set.");
-      }
-      path("/users/show.json");
-      return parameter("email", email);
     }
 
     /**
@@ -71,7 +55,7 @@ public final class ShowUserRequest extends AbstractRequest {
     public Builder userId(long userId) {
       if (path != null) {
         throw new IllegalStateException(
-            "Only one of id, email, userId, or screenName may be set.");
+            "Only one of id, userId, or screenName may be set.");
       }
       path("/users/show.json");
       return parameter("user_id", Long.toString(userId));
@@ -87,7 +71,7 @@ public final class ShowUserRequest extends AbstractRequest {
       assert (screenName != null);
       if (path != null) {
         throw new IllegalStateException(
-            "Only one of id, email, userId, or screenName may be set.");
+            "Only one of id, userId, or screenName may be set.");
       }
       path("/users/show.json");
       return parameter("screen_name", screenName);
@@ -96,9 +80,8 @@ public final class ShowUserRequest extends AbstractRequest {
     public ShowUserRequest build() {
       if (path == null) {
         throw new IllegalStateException(
-            "One of id, email, userId, or screenName must be set.");
+            "One of id, userId, or screenName must be set.");
       }
-      path("/users/show.json");
       return new ShowUserRequest(this);
     }
   }

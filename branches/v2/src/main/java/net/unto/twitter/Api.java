@@ -80,7 +80,7 @@ public class Api {
 
     private String host = DEFAULT_HOST;
 
-    private HttpManager httpManager = DEFAULT_HTTP_MANAGER;
+    private HttpManager httpManager = null;
     private String password = null;
     private int port = DEFAULT_PORT;
     private Url.Scheme scheme = DEFAULT_SCHEME;
@@ -166,7 +166,7 @@ public class Api {
       this.httpManager = TwitterHttpManager.builder()
           .username(builder.username).password(builder.password).build();
     } else {
-      this.httpManager = TwitterHttpManager.builder().build();
+      this.httpManager = DEFAULT_HTTP_MANAGER;
     }
     host = builder.host;
     port = builder.port;

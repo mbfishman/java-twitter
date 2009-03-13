@@ -76,7 +76,7 @@ public final class UpdateProfileRequest extends AbstractRequest {
      * Maximum of 160 characters.
      * 
      * @param description Maximum of 160 characters.
-     * @return
+     * @return Builder
      */
     public Builder description(String description) {
       assert (description != null);

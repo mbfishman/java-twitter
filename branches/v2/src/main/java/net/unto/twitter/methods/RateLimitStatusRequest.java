@@ -2,7 +2,6 @@ package net.unto.twitter.methods;
 
 import net.unto.twitter.JsonUtil;
 import net.unto.twitter.TwitterProtos.RateLimitStatus;
-import net.unto.twitter.TwitterProtos.Trends;
 
 public final class RateLimitStatusRequest extends AbstractRequest {
   

@@ -27,7 +27,6 @@ public final class SearchRequest extends AbstractRequest {
       assert (query != null);
       // From the docs: "Query length is limited to 140 characters"
       assert (query.length() <= 140);
-      host("search.twitter.com");
       path("/search.json");
       parameter("q", query);
       authorizationRequired(false);
@@ -40,7 +39,7 @@ public final class SearchRequest extends AbstractRequest {
      *        code
      * @return Builder
      */
-    public Builder sinceId(String lang) {
+    public Builder lang(String lang) {
       assert (lang != null);
       return parameter("lang", lang);
     }
@@ -48,7 +47,8 @@ public final class SearchRequest extends AbstractRequest {
     /**
      * The number of tweets to return per page, up to a max of 100
      * 
-     * @param resultsPerPage the number of tweets to return per page, up to a max of 100
+     * @param resultsPerPage the number of tweets to return per page, up to a
+     *        max of 100
      * @return Builder
      */
     public Builder resultsPerPage(int resultsPerPage) {
@@ -98,6 +98,10 @@ public final class SearchRequest extends AbstractRequest {
     }
 
     public SearchRequest build() {
+      // Set the host last, so as not to be overwritten by Api.setDefaults.
+      // TODO(dewitt): This will prevent all users from overriding
+      // 'search.twitter.com'
+      host("search.twitter.com");
       return new SearchRequest(this);
     }
   }

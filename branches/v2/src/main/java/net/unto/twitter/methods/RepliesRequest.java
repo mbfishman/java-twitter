@@ -5,6 +5,7 @@ import java.util.List;
 import org.joda.time.DateTime;
 
 import net.unto.twitter.JsonUtil;
+import net.unto.twitter.TwitterUtil;
 import net.unto.twitter.TwitterProtos.Status;
 
 // http://apiwiki.twitter.com/REST+API+Documentation#replies
@@ -32,7 +33,7 @@ public final class RepliesRequest extends AbstractRequest {
 
     public Builder since(DateTime since) {
       assert (since != null);
-      return parameter("since", since.toString());
+      return parameter("since", TwitterUtil.toString(since));
     }
 
     public Builder sinceId(long sinceId) {
