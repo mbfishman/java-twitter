@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 public final class UpdateProfileColorsRequest extends AbstractRequest {
 
   static final Pattern VALID_HEXCOLOR_PATTERN = Pattern
-      .compile("(\\p{XDigit}{3})|(\\\\p{XDigit}{6})");
+      .compile("[\\p{XDigit}]{3}|[\\p{XDigit}]{6}");
 
   public static Builder builder() {
     return new Builder();
@@ -22,7 +22,7 @@ public final class UpdateProfileColorsRequest extends AbstractRequest {
   public static final class Builder extends AbstractRequest.Builder<Builder> {
 
     Builder() {
-      path("/account/update_profile_image.json");
+      path("/account/update_profile_colors.json");
       authorizationRequired(true);
     }
 
