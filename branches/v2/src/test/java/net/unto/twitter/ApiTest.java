@@ -44,64 +44,76 @@ public class ApiTest {
   @Test
   public void testCreateBlockRequestUrl() {
     Api api = Api.builder().username("test").password("test").build();
-    assertEquals("http://twitter.com:80/blocks/create/dewitt.json", api
-        .createBlock("dewitt").build().toString());
+    Request request = api.createBlock("dewitt").build();
+    assertEquals("http://twitter.com:80/blocks/create/dewitt.json", request.toString());
   }
 
   @Test
   public void testCreateFavoriteRequestUrl() {
     Api api = Api.builder().username("test").password("test").build();
-    assertEquals("http://twitter.com:80/favorites/create/12345.json", api
-        .createFavorite(12345).build().toString());
+    Request request = api.createFavorite(12345).build();
+    assertEquals("http://twitter.com:80/favorites/create/12345.json", request.toString());
   }
 
   @Test
   public void testCreateFriendshipRequestUrl() {
     Api api = Api.builder().username("test").password("test").build();
-    assertEquals("http://twitter.com:80/friendships/create/dewitt.json", api
-        .createFriendship("dewitt").build().toString());
+    Request request = api.createFriendship("dewitt").build();
+    assertEquals("http://twitter.com:80/friendships/create/dewitt.json", request.toString());
   }
 
   @Test
   public void testDestroyBlockRequestUrl() {
     Api api = Api.builder().username("test").password("test").build();
-    assertEquals("http://twitter.com:80/blocks/destroy/dewitt.json", api
-        .destroyBlock("dewitt").build().toString());
+    Request request = api.destroyBlock("dewitt").build();
+    assertEquals("http://twitter.com:80/blocks/destroy/dewitt.json", request.toString());
   }
 
   @Test
   public void testDestroyDirectMessageRequestUrl() {
     Api api = Api.builder().username("test").password("test").build();
-    assertEquals("http://twitter.com:80/direct_messages/destroy/12345.json",
-        api.destroyDirectMessage(12345).build().toString());
+    Request request = api.destroyDirectMessage(12345).build();
+    assertEquals("http://twitter.com:80/direct_messages/destroy/12345.json", request.toString());
   }
 
   @Test
   public void testDestroyFavoriteRequestUrl() {
     Api api = Api.builder().username("test").password("test").build();
-    assertEquals("http://twitter.com:80/favorites/destroy/12345.json", api
-        .destroyFavorite(12345).build().toString());
+    Request request = api.destroyFavorite(12345).build();
+    assertEquals("http://twitter.com:80/favorites/destroy/12345.json", request.toString());
   }
 
   @Test
   public void testDestroyFriendshipRequestUrl() {
     Api api = Api.builder().username("test").password("test").build();
-    assertEquals("http://twitter.com:80/friendships/destroy/dewitt.json", api
-        .destroyFriendship("dewitt").build().toString());
+    Request request = api.destroyFriendship("dewitt").build();
+    assertEquals("http://twitter.com:80/friendships/destroy/dewitt.json", request.toString());
   }
 
   @Test
   public void testDestroyStatusRequestUrl() {
     Api api = Api.builder().username("test").password("test").build();
-    assertEquals("http://twitter.com:80/statuses/destroy/12345.json", api
-        .destroyStatus(12345).build().toString());
+    Request request = api.destroyStatus(12345).build();
+    assertEquals("http://twitter.com:80/statuses/destroy/12345.json", request.toString());
+  }
+  
+  @Test
+  public void testDirectMessagesRequestUrl() {
+    Api api = Api.builder().username("test").password("test").build();
+    DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeZone.UTC);
+    Request request = api.directMessages().page(1).sinceId(12345).since(epoch).build();
+    assertEquals("http://twitter.com:80/direct_messages.json", request.toString());
+    assertHasParameter(request.toUrl(), "page", "1");
+    assertHasParameter(request.toUrl(), "since_id", "12345");
+    assertHasParameter(request.toUrl(), "since",
+        "Thu Jan 01 00:00:00 +0000 1970");
   }
 
   @Test
   public void testEndSessionRequestUrl() {
     Api api = Api.builder().username("test").password("test").build();
-    assertEquals("http://twitter.com:80/account/end_session.json", api
-        .endSession().build().toString());
+    Request request = api.endSession().build();
+    assertEquals("http://twitter.com:80/account/end_session.json", request.toString());
   }
 
   @Test
@@ -467,9 +479,5 @@ public class ApiTest {
 
   private HttpManager getMockTwitterHttpManager() {
     return createMock(HttpManager.class);
-  }
-
-  private File getMockFile() {
-    return createMock(File.class);
   }
 }
