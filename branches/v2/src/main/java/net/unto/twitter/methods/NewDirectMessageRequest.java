@@ -25,7 +25,7 @@ public final class NewDirectMessageRequest extends AbstractRequest {
     Builder(String user, String text) {
       assert(user != null);
       assert(text != null);
-      assert(text.length() >= 140);
+      assert(text.length() <= 140);
       path("/direct_messages/new.json");
       parameter("user", user);
       parameter("text", text);
