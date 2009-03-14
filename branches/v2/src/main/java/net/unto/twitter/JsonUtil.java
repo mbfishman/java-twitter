@@ -61,7 +61,7 @@ public abstract class JsonUtil {
   }
 
   private final static User.Profile newUserProfile(JSONObject jsonObject) {
-    if (jsonObject == null) {
+    if (jsonObject == null || jsonObject.isNullObject()) {
       return null;
     }
     User.Profile.Builder builder = User.Profile.newBuilder();
@@ -165,7 +165,7 @@ public abstract class JsonUtil {
   }
 
   private final static Trends newTrends(JSONObject jsonObject) {
-    if (jsonObject == null) {
+    if (jsonObject == null || jsonObject.isNullObject()) {
       return null;
     }
     Trends.Builder builder = Trends.newBuilder();
@@ -194,7 +194,7 @@ public abstract class JsonUtil {
   }
 
   private final static Results newResults(JSONObject jsonObject) {
-    if (jsonObject == null) {
+    if (jsonObject == null || jsonObject.isNullObject()) {
       return null;
     }
     Results.Builder builder = Results.newBuilder();
@@ -214,7 +214,7 @@ public abstract class JsonUtil {
   }
 
   private final static Result newResult(JSONObject jsonObject) {
-    if (jsonObject == null) {
+    if (jsonObject == null || jsonObject.isNullObject()) {
       return null;
     }
     Results.Result.Builder builder = Results.Result.newBuilder();
@@ -238,7 +238,7 @@ public abstract class JsonUtil {
   }
 
   private final static RateLimitStatus newRateLimitStatus(JSONObject jsonObject) {
-    if (jsonObject == null) {
+    if (jsonObject == null || jsonObject.isNullObject()) {
       return null;
     }
     RateLimitStatus.Builder builder = RateLimitStatus.newBuilder();
