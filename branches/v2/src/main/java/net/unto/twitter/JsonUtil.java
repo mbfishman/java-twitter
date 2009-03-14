@@ -14,10 +14,7 @@ import net.unto.twitter.TwitterProtos.Status;
 import net.unto.twitter.TwitterProtos.DirectMessage;
 import net.unto.twitter.TwitterProtos.Trends.Trend;
 
-public class JsonUtil {
-  
-  private JsonUtil() {
-  }
+public abstract class JsonUtil {
   
   private final static User newUser(JSONObject jsonObject) {
     if (jsonObject == null) {

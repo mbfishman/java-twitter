@@ -4,9 +4,7 @@ import net.unto.twitter.UtilProtos.Url;
 import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.URIException;
 
-public class UrlUtil {
-
-  private UrlUtil() {}
+public abstract class UrlUtil {
   
   public static String assemble(Url url)  {
     String scheme = url.getScheme() == Url.Scheme.HTTP ? "http" : "https";
