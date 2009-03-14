@@ -15,63 +15,31 @@ import net.unto.twitter.TwitterProtos.DirectMessage;
 import net.unto.twitter.TwitterProtos.Trends.Trend;
 
 public abstract class JsonUtil {
-  
+
   private final static User newUser(JSONObject jsonObject) {
-    if (jsonObject == null) {
+    if (jsonObject == null || jsonObject.isNullObject()) {
       return null;
     }
     User.Builder builder = User.newBuilder();
-    if (jsonObject.has("id")) {
-      builder.setId(jsonObject.getLong("id"));
-    }
-    if (jsonObject.has("name")) {
-      builder.setName(jsonObject.getString("name"));
-    }
-    if (jsonObject.has("screen_name")) {
-      builder.setScreenName(jsonObject.getString("screen_name"));
-    }
-    if (jsonObject.has("location")) {
-      builder.setLocation(jsonObject.getString("location"));
-    }
-    if (jsonObject.has("description")) {
-      builder.setDescription(jsonObject.getString("description"));
-    }
+    builder.setId(jsonObject.optLong("id"));
+    builder.setName(jsonObject.optString("name"));
+    builder.setScreenName(jsonObject.optString("screen_name"));
+    builder.setLocation(jsonObject.optString("location"));
+    builder.setDescription(jsonObject.optString("description"));
     builder.setProfile(newUserProfile(jsonObject));
-    if (jsonObject.has("url")) {
-      builder.setUrl(jsonObject.getString("url"));
-    }
-    if (jsonObject.has("protected")) {
-      builder.setProtected(jsonObject.getBoolean("protected"));
-    }
-    if (jsonObject.has("followers_count")) {
-      builder.setFollowersCount(jsonObject.getInt("followers_count"));
-    }
-    if (jsonObject.has("friends_count")) {
-      builder.setFriendsCount(jsonObject.getInt("friends_count"));
-    }
-    if (jsonObject.has("created_at")) {
-      builder.setCreatedAt(jsonObject.getString("created_at"));
-    }
-    if (jsonObject.has("favorites_count")) {
-      builder.setFavoritesCount(jsonObject.getInt("favorites_count"));
-    }
-    if (jsonObject.has("utc_offset")) {
-      builder.setUtcOffset(jsonObject.getInt("utc_offset"));
-    }
-    if (jsonObject.has("time_zone")) {
-      builder.setTimeZone(jsonObject.getString("time_zone"));
-    }
-    if (jsonObject.has("following")) {
-      builder.setFollowing(jsonObject.getBoolean("following"));
-    }
-    if (jsonObject.has("notifications")) {
-      builder.setNotifications(jsonObject.getBoolean("notifications"));
-    }
-    if (jsonObject.has("statuses_count")) {
-      builder.setStatusesCount(jsonObject.getInt("statuses_count"));
-    }
+    builder.setUrl(jsonObject.optString("url"));
+    builder.setProtected(jsonObject.optBoolean("protected"));
+    builder.setFollowersCount(jsonObject.optInt("followers_count"));
+    builder.setFriendsCount(jsonObject.optInt("friends_count"));
+    builder.setCreatedAt(jsonObject.optString("created_at"));
+    builder.setFavoritesCount(jsonObject.optInt("favorites_count"));
+    builder.setUtcOffset(jsonObject.optInt("utc_offset"));
+    builder.setTimeZone(jsonObject.optString("time_zone"));
+    builder.setFollowing(jsonObject.optBoolean("following"));
+    builder.setNotifications(jsonObject.optBoolean("notifications"));
+    builder.setStatusesCount(jsonObject.optInt("statuses_count"));
     if (jsonObject.has("status")) {
-      builder.setStatus(newStatus(jsonObject.getJSONObject("status")));
+      builder.setStatus(newStatus(jsonObject.optJSONObject("status")));
     }
     return builder.build();
   }
@@ -97,67 +65,41 @@ public abstract class JsonUtil {
       return null;
     }
     User.Profile.Builder builder = User.Profile.newBuilder();
-    if (jsonObject.has("profile_image_url")) {
-      builder.setImageUrl(jsonObject.getString("profile_image_url"));
-    }
-    if (jsonObject.has("profile_background_color")) {
-      builder.setBackgroundColor(jsonObject.getString("profile_background_color"));
-    }
-    if (jsonObject.has("profile_text_color")) {
-      builder.setTextColor(jsonObject.getString("profile_text_color"));
-    }
-    if (jsonObject.has("profile_link_color")) {
-      builder.setLinkColor(jsonObject.getString("profile_link_color"));
-    }
-    if (jsonObject.has("profile_sidebar_fill_color")) {
-      builder.setSidebarFillColor(jsonObject.getString("profile_sidebar_fill_color"));
-    }
-    if (jsonObject.has("profile_sidebar_border_color")) {
-      builder.setSidebarBorderColor(jsonObject.getString("profile_sidebar_border_color"));
-    }
+    builder.setImageUrl(jsonObject.optString("profile_image_url"));
+    builder
+        .setBackgroundColor(jsonObject.optString("profile_background_color"));
+    builder.setTextColor(jsonObject.optString("profile_text_color"));
+    builder.setLinkColor(jsonObject.optString("profile_link_color"));
+    builder.setSidebarFillColor(jsonObject
+        .optString("profile_sidebar_fill_color"));
+    builder.setSidebarBorderColor(jsonObject
+        .optString("profile_sidebar_border_color"));
     return builder.build();
   }
-  
+
   public final static Status newStatus(String jsonString) {
     return newStatus(JSONObject.fromObject(jsonString));
   }
-  
+
   private final static Status newStatus(JSONObject jsonObject) {
-    if (jsonObject == null) {
+    if (jsonObject == null || jsonObject.isNullObject()) {
       return null;
     }
     Status.Builder builder = Status.newBuilder();
-    
-    if (jsonObject.has("created_at")) {
-      builder.setCreatedAt(jsonObject.getString("created_at"));
-    }
-    if (jsonObject.has("id")) {
-      builder.setId(jsonObject.getLong("id"));
-    }
-    if (jsonObject.has("text")) {
-      builder.setText(jsonObject.getString("text"));
-    }
-    if (jsonObject.has("source")) {
-      builder.setSource(jsonObject.getString("source"));
-    }
-    if (jsonObject.has("truncated")) {
-      builder.setTruncated(jsonObject.getBoolean("truncated"));
-    }
-    if (jsonObject.has("in_reply_to_status_id")) {
-      builder.setInReplyToStatusId(jsonObject.getLong("in_reply_to_status_id"));
-    }
-    if (jsonObject.has("in_reply_to_user_id")) {
-      builder.setInReplyToUserId(jsonObject.getLong("in_reply_to_user_id"));
-    }
+    builder.setCreatedAt(jsonObject.optString("created_at"));
+    builder.setId(jsonObject.optLong("id"));
+    builder.setText(jsonObject.optString("text"));
+    builder.setSource(jsonObject.optString("source"));
+    builder.setTruncated(jsonObject.optBoolean("truncated"));
+    builder.setInReplyToStatusId(jsonObject.optLong("in_reply_to_status_id"));
+    builder.setInReplyToUserId(jsonObject.optLong("in_reply_to_user_id"));
+    builder.setFavorited(jsonObject.optBoolean("favorited"));
     if (jsonObject.has("user")) {
-      builder.setUser(newUser(jsonObject.getJSONObject("user")));
-    }
-    if (jsonObject.has("favorited")) {
-      builder.setFavorited(jsonObject.getBoolean("favorited"));
+      builder.setUser(newUser(jsonObject.optJSONObject("user")));
     }
     return builder.build();
   }
-  
+
   public final static List<Status> newStatusList(String jsonString) {
     return newStatusList(JSONArray.fromObject(jsonString));
   }
@@ -169,63 +111,47 @@ public abstract class JsonUtil {
     }
     return statuses;
   }
-  
+
   private final static DirectMessage newDirectMessage(JSONObject jsonObject) {
-    if (jsonObject == null) {
+    if (jsonObject == null || jsonObject.isNullObject()) {
       return null;
     }
     DirectMessage.Builder builder = DirectMessage.newBuilder();
-    
-    if (jsonObject.has("id")) {
-      builder.setId(jsonObject.getLong("id"));
-    }
-    if (jsonObject.has("text")) {
-      builder.setText(jsonObject.getString("text"));
-    }
-    if (jsonObject.has("sender_id")) {
-      builder.setSenderId(jsonObject.getLong("sender_id"));
-    }
-    if (jsonObject.has("recipient_id")) {
-      builder.setRecipientId(jsonObject.getLong("recipient_id"));
-    }
-    if (jsonObject.has("created_at")) {
-      builder.setCreatedAt(jsonObject.getString("created_at"));
-    }
-    if (jsonObject.has("sender_screen_name")) {
-      builder.setSenderScreenName(jsonObject.getString("sender_screen_name"));
-    }
-    if (jsonObject.has("recipient_screen_name")) {
-      builder.setRecipientScreenName(jsonObject.getString("recipient_screen_name"));
-    }
-    if (jsonObject.has("sender")) {
-      builder.setSender(newUser(jsonObject.getJSONObject("sender")));
-    }
-    if (jsonObject.has("recipient")) {
-      builder.setRecipient(newUser(jsonObject.getJSONObject("recipient")));
-    }
+    builder.setId(jsonObject.optLong("id"));
+    builder.setText(jsonObject.optString("text"));
+    builder.setSenderId(jsonObject.optLong("sender_id"));
+    builder.setRecipientId(jsonObject.optLong("recipient_id"));
+    builder.setCreatedAt(jsonObject.optString("created_at"));
+    builder.setSenderScreenName(jsonObject.optString("sender_screen_name"));
+    builder.setRecipientScreenName(jsonObject
+        .optString("recipient_screen_name"));
+    builder.setSender(newUser(jsonObject.optJSONObject("sender")));
+    builder.setRecipient(newUser(jsonObject.optJSONObject("recipient")));
     return builder.build();
   }
-  
+
   public final static List<DirectMessage> newDirectMessageList(String jsonString) {
     return newDirectMessageList(JSONArray.fromObject(jsonString));
   }
 
-  private final static List<DirectMessage> newDirectMessageList(JSONArray jsonArray) {
-    List<DirectMessage> directMessages = new ArrayList<DirectMessage>(jsonArray.size());
+  private final static List<DirectMessage> newDirectMessageList(
+      JSONArray jsonArray) {
+    List<DirectMessage> directMessages = new ArrayList<DirectMessage>(jsonArray
+        .size());
     for (int i = 0; i < jsonArray.size(); i++) {
       directMessages.add(newDirectMessage(jsonArray.getJSONObject(i)));
     }
     return directMessages;
   }
 
-  public final static DirectMessage newDirectMessage(String jsonString)  {
+  public final static DirectMessage newDirectMessage(String jsonString) {
     return newDirectMessage(JSONObject.fromObject(jsonString));
   }
-  
+
   public final static long[] newLongArray(String jsonString) {
     return newLongArray(JSONArray.fromObject(jsonString));
   }
-  
+
   private final static long[] newLongArray(JSONArray jsonArray) {
     long[] longs = new long[jsonArray.size()];
     for (int i = 0; i < jsonArray.size(); i++) {
@@ -233,19 +159,17 @@ public abstract class JsonUtil {
     }
     return longs;
   }
-  
+
   public final static Trends newTrends(String jsonString) {
     return newTrends(JSONObject.fromObject(jsonString));
   }
-  
+
   private final static Trends newTrends(JSONObject jsonObject) {
     if (jsonObject == null) {
       return null;
     }
     Trends.Builder builder = Trends.newBuilder();
-    if (jsonObject.has("as_of")) {
-      builder.setAsOf(jsonObject.getString("as_of"));
-    }
+    builder.setAsOf(jsonObject.optString("as_of"));
     if (jsonObject.has("trends")) {
       JSONArray trendsJsonArray = jsonObject.getJSONArray("trends");
       for (int i = 0; i < trendsJsonArray.size(); i++) {
@@ -260,42 +184,26 @@ public abstract class JsonUtil {
       return null;
     }
     Trends.Trend.Builder builder = Trends.Trend.newBuilder();
-    if (jsonObject.has("name")) {
-      builder.setName(jsonObject.getString("name"));
-    }
-    if (jsonObject.has("url")) {
-      builder.setUrl(jsonObject.getString("url"));
-    }
+    builder.setName(jsonObject.optString("name"));
+    builder.setUrl(jsonObject.optString("url"));
     return builder.build();
   }
 
   public final static Results newResults(String jsonString) {
     return newResults(JSONObject.fromObject(jsonString));
   }
-  
+
   private final static Results newResults(JSONObject jsonObject) {
     if (jsonObject == null) {
       return null;
     }
     Results.Builder builder = Results.newBuilder();
-    if (jsonObject.has("completed_in")) {
-      builder.setCompletedIn(jsonObject.getDouble("completed_in"));
-    }
-    if (jsonObject.has("max_id")) {
-      builder.setMaxId(jsonObject.getLong("max_id"));
-    }
-    if (jsonObject.has("next_page")) {
-      builder.setNextPage(jsonObject.getString("next_page"));
-    }
-    if (jsonObject.has("page")) {
-      builder.setPage(jsonObject.getInt("page"));
-    }
-    if (jsonObject.has("query")) {
-      builder.setQuery(jsonObject.getString("query"));
-    }
-    if (jsonObject.has("refresh_url")) {
-      builder.setRefreshUrl(jsonObject.getString("refresh_url"));
-    }
+    builder.setCompletedIn(jsonObject.optDouble("completed_in"));
+    builder.setMaxId(jsonObject.optLong("max_id"));
+    builder.setNextPage(jsonObject.optString("next_page"));
+    builder.setPage(jsonObject.optInt("page"));
+    builder.setQuery(jsonObject.optString("query"));
+    builder.setRefreshUrl(jsonObject.optString("refresh_url"));
     if (jsonObject.has("results")) {
       JSONArray resultsJsonArray = jsonObject.getJSONArray("results");
       for (int i = 0; i < resultsJsonArray.size(); i++) {
@@ -310,66 +218,34 @@ public abstract class JsonUtil {
       return null;
     }
     Results.Result.Builder builder = Results.Result.newBuilder();
-    if (jsonObject.has("created_at")) {
-      builder.setCreatedAt(jsonObject.getString("created_at"));
-    }
-    if (jsonObject.has("from_user_id")) {
-      builder.setFromUserId(jsonObject.getLong("from_user_id"));
-    }
-    if (jsonObject.has("from_user")) {
-      builder.setFromUser(jsonObject.getString("from_user"));
-    }
-    if (jsonObject.has("id")) {
-      builder.setId(jsonObject.getLong("id"));
-    }
-    if (jsonObject.has("iso_language_code")) {
-      builder.setIsoLanguageCode(jsonObject.getString("iso_language_code"));
-    }
-    if (jsonObject.has("profile_image_url")) {
-      builder.setProfileImageUrl(jsonObject.getString("profile_image_url"));
-    }
-    if (jsonObject.has("source")) {
-      builder.setSource(jsonObject.getString("source"));
-    }
-    if (jsonObject.has("text")) {
-      builder.setText(jsonObject.getString("text"));
-    }
-    if (jsonObject.has("to_user_id")) {
-      builder.setToUserId(jsonObject.getLong("to_user_id"));
-    }
-    if (jsonObject.has("to_user")) {
-      builder.setToUser(jsonObject.getString("to_user"));
-    }
-    if (jsonObject.has("results_per_page")) {
-      builder.setResultsPerPage(jsonObject.getInt("results_per_page"));
-    }
-    if (jsonObject.has("since_id")) {
-      builder.setSinceId(jsonObject.getLong("since_id"));
-    }
+    builder.setCreatedAt(jsonObject.optString("created_at"));
+    builder.setFromUserId(jsonObject.optLong("from_user_id"));
+    builder.setFromUser(jsonObject.optString("from_user"));
+    builder.setId(jsonObject.optLong("id"));
+    builder.setIsoLanguageCode(jsonObject.optString("iso_language_code"));
+    builder.setProfileImageUrl(jsonObject.optString("profile_image_url"));
+    builder.setSource(jsonObject.optString("source"));
+    builder.setText(jsonObject.optString("text"));
+    builder.setToUserId(jsonObject.optLong("to_user_id"));
+    builder.setToUser(jsonObject.optString("to_user"));
+    builder.setResultsPerPage(jsonObject.optInt("results_per_page"));
+    builder.setSinceId(jsonObject.optLong("since_id"));
     return builder.build();
   }
 
   public static RateLimitStatus newRateLimitStatus(String jsonString) {
     return newRateLimitStatus(JSONObject.fromObject(jsonString));
   }
-  
+
   private final static RateLimitStatus newRateLimitStatus(JSONObject jsonObject) {
     if (jsonObject == null) {
       return null;
     }
     RateLimitStatus.Builder builder = RateLimitStatus.newBuilder();
-    if (jsonObject.has("hourly_limit")) {
-      builder.setHourlyLimit(jsonObject.getInt("hourly_limit"));
-    }
-    if (jsonObject.has("reset_time")) {
-      builder.setResetTime(jsonObject.getString("reset_time"));
-    }
-    if (jsonObject.has("reset_time_in_seconds")) {
-      builder.setResetTimeInSeconds(jsonObject.getLong("reset_time_in_seconds"));
-    }
-    if (jsonObject.has("remaining_hits")) {
-      builder.setRemainingHits(jsonObject.getLong("remaining_hits"));
-    }
+    builder.setHourlyLimit(jsonObject.optInt("hourly_limit"));
+    builder.setResetTime(jsonObject.optString("reset_time"));
+    builder.setResetTimeInSeconds(jsonObject.optLong("reset_time_in_seconds"));
+    builder.setRemainingHits(jsonObject.optLong("remaining_hits"));
     return builder.build();
   }
 }
