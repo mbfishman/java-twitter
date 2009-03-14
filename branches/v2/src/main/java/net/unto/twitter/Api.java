@@ -71,8 +71,6 @@ import net.unto.twitter.methods.VerifyCredentialsRequest;
  *     .build().post();
  * System.out.println(status.getText());
  * </pre>
- * 
- * @author DeWitt Clinton <dewitt@unto.net>
  */
 public class Api {
 
@@ -83,13 +81,13 @@ public class Api {
   public static final Url.Scheme DEFAULT_SCHEME = Url.Scheme.HTTP;
 
   // Depending on the JVM, this static initializer must be ordered after the
-  // definition of the other static defaults it in turn depends on. Do not 
+  // definition of the other static defaults it in turn depends on. Do not
   // reorder in the source.
   public static final HttpManager DEFAULT_HTTP_MANAGER = TwitterHttpManager
-  .builder().build();
-  
+      .builder().build();
+
   // Depending on the JVM, this static initializer must be ordered after the
-  // definition of the other static defaults it in turn depends on. Do not 
+  // definition of the other static defaults it in turn depends on. Do not
   // reorder in the source.
   public static final Api DEFAULT_API = Api.builder().build();
 
@@ -295,15 +293,15 @@ public class Api {
   }
 
   /**
-   * Returns the 20 most recent @replies (status updates prefixed with
+   * Returns the 20 most recent &#64;replies (status updates prefixed with
+   * &#64;username) for the authenticating user.
    * 
-   * @username) for the authenticating user.
-   *            <p>
-   *            Example usage:
-   *            </p>
-   *            <p>
-   *            <code>List<Status> replies = api.replies().build().get();</code>
-   *            </p>
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * <code>List<Status> replies = api.replies().build().get();</code>
+   * </p>
    * 
    * @return {@link RepliesRequest.Builder}
    */
