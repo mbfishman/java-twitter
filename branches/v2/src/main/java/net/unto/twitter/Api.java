@@ -76,17 +76,36 @@ import net.unto.twitter.methods.VerifyCredentialsRequest;
  */
 public class Api {
 
+  public static final String DEFAULT_HOST = "twitter.com";
+
+  public static final int DEFAULT_PORT = 80;
+
+  public static final Url.Scheme DEFAULT_SCHEME = Url.Scheme.HTTP;
+
+  // Depending on the JVM, this static initializer must be ordered after the
+  // definition of the other static defaults it in turn depends on. Do not 
+  // reorder in the source.
+  public static final HttpManager DEFAULT_HTTP_MANAGER = TwitterHttpManager
+  .builder().build();
+  
+  // Depending on the JVM, this static initializer must be ordered after the
+  // definition of the other static defaults it in turn depends on. Do not 
+  // reorder in the source.
+  public static final Api DEFAULT_API = Api.builder().build();
+
   public static class Builder {
 
-    private String host = DEFAULT_HOST;
-
-    private HttpManager httpManager = null;
-    private String password = null;
-    private int port = DEFAULT_PORT;
-    private Url.Scheme scheme = DEFAULT_SCHEME;
-    private String username = null;
+    String host = DEFAULT_HOST;
+    HttpManager httpManager = null;
+    String password = null;
+    int port = DEFAULT_PORT;
+    Url.Scheme scheme = DEFAULT_SCHEME;
+    String username = null;
 
     public Api build() {
+      assert (host != null);
+      assert (port > 0);
+      assert (scheme != null);
       if ((username != null) && (password == null)) {
         throw new IllegalStateException(
             "Password must be set if username is set.");
@@ -118,11 +137,13 @@ public class Api {
     }
 
     public Builder port(int port) {
+      assert port > 0;
       this.port = port;
       return this;
     }
 
     public Builder scheme(Url.Scheme scheme) {
+      assert (scheme != null);
       this.scheme = scheme;
       return this;
     }
@@ -132,17 +153,6 @@ public class Api {
       return this;
     }
   }
-
-  public static final Api DEFAULT_API = Api.builder().build();
-
-  public static final String DEFAULT_HOST = "twitter.com";
-
-  public static final HttpManager DEFAULT_HTTP_MANAGER = TwitterHttpManager
-      .builder().build();
-
-  public static final int DEFAULT_PORT = 80;
-
-  public static final Url.Scheme DEFAULT_SCHEME = Url.Scheme.HTTP;
 
   public static Builder builder() {
     return new Builder();
@@ -852,9 +862,10 @@ public class Api {
     setDefaults(builder);
     return builder;
   }
-  
+
   /**
-   * Enables notifications for updates from the specified user to the authenticating user.  Returns the specified user when successful.
+   * Enables notifications for updates from the specified user to the
+   * authenticating user. Returns the specified user when successful.
    * <p>
    * Example usage:
    * </p>
@@ -870,9 +881,10 @@ public class Api {
     setDefaults(builder);
     return builder;
   }
-  
+
   /**
-   * Disables notifications for updates from the specified user to the authenticating user.  Returns the specified user when successful.
+   * Disables notifications for updates from the specified user to the
+   * authenticating user. Returns the specified user when successful.
    * <p>
    * Example usage:
    * </p>
@@ -888,9 +900,10 @@ public class Api {
     setDefaults(builder);
     return builder;
   }
-  
+
   /**
-   * Blocks the user specified in the ID parameter as the authenticating user.  Returns the blocked user in the requested format when successful.
+   * Blocks the user specified in the ID parameter as the authenticating user.
+   * Returns the blocked user in the requested format when successful.
    * <p>
    * Example usage:
    * </p>
@@ -906,9 +919,10 @@ public class Api {
     setDefaults(builder);
     return builder;
   }
-  
+
   /**
-   * Un-blocks the user specified in the ID parameter as the authenticating user.  Returns the un-blocked user in the requested format when successful.  
+   * Un-blocks the user specified in the ID parameter as the authenticating
+   * user. Returns the un-blocked user in the requested format when successful.
    * <p>
    * Example usage:
    * </p>
@@ -924,9 +938,10 @@ public class Api {
     setDefaults(builder);
     return builder;
   }
-  
+
   /**
-   * Returns the string "ok" in the requested format with a 200 OK HTTP status code.
+   * Returns the string "ok" in the requested format with a 200 OK HTTP status
+   * code.
    * <p>
    * Example usage:
    * </p>
