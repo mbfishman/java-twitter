@@ -75,6 +75,12 @@ public class DirectMessage implements Serializable {
     return senderScreenName;
   }
 
+  /**
+   * Set the screen name of the sender of this direct message.
+   * 
+   * @param senderScreenName the screen name of the sender of this direct
+   *        message.
+   */
   protected void setSenderScreenName(String senderScreenName) {
     this.senderScreenName = senderScreenName;
   }
@@ -113,9 +119,11 @@ public class DirectMessage implements Serializable {
   }
 
   /**
-   * Return the {@link User} instance representing the sender of this direct message.
+   * Return the {@link User} instance representing the sender of this direct
+   * message.
    * 
-   * @return the {@link User} instance representing the sender of this direct message.
+   * @return the {@link User} instance representing the sender of this direct
+   *         message.
    */
   public User getSender() {
     return sender;
@@ -126,18 +134,22 @@ public class DirectMessage implements Serializable {
   }
 
   /**
-   * Return true if the {@link User} instance representing the sender of this direct message has been set.
-   *  
-   * @return true if the {@link User} instance representing the sender of this direct message has been set.
+   * Return true if the {@link User} instance representing the sender of this
+   * direct message has been set.
+   * 
+   * @return true if the {@link User} instance representing the sender of this
+   *         direct message has been set.
    */
   public boolean hasSender() {
     return sender != null;
   }
 
   /**
-   * Return the {@link DateTime} instance representing the time at which this direct message was sent.
+   * Return the {@link DateTime} instance representing the time at which this
+   * direct message was sent.
    * 
-   * @return the {@link DateTime} instance representing the time at which this direct message was sent.
+   * @return the {@link DateTime} instance representing the time at which this
+   *         direct message was sent.
    */
   public DateTime getCreatedAt() {
     return createdAt;
