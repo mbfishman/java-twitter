@@ -1,6 +1,9 @@
 package net.unto.twitter;
 
 import net.unto.twitter.TwitterProtos.Device;
+import net.unto.twitter.TwitterProtos.DirectMessage;
+import net.unto.twitter.TwitterProtos.Status;
+import net.unto.twitter.TwitterProtos.User;
 import net.unto.twitter.UtilProtos.Url;
 import net.unto.twitter.UtilProtos.Url.Scheme;
 import net.unto.twitter.methods.CreateBlockRequest;
@@ -188,7 +191,7 @@ public class Api {
    * Example usage:
    * </p>
    * <p>
-   * <code>Status status = api.destroyStatus(12345).build().post();</code>
+   * <code>{@link Status} status = api.destroyStatus(12345).build().post();</code>
    * </p>
    * 
    * @param id The ID of the status to destroy.
@@ -211,7 +214,7 @@ public class Api {
    * Example usage:
    * </p>
    * <p>
-   * <code>List<User> followers = api.followers().build().get();</code>
+   * <code>List&lt;{@link User}&gt; followers = api.followers().build().get();</code>
    * </p>
    * 
    * @return A FollowersRequest.Builder supporting the <code>id</code> and
@@ -235,7 +238,7 @@ public class Api {
    * Example usage:
    * </p>
    * <p>
-   * <code>List<User> friends = api.friends().build().get();</code>
+   * <code>List&lt;{@link User}&gt; friends = api.friends().build().get();</code>
    * </p>
    * 
    * @return A FriendsRequest.Builder supporting the <code>id</code> and
@@ -258,7 +261,7 @@ public class Api {
    * Example usage:
    * </p>
    * <p>
-   * <code>List<Status> friendsTimeline = api.friendsTimeline().build().get();</code>
+   * <code>List&lt;{@link Status}&gt; friendsTimeline = api.friendsTimeline().build().get();</code>
    * </p>
    * 
    * @return A FriendsTimelineRequest.Builder supporting the <code>count</code>,
@@ -281,10 +284,11 @@ public class Api {
    * Example usage:
    * </p>
    * <p>
-   * <code>List<Status> publicTimeline = api.publicTimeline().build().get();</code>
+   * <code>List&lt;{@link Status}&gt; publicTimeline = api.publicTimeline().build().get();</code>
    * </p>
    * 
-   * @return {@link PublicTimelineRequest.Builder}
+   * @return A PublicTimelineRequest.Builder supporting the
+   *         <code>page</page> optional parameter.
    */
   public PublicTimelineRequest.Builder publicTimeline() {
     PublicTimelineRequest.Builder builder = PublicTimelineRequest.builder();
@@ -300,10 +304,11 @@ public class Api {
    * Example usage:
    * </p>
    * <p>
-   * <code>List<Status> replies = api.replies().build().get();</code>
+   * <code>List&lt;{@link Status}&gt; replies = api.replies().build().get();</code>
    * </p>
    * 
-   * @return {@link RepliesRequest.Builder}
+   * @return A RepliesRequest.Builder supporting the <code>page</code>,
+   *         <code>since</code>, and <code>sinceId</code> optional parameters.
    */
   public RepliesRequest.Builder replies() {
     RepliesRequest.Builder builder = RepliesRequest.builder();
@@ -325,11 +330,11 @@ public class Api {
    * Example usage:
    * </p>
    * <p>
-   * <code>Status status = api.showStatus().build().get();</code>
+   * <code>{@link Status} status = api.showStatus(12345).build().get();</code>
    * </p>
    * 
    * @param id The numerical ID of the status you're trying to retrieve.
-   * @return {@link RepliesRequest.Builder}
+   * @return A ShowStatusRequest.Builder.
    */
   public ShowStatusRequest.Builder showStatus(long id) {
     ShowStatusRequest.Builder builder = ShowStatusRequest.builder(id);
@@ -345,12 +350,13 @@ public class Api {
    * Example usage:
    * </p>
    * <p>
-   * <code>Status status = api.updateStatus("Hello Twitter").build().post();</code>
+   * <code>{@link Status} status = api.updateStatus("Hello Twitter").build().post();</code>
    * </p>
    * 
    * @param status The text of your status update. Should not be more than 140
    *        characters.
-   * @return {@link UpdateStatusRequest.Builder}
+   * @return A UpdateStatusRequest.Builder supporting the
+   *         <code>inReplyToStatusId</code> optional parameter.
    */
   public UpdateStatusRequest.Builder updateStatus(String status) {
     UpdateStatusRequest.Builder builder = UpdateStatusRequest.builder(status);
@@ -367,10 +373,12 @@ public class Api {
    * Example usage:
    * </p>
    * <p>
-   * <code>List<Status> userTimeline = api.userTimeline().build().get();</code>
+   * <code>List&lt;{@link Status}&gt; userTimeline = api.userTimeline().build().get();</code>
    * </p>
    * 
-   * @return {@link UserTimelineRequest.Builder}
+   * @return A UserTimelineRequest.Builder supporting the <code>id</code>,
+   *         <code>count</code>, <code>page</code>, <code>since</code>, and
+   *         <code>sinceId</code> optional parameters.
    */
   public UserTimelineRequest.Builder userTimeline() {
     UserTimelineRequest.Builder builder = UserTimelineRequest.builder();
@@ -388,10 +396,12 @@ public class Api {
    * Example usage:
    * </p>
    * <p>
-   * <code>User user = api.showUser().id("dewitt").build().get();</code>
+   * <code>{@link User} user = api.showUser().id("dewitt").build().get();</code>
    * </p>
    * 
-   * @return {@link ShowUserRequest.Builder}
+   * @return A ShowUserRequest.Builder supporting the <code>id</code>,
+   *         <code>screenName</code>, and <code>userId</code> parameters,
+   *         exactly one of which must be specified.
    */
   public ShowUserRequest.Builder showUser() {
     ShowUserRequest.Builder builder = ShowUserRequest.builder();
@@ -444,12 +454,13 @@ public class Api {
    * Example usage:
    * </p>
    * <p>
-   * <code>DirectMessage directMessage = api.newDirectMessage("dewitt", "Hello DeWitt").build().post();</code>
+   * <code>{@link DirectMessage} directMessage = api.newDirectMessage("dewitt", "Hello DeWitt").build().post();</code>
    * </p>
    * 
+   * @param user The ID or screen name of the recipient user.
    * @param status The text of your status update. Should not be more than 140
    *        characters.
-   * @return {@link NewDirectMessageRequest.Builder}
+   * @return A NewDirectMessageRequest.Builder.
    */
   public NewDirectMessageRequest.Builder newDirectMessage(String user,
       String status) {
