@@ -4,8 +4,6 @@ import net.unto.twitter.UtilProtos.Url;
 
 /**
  * A simple HTTP connection interface.
- * 
- * @author DeWitt Clinton <dewitt@unto.net>
  */
 public interface HttpManager
 {

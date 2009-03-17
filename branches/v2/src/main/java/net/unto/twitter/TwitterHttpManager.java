@@ -23,8 +23,6 @@ import org.apache.commons.httpclient.methods.PostMethod;
 /**
  * An implementation of the TwitterHttpManager interface using the Apache
  * Commons HttpClient library.
- * 
- * @author DeWitt Clinton <dewitt@unto.net>
  */
 public class TwitterHttpManager implements HttpManager {
  

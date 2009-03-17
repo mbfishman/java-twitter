@@ -15,8 +15,6 @@ import org.junit.Test;
 
 /**
  * Unit tests for the Api class.
- * 
- * @author DeWitt Clinton <dewitt@unto.net>
  */
 public class ApiTest {
 
