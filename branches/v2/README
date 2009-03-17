@@ -28,6 +28,7 @@ The java-twitter library requires that the following runtime dependencies are in
   * [http://joda-time.sourceforge.net/ Joda Time]
   * [http://json-lib.sourceforge.net/ Json-lib]
   * [http://code.google.com/p/protobuf/ Protocol Buffers]
+  * [http://code.google.com/p/google-collections/ Google Collections]
 
 ===Examples===
 
@@ -35,10 +36,10 @@ Connect to Twitter and print out the latest public messages:
 
 {{{
   import net.unto.twitter.Api;
-  import net.unto.twitter.Status;
+  import net.unto.twitter.TwitterProtos.Status;
    
   Api api = Api.builder().build();
-  for (Status status : api.PublicTimeline().get()) {
+  for (Status status : api.publicTimeline().build().get()) {
     System.out.println(String.format("%s wrote '%s'", status.getUser().getName(), status.getText()));
   }
 }}}
@@ -49,7 +50,7 @@ Send a Twitter message:
   import net.unto.twitter.Api;
   
   Api api = Api.builder().username("username").password("password").build();
-  api.UpdateStatus("This is a test message.").post();
+  api.updateStatus("This is a test message.").build.().post();
 }}}
 
 
@@ -75,7 +76,7 @@ Run the following:
 
 The JAR file will be generated as:
 
-  target/twitter-0.0.1.jar
+  target/twitter-0.9.jar
 
 ==Protocol Buffers==
 
@@ -114,7 +115,7 @@ Please visit http://groups.google.com/group/java-twitter for more discussion.
 ==License==
 
 {{{
-  Copyright 2007 DeWitt Clinton All Rights Reserved.
+  Copyright 2009 DeWitt Clinton All Rights Reserved.
   
   Licensed under the Apache License, Version 2.0 (the 'License');
   you may not use this file except in compliance with the License.
