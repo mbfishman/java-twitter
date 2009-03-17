@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.unto.twitter</groupId>
   <artifactId>twitter</artifactId>
-  <version>0.0.1</version>
+  <version>0.9-devel</version>
   <description>A Java wrapper around the Twitter API.</description>
   <repositories>
     <repository>
