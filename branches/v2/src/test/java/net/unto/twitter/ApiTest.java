@@ -6,6 +6,7 @@ import net.unto.twitter.TwitterProtos.Device;
 import net.unto.twitter.TwitterProtos.Geocode;
 import net.unto.twitter.UtilProtos.Url;
 import net.unto.twitter.UtilProtos.Url.Parameter;
+import net.unto.twitter.UtilProtos.Url.Scheme;
 import net.unto.twitter.methods.Request;
 
 import org.joda.time.DateTime;
@@ -401,6 +402,29 @@ public class ApiTest {
         request.toString());
   }
 
+  @Test
+  public void testModifiedHost() {
+    Api api = Api.builder().host("example.com").build();
+    Request request = api.publicTimeline().build();
+    assertEquals("http://example.com:80/statuses/public_timeline.json",
+                 request.toString());
+  }
+
+  @Test
+  public void testModifiedPort() {
+    Api api = Api.builder().port(8080).build();
+    Request request = api.publicTimeline().build();
+    assertEquals("http://twitter.com:8080/statuses/public_timeline.json",
+                 request.toString());
+  }
+
+  @Test
+  public void testModifiedSchemeAndPort() {
+    Api api = Api.builder().scheme(Scheme.HTTPS).port(443).build();
+    Request request = api.publicTimeline().build();
+    assertEquals("https://twitter.com:443/statuses/public_timeline.json",
+                 request.toString());
+  }
 
   void assertHasParameter(Url url, String name, Object value) {
     Parameter expected = Parameter.newBuilder().setName(name).setValue(
