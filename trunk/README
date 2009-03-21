@@ -53,7 +53,7 @@ Send a Twitter message:
   import net.unto.twitter.Api;
   
   Api api = Api.builder().username("username").password("password").build();
-  api.updateStatus("This is a test message.").build.().post();
+  api.updateStatus("This is a test message.").build().post();
 }}}
 
 ==Maven==
