@@ -77,23 +77,58 @@ import net.unto.twitter.methods.VerifyCredentialsRequest;
  */
 public class Api {
 
+  // Depending on the JVM, these static initializers must be ordered after the
+  // definition of the other static defaults it in turn depends on. Do not
+  // reorder these declarations in the source.
+
+  /**
+   * The default host of Twitter API calls, ["twitter.com"]
+   */
   public static final String DEFAULT_HOST = "twitter.com";
 
+  /**
+   * The default port of Twitter API calls, [80]
+   */
   public static final int DEFAULT_PORT = 80;
 
+  /**
+   * The default http scheme of Twitter API calls, [HTTP]
+   */
   public static final Url.Scheme DEFAULT_SCHEME = Url.Scheme.HTTP;
 
-  // Depending on the JVM, this static initializer must be ordered after the
-  // definition of the other static defaults it in turn depends on. Do not
-  // reorder in the source.
+
+  /**
+   * A HttpManager configured with default settings.
+   */
   public static final HttpManager DEFAULT_HTTP_MANAGER = TwitterHttpManager
       .builder().build();
 
-  // Depending on the JVM, this static initializer must be ordered after the
-  // definition of the other static defaults it in turn depends on. Do not
-  // reorder in the source.
+  /**
+   * An Api instance configured with the default settings.
+   * <p>
+   * Does not support authenticated requests.
+   * </p>
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * <code>List&lt;{@link Status}&gt; publicTimeline = Api.DEFAULT_API.publicTimeline().build().get();</code>
+   * </p>
+   */
   public static final Api DEFAULT_API = Api.builder().build();
 
+  /**
+   * A builder for an immutable {@link Api} instance.
+   * <p>
+   * The Api.Builder is the only way to construct a new {@link Api} instance.
+   * Use the builder to configure a new Api instance with username and password
+   * credentials for Twitter API calls.
+   * </p>
+   * Example usage: </p>
+   * <p>
+   * <code>Api api = Api.builder().username(&quot;username&quot;).password(&quot;password&quot;).build();</code>
+   * </p>
+   */
   public static class Builder {
 
     String host = DEFAULT_HOST;
@@ -103,6 +138,11 @@ public class Api {
     Url.Scheme scheme = DEFAULT_SCHEME;
     String username = null;
 
+    /**
+     * Use the Builder instance to construct an immutable Api instance.
+     * 
+     * @return An immutable Api instance.
+     */
     public Api build() {
       assert (host != null);
       assert (port > 0);
@@ -122,39 +162,90 @@ public class Api {
       return new Api(this);
     }
 
+    /**
+     * Sets the default host (e.g., "twitter.com") for Twitter API calls.
+     * 
+     * @param host the default host (e.g., "twitter.com") for Twitter API calls.
+     * @return This {@link Builder} instance.
+     */
     public Builder host(String host) {
       this.host = host;
       return this;
     }
 
+    /**
+     * Sets the default {@link HttpManager} for Twitter API calls.
+     * 
+     * @param httpManager the default {@link HttpManager} for Twitter API calls.
+     * @return This {@link Builder} instance.
+     */
     public Builder httpManager(HttpManager httpManager) {
       this.httpManager = httpManager;
       return this;
     }
 
+    /**
+     * Sets the password for authenticated Twitter API calls.
+     * <p>
+     * The username must be set if the password is set, and the httpManager
+     * should not be set.
+     * </p>
+     * 
+     * @param password the password for authenticated Twitter API calls.
+     * @return This {@link Builder} instance.
+     */
     public Builder password(String password) {
       this.password = password;
       return this;
     }
 
+    /**
+     * Sets the default port (e.g., 80) for Twitter API calls.
+     * 
+     * @param port the default port (e.g., 80) for Twitter API calls.
+     * @return This {@link Builder} instance.
+     */
     public Builder port(int port) {
       assert port > 0;
       this.port = port;
       return this;
     }
 
+    /**
+     * Sets the default http scheme (e.g., Url.Scheme.HTTP) for Twitter API
+     * calls.
+     * 
+     * @param scheme the default http scheme (e.g., Url.Scheme.HTTP) for Twitter
+     *        API calls.
+     * @return This {@link Builder} instance.
+     */
     public Builder scheme(Url.Scheme scheme) {
       assert (scheme != null);
       this.scheme = scheme;
       return this;
     }
 
+    /**
+     * Sets the username for authenticated Twitter API calls.
+     * <p>
+     * The password must be set if the username is set, and the httpManager
+     * should not be set.
+     * </p>
+     * 
+     * @param username the username for authenticated Twitter API calls.
+     * @return This {@link Builder} instance.
+     */
     public Builder username(String username) {
       this.username = username;
       return this;
     }
   }
 
+  /**
+   * Return a new mutable builder for Api instances.
+   * 
+   * @return a new mutable builder for {@link Api} instances.
+   */
   public static Builder builder() {
     return new Builder();
   }
@@ -195,7 +286,8 @@ public class Api {
    * </p>
    * 
    * @param id The ID of the status to destroy.
-   * @return A DestroyStatusRequest.Builder.
+   * @return A {@link net.unto.twitter.methods.DestroyStatusRequest.Builder}
+   *         instance.
    */
   public DestroyStatusRequest.Builder destroyStatus(long id) {
     DestroyStatusRequest.Builder builder = DestroyStatusRequest.builder(id);
@@ -217,8 +309,9 @@ public class Api {
    * <code>List&lt;{@link User}&gt; followers = api.followers().build().get();</code>
    * </p>
    * 
-   * @return A FollowersRequest.Builder supporting the <code>id</code> and
-   *         <code>page</code> optional parameters.
+   * @return A {@link net.unto.twitter.methods.FollowersRequest.Builder}
+   *         instance supporting the <code>id</code> and <code>page</code>
+   *         optional parameters.
    */
   public FollowersRequest.Builder followers() {
     FollowersRequest.Builder builder = FollowersRequest.builder();
@@ -241,8 +334,9 @@ public class Api {
    * <code>List&lt;{@link User}&gt; friends = api.friends().build().get();</code>
    * </p>
    * 
-   * @return A FriendsRequest.Builder supporting the <code>id</code> and
-   *         <code>page</code> optional parameters.
+   * @return A {@link net.unto.twitter.methods.FriendsRequest.Builder} instance
+   *         supporting the <code>id</code> and <code>page</code> optional
+   *         parameters.
    */
   public FriendsRequest.Builder friends() {
     FriendsRequest.Builder builder = FriendsRequest.builder();
@@ -264,9 +358,9 @@ public class Api {
    * <code>List&lt;{@link Status}&gt; friendsTimeline = api.friendsTimeline().build().get();</code>
    * </p>
    * 
-   * @return A FriendsTimelineRequest.Builder supporting the <code>count</code>,
-   *         <code>page</code>, <code>since</code>, and <code>sinceId</code>
-   *         optional parameters.
+   * @return A {@link net.unto.twitter.methods.FriendsTimelineRequest.Builder}
+   *         instance supporting the <code>count</code>, <code>page</code>,
+   *         <code>since</code>, and <code>sinceId</code> optional parameters.
    */
   public FriendsTimelineRequest.Builder friendsTimeline() {
     FriendsTimelineRequest.Builder builder = FriendsTimelineRequest.builder();
@@ -287,8 +381,8 @@ public class Api {
    * <code>List&lt;{@link Status}&gt; publicTimeline = api.publicTimeline().build().get();</code>
    * </p>
    * 
-   * @return A PublicTimelineRequest.Builder supporting the
-   *         <code>page</page> optional parameter.
+   * @return A {@link net.unto.twitter.methods.PublicTimelineRequest.Builder}
+   *         instance supporting the <code>page</page> optional parameter.
    */
   public PublicTimelineRequest.Builder publicTimeline() {
     PublicTimelineRequest.Builder builder = PublicTimelineRequest.builder();
@@ -307,8 +401,9 @@ public class Api {
    * <code>List&lt;{@link Status}&gt; replies = api.replies().build().get();</code>
    * </p>
    * 
-   * @return A RepliesRequest.Builder supporting the <code>page</code>,
-   *         <code>since</code>, and <code>sinceId</code> optional parameters.
+   * @return A {@link net.unto.twitter.methods.RepliesRequest.Builder} instance
+   *         supporting the <code>page</code>, <code>since</code>, and
+   *         <code>sinceId</code> optional parameters.
    */
   public RepliesRequest.Builder replies() {
     RepliesRequest.Builder builder = RepliesRequest.builder();
@@ -334,7 +429,8 @@ public class Api {
    * </p>
    * 
    * @param id The numerical ID of the status you're trying to retrieve.
-   * @return A ShowStatusRequest.Builder.
+   * @return A {@link net.unto.twitter.methods.ShowStatusRequest.Builder}
+   *         instance.
    */
   public ShowStatusRequest.Builder showStatus(long id) {
     ShowStatusRequest.Builder builder = ShowStatusRequest.builder(id);
@@ -355,8 +451,9 @@ public class Api {
    * 
    * @param status The text of your status update. Should not be more than 140
    *        characters.
-   * @return A UpdateStatusRequest.Builder supporting the
-   *         <code>inReplyToStatusId</code> optional parameter.
+   * @return A {@link net.unto.twitter.methods.UpdateStatusRequest.Builder}
+   *         instance supporting the <code>inReplyToStatusId</code> optional
+   *         parameter.
    */
   public UpdateStatusRequest.Builder updateStatus(String status) {
     UpdateStatusRequest.Builder builder = UpdateStatusRequest.builder(status);
@@ -376,9 +473,10 @@ public class Api {
    * <code>List&lt;{@link Status}&gt; userTimeline = api.userTimeline().build().get();</code>
    * </p>
    * 
-   * @return A UserTimelineRequest.Builder supporting the <code>id</code>,
-   *         <code>count</code>, <code>page</code>, <code>since</code>, and
-   *         <code>sinceId</code> optional parameters.
+   * @return A {@link net.unto.twitter.methods.UserTimelineRequest.Builder}
+   *         instance supporting the <code>id</code>, <code>count</code>,
+   *         <code>page</code>, <code>since</code>, and <code>sinceId</code>
+   *         optional parameters.
    */
   public UserTimelineRequest.Builder userTimeline() {
     UserTimelineRequest.Builder builder = UserTimelineRequest.builder();
@@ -399,9 +497,10 @@ public class Api {
    * <code>{@link User} user = api.showUser().id("dewitt").build().get();</code>
    * </p>
    * 
-   * @return A ShowUserRequest.Builder supporting the <code>id</code>,
-   *         <code>screenName</code>, and <code>userId</code> parameters,
-   *         exactly one of which must be specified.
+   * @return A {@link net.unto.twitter.methods.ShowUserRequest.Builder} instance
+   *         supporting the <code>id</code>, <code>screenName</code>, and
+   *         <code>userId</code> parameters, exactly one of which must be
+   *         specified.
    */
   public ShowUserRequest.Builder showUser() {
     ShowUserRequest.Builder builder = ShowUserRequest.builder();
@@ -419,7 +518,8 @@ public class Api {
    * <code>List<DirectMessages> directMessages = api.directMessages().build().get();</code>
    * </p>
    * 
-   * @return {@link DirectMessagesRequest.Builder}
+   * @return A {@link net.unto.twitter.methods.DirectMessagesRequest.Builder}
+   *         instance.
    */
   public DirectMessagesRequest.Builder directMessages() {
     DirectMessagesRequest.Builder builder = DirectMessagesRequest.builder();
@@ -438,7 +538,10 @@ public class Api {
    * <code>List<DirectMessages> directMessages = api.sentDirectMessages().build().get();</code>
    * </p>
    * 
-   * @return {@link SentDirectMessagesRequest.Builder}
+   * @return A
+   *         {@link net.unto.twitter.methods.SentDirectMessagesRequest.Builder}
+   *         instance supporting the <code>page</code>, <code>since</code>, and
+   *         <code>sinceId</code> optional parameters.
    */
   public SentDirectMessagesRequest.Builder sentDirectMessages() {
     SentDirectMessagesRequest.Builder builder = SentDirectMessagesRequest
@@ -460,7 +563,8 @@ public class Api {
    * @param user The ID or screen name of the recipient user.
    * @param status The text of your status update. Should not be more than 140
    *        characters.
-   * @return A NewDirectMessageRequest.Builder.
+   * @return A {@link net.unto.twitter.methods.NewDirectMessageRequest.Builder}
+   *         instance.
    */
   public NewDirectMessageRequest.Builder newDirectMessage(String user,
       String status) {
@@ -481,7 +585,9 @@ public class Api {
    * </p>
    * 
    * @param id The ID of the direct message to destroy.
-   * @return {@link DestroyDirectMessageRequest.Builder}
+   * @return A
+   *         {@link net.unto.twitter.methods.DestroyDirectMessageRequest.Builder}
+   *         instance.
    */
   public DestroyDirectMessageRequest.Builder destroyDirectMessage(long id) {
     DestroyDirectMessageRequest.Builder builder = DestroyDirectMessageRequest
@@ -501,7 +607,8 @@ public class Api {
    * </p>
    * 
    * @param id The ID or screen name of the user to befriend
-   * @return {@link CreateFriendshipRequest.Builder}
+   * @return A {@link net.unto.twitter.methods.CreateFriendshipRequest.Builder}
+   *         instance supporting the <code>follow</code> optional parameter.
    */
   public CreateFriendshipRequest.Builder createFriendship(String id) {
     CreateFriendshipRequest.Builder builder = CreateFriendshipRequest
@@ -522,7 +629,8 @@ public class Api {
    * 
    * @param id The ID or screen name of the user with whom to discontinue
    *        friendship.
-   * @return {@link DestroyFriendshipRequest.Builder}
+   * @return A {@link net.unto.twitter.methods.DestroyFriendshipRequest.Builder}
+   *         instance.
    */
   public DestroyFriendshipRequest.Builder destroyFriendship(String id) {
     DestroyFriendshipRequest.Builder builder = DestroyFriendshipRequest
@@ -544,7 +652,8 @@ public class Api {
    *        for.
    * @param userB The ID or screen_name of the second user to test friendship
    *        for.
-   * @return {@link FriendshipExistsRequest.Builder}
+   * @return A {@link net.unto.twitter.methods.FriendshipExistsRequest.Builder}
+   *         instance.
    */
   public FriendshipExistsRequest.Builder friendshipExists(String userA,
       String userB) {
@@ -565,7 +674,8 @@ public class Api {
    * <code>long[] following = api.friendIds().build().get();</code>
    * </p>
    * 
-   * @return {@link FriendIdsRequest.Builder}
+   * @return A {@link net.unto.twitter.methods.FriendIdsRequest.Builder}
+   *         instance supporting the <code>id</code> optional parameter.
    */
   public FriendIdsRequest.Builder friendIds() {
     FriendIdsRequest.Builder builder = FriendIdsRequest.builder();
@@ -583,7 +693,8 @@ public class Api {
    * <code>long[] followers = api.followerIds().build().get();</code>
    * </p>
    * 
-   * @return {@link FollowerIdsRequest.Builder}
+   * @return A {@link net.unto.twitter.methods.FollowerIdsRequest.Builder}
+   *         instance supporting the <code>id</code> optional parameter.
    */
   public FollowerIdsRequest.Builder followerIds() {
     FollowerIdsRequest.Builder builder = FollowerIdsRequest.builder();
@@ -595,7 +706,8 @@ public class Api {
    * Returns a representation of the requesting user if authentication was
    * successful.
    * 
-   * @return {@link VerifyCredentialsRequest.Builder}
+   * @return A {@link net.unto.twitter.methods.VerifyCredentialsRequest.Builder}
+   *         instance.
    */
   public VerifyCredentialsRequest.Builder verifyCredentials() {
     VerifyCredentialsRequest.Builder builder = VerifyCredentialsRequest
@@ -607,7 +719,8 @@ public class Api {
   /**
    * Ends the session of the authenticating user.
    * 
-   * @return {@link EndSessionRequest.Builder}
+   * @return A {@link net.unto.twitter.methods.EndSessionRequest.Builder}
+   *         instance.
    */
   public EndSessionRequest.Builder endSession() {
     EndSessionRequest.Builder builder = EndSessionRequest.builder();
@@ -626,7 +739,9 @@ public class Api {
    * </p>
    * 
    * @param device Must be one of: sms, im, none.
-   * @return {@link UpdateDeliveryDeviceRequest.Builder}
+   * @return A
+   *         {@link net.unto.twitter.methods.UpdateDeliveryDeviceRequest.Builder}
+   *         instance.
    */
   public UpdateDeliveryDeviceRequest.Builder updateDeliveryDevice(Device device) {
     UpdateDeliveryDeviceRequest.Builder builder = UpdateDeliveryDeviceRequest
@@ -653,7 +768,7 @@ public class Api {
    * 
    * </p>
    * 
-   * @return {@link TrendsRequest.Builder}
+   * @return A {@link net.unto.twitter.methods.TrendsRequest.Builder} instance.
    */
   public TrendsRequest.Builder trends() {
     TrendsRequest.Builder builder = TrendsRequest.builder();
@@ -678,7 +793,11 @@ public class Api {
    * 
    * </p>
    * 
-   * @return {@link SearchRequest.Builder}
+   * @return A {@link net.unto.twitter.methods.SearchRequest.Builder} instance
+   *         supporting the <code>geocode</code>, <code>lang</code>,
+   *         <code>page</code>, <code>resultsPerPage</code>,
+   *         <code>showUser</code>, and <code>sinceId</code> optional
+   *         parameters.
    */
   public SearchRequest.Builder search(String query) {
     SearchRequest.Builder builder = SearchRequest.builder(query);
@@ -700,7 +819,13 @@ public class Api {
    *     .post();
    * </pre>
    * 
-   * @return {@link UpdateProfileColorsRequest.Builder}
+   * @return A
+   *         {@link net.unto.twitter.methods.UpdateProfileColorsRequest.Builder}
+   *         instance supporting the <code>profileBackgroundColor</code>,
+   *         <code>profileLinkColor</code>,
+   *         <code>profileSidebarBorderColor</code>,
+   *         <code>profileSidebarFillColor</code>, and
+   *         <code>profileTextColor</code> optional parameters.
    */
   public UpdateProfileColorsRequest.Builder updateProfileColors() {
     UpdateProfileColorsRequest.Builder builder = UpdateProfileColorsRequest
@@ -725,7 +850,7 @@ public class Api {
    * 
    * </p>
    * 
-   * @return {@link UpdateProfileImageRequest.Builder}
+   * @return  A {@link net.unto.twitter.methods.UpdateProfileImageRequest.Builder} instance.
    */
   public UpdateProfileImageRequest.Builder updateProfileImage(byte[] imageData) {
     UpdateProfileImageRequest.Builder builder = UpdateProfileImageRequest
@@ -750,7 +875,7 @@ public class Api {
    * 
    * </p>
    * 
-   * @return {@link UpdateProfileBackgroundImageRequest.Builder}
+   * @return A {@link net.unto.twitter.methods.UpdateProfileBackgroundImageRequest.Builder} instance.
    */
   public UpdateProfileBackgroundImageRequest.Builder updateProfileBackgroundImage(
       byte[] imageData) {
@@ -779,7 +904,7 @@ public class Api {
    * 
    * </p>
    * 
-   * @return {@link RateLimitStatusRequest.Builder}
+   * @return A {@link net.unto.twitter.methods.RateLimitStatusRequest.Builder} instance.
    */
   public RateLimitStatusRequest.Builder rateLimitStatus() {
     RateLimitStatusRequest.Builder builder = RateLimitStatusRequest.builder();
@@ -803,7 +928,13 @@ public class Api {
    * 
    * </p>
    * 
-   * @return {@link UpdateProfileRequest.Builder}
+   * @return A
+   *         {@link net.unto.twitter.methods.UpdateProfileRequest.Builder}
+   *         instance supporting the <code>description</code>,
+   *         <code>email</code>,
+   *         <code>location</code>,
+   *         <code>name</code>, and
+   *         <code>url</code> optional parameters.
    */
   public UpdateProfileRequest.Builder updateProfile() {
     UpdateProfileRequest.Builder builder = UpdateProfileRequest.builder();
@@ -824,7 +955,9 @@ public class Api {
    * <code>List<Status> favorites = api.favorites().build().get();</code>
    * </p>
    * 
-   * @return A FavoritesRequest.Builder supporting the <code>id</code> and
+   * @return A
+   *         {@link net.unto.twitter.methods.FavoritesRequest.Builder}
+   *         instance supporting the <code>id</code> and
    *         <code>page</code> optional parameters.
    */
   public FavoritesRequest.Builder favorites() {
@@ -844,7 +977,9 @@ public class Api {
    * </p>
    * 
    * @param id The ID of the status to favorite.
-   * @return A CreateFavoriteRequest.Builder.
+   * @return A
+   *         {@link net.unto.twitter.methods.CreateFavoriteRequest.Builder}
+   *         instance.
    */
   public CreateFavoriteRequest.Builder createFavorite(long id) {
     CreateFavoriteRequest.Builder builder = CreateFavoriteRequest.builder(id);
@@ -864,7 +999,9 @@ public class Api {
    * </p>
    * 
    * @param id The ID of the status to un-favorite
-   * @return A DestroyFavoriteRequest.Builder.
+   * @return A
+   *         {@link net.unto.twitter.methods.DestroyFavoriteRequest.Builder}
+   *         instance.
    */
   public DestroyFavoriteRequest.Builder destroyFavorite(long id) {
     DestroyFavoriteRequest.Builder builder = DestroyFavoriteRequest.builder(id);
@@ -883,7 +1020,9 @@ public class Api {
    * </p>
    * 
    * @param id The ID or screen name of the user to follow.
-   * @return A FollowRequest.Builder.
+   * @return A
+   *         {@link net.unto.twitter.methods.FollowRequest.Builder}
+   *         instance.
    */
   public FollowRequest.Builder follow(String id) {
     FollowRequest.Builder builder = FollowRequest.builder(id);
@@ -902,7 +1041,9 @@ public class Api {
    * </p>
    * 
    * @param id The ID or screen name of the user to leave.
-   * @return A LeaveRequest.Builder.
+   * @return A
+   *         {@link net.unto.twitter.methods.LeaveRequest.Builder}
+   *         instance.
    */
   public LeaveRequest.Builder leave(String id) {
     LeaveRequest.Builder builder = LeaveRequest.builder(id);
@@ -921,7 +1062,9 @@ public class Api {
    * </p>
    * 
    * @param id The ID or screen_name of the user to block.
-   * @return A CreateBlockRequest.Builder.
+   * @return A
+   *         {@link net.unto.twitter.methods.CreateBlockRequest.Builder}
+   *         instance.
    */
   public CreateBlockRequest.Builder createBlock(String id) {
     CreateBlockRequest.Builder builder = CreateBlockRequest.builder(id);
@@ -940,7 +1083,9 @@ public class Api {
    * </p>
    * 
    * @param id The ID or screen_name of the user to un-block.
-   * @return A DestroyBlockRequest.Builder.
+   * @return A
+   *         {@link net.unto.twitter.methods.DestroyBlockRequest.Builder}
+   *         instance.
    */
   public DestroyBlockRequest.Builder destroyBlock(String id) {
     DestroyBlockRequest.Builder builder = DestroyBlockRequest.builder(id);
@@ -958,7 +1103,9 @@ public class Api {
    * <code>String ok = api.test().build().get();</code>
    * </p>
    * 
-   * @return A TestRequest.Builder.
+   * @return A
+   *         {@link net.unto.twitter.methods.TestRequest.Builder}
+   *         instance.
    */
   public TestRequest.Builder test() {
     TestRequest.Builder builder = TestRequest.builder();

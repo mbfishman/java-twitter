@@ -8,7 +8,7 @@ import net.unto.twitter.HttpManager;
 import net.unto.twitter.UrlUtil;
 import net.unto.twitter.UtilProtos.Url;
 
-abstract class AbstractRequest implements Request {
+public abstract class AbstractRequest implements Request {
 
   public static abstract class Builder<BuilderType extends Builder<?>>
       implements Request.Builder {
@@ -27,6 +27,12 @@ abstract class AbstractRequest implements Request {
       return (BuilderType) this;
     }
 
+    /**
+     * Sets the host (e.g., "twitter.com") for this Twitter API call.
+     * 
+     * @param host the host (e.g., "twitter.com") for Twitter API call.
+     * @return This {@link Builder} instance.
+     */
     @SuppressWarnings("unchecked")
     public BuilderType host(String host) {
       this.host = host;
@@ -34,6 +40,12 @@ abstract class AbstractRequest implements Request {
       return (BuilderType) this;
     }
 
+    /**
+     * Sets the HttpManager for this Twitter API call.
+     * 
+     * @param httpManager the HttpManager for Twitter API call.
+     * @return This {@link Builder} instance.
+     */
     @SuppressWarnings("unchecked")
     public BuilderType httpManager(HttpManager httpManager) {
       this.httpManager = httpManager;
@@ -59,6 +71,12 @@ abstract class AbstractRequest implements Request {
       return (BuilderType) this;
     }
 
+    /**
+     * Sets the port (e.g., 80) for this Twitter API call.
+     * 
+     * @param port the port (e.g., 80) for this Twitter API call.
+     * @return This {@link Builder} instance.
+     */
     @SuppressWarnings("unchecked")
     public BuilderType port(int port) {
       this.port = port;
@@ -66,6 +84,12 @@ abstract class AbstractRequest implements Request {
       return (BuilderType) this;
     }
 
+    /**
+     * Sets the http scheme (e.g., Url.Scheme.HTTP) for this Twitter API call.
+     * 
+     * @param scheme the http scheme (e.g., Url.Scheme.HTTP) for this Twitter API call.
+     * @return This {@link Builder} instance.
+     */
     @SuppressWarnings("unchecked")
     public BuilderType scheme(Url.Scheme scheme) {
       this.scheme = scheme;

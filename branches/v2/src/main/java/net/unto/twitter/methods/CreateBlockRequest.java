@@ -9,6 +9,10 @@ import net.unto.twitter.TwitterProtos.User;
  */
 public final class CreateBlockRequest extends AbstractRequest {
 
+  /**
+   * @param id the ID or screen_name of the user to block. 
+   * @return A {@link Builder} instance.
+   */
   public static Builder builder(String id) {
     return new Builder(id);
   }
@@ -27,11 +31,17 @@ public final class CreateBlockRequest extends AbstractRequest {
       authorizationRequired(true);
     }
 
+    /* (non-Javadoc)
+     * @see net.unto.twitter.methods.Request.Builder#build()
+     */
     public CreateBlockRequest build() {
       return new CreateBlockRequest(this);
     }
   }
 
+  /**
+   * @return the blocked user when successful.
+   */
   public User post() {
     return JsonUtil.newUser(postJson());
   }
