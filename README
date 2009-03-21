@@ -78,7 +78,7 @@ And
   <dependencies>
     ...
     <dependency>
-      <groupId>net.unto</groupId>
+      <groupId>net.unto.twitter</groupId>
       <artifactId>java-twitter</artifactId>
       <version>0.9-SNAPSHOT</version>
     </dependency>
