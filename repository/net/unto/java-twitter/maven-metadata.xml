@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>net.unto</groupId>
+  <artifactId>java-twitter</artifactId>
+  <version>0.9-SNAPSHOT</version>
+  <versioning>
+    <versions>
+      <version>0.9-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20090321225725</lastUpdated>
+  </versioning>
+</metadata>
