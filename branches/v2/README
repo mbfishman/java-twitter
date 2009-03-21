@@ -15,21 +15,24 @@ it even easier for java programmers to use.
 
 ==Using==
 
-Download the latest source or binrary version of java-twitter from:
+Download the latest source or binary version of java-twitter from:
 
   http://code.google.com/p/java-twitter/downloads/list
+
+==Documentation==
+
+Read the online javadocs at:
+
+  http://java-twitter.googlecode.com/svn/site/apidocs/index.html
+
+Begin at:
+
+  http://java-twitter.googlecode.com/svn/site/apidocs/net/unto/twitter/Api.html
+
+View the Maven project site at:
+
+  http://java-twitter.googlecode.com/svn/site/index.html
   
-===Runtime Dependencies===
-
-The java-twitter library requires that the following runtime dependencies are installed in the CLASSPATH:
-
-  * [http://commons.apache.org/lang/ Apache Commons Lang]
-  * [http://jakarta.apache.org/httpcomponents/httpclient-3.x/ Apache Jakarta Commons HttpClient]
-  * [http://joda-time.sourceforge.net/ Joda Time]
-  * [http://json-lib.sourceforge.net/ Json-lib]
-  * [http://code.google.com/p/protobuf/ Protocol Buffers]
-  * [http://code.google.com/p/google-collections/ Google Collections]
-
 ===Examples===
 
 Connect to Twitter and print out the latest public messages:
@@ -53,15 +56,56 @@ Send a Twitter message:
   api.updateStatus("This is a test message.").build.().post();
 }}}
 
+==Maven==
+
+Add the following to your pom.xml:
+
+{{{
+  <repositories>
+    ...
+    <repository>
+      <id>java-twitter-repository</id>
+      <url>http://java-twitter.googlecode.com/svn/repository/</url>
+      <name>java-twitter maven repository</name>
+    </repository>
+    ...
+  </repositories>
+}}}
+
+And
+
+{{{
+  <dependencies>
+    ...
+    <dependency>
+      <groupId>net.unto</groupId>
+      <artifactId>java-twitter</artifactId>
+      <version>0.9-SNAPSHOT</version>
+    </dependency>
+    ...
+  <dependencies>
+}}}
+ 
+  
+===Runtime Dependencies===
+
+The java-twitter library requires that the following runtime dependencies are installed in the CLASSPATH:
+
+  * [http://commons.apache.org/lang/ Apache Commons Lang]
+  * [http://jakarta.apache.org/httpcomponents/httpclient-3.x/ Apache Jakarta Commons HttpClient]
+  * [http://joda-time.sourceforge.net/ Joda Time]
+  * [http://json-lib.sourceforge.net/ Json-lib]
+  * [http://code.google.com/p/protobuf/ Protocol Buffers]
+  * [http://code.google.com/p/google-collections/ Google Collections]
 
 ==Building==
 
 *Using Maven*
 
-Install Java 1.5 or greater:
+Install Java 1.6 or greater:
 
-  http://java.sun.com/j2se/1.5.0/
-  
+  http://java.sun.com/javase/6/
+
 Install Maven:
 
   http://maven.apache.org/
