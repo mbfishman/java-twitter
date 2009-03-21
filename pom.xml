@@ -7,7 +7,7 @@
   <modelVersion>4.0.0</modelVersion>
   <name>java-twitter</name>
   <description>A Java wrapper around the Twitter API.</description>
-  <groupId>net.unto</groupId>
+  <groupId>net.unto.twitter</groupId>
   <artifactId>java-twitter</artifactId>
   <version>0.9-SNAPSHOT</version>
   <url>http://java-twitter.googlecode.com/</url>
