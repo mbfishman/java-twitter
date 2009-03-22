@@ -4,16 +4,16 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
-import com.google.protobuf.ByteString;
-
 import net.unto.twitter.UtilProtos.Url.Part;
 
 import org.apache.commons.httpclient.methods.multipart.FilePart;
-import com.google.common.collect.ImmutableMap;
+import org.apache.commons.io.FileUtils;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
-import org.apache.commons.io.FileUtils;
+
+import com.google.common.collect.ImmutableMap;
+import com.google.protobuf.ByteString;
 
 public abstract class TwitterUtil {
 

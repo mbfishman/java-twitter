@@ -1,12 +1,12 @@
 package net.unto.twitter.methods;
 
-import com.google.common.collect.ImmutableMap;
+import java.util.Map;
 
 import net.unto.twitter.JsonUtil;
 import net.unto.twitter.TwitterProtos.Device;
 import net.unto.twitter.TwitterProtos.User;
 
-import java.util.Map;
+import com.google.common.collect.ImmutableMap;
 
 /**
  * Sets which device Twitter delivers updates to for the authenticating user.

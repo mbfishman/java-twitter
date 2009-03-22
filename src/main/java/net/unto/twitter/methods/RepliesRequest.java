@@ -2,11 +2,11 @@ package net.unto.twitter.methods;
 
 import java.util.List;
 
-import org.joda.time.DateTime;
-
 import net.unto.twitter.JsonUtil;
 import net.unto.twitter.TwitterUtil;
 import net.unto.twitter.TwitterProtos.Status;
+
+import org.joda.time.DateTime;
 
 // http://apiwiki.twitter.com/REST+API+Documentation#replies
   

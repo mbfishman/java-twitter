@@ -1,9 +1,9 @@
 package net.unto.twitter.methods;
 
+import java.util.regex.Pattern;
+
 import net.unto.twitter.JsonUtil;
 import net.unto.twitter.TwitterProtos.User;
-
-import java.util.regex.Pattern;
 
 
 public final class UpdateProfileColorsRequest extends AbstractRequest {

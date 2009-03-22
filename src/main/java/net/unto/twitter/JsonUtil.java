@@ -5,13 +5,13 @@ import java.util.List;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import net.unto.twitter.TwitterProtos.Results;
-import net.unto.twitter.TwitterProtos.Results.Result;
+import net.unto.twitter.TwitterProtos.DirectMessage;
 import net.unto.twitter.TwitterProtos.RateLimitStatus;
+import net.unto.twitter.TwitterProtos.Results;
+import net.unto.twitter.TwitterProtos.Status;
 import net.unto.twitter.TwitterProtos.Trends;
 import net.unto.twitter.TwitterProtos.User;
-import net.unto.twitter.TwitterProtos.Status;
-import net.unto.twitter.TwitterProtos.DirectMessage;
+import net.unto.twitter.TwitterProtos.Results.Result;
 import net.unto.twitter.TwitterProtos.Trends.Trend;
 
 public abstract class JsonUtil {

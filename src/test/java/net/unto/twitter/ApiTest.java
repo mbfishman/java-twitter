@@ -452,6 +452,4 @@ public class ApiTest {
   }
 
   private String TEST_DATA_DIR = "src/test/data/";
-
-  private int MAX_TEST_DATA_FILE_SIZE = 65536;
 }

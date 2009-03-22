@@ -9,8 +9,6 @@ import net.unto.twitter.UrlUtil;
 import net.unto.twitter.UtilProtos.Url;
 import net.unto.twitter.UtilProtos.Url.Part;
 
-import com.google.protobuf.ByteString;
-
 public abstract class AbstractRequest implements Request {
 
   public static abstract class Builder<BuilderType extends Builder<?>>
