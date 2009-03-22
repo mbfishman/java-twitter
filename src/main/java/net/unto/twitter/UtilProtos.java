@@ -109,7 +109,7 @@ public final class UtilProtos {
         return net.unto.twitter.UtilProtos.internal_static_twitter_Url_Parameter_fieldAccessorTable;
       }
       
-      // required string name = 1;
+      // optional string name = 1;
       private boolean hasName;
       private java.lang.String name_ = "";
       public boolean hasName() { return hasName; }
@@ -231,7 +231,7 @@ public final class UtilProtos {
         }
         
         
-        // required string name = 1;
+        // optional string name = 1;
         public boolean hasName() {
           return result.hasName();
         }
@@ -264,6 +264,267 @@ public final class UtilProtos {
         public Builder clearValue() {
           result.hasValue = false;
           result.value_ = "";
+          return this;
+        }
+      }
+      
+      static {
+        net.unto.twitter.UtilProtos.getDescriptor();
+      }
+    }
+    
+    public static final class Part extends
+        com.google.protobuf.GeneratedMessage {
+      // Use Part.newBuilder() to construct.
+      private Part() {}
+      
+      private static final Part defaultInstance = new Part();
+      public static Part getDefaultInstance() {
+        return defaultInstance;
+      }
+      
+      public Part getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+      
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return net.unto.twitter.UtilProtos.internal_static_twitter_Url_Part_descriptor;
+      }
+      
+      @Override
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return net.unto.twitter.UtilProtos.internal_static_twitter_Url_Part_fieldAccessorTable;
+      }
+      
+      // optional string name = 1;
+      private boolean hasName;
+      private java.lang.String name_ = "";
+      public boolean hasName() { return hasName; }
+      public java.lang.String getName() { return name_; }
+      
+      // optional string filename = 2;
+      private boolean hasFilename;
+      private java.lang.String filename_ = "";
+      public boolean hasFilename() { return hasFilename; }
+      public java.lang.String getFilename() { return filename_; }
+      
+      // optional string content_type = 3;
+      private boolean hasContentType;
+      private java.lang.String contentType_ = "";
+      public boolean hasContentType() { return hasContentType; }
+      public java.lang.String getContentType() { return contentType_; }
+      
+      // optional string charset = 4;
+      private boolean hasCharset;
+      private java.lang.String charset_ = "";
+      public boolean hasCharset() { return hasCharset; }
+      public java.lang.String getCharset() { return charset_; }
+      
+      // optional bytes value = 5;
+      private boolean hasValue;
+      private com.google.protobuf.ByteString value_ = com.google.protobuf.ByteString.EMPTY;
+      public boolean hasValue() { return hasValue; }
+      public com.google.protobuf.ByteString getValue() { return value_; }
+      
+      public static net.unto.twitter.UtilProtos.Url.Part parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data).buildParsed();
+      }
+      public static net.unto.twitter.UtilProtos.Url.Part parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistry extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data, extensionRegistry)
+                 .buildParsed();
+      }
+      public static net.unto.twitter.UtilProtos.Url.Part parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data).buildParsed();
+      }
+      public static net.unto.twitter.UtilProtos.Url.Part parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistry extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data, extensionRegistry)
+                 .buildParsed();
+      }
+      public static net.unto.twitter.UtilProtos.Url.Part parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input).buildParsed();
+      }
+      public static net.unto.twitter.UtilProtos.Url.Part parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistry extensionRegistry)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input, extensionRegistry)
+                 .buildParsed();
+      }
+      public static net.unto.twitter.UtilProtos.Url.Part parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input).buildParsed();
+      }
+      public static net.unto.twitter.UtilProtos.Url.Part parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistry extensionRegistry)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input, extensionRegistry)
+                 .buildParsed();
+      }
+      
+      public static Builder newBuilder() { return new Builder(); }
+      public Builder newBuilderForType() { return new Builder(); }
+      public static Builder newBuilder(net.unto.twitter.UtilProtos.Url.Part prototype) {
+        return new Builder().mergeFrom(prototype);
+      }
+      
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder> {
+        // Construct using net.unto.twitter.UtilProtos.Url.Part.newBuilder()
+        private Builder() {}
+        
+        net.unto.twitter.UtilProtos.Url.Part result = new net.unto.twitter.UtilProtos.Url.Part();
+        
+        @Override
+        protected net.unto.twitter.UtilProtos.Url.Part internalGetResult() {
+          return result;
+        }
+        
+        @Override
+        public Builder clear() {
+          result = new net.unto.twitter.UtilProtos.Url.Part();
+          return this;
+        }
+        
+        @Override
+        public Builder clone() {
+          return new Builder().mergeFrom(result);
+        }
+        
+        @Override
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return net.unto.twitter.UtilProtos.Url.Part.getDescriptor();
+        }
+        
+        public net.unto.twitter.UtilProtos.Url.Part getDefaultInstanceForType() {
+          return net.unto.twitter.UtilProtos.Url.Part.getDefaultInstance();
+        }
+        
+        public net.unto.twitter.UtilProtos.Url.Part build() {
+          if (!isInitialized()) {
+            throw new com.google.protobuf.UninitializedMessageException(
+              result);
+          }
+          return buildPartial();
+        }
+        
+        private net.unto.twitter.UtilProtos.Url.Part buildParsed()
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          if (!isInitialized()) {
+            throw new com.google.protobuf.UninitializedMessageException(
+              result).asInvalidProtocolBufferException();
+          }
+          return buildPartial();
+        }
+        
+        public net.unto.twitter.UtilProtos.Url.Part buildPartial() {
+          net.unto.twitter.UtilProtos.Url.Part returnMe = result;
+          result = null;
+          return returnMe;
+        }
+        
+        
+        // optional string name = 1;
+        public boolean hasName() {
+          return result.hasName();
+        }
+        public java.lang.String getName() {
+          return result.getName();
+        }
+        public Builder setName(java.lang.String value) {
+          result.hasName = true;
+          result.name_ = value;
+          return this;
+        }
+        public Builder clearName() {
+          result.hasName = false;
+          result.name_ = "";
+          return this;
+        }
+        
+        // optional string filename = 2;
+        public boolean hasFilename() {
+          return result.hasFilename();
+        }
+        public java.lang.String getFilename() {
+          return result.getFilename();
+        }
+        public Builder setFilename(java.lang.String value) {
+          result.hasFilename = true;
+          result.filename_ = value;
+          return this;
+        }
+        public Builder clearFilename() {
+          result.hasFilename = false;
+          result.filename_ = "";
+          return this;
+        }
+        
+        // optional string content_type = 3;
+        public boolean hasContentType() {
+          return result.hasContentType();
+        }
+        public java.lang.String getContentType() {
+          return result.getContentType();
+        }
+        public Builder setContentType(java.lang.String value) {
+          result.hasContentType = true;
+          result.contentType_ = value;
+          return this;
+        }
+        public Builder clearContentType() {
+          result.hasContentType = false;
+          result.contentType_ = "";
+          return this;
+        }
+        
+        // optional string charset = 4;
+        public boolean hasCharset() {
+          return result.hasCharset();
+        }
+        public java.lang.String getCharset() {
+          return result.getCharset();
+        }
+        public Builder setCharset(java.lang.String value) {
+          result.hasCharset = true;
+          result.charset_ = value;
+          return this;
+        }
+        public Builder clearCharset() {
+          result.hasCharset = false;
+          result.charset_ = "";
+          return this;
+        }
+        
+        // optional bytes value = 5;
+        public boolean hasValue() {
+          return result.hasValue();
+        }
+        public com.google.protobuf.ByteString getValue() {
+          return result.getValue();
+        }
+        public Builder setValue(com.google.protobuf.ByteString value) {
+          result.hasValue = true;
+          result.value_ = value;
+          return this;
+        }
+        public Builder clearValue() {
+          result.hasValue = false;
+          result.value_ = com.google.protobuf.ByteString.EMPTY;
           return this;
         }
       }
@@ -306,6 +567,17 @@ public final class UtilProtos {
     public int getParametersCount() { return parameters_.size(); }
     public net.unto.twitter.UtilProtos.Url.Parameter getParameters(int index) {
       return parameters_.get(index);
+    }
+    
+    // repeated .twitter.Url.Part parts = 6;
+    private java.util.List<net.unto.twitter.UtilProtos.Url.Part> parts_ =
+      java.util.Collections.emptyList();
+    public java.util.List<net.unto.twitter.UtilProtos.Url.Part> getPartsList() {
+      return parts_;
+    }
+    public int getPartsCount() { return parts_.size(); }
+    public net.unto.twitter.UtilProtos.Url.Part getParts(int index) {
+      return parts_.get(index);
     }
     
     public static net.unto.twitter.UtilProtos.Url parseFrom(
@@ -415,6 +687,10 @@ public final class UtilProtos {
         if (result.parameters_ != java.util.Collections.EMPTY_LIST) {
           result.parameters_ =
             java.util.Collections.unmodifiableList(result.parameters_);
+        }
+        if (result.parts_ != java.util.Collections.EMPTY_LIST) {
+          result.parts_ =
+            java.util.Collections.unmodifiableList(result.parts_);
         }
         net.unto.twitter.UtilProtos.Url returnMe = result;
         result = null;
@@ -538,6 +814,51 @@ public final class UtilProtos {
         result.parameters_ = java.util.Collections.emptyList();
         return this;
       }
+      
+      // repeated .twitter.Url.Part parts = 6;
+      public java.util.List<net.unto.twitter.UtilProtos.Url.Part> getPartsList() {
+        return java.util.Collections.unmodifiableList(result.parts_);
+      }
+      public int getPartsCount() {
+        return result.getPartsCount();
+      }
+      public net.unto.twitter.UtilProtos.Url.Part getParts(int index) {
+        return result.getParts(index);
+      }
+      public Builder setParts(int index, net.unto.twitter.UtilProtos.Url.Part value) {
+        result.parts_.set(index, value);
+        return this;
+      }
+      public Builder setParts(int index, net.unto.twitter.UtilProtos.Url.Part.Builder builderForValue) {
+        result.parts_.set(index, builderForValue.build());
+        return this;
+      }
+      public Builder addParts(net.unto.twitter.UtilProtos.Url.Part value) {
+        if (result.parts_.isEmpty()) {
+          result.parts_ = new java.util.ArrayList<net.unto.twitter.UtilProtos.Url.Part>();
+        }
+        result.parts_.add(value);
+        return this;
+      }
+      public Builder addParts(net.unto.twitter.UtilProtos.Url.Part.Builder builderForValue) {
+        if (result.parts_.isEmpty()) {
+          result.parts_ = new java.util.ArrayList<net.unto.twitter.UtilProtos.Url.Part>();
+        }
+        result.parts_.add(builderForValue.build());
+        return this;
+      }
+      public Builder addAllParts(
+          java.lang.Iterable<? extends net.unto.twitter.UtilProtos.Url.Part> values) {
+        if (result.parts_.isEmpty()) {
+          result.parts_ = new java.util.ArrayList<net.unto.twitter.UtilProtos.Url.Part>();
+        }
+        super.addAll(values, result.parts_);
+        return this;
+      }
+      public Builder clearParts() {
+        result.parts_ = java.util.Collections.emptyList();
+        return this;
+      }
     }
     
     static {
@@ -555,6 +876,11 @@ public final class UtilProtos {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_twitter_Url_Parameter_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_twitter_Url_Part_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_twitter_Url_Part_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -564,13 +890,16 @@ public final class UtilProtos {
       descriptor;
   static {
     java.lang.String descriptorData =
-      "\n\nutil.proto\022\007twitter\"\311\001\n\003Url\022#\n\006scheme\030" +
+      "\n\nutil.proto\022\007twitter\"\311\002\n\003Url\022#\n\006scheme\030" +
       "\001 \002(\0162\023.twitter.Url.Scheme\022\014\n\004host\030\002 \002(\t" +
       "\022\014\n\004port\030\003 \002(\005\022\014\n\004path\030\004 \002(\t\022*\n\nparamete" +
-      "rs\030\005 \003(\0132\026.twitter.Url.Parameter\032(\n\tPara" +
-      "meter\022\014\n\004name\030\001 \002(\t\022\r\n\005value\030\002 \001(\t\"\035\n\006Sc" +
-      "heme\022\010\n\004HTTP\020\000\022\t\n\005HTTPS\020\001B\036\n\020net.unto.tw" +
-      "itterB\nUtilProtos";
+      "rs\030\005 \003(\0132\026.twitter.Url.Parameter\022 \n\005part" +
+      "s\030\006 \003(\0132\021.twitter.Url.Part\032(\n\tParameter\022" +
+      "\014\n\004name\030\001 \001(\t\022\r\n\005value\030\002 \001(\t\032\\\n\004Part\022\014\n\004" +
+      "name\030\001 \001(\t\022\020\n\010filename\030\002 \001(\t\022\024\n\014content_" +
+      "type\030\003 \001(\t\022\017\n\007charset\030\004 \001(\t\022\r\n\005value\030\005 \001" +
+      "(\014\"\035\n\006Scheme\022\010\n\004HTTP\020\000\022\t\n\005HTTPS\020\001B\036\n\020net" +
+      ".unto.twitterB\nUtilProtos";
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
         public com.google.protobuf.ExtensionRegistry assignDescriptors(
@@ -581,7 +910,7 @@ public final class UtilProtos {
           internal_static_twitter_Url_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_twitter_Url_descriptor,
-              new java.lang.String[] { "Scheme", "Host", "Port", "Path", "Parameters", },
+              new java.lang.String[] { "Scheme", "Host", "Port", "Path", "Parameters", "Parts", },
               net.unto.twitter.UtilProtos.Url.class,
               net.unto.twitter.UtilProtos.Url.Builder.class);
           internal_static_twitter_Url_Parameter_descriptor =
@@ -592,6 +921,14 @@ public final class UtilProtos {
               new java.lang.String[] { "Name", "Value", },
               net.unto.twitter.UtilProtos.Url.Parameter.class,
               net.unto.twitter.UtilProtos.Url.Parameter.Builder.class);
+          internal_static_twitter_Url_Part_descriptor =
+            internal_static_twitter_Url_descriptor.getNestedTypes().get(1);
+          internal_static_twitter_Url_Part_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_twitter_Url_Part_descriptor,
+              new java.lang.String[] { "Name", "Filename", "ContentType", "Charset", "Value", },
+              net.unto.twitter.UtilProtos.Url.Part.class,
+              net.unto.twitter.UtilProtos.Url.Part.Builder.class);
           return null;
         }
       };

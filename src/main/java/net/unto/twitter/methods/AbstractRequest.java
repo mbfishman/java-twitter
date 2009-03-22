@@ -7,6 +7,9 @@ import net.unto.twitter.Api;
 import net.unto.twitter.HttpManager;
 import net.unto.twitter.UrlUtil;
 import net.unto.twitter.UtilProtos.Url;
+import net.unto.twitter.UtilProtos.Url.Part;
+
+import com.google.protobuf.ByteString;
 
 public abstract class AbstractRequest implements Request {
 
@@ -17,6 +20,7 @@ public abstract class AbstractRequest implements Request {
     String host = Api.DEFAULT_HOST;
     HttpManager httpManager;
     List<Url.Parameter> parameters = new ArrayList<Url.Parameter>();
+    List<Url.Part> parts = new ArrayList<Url.Part>();
     String path = null;
     int port = Api.DEFAULT_PORT;
     Url.Scheme scheme = Api.DEFAULT_SCHEME;
@@ -58,9 +62,19 @@ public abstract class AbstractRequest implements Request {
       assert (name != null);
       assert (name.length() > 0);
       assert (value != null);
-      Url.Parameter parameter = Url.Parameter.newBuilder().setName(name)
-          .setValue(value).build();
+      Url.Parameter parameter = Url.Parameter.newBuilder()
+	  .setName(name)
+          .setValue(value)
+	  .build();
       parameters.add(parameter);
+      // Safe conversion because BuilderType extends Builder
+      return (BuilderType) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    BuilderType part(Part part) {
+      assert(part != null);
+      parts.add(part);
       // Safe conversion because BuilderType extends Builder
       return (BuilderType) this;
     }
@@ -108,14 +122,20 @@ public abstract class AbstractRequest implements Request {
     assert (builder.port > 0);
     assert (builder.scheme != null);
     assert (builder.parameters != null);
+    assert (builder.parts != null);
     httpManager = builder.httpManager == null ? Api.DEFAULT_HTTP_MANAGER
         : builder.httpManager;
     if (builder.authorizationRequired && !httpManager.hasCredentials()) {
       throw new IllegalStateException("Authorization required.");
     }
-    url = Url.newBuilder().setScheme(builder.scheme).setHost(builder.host)
-        .setPort(builder.port).setPath(builder.path).addAllParameters(
-            builder.parameters).build();
+    url = Url.newBuilder()
+	.setScheme(builder.scheme)
+	.setHost(builder.host)
+        .setPort(builder.port)
+	.setPath(builder.path)
+	.addAllParameters(builder.parameters)
+	.addAllParts(builder.parts)
+	.build();
   }
 
   String getJson() {
