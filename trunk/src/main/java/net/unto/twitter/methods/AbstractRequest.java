@@ -60,10 +60,8 @@ public abstract class AbstractRequest implements Request {
       assert (name != null);
       assert (name.length() > 0);
       assert (value != null);
-      Url.Parameter parameter = Url.Parameter.newBuilder()
-	  .setName(name)
-          .setValue(value)
-	  .build();
+      Url.Parameter parameter = Url.Parameter.newBuilder().setName(name)
+          .setValue(value).build();
       parameters.add(parameter);
       // Safe conversion because BuilderType extends Builder
       return (BuilderType) this;
@@ -71,7 +69,7 @@ public abstract class AbstractRequest implements Request {
 
     @SuppressWarnings("unchecked")
     BuilderType part(Part part) {
-      assert(part != null);
+      assert (part != null);
       parts.add(part);
       // Safe conversion because BuilderType extends Builder
       return (BuilderType) this;
@@ -99,7 +97,8 @@ public abstract class AbstractRequest implements Request {
     /**
      * Sets the http scheme (e.g., Url.Scheme.HTTP) for this Twitter API call.
      * 
-     * @param scheme the http scheme (e.g., Url.Scheme.HTTP) for this Twitter API call.
+     * @param scheme the http scheme (e.g., Url.Scheme.HTTP) for this Twitter
+     *        API call.
      * @return This {@link Builder} instance.
      */
     @SuppressWarnings("unchecked")
@@ -126,14 +125,9 @@ public abstract class AbstractRequest implements Request {
     if (builder.authorizationRequired && !httpManager.hasCredentials()) {
       throw new IllegalStateException("Authorization required.");
     }
-    url = Url.newBuilder()
-	.setScheme(builder.scheme)
-	.setHost(builder.host)
-        .setPort(builder.port)
-	.setPath(builder.path)
-	.addAllParameters(builder.parameters)
-	.addAllParts(builder.parts)
-	.build();
+    url = Url.newBuilder().setScheme(builder.scheme).setHost(builder.host)
+        .setPort(builder.port).setPath(builder.path).addAllParameters(
+            builder.parameters).addAllParts(builder.parts).build();
   }
 
   String getJson() {
@@ -148,7 +142,7 @@ public abstract class AbstractRequest implements Request {
   public final String toString() {
     return UrlUtil.assemble(url);
   }
-  
+
   // For testing
   public final Url toUrl() {
     return url;

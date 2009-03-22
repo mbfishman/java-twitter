@@ -32,12 +32,12 @@ import org.apache.commons.httpclient.methods.multipart.StringPart;
  * Commons HttpClient library.
  */
 public class TwitterHttpManager implements HttpManager {
- 
+
 
   public static Builder builder() {
     return new Builder();
   }
-  
+
   public static class Builder {
 
     private Credentials credentials = null;
@@ -46,40 +46,42 @@ public class TwitterHttpManager implements HttpManager {
     private HttpConnectionManager httpConnectionManager = null;
     private AuthScope authScope = null;
 
-    Builder() {}
-    
+    Builder() {
+    }
+
     public TwitterHttpManager build() {
       return new TwitterHttpManager(this);
     }
-    
+
     public Builder credentials(Credentials credentials) {
-      assert(username == null);
-      assert(password == null);
+      assert (username == null);
+      assert (password == null);
       this.credentials = credentials;
       return this;
     }
-    
+
     public Builder username(String username) {
-      assert(credentials == null);
+      assert (credentials == null);
       this.username = username;
       if (password != null) {
         credentials = new UsernamePasswordCredentials(username, password);
       }
       return this;
     }
-    
-    public Builder httpConnectionManager(HttpConnectionManager httpConnectionManager) {
+
+    public Builder httpConnectionManager(
+        HttpConnectionManager httpConnectionManager) {
       this.httpConnectionManager = httpConnectionManager;
       return this;
     }
-    
+
     public Builder authScope(AuthScope authScope) {
       this.authScope = authScope;
       return this;
     }
-    
+
     public Builder password(String password) {
-      assert(credentials == null);
+      assert (credentials == null);
       this.password = password;
       if (username != null) {
         credentials = new UsernamePasswordCredentials(username, password);
@@ -87,7 +89,7 @@ public class TwitterHttpManager implements HttpManager {
       return this;
     }
   }
-  
+
   private AuthScope authScope = null;
 
   private HttpConnectionManager connectionManager = null;
@@ -99,23 +101,23 @@ public class TwitterHttpManager implements HttpManager {
    */
   public TwitterHttpManager(Builder builder) {
     authScope = builder.authScope != null ? builder.authScope : AuthScope.ANY;
-    connectionManager = builder.httpConnectionManager != null ?
-        builder.httpConnectionManager :
-        new MultiThreadedHttpConnectionManager();
+    connectionManager = builder.httpConnectionManager != null
+        ? builder.httpConnectionManager
+        : new MultiThreadedHttpConnectionManager();
     credentials = builder.credentials;
   }
-  
+
   public boolean hasCredentials() {
     return credentials != null;
   }
-  
+
   /*
    * (non-Javadoc)
    * 
    * @see net.unto.twitter.TwitterHttpManager#get(java.lang.String)
    */
   public String get(Url url) {
-    assert(url != null);
+    assert (url != null);
     String uri = UrlUtil.assemble(url);
     GetMethod method = new GetMethod(uri);
     method.setQueryString(getParametersAsNamedValuePairArray(url));
@@ -129,18 +131,19 @@ public class TwitterHttpManager implements HttpManager {
    * @see net.unto.twitter.TwitterHttpManager#post(java.lang.String)
    */
   public String post(Url url) {
-    assert(url != null);
+    assert (url != null);
     String uri = UrlUtil.assemble(url);
     PostMethod method = new PostMethod(uri);
     if (url.getPartsCount() > 0) {
-      method.setRequestEntity(new MultipartRequestEntity(getParts(url), method.getParams()));
+      method.setRequestEntity(new MultipartRequestEntity(getParts(url), method
+          .getParams()));
     } else {
       method.setRequestBody(getParametersAsNamedValuePairArray(url));
     }
     method.getParams().setCookiePolicy(CookiePolicy.BROWSER_COMPATIBILITY);
     return execute(method);
   }
-  
+
   private Part[] getParts(Url url) {
     List<Part> out = new ArrayList<Part>();
     for (Parameter parameter : url.getParametersList()) {
@@ -148,25 +151,27 @@ public class TwitterHttpManager implements HttpManager {
         out.add(new StringPart(parameter.getName(), parameter.getValue()
             .toString()));
       }
-    } 
+    }
     for (Url.Part part : url.getPartsList()) {
-      assert(part.hasName());
-      assert(part.hasValue());
-      assert(part.hasFilename());
-      assert(part.hasContentType());
-      assert(part.hasCharset());
-      ByteArrayPartSource source = 
-	new ByteArrayPartSource(part.getFilename(), part.getValue().toByteArray());
-      FilePart filePart = new FilePart(part.getName(), source, part.getContentType(), part.getCharset());
+      assert (part.hasName());
+      assert (part.hasValue());
+      assert (part.hasFilename());
+      assert (part.hasContentType());
+      assert (part.hasCharset());
+      ByteArrayPartSource source = new ByteArrayPartSource(part.getFilename(),
+          part.getValue().toByteArray());
+      FilePart filePart = new FilePart(part.getName(), source, part
+          .getContentType(), part.getCharset());
 
-      // The Twitter API has a bug where if the Content-Type header contains a charset, the
-      // HTTP call will return a 403 error.  So instead of sending:
+      // The Twitter API has a bug where if the Content-Type header contains a
+      // charset, the
+      // HTTP call will return a 403 error. So instead of sending:
       //
-      //    Content-Type: image/png; charset=ISO-8859-1
+      // Content-Type: image/png; charset=ISO-8859-1
       // 
       // We override the charset and send:
       //
-      //    Content-Type: image/png
+      // Content-Type: image/png
       filePart.setCharSet(null);
 
       out.add(filePart);
@@ -194,12 +199,14 @@ public class TwitterHttpManager implements HttpManager {
     } else {
       httpClient.getParams().setAuthenticationPreemptive(false);
     }
-    
+
     try {
       int statusCode = httpClient.executeMethod(method);
       if (statusCode != HttpStatus.SC_OK) {
-        String error = String.format("Expected 200 OK. Received %d %s.  Response: %s.",
-				     statusCode, HttpStatus.getStatusText(statusCode), method.getResponseBodyAsString());
+        String error = String.format(
+            "Expected 200 OK. Received %d %s.  Response: %s.", statusCode,
+            HttpStatus.getStatusText(statusCode), method
+                .getResponseBodyAsString());
         throw new RuntimeException(error);
       }
       String responseBody = method.getResponseBodyAsString();
