@@ -134,16 +134,16 @@ public abstract class TwitterUtil {
 
   public final static String getExtension(String filename) {
     int index = filename.lastIndexOf('.');
-    return ((index >= 0) || (index < filename.length())) ?
-        filename.substring(index + 1) :
-	null;
+    return ((index >= 0) || (index < filename.length())) ? 
+        filename.substring(index + 1) : 
+        null;
   }
 
   public final static String guessContentType(File file) {
     String extension = getExtension(file.getName());
     return ((extension != null) && CONTENT_TYPES.containsKey(extension)) ?
-	CONTENT_TYPES.get(extension) :
-	FilePart.DEFAULT_CONTENT_TYPE;
+        CONTENT_TYPES.get(extension) :
+        FilePart.DEFAULT_CONTENT_TYPE;
   }
 
   public final static String guessCharset(File file) {
