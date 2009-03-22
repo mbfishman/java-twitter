@@ -1,5 +1,7 @@
 package net.unto.twitter;
 
+import java.io.File;
+
 import net.unto.twitter.TwitterProtos.Device;
 import net.unto.twitter.TwitterProtos.DirectMessage;
 import net.unto.twitter.TwitterProtos.Status;
@@ -844,17 +846,16 @@ public class Api {
    * 
    * <pre>
    * File file = new File(&quot;profile_image.png&quot;);
-   * User user = api.updateProfileImage(FileUtils.readFileToByteArray()).build()
-   *     .post();
+   * User user = api.updateProfileImage(file).build().post();
    * </pre>
    * 
    * </p>
    * 
    * @return  A {@link net.unto.twitter.methods.UpdateProfileImageRequest.Builder} instance.
    */
-  public UpdateProfileImageRequest.Builder updateProfileImage(byte[] imageData) {
+   public UpdateProfileImageRequest.Builder updateProfileImage(File file) {
     UpdateProfileImageRequest.Builder builder = UpdateProfileImageRequest
-        .builder(imageData);
+        .builder(file);
     setDefaults(builder);
     return builder;
   }
@@ -869,18 +870,16 @@ public class Api {
    * 
    * <pre>
    * File file = new File(&quot;profile_background_image.png&quot;);
-   * User user = api.updateProfileBackgroundImage(FileUtils.readFileToByteArray())
-   *     .build().post();
+   * User user = api.updateProfileBackgroundImage(file).build().post();
    * </pre>
    * 
    * </p>
    * 
    * @return A {@link net.unto.twitter.methods.UpdateProfileBackgroundImageRequest.Builder} instance.
    */
-  public UpdateProfileBackgroundImageRequest.Builder updateProfileBackgroundImage(
-      byte[] imageData) {
+  public UpdateProfileBackgroundImageRequest.Builder updateProfileBackgroundImage(File file) {
     UpdateProfileBackgroundImageRequest.Builder builder = UpdateProfileBackgroundImageRequest
-        .builder(imageData);
+        .builder(file);
     setDefaults(builder);
     return builder;
   }

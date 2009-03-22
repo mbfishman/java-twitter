@@ -19,6 +19,13 @@ import org.apache.commons.httpclient.auth.AuthScope;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.methods.RequestEntity;
+import org.apache.commons.httpclient.methods.multipart.Part;
+import org.apache.commons.httpclient.methods.multipart.StringPart;
+import org.apache.commons.httpclient.methods.multipart.FilePart;
+import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
+import org.apache.commons.httpclient.methods.multipart.ByteArrayPartSource;
+
 
 /**
  * An implementation of the TwitterHttpManager interface using the Apache
@@ -26,6 +33,7 @@ import org.apache.commons.httpclient.methods.PostMethod;
  */
 public class TwitterHttpManager implements HttpManager {
  
+
   public static Builder builder() {
     return new Builder();
   }
@@ -124,9 +132,46 @@ public class TwitterHttpManager implements HttpManager {
     assert(url != null);
     String uri = UrlUtil.assemble(url);
     PostMethod method = new PostMethod(uri);
-    method.setQueryString(getParametersAsNamedValuePairArray(url));
+    if (url.getPartsCount() > 0) {
+      method.setRequestEntity(new MultipartRequestEntity(getParts(url), method.getParams()));
+    } else {
+      method.setRequestBody(getParametersAsNamedValuePairArray(url));
+    }
     method.getParams().setCookiePolicy(CookiePolicy.BROWSER_COMPATIBILITY);
     return execute(method);
+  }
+  
+  private Part[] getParts(Url url) {
+    List<Part> out = new ArrayList<Part>();
+    for (Parameter parameter : url.getParametersList()) {
+      if (parameter.hasName() && parameter.hasValue()) {
+        out.add(new StringPart(parameter.getName(), parameter.getValue()
+            .toString()));
+      }
+    } 
+    for (Url.Part part : url.getPartsList()) {
+      assert(part.hasName());
+      assert(part.hasValue());
+      assert(part.hasFilename());
+      assert(part.hasContentType());
+      assert(part.hasCharset());
+      ByteArrayPartSource source = 
+	new ByteArrayPartSource(part.getFilename(), part.getValue().toByteArray());
+      FilePart filePart = new FilePart(part.getName(), source, part.getContentType(), part.getCharset());
+
+      // The Twitter API has a bug where if the Content-Type header contains a charset, the
+      // HTTP call will return a 403 error.  So instead of sending:
+      //
+      //    Content-Type: image/png; charset=ISO-8859-1
+      // 
+      // We override the charset and send:
+      //
+      //    Content-Type: image/png
+      filePart.setCharSet(null);
+
+      out.add(filePart);
+    }
+    return out.toArray(new Part[out.size()]);
   }
 
   private NameValuePair[] getParametersAsNamedValuePairArray(Url url) {
@@ -153,8 +198,8 @@ public class TwitterHttpManager implements HttpManager {
     try {
       int statusCode = httpClient.executeMethod(method);
       if (statusCode != HttpStatus.SC_OK) {
-        String error = String.format("Expected 200 OK. Received %d %s",
-            statusCode, HttpStatus.getStatusText(statusCode));
+        String error = String.format("Expected 200 OK. Received %d %s.  Response: %s.",
+				     statusCode, HttpStatus.getStatusText(statusCode), method.getResponseBodyAsString());
         throw new RuntimeException(error);
       }
       String responseBody = method.getResponseBodyAsString();

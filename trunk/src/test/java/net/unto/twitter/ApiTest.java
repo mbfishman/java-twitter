@@ -1,35 +1,29 @@
 package net.unto.twitter;
 
+import java.io.File;
+import java.io.IOException;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import net.unto.twitter.TwitterProtos.Device;
 import net.unto.twitter.TwitterProtos.Geocode;
 import net.unto.twitter.UtilProtos.Url;
 import net.unto.twitter.UtilProtos.Url.Parameter;
+import net.unto.twitter.UtilProtos.Url.Part;
 import net.unto.twitter.UtilProtos.Url.Scheme;
 import net.unto.twitter.methods.Request;
-
+import org.apache.commons.httpclient.methods.multipart.FilePart;
+import org.apache.commons.io.FileUtils;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.junit.Test;
+import com.google.protobuf.ByteString;
+
 
 /**
  * Unit tests for the Api class.
  */
 public class ApiTest {
-
-  // G   I   F   8   9   a 001  \0 001  \0 200 377 ...
-  private final static byte[] CLEAR_DOT_GIF = new byte[] {
-      (byte) 0x47, (byte) 0x49, (byte) 0x46, (byte) 0x38, (byte) 0x39,
-      (byte) 0x61, (byte) 0x01, (byte) 0x00, (byte) 0x01, (byte) 0x00,
-      (byte) 0x80, (byte) 0xff, (byte) 0x00, (byte) 0xc0, (byte) 0xc0,
-      (byte) 0xc0, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x21,
-      (byte) 0xf9, (byte) 0x04, (byte) 0x01, (byte) 0x00, (byte) 0x00,
-      (byte) 0x00, (byte) 0x00, (byte) 0x2c, (byte) 0x00, (byte) 0x00,
-      (byte) 0x00, (byte) 0x00, (byte) 0x01, (byte) 0x00, (byte) 0x01,
-      (byte) 0x00, (byte) 0x00, (byte) 0x02, (byte) 0x02, (byte) 0x44,
-      (byte) 0x01, (byte) 0x00, (byte) 0x3b
-  };
 
   @Test
   public void testCreateBlockRequestUrl() {
@@ -315,13 +309,15 @@ public class ApiTest {
   }
 
   @Test
-  public void testUpdateProfileBackgroundImageRequestUrl() {
+  public void testUpdateProfileBackgroundImageRequestUrl() throws IOException {
     Api api = Api.builder().username("test").password("test").build();
-    Request request = api.updateProfileBackgroundImage(CLEAR_DOT_GIF).build();
+    File file = new File(TEST_DATA_DIR, "profile_background_image.png");
+    Request request = api.updateProfileBackgroundImage(file).build();
     assertEquals(
         "http://twitter.com:80/account/update_profile_background_image.json",
         request.toString());
-    assertHasParameter(request.toUrl(), "image", new String(CLEAR_DOT_GIF));
+    byte[] bytes = FileUtils.readFileToByteArray(file);
+    assertHasPart(request.toUrl(), "image", "profile_background_image.png", bytes, "image/png", FilePart.DEFAULT_CHARSET);
   }
 
   @Test
@@ -342,12 +338,14 @@ public class ApiTest {
   }
 
   @Test
-  public void testUpdateProfileImageRequestUrl() {
+  public void testUpdateProfileImageRequestUrl() throws IOException {
     Api api = Api.builder().username("test").password("test").build();
-    Request request = api.updateProfileImage(CLEAR_DOT_GIF).build();
+    File file = new File(TEST_DATA_DIR, "profile_image.png");
+    Request request = api.updateProfileImage(file).build();
     assertEquals("http://twitter.com:80/account/update_profile_image.json",
         request.toString());
-    assertHasParameter(request.toUrl(), "image", new String(CLEAR_DOT_GIF));
+    byte[] bytes = FileUtils.readFileToByteArray(file);
+    assertHasPart(request.toUrl(), "image", "profile_image.png", bytes, "image/png", FilePart.DEFAULT_CHARSET);
   }
 
   @Test
@@ -436,4 +434,24 @@ public class ApiTest {
         expected));
   }
 
+  void assertHasPart(Url url, String name, String filename, byte[] value, String contentType, String charset) {
+    Part expected = Part.newBuilder()
+      .setName(name)
+      .setFilename(filename)
+      .setValue(ByteString.copyFrom(value))
+      .setContentType(contentType)
+      .setCharset(charset)
+      .build();
+    for (Part actual : url.getPartsList()) {
+      if (actual.equals(expected)) {
+        return;
+      }
+    }
+    fail(String.format("Actual URL %s does not contain part %s", url,
+        expected));
+  }
+
+  private String TEST_DATA_DIR = "src/test/data/";
+
+  private int MAX_TEST_DATA_FILE_SIZE = 65536;
 }
