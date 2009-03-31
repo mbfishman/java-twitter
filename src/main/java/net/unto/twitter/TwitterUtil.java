@@ -2,6 +2,7 @@ package net.unto.twitter;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Map;
 
 import net.unto.twitter.UtilProtos.Url.Part;
@@ -117,7 +118,8 @@ public abstract class TwitterUtil {
       .build();
 
   public final static DateTimeFormatter TWITTER_DATE_FORMATTER = DateTimeFormat
-      .forPattern("EEE MMM dd HH:mm:ss Z yyyy");
+      .forPattern("EEE MMM dd HH:mm:ss Z yyyy")
+      .withLocale(Locale.US);
 
   public final static DateTime parseTwitterDateTimeString(String twitterDateString) {
     try {
