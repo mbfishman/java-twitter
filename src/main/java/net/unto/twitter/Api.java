@@ -6,6 +6,7 @@ import net.unto.twitter.TwitterProtos.Device;
 import net.unto.twitter.TwitterProtos.DirectMessage;
 import net.unto.twitter.TwitterProtos.Status;
 import net.unto.twitter.TwitterProtos.User;
+import net.unto.twitter.UtilProtos.Credentials;
 import net.unto.twitter.UtilProtos.Url;
 import net.unto.twitter.UtilProtos.Url.Scheme;
 import net.unto.twitter.methods.CreateBlockRequest;
@@ -71,9 +72,15 @@ import net.unto.twitter.methods.VerifyCredentialsRequest;
  * </p>
  * 
  * <pre>
- * Api api = Api.builder().username(&quot;username&quot;).password(&quot;password&quot;).build();
- * Status status = api.updateStatus(&quot;Hello Twitter&quot;).inReplyToStatusId(12345)
- *     .build().post();
+ * Credentials credentials = Credentials.newBuilder()
+ *     .username(&quot;username&quot;)
+ *     .password(&quot;password&quot;)
+ *     .build();
+ * Api api = Api.builder().credentials(credentials).build();
+ * Status status = api.updateStatus(&quot;Hello Twitter&quot;)
+ *     .inReplyToStatusId(12345)
+ *     .build()
+ *     .post();
  * System.out.println(status.getText());
  * </pre>
  */
@@ -127,9 +134,13 @@ public class Api {
    * credentials for Twitter API calls.
    * </p>
    * Example usage: </p>
-   * <p>
-   * <code>Api api = Api.builder().username(&quot;username&quot;).password(&quot;password&quot;).build();</code>
-   * </p>
+   * <pre>
+   * Credentials credentials = Credentials.newBuilder()
+   *     .username(&quot;username&quot;)
+   *     .password(&quot;password&quot;)
+   *     .build();
+   * Api api = Api.builder().credentials(credentials).build();</code>
+   * </pre>
    */
   public static class Builder {
 
@@ -139,6 +150,7 @@ public class Api {
     int port = DEFAULT_PORT;
     Url.Scheme scheme = DEFAULT_SCHEME;
     String username = null;
+    Credentials credentials = null;
 
     /**
      * Use the Builder instance to construct an immutable Api instance.
@@ -160,6 +172,10 @@ public class Api {
       if ((username != null) && (httpManager != null)) {
         throw new IllegalStateException(
             "Only one of httpManager and username can be set.");
+      }
+      if ((username != null) && (credentials != null)) {
+        throw new IllegalStateException(
+            "Only one of credentials and username can be set.");
       }
       return new Api(this);
     }
@@ -187,6 +203,17 @@ public class Api {
     }
 
     /**
+     * Sets the user credentials for authenticated Twitter API calls.
+     * 
+     * @param credentials the user credentials for authenticated Twitter API calls.
+     * @return This {@link Builder} instance.
+     */
+    public Builder credentials(Credentials credentials) {
+      this.credentials = credentials;
+      return this;
+    }
+    
+    /**
      * Sets the password for authenticated Twitter API calls.
      * <p>
      * The username must be set if the password is set, and the httpManager
@@ -195,7 +222,9 @@ public class Api {
      * 
      * @param password the password for authenticated Twitter API calls.
      * @return This {@link Builder} instance.
+     * @deprecated Use Credentials instead. Will be removed for 1.0 release.
      */
+    @Deprecated
     public Builder password(String password) {
       this.password = password;
       return this;
@@ -236,7 +265,9 @@ public class Api {
      * 
      * @param username the username for authenticated Twitter API calls.
      * @return This {@link Builder} instance.
+     * @deprecated Use Credentials instead. Will be removed for 1.0 release.
      */
+    @Deprecated
     public Builder username(String username) {
       this.username = username;
       return this;
@@ -260,15 +291,23 @@ public class Api {
 
   private Scheme scheme;
 
+  private Credentials credentials;
+  
   private Api(Builder builder) {
     assert (builder.host != null);
     assert (builder.port > 0);
     assert (builder.scheme != null);
     if (builder.httpManager != null) {
       this.httpManager = builder.httpManager;
+    } else if (builder.credentials != null) {
+      this.httpManager = TwitterHttpManager.builder().credentials(credentials)
+      .build();
     } else if (builder.username != null && builder.password != null) {
-      this.httpManager = TwitterHttpManager.builder()
-          .username(builder.username).password(builder.password).build();
+      // TODO(dewitt): Remove the username and password in favor of Credentials
+      Credentials credentials = Credentials.newBuilder().setUsername(
+          builder.username).setPassword(builder.password).build();
+      this.httpManager = TwitterHttpManager.builder().credentials(credentials)
+          .build();
     } else {
       this.httpManager = DEFAULT_HTTP_MANAGER;
     }
@@ -396,12 +435,8 @@ public class Api {
    * Returns the 20 most recent &#64;replies (status updates prefixed with
    * &#64;username) for the authenticating user.
    * 
-   * <p>
-   * Example usage:
-   * </p>
-   * <p>
-   * <code>List&lt;{@link Status}&gt; replies = api.replies().build().get();</code>
-   * </p>
+   * <p> Example usage: </p> <p> <code>List&lt;{@link Status}&gt; replies =
+   * api.replies().build().get();</code> </p>
    * 
    * @return A {@link net.unto.twitter.methods.RepliesRequest.Builder} instance
    *         supporting the <code>page</code>, <code>since</code>, and
@@ -851,9 +886,11 @@ public class Api {
    * 
    * </p>
    * 
-   * @return  A {@link net.unto.twitter.methods.UpdateProfileImageRequest.Builder} instance.
+   * @return A
+   *         {@link net.unto.twitter.methods.UpdateProfileImageRequest.Builder}
+   *         instance.
    */
-   public UpdateProfileImageRequest.Builder updateProfileImage(File file) {
+  public UpdateProfileImageRequest.Builder updateProfileImage(File file) {
     UpdateProfileImageRequest.Builder builder = UpdateProfileImageRequest
         .builder(file);
     setDefaults(builder);
@@ -875,9 +912,12 @@ public class Api {
    * 
    * </p>
    * 
-   * @return A {@link net.unto.twitter.methods.UpdateProfileBackgroundImageRequest.Builder} instance.
+   * @return A
+   *         {@link net.unto.twitter.methods.UpdateProfileBackgroundImageRequest.Builder}
+   *         instance.
    */
-  public UpdateProfileBackgroundImageRequest.Builder updateProfileBackgroundImage(File file) {
+  public UpdateProfileBackgroundImageRequest.Builder updateProfileBackgroundImage(
+      File file) {
     UpdateProfileBackgroundImageRequest.Builder builder = UpdateProfileBackgroundImageRequest
         .builder(file);
     setDefaults(builder);
@@ -903,7 +943,8 @@ public class Api {
    * 
    * </p>
    * 
-   * @return A {@link net.unto.twitter.methods.RateLimitStatusRequest.Builder} instance.
+   * @return A {@link net.unto.twitter.methods.RateLimitStatusRequest.Builder}
+   *         instance.
    */
   public RateLimitStatusRequest.Builder rateLimitStatus() {
     RateLimitStatusRequest.Builder builder = RateLimitStatusRequest.builder();
@@ -927,12 +968,9 @@ public class Api {
    * 
    * </p>
    * 
-   * @return A
-   *         {@link net.unto.twitter.methods.UpdateProfileRequest.Builder}
+   * @return A {@link net.unto.twitter.methods.UpdateProfileRequest.Builder}
    *         instance supporting the <code>description</code>,
-   *         <code>email</code>,
-   *         <code>location</code>,
-   *         <code>name</code>, and
+   *         <code>email</code>, <code>location</code>, <code>name</code>, and
    *         <code>url</code> optional parameters.
    */
   public UpdateProfileRequest.Builder updateProfile() {
@@ -954,10 +992,9 @@ public class Api {
    * <code>List<Status> favorites = api.favorites().build().get();</code>
    * </p>
    * 
-   * @return A
-   *         {@link net.unto.twitter.methods.FavoritesRequest.Builder}
-   *         instance supporting the <code>id</code> and
-   *         <code>page</code> optional parameters.
+   * @return A {@link net.unto.twitter.methods.FavoritesRequest.Builder}
+   *         instance supporting the <code>id</code> and <code>page</code>
+   *         optional parameters.
    */
   public FavoritesRequest.Builder favorites() {
     FavoritesRequest.Builder builder = FavoritesRequest.builder();
@@ -976,8 +1013,7 @@ public class Api {
    * </p>
    * 
    * @param id The ID of the status to favorite.
-   * @return A
-   *         {@link net.unto.twitter.methods.CreateFavoriteRequest.Builder}
+   * @return A {@link net.unto.twitter.methods.CreateFavoriteRequest.Builder}
    *         instance.
    */
   public CreateFavoriteRequest.Builder createFavorite(long id) {
@@ -998,8 +1034,7 @@ public class Api {
    * </p>
    * 
    * @param id The ID of the status to un-favorite
-   * @return A
-   *         {@link net.unto.twitter.methods.DestroyFavoriteRequest.Builder}
+   * @return A {@link net.unto.twitter.methods.DestroyFavoriteRequest.Builder}
    *         instance.
    */
   public DestroyFavoriteRequest.Builder destroyFavorite(long id) {
@@ -1019,9 +1054,7 @@ public class Api {
    * </p>
    * 
    * @param id The ID or screen name of the user to follow.
-   * @return A
-   *         {@link net.unto.twitter.methods.FollowRequest.Builder}
-   *         instance.
+   * @return A {@link net.unto.twitter.methods.FollowRequest.Builder} instance.
    */
   public FollowRequest.Builder follow(String id) {
     FollowRequest.Builder builder = FollowRequest.builder(id);
@@ -1040,9 +1073,7 @@ public class Api {
    * </p>
    * 
    * @param id The ID or screen name of the user to leave.
-   * @return A
-   *         {@link net.unto.twitter.methods.LeaveRequest.Builder}
-   *         instance.
+   * @return A {@link net.unto.twitter.methods.LeaveRequest.Builder} instance.
    */
   public LeaveRequest.Builder leave(String id) {
     LeaveRequest.Builder builder = LeaveRequest.builder(id);
@@ -1061,8 +1092,7 @@ public class Api {
    * </p>
    * 
    * @param id The ID or screen_name of the user to block.
-   * @return A
-   *         {@link net.unto.twitter.methods.CreateBlockRequest.Builder}
+   * @return A {@link net.unto.twitter.methods.CreateBlockRequest.Builder}
    *         instance.
    */
   public CreateBlockRequest.Builder createBlock(String id) {
@@ -1082,8 +1112,7 @@ public class Api {
    * </p>
    * 
    * @param id The ID or screen_name of the user to un-block.
-   * @return A
-   *         {@link net.unto.twitter.methods.DestroyBlockRequest.Builder}
+   * @return A {@link net.unto.twitter.methods.DestroyBlockRequest.Builder}
    *         instance.
    */
   public DestroyBlockRequest.Builder destroyBlock(String id) {
@@ -1102,9 +1131,7 @@ public class Api {
    * <code>String ok = api.test().build().get();</code>
    * </p>
    * 
-   * @return A
-   *         {@link net.unto.twitter.methods.TestRequest.Builder}
-   *         instance.
+   * @return A {@link net.unto.twitter.methods.TestRequest.Builder} instance.
    */
   public TestRequest.Builder test() {
     TestRequest.Builder builder = TestRequest.builder();
