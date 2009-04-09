@@ -30,3 +30,9 @@ message Url {
   }
 }
 
+message Credentials {
+  optional string username = 1;
+  optional string password = 2;
+}
+
+
