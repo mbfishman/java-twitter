@@ -1,13 +1,12 @@
 package net.unto.twitter;
 
-import net.unto.twitter.UtilProtos.Credentials;
 import net.unto.twitter.UtilProtos.Url;
 
 /**
  * A simple HTTP connection interface.
  */
 public interface HttpManager
-{ 
+{
   boolean hasCredentials();
   
   void clearCredentials();
@@ -27,9 +26,4 @@ public interface HttpManager
    * @return a String containing the body of the HTTP POST response.
    */
   String post(Url url);
-  
-  public static interface Builder {
-    Builder credentials(Credentials credentials);
-    HttpManager build();
-  }
 }
