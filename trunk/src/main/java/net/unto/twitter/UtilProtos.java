@@ -866,195 +866,6 @@ public final class UtilProtos {
     }
   }
   
-  public static final class Credentials extends
-      com.google.protobuf.GeneratedMessage {
-    // Use Credentials.newBuilder() to construct.
-    private Credentials() {}
-    
-    private static final Credentials defaultInstance = new Credentials();
-    public static Credentials getDefaultInstance() {
-      return defaultInstance;
-    }
-    
-    public Credentials getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-    
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return net.unto.twitter.UtilProtos.internal_static_twitter_Credentials_descriptor;
-    }
-    
-    @Override
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return net.unto.twitter.UtilProtos.internal_static_twitter_Credentials_fieldAccessorTable;
-    }
-    
-    // optional string username = 1;
-    private boolean hasUsername;
-    private java.lang.String username_ = "";
-    public boolean hasUsername() { return hasUsername; }
-    public java.lang.String getUsername() { return username_; }
-    
-    // optional string password = 2;
-    private boolean hasPassword;
-    private java.lang.String password_ = "";
-    public boolean hasPassword() { return hasPassword; }
-    public java.lang.String getPassword() { return password_; }
-    
-    public static net.unto.twitter.UtilProtos.Credentials parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
-    }
-    public static net.unto.twitter.UtilProtos.Credentials parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistry extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
-    }
-    public static net.unto.twitter.UtilProtos.Credentials parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
-    }
-    public static net.unto.twitter.UtilProtos.Credentials parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistry extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
-    }
-    public static net.unto.twitter.UtilProtos.Credentials parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
-    }
-    public static net.unto.twitter.UtilProtos.Credentials parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistry extensionRegistry)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
-    }
-    public static net.unto.twitter.UtilProtos.Credentials parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
-    }
-    public static net.unto.twitter.UtilProtos.Credentials parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistry extensionRegistry)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
-    }
-    
-    public static Builder newBuilder() { return new Builder(); }
-    public Builder newBuilderForType() { return new Builder(); }
-    public static Builder newBuilder(net.unto.twitter.UtilProtos.Credentials prototype) {
-      return new Builder().mergeFrom(prototype);
-    }
-    
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> {
-      // Construct using net.unto.twitter.UtilProtos.Credentials.newBuilder()
-      private Builder() {}
-      
-      net.unto.twitter.UtilProtos.Credentials result = new net.unto.twitter.UtilProtos.Credentials();
-      
-      @Override
-      protected net.unto.twitter.UtilProtos.Credentials internalGetResult() {
-        return result;
-      }
-      
-      @Override
-      public Builder clear() {
-        result = new net.unto.twitter.UtilProtos.Credentials();
-        return this;
-      }
-      
-      @Override
-      public Builder clone() {
-        return new Builder().mergeFrom(result);
-      }
-      
-      @Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return net.unto.twitter.UtilProtos.Credentials.getDescriptor();
-      }
-      
-      public net.unto.twitter.UtilProtos.Credentials getDefaultInstanceForType() {
-        return net.unto.twitter.UtilProtos.Credentials.getDefaultInstance();
-      }
-      
-      public net.unto.twitter.UtilProtos.Credentials build() {
-        if (!isInitialized()) {
-          throw new com.google.protobuf.UninitializedMessageException(
-            result);
-        }
-        return buildPartial();
-      }
-      
-      private net.unto.twitter.UtilProtos.Credentials buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        if (!isInitialized()) {
-          throw new com.google.protobuf.UninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return buildPartial();
-      }
-      
-      public net.unto.twitter.UtilProtos.Credentials buildPartial() {
-        net.unto.twitter.UtilProtos.Credentials returnMe = result;
-        result = null;
-        return returnMe;
-      }
-      
-      
-      // optional string username = 1;
-      public boolean hasUsername() {
-        return result.hasUsername();
-      }
-      public java.lang.String getUsername() {
-        return result.getUsername();
-      }
-      public Builder setUsername(java.lang.String value) {
-        result.hasUsername = true;
-        result.username_ = value;
-        return this;
-      }
-      public Builder clearUsername() {
-        result.hasUsername = false;
-        result.username_ = "";
-        return this;
-      }
-      
-      // optional string password = 2;
-      public boolean hasPassword() {
-        return result.hasPassword();
-      }
-      public java.lang.String getPassword() {
-        return result.getPassword();
-      }
-      public Builder setPassword(java.lang.String value) {
-        result.hasPassword = true;
-        result.password_ = value;
-        return this;
-      }
-      public Builder clearPassword() {
-        result.hasPassword = false;
-        result.password_ = "";
-        return this;
-      }
-    }
-    
-    static {
-      net.unto.twitter.UtilProtos.getDescriptor();
-    }
-  }
-  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_twitter_Url_descriptor;
   private static
@@ -1070,11 +881,6 @@ public final class UtilProtos {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_twitter_Url_Part_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_twitter_Credentials_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_twitter_Credentials_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1092,9 +898,8 @@ public final class UtilProtos {
       "\014\n\004name\030\001 \001(\t\022\r\n\005value\030\002 \001(\t\032\\\n\004Part\022\014\n\004" +
       "name\030\001 \001(\t\022\020\n\010filename\030\002 \001(\t\022\024\n\014content_" +
       "type\030\003 \001(\t\022\017\n\007charset\030\004 \001(\t\022\r\n\005value\030\005 \001" +
-      "(\014\"\035\n\006Scheme\022\010\n\004HTTP\020\000\022\t\n\005HTTPS\020\001\"1\n\013Cre" +
-      "dentials\022\020\n\010username\030\001 \001(\t\022\020\n\010password\030\002" +
-      " \001(\tB\036\n\020net.unto.twitterB\nUtilProtos";
+      "(\014\"\035\n\006Scheme\022\010\n\004HTTP\020\000\022\t\n\005HTTPS\020\001B\036\n\020net" +
+      ".unto.twitterB\nUtilProtos";
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
         public com.google.protobuf.ExtensionRegistry assignDescriptors(
@@ -1124,14 +929,6 @@ public final class UtilProtos {
               new java.lang.String[] { "Name", "Filename", "ContentType", "Charset", "Value", },
               net.unto.twitter.UtilProtos.Url.Part.class,
               net.unto.twitter.UtilProtos.Url.Part.Builder.class);
-          internal_static_twitter_Credentials_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_twitter_Credentials_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_twitter_Credentials_descriptor,
-              new java.lang.String[] { "Username", "Password", },
-              net.unto.twitter.UtilProtos.Credentials.class,
-              net.unto.twitter.UtilProtos.Credentials.Builder.class);
           return null;
         }
       };
