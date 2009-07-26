@@ -97,6 +97,28 @@ public final class SearchRequest extends AbstractRequest {
       return parameter("since_id", Long.toString(sinceId));
     }
 
+    /**
+     * Returns tweets send by the given screen name.
+     * 
+     * @param screenName Returns tweets send by the given screen name.
+     * @return Builder
+     */
+    public Builder fromScreenName(String screenName) {
+      assert (screenName != null);
+      return parameter("from", screenName);
+    }
+
+    /**
+     * Returns tweets send to the given screen name.
+     * 
+     * @param screenName Returns tweets send to the given screen name.
+     * @return Builder
+     */
+    public Builder toScreenName(String screenName) {
+      assert (screenName != null);
+      return parameter("to", screenName);
+    }
+
     public SearchRequest build() {
       // Set the host last, so as not to be overwritten by Api.setDefaults.
       // TODO(dewitt): This will prevent all users from overriding

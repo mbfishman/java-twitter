@@ -229,7 +229,8 @@ public class ApiTest {
     Geocode geocode = Geocode.newBuilder().setLatitude(40.757929).setLongitude(
         -73.985506).setRadius(25).setUnit(Geocode.Unit.KILOMETERS).build();
     Request request = api.search("foo").geocode(geocode).page(1)
-        .resultsPerPage(10).sinceId(12345).lang("en").showUser(true).build();
+      .resultsPerPage(10).sinceId(12345).lang("en").showUser(true)
+      .fromScreenName("dewitt").toScreenName("test").build();
     assertEquals("http://search.twitter.com:80/search.json", request.toString());
     assertHasParameter(request.toUrl(), "geocode", "40.757929,-73.985506,25km");
     assertHasParameter(request.toUrl(), "page", "1");
@@ -237,6 +238,8 @@ public class ApiTest {
     assertHasParameter(request.toUrl(), "since_id", "12345");
     assertHasParameter(request.toUrl(), "lang", "en");
     assertHasParameter(request.toUrl(), "show_user", "true");
+    assertHasParameter(request.toUrl(), "from", "dewitt");
+    assertHasParameter(request.toUrl(), "to", "test");
   }
 
   @Test
