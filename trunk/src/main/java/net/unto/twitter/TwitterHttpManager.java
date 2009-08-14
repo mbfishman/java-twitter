@@ -25,7 +25,7 @@ import org.apache.commons.httpclient.methods.multipart.FilePart;
 import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
 import org.apache.commons.httpclient.methods.multipart.Part;
 import org.apache.commons.httpclient.methods.multipart.StringPart;
-
+import org.apache.commons.httpclient.params.HttpMethodParams;
 
 /**
  * An implementation of the TwitterHttpManager interface using the Apache
@@ -122,6 +122,8 @@ public class TwitterHttpManager implements HttpManager {
     GetMethod method = new GetMethod(uri);
     method.setQueryString(getParametersAsNamedValuePairArray(url));
     method.getParams().setCookiePolicy(CookiePolicy.BROWSER_COMPATIBILITY);
+    method.getParams().setParameter(
+        HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
     return execute(method);
   }
 
