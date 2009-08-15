@@ -119,6 +119,16 @@ public final class SearchRequest extends AbstractRequest {
       return parameter("to", screenName);
     }
 
+    /**
+     * Returns tweets up to and including maxId.
+     * 
+     * @param maxId Returns tweets up to and including maxId
+     * @return Builder
+     */
+    public Builder maxId(long maxId) {
+      return parameter("max_id", Long.toString(maxId));
+    }
+
     public SearchRequest build() {
       // Set the host last, so as not to be overwritten by Api.setDefaults.
       // TODO(dewitt): This will prevent all users from overriding
