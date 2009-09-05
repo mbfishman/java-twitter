@@ -1,13 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<metadata>
+<?xml version="1.0" encoding="UTF-8"?><metadata>
   <groupId>net.unto.twitter</groupId>
   <artifactId>java-twitter</artifactId>
   <version>0.9-SNAPSHOT</version>
   <versioning>
     <snapshot>
-      <timestamp>20090321.230914</timestamp>
-      <buildNumber>1</buildNumber>
+      <timestamp>20090905.180152</timestamp>
+      <buildNumber>2</buildNumber>
     </snapshot>
-    <lastUpdated>20090321230919</lastUpdated>
+    <lastUpdated>20090905180200</lastUpdated>
   </versioning>
 </metadata>
