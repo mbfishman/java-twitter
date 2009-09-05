@@ -7,7 +7,8 @@ public final class TwitterProtos {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public static enum Device {
+  public enum Device
+      implements com.google.protobuf.ProtocolMessageEnum {
     NONE(0, 0),
     SMS(1, 1),
     IM(2, 2),
@@ -24,6 +25,18 @@ public final class TwitterProtos {
         default: return null;
       }
     }
+    
+    public static com.google.protobuf.Internal.EnumLiteMap<Device>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static com.google.protobuf.Internal.EnumLiteMap<Device>
+        internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<Device>() {
+            public Device findValueByNumber(int number) {
+              return Device.valueOf(number)
+    ;        }
+          };
     
     public final com.google.protobuf.Descriptors.EnumValueDescriptor
         getValueDescriptor() {
@@ -80,7 +93,6 @@ public final class TwitterProtos {
       return net.unto.twitter.TwitterProtos.internal_static_twitter_User_descriptor;
     }
     
-    @Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.unto.twitter.TwitterProtos.internal_static_twitter_User_fieldAccessorTable;
@@ -105,47 +117,114 @@ public final class TwitterProtos {
         return net.unto.twitter.TwitterProtos.internal_static_twitter_User_Profile_descriptor;
       }
       
-      @Override
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return net.unto.twitter.TwitterProtos.internal_static_twitter_User_Profile_fieldAccessorTable;
       }
       
       // optional string image_url = 1;
+      public static final int IMAGE_URL_FIELD_NUMBER = 1;
       private boolean hasImageUrl;
       private java.lang.String imageUrl_ = "";
       public boolean hasImageUrl() { return hasImageUrl; }
       public java.lang.String getImageUrl() { return imageUrl_; }
       
       // optional string background_color = 2;
+      public static final int BACKGROUND_COLOR_FIELD_NUMBER = 2;
       private boolean hasBackgroundColor;
       private java.lang.String backgroundColor_ = "";
       public boolean hasBackgroundColor() { return hasBackgroundColor; }
       public java.lang.String getBackgroundColor() { return backgroundColor_; }
       
       // optional string text_color = 3;
+      public static final int TEXT_COLOR_FIELD_NUMBER = 3;
       private boolean hasTextColor;
       private java.lang.String textColor_ = "";
       public boolean hasTextColor() { return hasTextColor; }
       public java.lang.String getTextColor() { return textColor_; }
       
       // optional string link_color = 4;
+      public static final int LINK_COLOR_FIELD_NUMBER = 4;
       private boolean hasLinkColor;
       private java.lang.String linkColor_ = "";
       public boolean hasLinkColor() { return hasLinkColor; }
       public java.lang.String getLinkColor() { return linkColor_; }
       
       // optional string sidebar_fill_color = 5;
+      public static final int SIDEBAR_FILL_COLOR_FIELD_NUMBER = 5;
       private boolean hasSidebarFillColor;
       private java.lang.String sidebarFillColor_ = "";
       public boolean hasSidebarFillColor() { return hasSidebarFillColor; }
       public java.lang.String getSidebarFillColor() { return sidebarFillColor_; }
       
       // optional string sidebar_border_color = 6;
+      public static final int SIDEBAR_BORDER_COLOR_FIELD_NUMBER = 6;
       private boolean hasSidebarBorderColor;
       private java.lang.String sidebarBorderColor_ = "";
       public boolean hasSidebarBorderColor() { return hasSidebarBorderColor; }
       public java.lang.String getSidebarBorderColor() { return sidebarBorderColor_; }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        if (hasImageUrl()) {
+          output.writeString(1, getImageUrl());
+        }
+        if (hasBackgroundColor()) {
+          output.writeString(2, getBackgroundColor());
+        }
+        if (hasTextColor()) {
+          output.writeString(3, getTextColor());
+        }
+        if (hasLinkColor()) {
+          output.writeString(4, getLinkColor());
+        }
+        if (hasSidebarFillColor()) {
+          output.writeString(5, getSidebarFillColor());
+        }
+        if (hasSidebarBorderColor()) {
+          output.writeString(6, getSidebarBorderColor());
+        }
+        getUnknownFields().writeTo(output);
+      }
+      
+      private int memoizedSerializedSize = -1;
+      public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+      
+        size = 0;
+        if (hasImageUrl()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeStringSize(1, getImageUrl());
+        }
+        if (hasBackgroundColor()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeStringSize(2, getBackgroundColor());
+        }
+        if (hasTextColor()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeStringSize(3, getTextColor());
+        }
+        if (hasLinkColor()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeStringSize(4, getLinkColor());
+        }
+        if (hasSidebarFillColor()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeStringSize(5, getSidebarFillColor());
+        }
+        if (hasSidebarBorderColor()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeStringSize(6, getSidebarBorderColor());
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
       
       public static net.unto.twitter.TwitterProtos.User.Profile parseFrom(
           com.google.protobuf.ByteString data)
@@ -154,7 +233,7 @@ public final class TwitterProtos {
       }
       public static net.unto.twitter.TwitterProtos.User.Profile parseFrom(
           com.google.protobuf.ByteString data,
-          com.google.protobuf.ExtensionRegistry extensionRegistry)
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return newBuilder().mergeFrom(data, extensionRegistry)
                  .buildParsed();
@@ -165,7 +244,7 @@ public final class TwitterProtos {
       }
       public static net.unto.twitter.TwitterProtos.User.Profile parseFrom(
           byte[] data,
-          com.google.protobuf.ExtensionRegistry extensionRegistry)
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return newBuilder().mergeFrom(data, extensionRegistry)
                  .buildParsed();
@@ -176,9 +255,20 @@ public final class TwitterProtos {
       }
       public static net.unto.twitter.TwitterProtos.User.Profile parseFrom(
           java.io.InputStream input,
-          com.google.protobuf.ExtensionRegistry extensionRegistry)
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         return newBuilder().mergeFrom(input, extensionRegistry)
+                 .buildParsed();
+      }
+      public static net.unto.twitter.TwitterProtos.User.Profile parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return newBuilder().mergeDelimitedFrom(input).buildParsed();
+      }
+      public static net.unto.twitter.TwitterProtos.User.Profile parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return newBuilder().mergeDelimitedFrom(input, extensionRegistry)
                  .buildParsed();
       }
       public static net.unto.twitter.TwitterProtos.User.Profile parseFrom(
@@ -188,42 +278,49 @@ public final class TwitterProtos {
       }
       public static net.unto.twitter.TwitterProtos.User.Profile parseFrom(
           com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistry extensionRegistry)
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         return newBuilder().mergeFrom(input, extensionRegistry)
                  .buildParsed();
       }
       
-      public static Builder newBuilder() { return new Builder(); }
-      public Builder newBuilderForType() { return new Builder(); }
+      public static Builder newBuilder() { return Builder.create(); }
+      public Builder newBuilderForType() { return newBuilder(); }
       public static Builder newBuilder(net.unto.twitter.TwitterProtos.User.Profile prototype) {
-        return new Builder().mergeFrom(prototype);
+        return newBuilder().mergeFrom(prototype);
       }
+      public Builder toBuilder() { return newBuilder(this); }
       
       public static final class Builder extends
           com.google.protobuf.GeneratedMessage.Builder<Builder> {
+        private net.unto.twitter.TwitterProtos.User.Profile result;
+        
         // Construct using net.unto.twitter.TwitterProtos.User.Profile.newBuilder()
         private Builder() {}
         
-        net.unto.twitter.TwitterProtos.User.Profile result = new net.unto.twitter.TwitterProtos.User.Profile();
+        private static Builder create() {
+          Builder builder = new Builder();
+          builder.result = new net.unto.twitter.TwitterProtos.User.Profile();
+          return builder;
+        }
         
-        @Override
         protected net.unto.twitter.TwitterProtos.User.Profile internalGetResult() {
           return result;
         }
         
-        @Override
         public Builder clear() {
+          if (result == null) {
+            throw new IllegalStateException(
+              "Cannot call clear() after build().");
+          }
           result = new net.unto.twitter.TwitterProtos.User.Profile();
           return this;
         }
         
-        @Override
         public Builder clone() {
-          return new Builder().mergeFrom(result);
+          return create().mergeFrom(result);
         }
         
-        @Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
           return net.unto.twitter.TwitterProtos.User.Profile.getDescriptor();
@@ -233,10 +330,12 @@ public final class TwitterProtos {
           return net.unto.twitter.TwitterProtos.User.Profile.getDefaultInstance();
         }
         
+        public boolean isInitialized() {
+          return result.isInitialized();
+        }
         public net.unto.twitter.TwitterProtos.User.Profile build() {
-          if (!isInitialized()) {
-            throw new com.google.protobuf.UninitializedMessageException(
-              result);
+          if (result != null && !isInitialized()) {
+            throw newUninitializedMessageException(result);
           }
           return buildPartial();
         }
@@ -244,16 +343,102 @@ public final class TwitterProtos {
         private net.unto.twitter.TwitterProtos.User.Profile buildParsed()
             throws com.google.protobuf.InvalidProtocolBufferException {
           if (!isInitialized()) {
-            throw new com.google.protobuf.UninitializedMessageException(
+            throw newUninitializedMessageException(
               result).asInvalidProtocolBufferException();
           }
           return buildPartial();
         }
         
         public net.unto.twitter.TwitterProtos.User.Profile buildPartial() {
+          if (result == null) {
+            throw new IllegalStateException(
+              "build() has already been called on this Builder.");
+          }
           net.unto.twitter.TwitterProtos.User.Profile returnMe = result;
           result = null;
           return returnMe;
+        }
+        
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof net.unto.twitter.TwitterProtos.User.Profile) {
+            return mergeFrom((net.unto.twitter.TwitterProtos.User.Profile)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+        
+        public Builder mergeFrom(net.unto.twitter.TwitterProtos.User.Profile other) {
+          if (other == net.unto.twitter.TwitterProtos.User.Profile.getDefaultInstance()) return this;
+          if (other.hasImageUrl()) {
+            setImageUrl(other.getImageUrl());
+          }
+          if (other.hasBackgroundColor()) {
+            setBackgroundColor(other.getBackgroundColor());
+          }
+          if (other.hasTextColor()) {
+            setTextColor(other.getTextColor());
+          }
+          if (other.hasLinkColor()) {
+            setLinkColor(other.getLinkColor());
+          }
+          if (other.hasSidebarFillColor()) {
+            setSidebarFillColor(other.getSidebarFillColor());
+          }
+          if (other.hasSidebarBorderColor()) {
+            setSidebarBorderColor(other.getSidebarBorderColor());
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+        
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder(
+              this.getUnknownFields());
+          while (true) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  this.setUnknownFields(unknownFields.build());
+                  return this;
+                }
+                break;
+              }
+              case 10: {
+                setImageUrl(input.readString());
+                break;
+              }
+              case 18: {
+                setBackgroundColor(input.readString());
+                break;
+              }
+              case 26: {
+                setTextColor(input.readString());
+                break;
+              }
+              case 34: {
+                setLinkColor(input.readString());
+                break;
+              }
+              case 42: {
+                setSidebarFillColor(input.readString());
+                break;
+              }
+              case 50: {
+                setSidebarBorderColor(input.readString());
+                break;
+              }
+            }
+          }
         }
         
         
@@ -265,13 +450,16 @@ public final class TwitterProtos {
           return result.getImageUrl();
         }
         public Builder setImageUrl(java.lang.String value) {
-          result.hasImageUrl = true;
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasImageUrl = true;
           result.imageUrl_ = value;
           return this;
         }
         public Builder clearImageUrl() {
           result.hasImageUrl = false;
-          result.imageUrl_ = "";
+          result.imageUrl_ = getDefaultInstance().getImageUrl();
           return this;
         }
         
@@ -283,13 +471,16 @@ public final class TwitterProtos {
           return result.getBackgroundColor();
         }
         public Builder setBackgroundColor(java.lang.String value) {
-          result.hasBackgroundColor = true;
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasBackgroundColor = true;
           result.backgroundColor_ = value;
           return this;
         }
         public Builder clearBackgroundColor() {
           result.hasBackgroundColor = false;
-          result.backgroundColor_ = "";
+          result.backgroundColor_ = getDefaultInstance().getBackgroundColor();
           return this;
         }
         
@@ -301,13 +492,16 @@ public final class TwitterProtos {
           return result.getTextColor();
         }
         public Builder setTextColor(java.lang.String value) {
-          result.hasTextColor = true;
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasTextColor = true;
           result.textColor_ = value;
           return this;
         }
         public Builder clearTextColor() {
           result.hasTextColor = false;
-          result.textColor_ = "";
+          result.textColor_ = getDefaultInstance().getTextColor();
           return this;
         }
         
@@ -319,13 +513,16 @@ public final class TwitterProtos {
           return result.getLinkColor();
         }
         public Builder setLinkColor(java.lang.String value) {
-          result.hasLinkColor = true;
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasLinkColor = true;
           result.linkColor_ = value;
           return this;
         }
         public Builder clearLinkColor() {
           result.hasLinkColor = false;
-          result.linkColor_ = "";
+          result.linkColor_ = getDefaultInstance().getLinkColor();
           return this;
         }
         
@@ -337,13 +534,16 @@ public final class TwitterProtos {
           return result.getSidebarFillColor();
         }
         public Builder setSidebarFillColor(java.lang.String value) {
-          result.hasSidebarFillColor = true;
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasSidebarFillColor = true;
           result.sidebarFillColor_ = value;
           return this;
         }
         public Builder clearSidebarFillColor() {
           result.hasSidebarFillColor = false;
-          result.sidebarFillColor_ = "";
+          result.sidebarFillColor_ = getDefaultInstance().getSidebarFillColor();
           return this;
         }
         
@@ -355,13 +555,16 @@ public final class TwitterProtos {
           return result.getSidebarBorderColor();
         }
         public Builder setSidebarBorderColor(java.lang.String value) {
-          result.hasSidebarBorderColor = true;
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasSidebarBorderColor = true;
           result.sidebarBorderColor_ = value;
           return this;
         }
         public Builder clearSidebarBorderColor() {
           result.hasSidebarBorderColor = false;
-          result.sidebarBorderColor_ = "";
+          result.sidebarBorderColor_ = getDefaultInstance().getSidebarBorderColor();
           return this;
         }
       }
@@ -369,115 +572,283 @@ public final class TwitterProtos {
       static {
         net.unto.twitter.TwitterProtos.getDescriptor();
       }
+      
+      static {
+        net.unto.twitter.TwitterProtos.internalForceInit();
+      }
     }
     
     // optional uint64 id = 1;
+    public static final int ID_FIELD_NUMBER = 1;
     private boolean hasId;
     private long id_ = 0L;
     public boolean hasId() { return hasId; }
     public long getId() { return id_; }
     
     // optional string name = 2;
+    public static final int NAME_FIELD_NUMBER = 2;
     private boolean hasName;
     private java.lang.String name_ = "";
     public boolean hasName() { return hasName; }
     public java.lang.String getName() { return name_; }
     
     // optional string screen_name = 3;
+    public static final int SCREEN_NAME_FIELD_NUMBER = 3;
     private boolean hasScreenName;
     private java.lang.String screenName_ = "";
     public boolean hasScreenName() { return hasScreenName; }
     public java.lang.String getScreenName() { return screenName_; }
     
     // optional string location = 4;
+    public static final int LOCATION_FIELD_NUMBER = 4;
     private boolean hasLocation;
     private java.lang.String location_ = "";
     public boolean hasLocation() { return hasLocation; }
     public java.lang.String getLocation() { return location_; }
     
     // optional string description = 5;
+    public static final int DESCRIPTION_FIELD_NUMBER = 5;
     private boolean hasDescription;
     private java.lang.String description_ = "";
     public boolean hasDescription() { return hasDescription; }
     public java.lang.String getDescription() { return description_; }
     
     // optional .twitter.User.Profile profile = 6;
+    public static final int PROFILE_FIELD_NUMBER = 6;
     private boolean hasProfile;
     private net.unto.twitter.TwitterProtos.User.Profile profile_ = net.unto.twitter.TwitterProtos.User.Profile.getDefaultInstance();
     public boolean hasProfile() { return hasProfile; }
     public net.unto.twitter.TwitterProtos.User.Profile getProfile() { return profile_; }
     
     // optional string url = 7;
+    public static final int URL_FIELD_NUMBER = 7;
     private boolean hasUrl;
     private java.lang.String url_ = "";
     public boolean hasUrl() { return hasUrl; }
     public java.lang.String getUrl() { return url_; }
     
     // optional bool protected = 8;
+    public static final int PROTECTED_FIELD_NUMBER = 8;
     private boolean hasProtected;
     private boolean protected_ = false;
     public boolean hasProtected() { return hasProtected; }
     public boolean getProtected() { return protected_; }
     
     // optional uint32 followers_count = 9;
+    public static final int FOLLOWERS_COUNT_FIELD_NUMBER = 9;
     private boolean hasFollowersCount;
     private int followersCount_ = 0;
     public boolean hasFollowersCount() { return hasFollowersCount; }
     public int getFollowersCount() { return followersCount_; }
     
     // optional uint32 friends_count = 10;
+    public static final int FRIENDS_COUNT_FIELD_NUMBER = 10;
     private boolean hasFriendsCount;
     private int friendsCount_ = 0;
     public boolean hasFriendsCount() { return hasFriendsCount; }
     public int getFriendsCount() { return friendsCount_; }
     
     // optional string created_at = 11;
+    public static final int CREATED_AT_FIELD_NUMBER = 11;
     private boolean hasCreatedAt;
     private java.lang.String createdAt_ = "";
     public boolean hasCreatedAt() { return hasCreatedAt; }
     public java.lang.String getCreatedAt() { return createdAt_; }
     
     // optional uint32 favorites_count = 12;
+    public static final int FAVORITES_COUNT_FIELD_NUMBER = 12;
     private boolean hasFavoritesCount;
     private int favoritesCount_ = 0;
     public boolean hasFavoritesCount() { return hasFavoritesCount; }
     public int getFavoritesCount() { return favoritesCount_; }
     
     // optional sint32 utc_offset = 13;
+    public static final int UTC_OFFSET_FIELD_NUMBER = 13;
     private boolean hasUtcOffset;
     private int utcOffset_ = 0;
     public boolean hasUtcOffset() { return hasUtcOffset; }
     public int getUtcOffset() { return utcOffset_; }
     
     // optional string time_zone = 14;
+    public static final int TIME_ZONE_FIELD_NUMBER = 14;
     private boolean hasTimeZone;
     private java.lang.String timeZone_ = "";
     public boolean hasTimeZone() { return hasTimeZone; }
     public java.lang.String getTimeZone() { return timeZone_; }
     
     // optional bool following = 15;
+    public static final int FOLLOWING_FIELD_NUMBER = 15;
     private boolean hasFollowing;
     private boolean following_ = false;
     public boolean hasFollowing() { return hasFollowing; }
     public boolean getFollowing() { return following_; }
     
     // optional bool notifications = 16;
+    public static final int NOTIFICATIONS_FIELD_NUMBER = 16;
     private boolean hasNotifications;
     private boolean notifications_ = false;
     public boolean hasNotifications() { return hasNotifications; }
     public boolean getNotifications() { return notifications_; }
     
     // optional uint32 statuses_count = 17;
+    public static final int STATUSES_COUNT_FIELD_NUMBER = 17;
     private boolean hasStatusesCount;
     private int statusesCount_ = 0;
     public boolean hasStatusesCount() { return hasStatusesCount; }
     public int getStatusesCount() { return statusesCount_; }
     
     // optional .twitter.Status status = 18;
+    public static final int STATUS_FIELD_NUMBER = 18;
     private boolean hasStatus;
     private net.unto.twitter.TwitterProtos.Status status_ = net.unto.twitter.TwitterProtos.Status.getDefaultInstance();
     public boolean hasStatus() { return hasStatus; }
     public net.unto.twitter.TwitterProtos.Status getStatus() { return status_; }
+    
+    public final boolean isInitialized() {
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (hasId()) {
+        output.writeUInt64(1, getId());
+      }
+      if (hasName()) {
+        output.writeString(2, getName());
+      }
+      if (hasScreenName()) {
+        output.writeString(3, getScreenName());
+      }
+      if (hasLocation()) {
+        output.writeString(4, getLocation());
+      }
+      if (hasDescription()) {
+        output.writeString(5, getDescription());
+      }
+      if (hasProfile()) {
+        output.writeMessage(6, getProfile());
+      }
+      if (hasUrl()) {
+        output.writeString(7, getUrl());
+      }
+      if (hasProtected()) {
+        output.writeBool(8, getProtected());
+      }
+      if (hasFollowersCount()) {
+        output.writeUInt32(9, getFollowersCount());
+      }
+      if (hasFriendsCount()) {
+        output.writeUInt32(10, getFriendsCount());
+      }
+      if (hasCreatedAt()) {
+        output.writeString(11, getCreatedAt());
+      }
+      if (hasFavoritesCount()) {
+        output.writeUInt32(12, getFavoritesCount());
+      }
+      if (hasUtcOffset()) {
+        output.writeSInt32(13, getUtcOffset());
+      }
+      if (hasTimeZone()) {
+        output.writeString(14, getTimeZone());
+      }
+      if (hasFollowing()) {
+        output.writeBool(15, getFollowing());
+      }
+      if (hasNotifications()) {
+        output.writeBool(16, getNotifications());
+      }
+      if (hasStatusesCount()) {
+        output.writeUInt32(17, getStatusesCount());
+      }
+      if (hasStatus()) {
+        output.writeMessage(18, getStatus());
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (hasId()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(1, getId());
+      }
+      if (hasName()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(2, getName());
+      }
+      if (hasScreenName()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(3, getScreenName());
+      }
+      if (hasLocation()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(4, getLocation());
+      }
+      if (hasDescription()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(5, getDescription());
+      }
+      if (hasProfile()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(6, getProfile());
+      }
+      if (hasUrl()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(7, getUrl());
+      }
+      if (hasProtected()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(8, getProtected());
+      }
+      if (hasFollowersCount()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(9, getFollowersCount());
+      }
+      if (hasFriendsCount()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(10, getFriendsCount());
+      }
+      if (hasCreatedAt()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(11, getCreatedAt());
+      }
+      if (hasFavoritesCount()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(12, getFavoritesCount());
+      }
+      if (hasUtcOffset()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeSInt32Size(13, getUtcOffset());
+      }
+      if (hasTimeZone()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(14, getTimeZone());
+      }
+      if (hasFollowing()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(15, getFollowing());
+      }
+      if (hasNotifications()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(16, getNotifications());
+      }
+      if (hasStatusesCount()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(17, getStatusesCount());
+      }
+      if (hasStatus()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(18, getStatus());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
     
     public static net.unto.twitter.TwitterProtos.User parseFrom(
         com.google.protobuf.ByteString data)
@@ -486,7 +857,7 @@ public final class TwitterProtos {
     }
     public static net.unto.twitter.TwitterProtos.User parseFrom(
         com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
@@ -497,7 +868,7 @@ public final class TwitterProtos {
     }
     public static net.unto.twitter.TwitterProtos.User parseFrom(
         byte[] data,
-        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
@@ -508,9 +879,20 @@ public final class TwitterProtos {
     }
     public static net.unto.twitter.TwitterProtos.User parseFrom(
         java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.unto.twitter.TwitterProtos.User parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeDelimitedFrom(input).buildParsed();
+    }
+    public static net.unto.twitter.TwitterProtos.User parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeDelimitedFrom(input, extensionRegistry)
                .buildParsed();
     }
     public static net.unto.twitter.TwitterProtos.User parseFrom(
@@ -520,42 +902,49 @@ public final class TwitterProtos {
     }
     public static net.unto.twitter.TwitterProtos.User parseFrom(
         com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
     }
     
-    public static Builder newBuilder() { return new Builder(); }
-    public Builder newBuilderForType() { return new Builder(); }
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.unto.twitter.TwitterProtos.User prototype) {
-      return new Builder().mergeFrom(prototype);
+      return newBuilder().mergeFrom(prototype);
     }
+    public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
+      private net.unto.twitter.TwitterProtos.User result;
+      
       // Construct using net.unto.twitter.TwitterProtos.User.newBuilder()
       private Builder() {}
       
-      net.unto.twitter.TwitterProtos.User result = new net.unto.twitter.TwitterProtos.User();
+      private static Builder create() {
+        Builder builder = new Builder();
+        builder.result = new net.unto.twitter.TwitterProtos.User();
+        return builder;
+      }
       
-      @Override
       protected net.unto.twitter.TwitterProtos.User internalGetResult() {
         return result;
       }
       
-      @Override
       public Builder clear() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "Cannot call clear() after build().");
+        }
         result = new net.unto.twitter.TwitterProtos.User();
         return this;
       }
       
-      @Override
       public Builder clone() {
-        return new Builder().mergeFrom(result);
+        return create().mergeFrom(result);
       }
       
-      @Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.unto.twitter.TwitterProtos.User.getDescriptor();
@@ -565,10 +954,12 @@ public final class TwitterProtos {
         return net.unto.twitter.TwitterProtos.User.getDefaultInstance();
       }
       
+      public boolean isInitialized() {
+        return result.isInitialized();
+      }
       public net.unto.twitter.TwitterProtos.User build() {
-        if (!isInitialized()) {
-          throw new com.google.protobuf.UninitializedMessageException(
-            result);
+        if (result != null && !isInitialized()) {
+          throw newUninitializedMessageException(result);
         }
         return buildPartial();
       }
@@ -576,16 +967,196 @@ public final class TwitterProtos {
       private net.unto.twitter.TwitterProtos.User buildParsed()
           throws com.google.protobuf.InvalidProtocolBufferException {
         if (!isInitialized()) {
-          throw new com.google.protobuf.UninitializedMessageException(
+          throw newUninitializedMessageException(
             result).asInvalidProtocolBufferException();
         }
         return buildPartial();
       }
       
       public net.unto.twitter.TwitterProtos.User buildPartial() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "build() has already been called on this Builder.");
+        }
         net.unto.twitter.TwitterProtos.User returnMe = result;
         result = null;
         return returnMe;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof net.unto.twitter.TwitterProtos.User) {
+          return mergeFrom((net.unto.twitter.TwitterProtos.User)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(net.unto.twitter.TwitterProtos.User other) {
+        if (other == net.unto.twitter.TwitterProtos.User.getDefaultInstance()) return this;
+        if (other.hasId()) {
+          setId(other.getId());
+        }
+        if (other.hasName()) {
+          setName(other.getName());
+        }
+        if (other.hasScreenName()) {
+          setScreenName(other.getScreenName());
+        }
+        if (other.hasLocation()) {
+          setLocation(other.getLocation());
+        }
+        if (other.hasDescription()) {
+          setDescription(other.getDescription());
+        }
+        if (other.hasProfile()) {
+          mergeProfile(other.getProfile());
+        }
+        if (other.hasUrl()) {
+          setUrl(other.getUrl());
+        }
+        if (other.hasProtected()) {
+          setProtected(other.getProtected());
+        }
+        if (other.hasFollowersCount()) {
+          setFollowersCount(other.getFollowersCount());
+        }
+        if (other.hasFriendsCount()) {
+          setFriendsCount(other.getFriendsCount());
+        }
+        if (other.hasCreatedAt()) {
+          setCreatedAt(other.getCreatedAt());
+        }
+        if (other.hasFavoritesCount()) {
+          setFavoritesCount(other.getFavoritesCount());
+        }
+        if (other.hasUtcOffset()) {
+          setUtcOffset(other.getUtcOffset());
+        }
+        if (other.hasTimeZone()) {
+          setTimeZone(other.getTimeZone());
+        }
+        if (other.hasFollowing()) {
+          setFollowing(other.getFollowing());
+        }
+        if (other.hasNotifications()) {
+          setNotifications(other.getNotifications());
+        }
+        if (other.hasStatusesCount()) {
+          setStatusesCount(other.getStatusesCount());
+        }
+        if (other.hasStatus()) {
+          mergeStatus(other.getStatus());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              setId(input.readUInt64());
+              break;
+            }
+            case 18: {
+              setName(input.readString());
+              break;
+            }
+            case 26: {
+              setScreenName(input.readString());
+              break;
+            }
+            case 34: {
+              setLocation(input.readString());
+              break;
+            }
+            case 42: {
+              setDescription(input.readString());
+              break;
+            }
+            case 50: {
+              net.unto.twitter.TwitterProtos.User.Profile.Builder subBuilder = net.unto.twitter.TwitterProtos.User.Profile.newBuilder();
+              if (hasProfile()) {
+                subBuilder.mergeFrom(getProfile());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setProfile(subBuilder.buildPartial());
+              break;
+            }
+            case 58: {
+              setUrl(input.readString());
+              break;
+            }
+            case 64: {
+              setProtected(input.readBool());
+              break;
+            }
+            case 72: {
+              setFollowersCount(input.readUInt32());
+              break;
+            }
+            case 80: {
+              setFriendsCount(input.readUInt32());
+              break;
+            }
+            case 90: {
+              setCreatedAt(input.readString());
+              break;
+            }
+            case 96: {
+              setFavoritesCount(input.readUInt32());
+              break;
+            }
+            case 104: {
+              setUtcOffset(input.readSInt32());
+              break;
+            }
+            case 114: {
+              setTimeZone(input.readString());
+              break;
+            }
+            case 120: {
+              setFollowing(input.readBool());
+              break;
+            }
+            case 128: {
+              setNotifications(input.readBool());
+              break;
+            }
+            case 136: {
+              setStatusesCount(input.readUInt32());
+              break;
+            }
+            case 146: {
+              net.unto.twitter.TwitterProtos.Status.Builder subBuilder = net.unto.twitter.TwitterProtos.Status.newBuilder();
+              if (hasStatus()) {
+                subBuilder.mergeFrom(getStatus());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setStatus(subBuilder.buildPartial());
+              break;
+            }
+          }
+        }
       }
       
       
@@ -615,13 +1186,16 @@ public final class TwitterProtos {
         return result.getName();
       }
       public Builder setName(java.lang.String value) {
-        result.hasName = true;
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasName = true;
         result.name_ = value;
         return this;
       }
       public Builder clearName() {
         result.hasName = false;
-        result.name_ = "";
+        result.name_ = getDefaultInstance().getName();
         return this;
       }
       
@@ -633,13 +1207,16 @@ public final class TwitterProtos {
         return result.getScreenName();
       }
       public Builder setScreenName(java.lang.String value) {
-        result.hasScreenName = true;
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasScreenName = true;
         result.screenName_ = value;
         return this;
       }
       public Builder clearScreenName() {
         result.hasScreenName = false;
-        result.screenName_ = "";
+        result.screenName_ = getDefaultInstance().getScreenName();
         return this;
       }
       
@@ -651,13 +1228,16 @@ public final class TwitterProtos {
         return result.getLocation();
       }
       public Builder setLocation(java.lang.String value) {
-        result.hasLocation = true;
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasLocation = true;
         result.location_ = value;
         return this;
       }
       public Builder clearLocation() {
         result.hasLocation = false;
-        result.location_ = "";
+        result.location_ = getDefaultInstance().getLocation();
         return this;
       }
       
@@ -669,13 +1249,16 @@ public final class TwitterProtos {
         return result.getDescription();
       }
       public Builder setDescription(java.lang.String value) {
-        result.hasDescription = true;
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasDescription = true;
         result.description_ = value;
         return this;
       }
       public Builder clearDescription() {
         result.hasDescription = false;
-        result.description_ = "";
+        result.description_ = getDefaultInstance().getDescription();
         return this;
       }
       
@@ -687,6 +1270,9 @@ public final class TwitterProtos {
         return result.getProfile();
       }
       public Builder setProfile(net.unto.twitter.TwitterProtos.User.Profile value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
         result.hasProfile = true;
         result.profile_ = value;
         return this;
@@ -721,13 +1307,16 @@ public final class TwitterProtos {
         return result.getUrl();
       }
       public Builder setUrl(java.lang.String value) {
-        result.hasUrl = true;
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasUrl = true;
         result.url_ = value;
         return this;
       }
       public Builder clearUrl() {
         result.hasUrl = false;
-        result.url_ = "";
+        result.url_ = getDefaultInstance().getUrl();
         return this;
       }
       
@@ -793,13 +1382,16 @@ public final class TwitterProtos {
         return result.getCreatedAt();
       }
       public Builder setCreatedAt(java.lang.String value) {
-        result.hasCreatedAt = true;
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasCreatedAt = true;
         result.createdAt_ = value;
         return this;
       }
       public Builder clearCreatedAt() {
         result.hasCreatedAt = false;
-        result.createdAt_ = "";
+        result.createdAt_ = getDefaultInstance().getCreatedAt();
         return this;
       }
       
@@ -847,13 +1439,16 @@ public final class TwitterProtos {
         return result.getTimeZone();
       }
       public Builder setTimeZone(java.lang.String value) {
-        result.hasTimeZone = true;
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasTimeZone = true;
         result.timeZone_ = value;
         return this;
       }
       public Builder clearTimeZone() {
         result.hasTimeZone = false;
-        result.timeZone_ = "";
+        result.timeZone_ = getDefaultInstance().getTimeZone();
         return this;
       }
       
@@ -919,6 +1514,9 @@ public final class TwitterProtos {
         return result.getStatus();
       }
       public Builder setStatus(net.unto.twitter.TwitterProtos.Status value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
         result.hasStatus = true;
         result.status_ = value;
         return this;
@@ -949,6 +1547,10 @@ public final class TwitterProtos {
     static {
       net.unto.twitter.TwitterProtos.getDescriptor();
     }
+    
+    static {
+      net.unto.twitter.TwitterProtos.internalForceInit();
+    }
   }
   
   public static final class Status extends
@@ -970,65 +1572,156 @@ public final class TwitterProtos {
       return net.unto.twitter.TwitterProtos.internal_static_twitter_Status_descriptor;
     }
     
-    @Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.unto.twitter.TwitterProtos.internal_static_twitter_Status_fieldAccessorTable;
     }
     
     // optional string created_at = 1;
+    public static final int CREATED_AT_FIELD_NUMBER = 1;
     private boolean hasCreatedAt;
     private java.lang.String createdAt_ = "";
     public boolean hasCreatedAt() { return hasCreatedAt; }
     public java.lang.String getCreatedAt() { return createdAt_; }
     
     // optional uint64 id = 2;
+    public static final int ID_FIELD_NUMBER = 2;
     private boolean hasId;
     private long id_ = 0L;
     public boolean hasId() { return hasId; }
     public long getId() { return id_; }
     
     // optional string text = 3;
+    public static final int TEXT_FIELD_NUMBER = 3;
     private boolean hasText;
     private java.lang.String text_ = "";
     public boolean hasText() { return hasText; }
     public java.lang.String getText() { return text_; }
     
     // optional string source = 4;
+    public static final int SOURCE_FIELD_NUMBER = 4;
     private boolean hasSource;
     private java.lang.String source_ = "";
     public boolean hasSource() { return hasSource; }
     public java.lang.String getSource() { return source_; }
     
     // optional bool truncated = 5;
+    public static final int TRUNCATED_FIELD_NUMBER = 5;
     private boolean hasTruncated;
     private boolean truncated_ = false;
     public boolean hasTruncated() { return hasTruncated; }
     public boolean getTruncated() { return truncated_; }
     
     // optional uint64 in_reply_to_status_id = 6;
+    public static final int IN_REPLY_TO_STATUS_ID_FIELD_NUMBER = 6;
     private boolean hasInReplyToStatusId;
     private long inReplyToStatusId_ = 0L;
     public boolean hasInReplyToStatusId() { return hasInReplyToStatusId; }
     public long getInReplyToStatusId() { return inReplyToStatusId_; }
     
     // optional uint64 in_reply_to_user_id = 7;
+    public static final int IN_REPLY_TO_USER_ID_FIELD_NUMBER = 7;
     private boolean hasInReplyToUserId;
     private long inReplyToUserId_ = 0L;
     public boolean hasInReplyToUserId() { return hasInReplyToUserId; }
     public long getInReplyToUserId() { return inReplyToUserId_; }
     
     // optional bool favorited = 8;
+    public static final int FAVORITED_FIELD_NUMBER = 8;
     private boolean hasFavorited;
     private boolean favorited_ = false;
     public boolean hasFavorited() { return hasFavorited; }
     public boolean getFavorited() { return favorited_; }
     
     // optional .twitter.User user = 9;
+    public static final int USER_FIELD_NUMBER = 9;
     private boolean hasUser;
     private net.unto.twitter.TwitterProtos.User user_ = net.unto.twitter.TwitterProtos.User.getDefaultInstance();
     public boolean hasUser() { return hasUser; }
     public net.unto.twitter.TwitterProtos.User getUser() { return user_; }
+    
+    public final boolean isInitialized() {
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (hasCreatedAt()) {
+        output.writeString(1, getCreatedAt());
+      }
+      if (hasId()) {
+        output.writeUInt64(2, getId());
+      }
+      if (hasText()) {
+        output.writeString(3, getText());
+      }
+      if (hasSource()) {
+        output.writeString(4, getSource());
+      }
+      if (hasTruncated()) {
+        output.writeBool(5, getTruncated());
+      }
+      if (hasInReplyToStatusId()) {
+        output.writeUInt64(6, getInReplyToStatusId());
+      }
+      if (hasInReplyToUserId()) {
+        output.writeUInt64(7, getInReplyToUserId());
+      }
+      if (hasFavorited()) {
+        output.writeBool(8, getFavorited());
+      }
+      if (hasUser()) {
+        output.writeMessage(9, getUser());
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (hasCreatedAt()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(1, getCreatedAt());
+      }
+      if (hasId()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(2, getId());
+      }
+      if (hasText()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(3, getText());
+      }
+      if (hasSource()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(4, getSource());
+      }
+      if (hasTruncated()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(5, getTruncated());
+      }
+      if (hasInReplyToStatusId()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(6, getInReplyToStatusId());
+      }
+      if (hasInReplyToUserId()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(7, getInReplyToUserId());
+      }
+      if (hasFavorited()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(8, getFavorited());
+      }
+      if (hasUser()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(9, getUser());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
     
     public static net.unto.twitter.TwitterProtos.Status parseFrom(
         com.google.protobuf.ByteString data)
@@ -1037,7 +1730,7 @@ public final class TwitterProtos {
     }
     public static net.unto.twitter.TwitterProtos.Status parseFrom(
         com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
@@ -1048,7 +1741,7 @@ public final class TwitterProtos {
     }
     public static net.unto.twitter.TwitterProtos.Status parseFrom(
         byte[] data,
-        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
@@ -1059,9 +1752,20 @@ public final class TwitterProtos {
     }
     public static net.unto.twitter.TwitterProtos.Status parseFrom(
         java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.unto.twitter.TwitterProtos.Status parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeDelimitedFrom(input).buildParsed();
+    }
+    public static net.unto.twitter.TwitterProtos.Status parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeDelimitedFrom(input, extensionRegistry)
                .buildParsed();
     }
     public static net.unto.twitter.TwitterProtos.Status parseFrom(
@@ -1071,42 +1775,49 @@ public final class TwitterProtos {
     }
     public static net.unto.twitter.TwitterProtos.Status parseFrom(
         com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
     }
     
-    public static Builder newBuilder() { return new Builder(); }
-    public Builder newBuilderForType() { return new Builder(); }
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.unto.twitter.TwitterProtos.Status prototype) {
-      return new Builder().mergeFrom(prototype);
+      return newBuilder().mergeFrom(prototype);
     }
+    public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
+      private net.unto.twitter.TwitterProtos.Status result;
+      
       // Construct using net.unto.twitter.TwitterProtos.Status.newBuilder()
       private Builder() {}
       
-      net.unto.twitter.TwitterProtos.Status result = new net.unto.twitter.TwitterProtos.Status();
+      private static Builder create() {
+        Builder builder = new Builder();
+        builder.result = new net.unto.twitter.TwitterProtos.Status();
+        return builder;
+      }
       
-      @Override
       protected net.unto.twitter.TwitterProtos.Status internalGetResult() {
         return result;
       }
       
-      @Override
       public Builder clear() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "Cannot call clear() after build().");
+        }
         result = new net.unto.twitter.TwitterProtos.Status();
         return this;
       }
       
-      @Override
       public Builder clone() {
-        return new Builder().mergeFrom(result);
+        return create().mergeFrom(result);
       }
       
-      @Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.unto.twitter.TwitterProtos.Status.getDescriptor();
@@ -1116,10 +1827,12 @@ public final class TwitterProtos {
         return net.unto.twitter.TwitterProtos.Status.getDefaultInstance();
       }
       
+      public boolean isInitialized() {
+        return result.isInitialized();
+      }
       public net.unto.twitter.TwitterProtos.Status build() {
-        if (!isInitialized()) {
-          throw new com.google.protobuf.UninitializedMessageException(
-            result);
+        if (result != null && !isInitialized()) {
+          throw newUninitializedMessageException(result);
         }
         return buildPartial();
       }
@@ -1127,16 +1840,128 @@ public final class TwitterProtos {
       private net.unto.twitter.TwitterProtos.Status buildParsed()
           throws com.google.protobuf.InvalidProtocolBufferException {
         if (!isInitialized()) {
-          throw new com.google.protobuf.UninitializedMessageException(
+          throw newUninitializedMessageException(
             result).asInvalidProtocolBufferException();
         }
         return buildPartial();
       }
       
       public net.unto.twitter.TwitterProtos.Status buildPartial() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "build() has already been called on this Builder.");
+        }
         net.unto.twitter.TwitterProtos.Status returnMe = result;
         result = null;
         return returnMe;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof net.unto.twitter.TwitterProtos.Status) {
+          return mergeFrom((net.unto.twitter.TwitterProtos.Status)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(net.unto.twitter.TwitterProtos.Status other) {
+        if (other == net.unto.twitter.TwitterProtos.Status.getDefaultInstance()) return this;
+        if (other.hasCreatedAt()) {
+          setCreatedAt(other.getCreatedAt());
+        }
+        if (other.hasId()) {
+          setId(other.getId());
+        }
+        if (other.hasText()) {
+          setText(other.getText());
+        }
+        if (other.hasSource()) {
+          setSource(other.getSource());
+        }
+        if (other.hasTruncated()) {
+          setTruncated(other.getTruncated());
+        }
+        if (other.hasInReplyToStatusId()) {
+          setInReplyToStatusId(other.getInReplyToStatusId());
+        }
+        if (other.hasInReplyToUserId()) {
+          setInReplyToUserId(other.getInReplyToUserId());
+        }
+        if (other.hasFavorited()) {
+          setFavorited(other.getFavorited());
+        }
+        if (other.hasUser()) {
+          mergeUser(other.getUser());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              setCreatedAt(input.readString());
+              break;
+            }
+            case 16: {
+              setId(input.readUInt64());
+              break;
+            }
+            case 26: {
+              setText(input.readString());
+              break;
+            }
+            case 34: {
+              setSource(input.readString());
+              break;
+            }
+            case 40: {
+              setTruncated(input.readBool());
+              break;
+            }
+            case 48: {
+              setInReplyToStatusId(input.readUInt64());
+              break;
+            }
+            case 56: {
+              setInReplyToUserId(input.readUInt64());
+              break;
+            }
+            case 64: {
+              setFavorited(input.readBool());
+              break;
+            }
+            case 74: {
+              net.unto.twitter.TwitterProtos.User.Builder subBuilder = net.unto.twitter.TwitterProtos.User.newBuilder();
+              if (hasUser()) {
+                subBuilder.mergeFrom(getUser());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setUser(subBuilder.buildPartial());
+              break;
+            }
+          }
+        }
       }
       
       
@@ -1148,13 +1973,16 @@ public final class TwitterProtos {
         return result.getCreatedAt();
       }
       public Builder setCreatedAt(java.lang.String value) {
-        result.hasCreatedAt = true;
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasCreatedAt = true;
         result.createdAt_ = value;
         return this;
       }
       public Builder clearCreatedAt() {
         result.hasCreatedAt = false;
-        result.createdAt_ = "";
+        result.createdAt_ = getDefaultInstance().getCreatedAt();
         return this;
       }
       
@@ -1184,13 +2012,16 @@ public final class TwitterProtos {
         return result.getText();
       }
       public Builder setText(java.lang.String value) {
-        result.hasText = true;
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasText = true;
         result.text_ = value;
         return this;
       }
       public Builder clearText() {
         result.hasText = false;
-        result.text_ = "";
+        result.text_ = getDefaultInstance().getText();
         return this;
       }
       
@@ -1202,13 +2033,16 @@ public final class TwitterProtos {
         return result.getSource();
       }
       public Builder setSource(java.lang.String value) {
-        result.hasSource = true;
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasSource = true;
         result.source_ = value;
         return this;
       }
       public Builder clearSource() {
         result.hasSource = false;
-        result.source_ = "";
+        result.source_ = getDefaultInstance().getSource();
         return this;
       }
       
@@ -1292,6 +2126,9 @@ public final class TwitterProtos {
         return result.getUser();
       }
       public Builder setUser(net.unto.twitter.TwitterProtos.User value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
         result.hasUser = true;
         result.user_ = value;
         return this;
@@ -1322,6 +2159,10 @@ public final class TwitterProtos {
     static {
       net.unto.twitter.TwitterProtos.getDescriptor();
     }
+    
+    static {
+      net.unto.twitter.TwitterProtos.internalForceInit();
+    }
   }
   
   public static final class DirectMessage extends
@@ -1343,65 +2184,156 @@ public final class TwitterProtos {
       return net.unto.twitter.TwitterProtos.internal_static_twitter_DirectMessage_descriptor;
     }
     
-    @Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.unto.twitter.TwitterProtos.internal_static_twitter_DirectMessage_fieldAccessorTable;
     }
     
     // optional uint64 id = 1;
+    public static final int ID_FIELD_NUMBER = 1;
     private boolean hasId;
     private long id_ = 0L;
     public boolean hasId() { return hasId; }
     public long getId() { return id_; }
     
     // optional string text = 2;
+    public static final int TEXT_FIELD_NUMBER = 2;
     private boolean hasText;
     private java.lang.String text_ = "";
     public boolean hasText() { return hasText; }
     public java.lang.String getText() { return text_; }
     
     // optional uint64 sender_id = 3;
+    public static final int SENDER_ID_FIELD_NUMBER = 3;
     private boolean hasSenderId;
     private long senderId_ = 0L;
     public boolean hasSenderId() { return hasSenderId; }
     public long getSenderId() { return senderId_; }
     
     // optional uint64 recipient_id = 4;
+    public static final int RECIPIENT_ID_FIELD_NUMBER = 4;
     private boolean hasRecipientId;
     private long recipientId_ = 0L;
     public boolean hasRecipientId() { return hasRecipientId; }
     public long getRecipientId() { return recipientId_; }
     
     // optional string created_at = 5;
+    public static final int CREATED_AT_FIELD_NUMBER = 5;
     private boolean hasCreatedAt;
     private java.lang.String createdAt_ = "";
     public boolean hasCreatedAt() { return hasCreatedAt; }
     public java.lang.String getCreatedAt() { return createdAt_; }
     
     // optional string sender_screen_name = 6;
+    public static final int SENDER_SCREEN_NAME_FIELD_NUMBER = 6;
     private boolean hasSenderScreenName;
     private java.lang.String senderScreenName_ = "";
     public boolean hasSenderScreenName() { return hasSenderScreenName; }
     public java.lang.String getSenderScreenName() { return senderScreenName_; }
     
     // optional string recipient_screen_name = 7;
+    public static final int RECIPIENT_SCREEN_NAME_FIELD_NUMBER = 7;
     private boolean hasRecipientScreenName;
     private java.lang.String recipientScreenName_ = "";
     public boolean hasRecipientScreenName() { return hasRecipientScreenName; }
     public java.lang.String getRecipientScreenName() { return recipientScreenName_; }
     
     // optional .twitter.User sender = 8;
+    public static final int SENDER_FIELD_NUMBER = 8;
     private boolean hasSender;
     private net.unto.twitter.TwitterProtos.User sender_ = net.unto.twitter.TwitterProtos.User.getDefaultInstance();
     public boolean hasSender() { return hasSender; }
     public net.unto.twitter.TwitterProtos.User getSender() { return sender_; }
     
     // optional .twitter.User recipient = 9;
+    public static final int RECIPIENT_FIELD_NUMBER = 9;
     private boolean hasRecipient;
     private net.unto.twitter.TwitterProtos.User recipient_ = net.unto.twitter.TwitterProtos.User.getDefaultInstance();
     public boolean hasRecipient() { return hasRecipient; }
     public net.unto.twitter.TwitterProtos.User getRecipient() { return recipient_; }
+    
+    public final boolean isInitialized() {
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (hasId()) {
+        output.writeUInt64(1, getId());
+      }
+      if (hasText()) {
+        output.writeString(2, getText());
+      }
+      if (hasSenderId()) {
+        output.writeUInt64(3, getSenderId());
+      }
+      if (hasRecipientId()) {
+        output.writeUInt64(4, getRecipientId());
+      }
+      if (hasCreatedAt()) {
+        output.writeString(5, getCreatedAt());
+      }
+      if (hasSenderScreenName()) {
+        output.writeString(6, getSenderScreenName());
+      }
+      if (hasRecipientScreenName()) {
+        output.writeString(7, getRecipientScreenName());
+      }
+      if (hasSender()) {
+        output.writeMessage(8, getSender());
+      }
+      if (hasRecipient()) {
+        output.writeMessage(9, getRecipient());
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (hasId()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(1, getId());
+      }
+      if (hasText()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(2, getText());
+      }
+      if (hasSenderId()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(3, getSenderId());
+      }
+      if (hasRecipientId()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(4, getRecipientId());
+      }
+      if (hasCreatedAt()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(5, getCreatedAt());
+      }
+      if (hasSenderScreenName()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(6, getSenderScreenName());
+      }
+      if (hasRecipientScreenName()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(7, getRecipientScreenName());
+      }
+      if (hasSender()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(8, getSender());
+      }
+      if (hasRecipient()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(9, getRecipient());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
     
     public static net.unto.twitter.TwitterProtos.DirectMessage parseFrom(
         com.google.protobuf.ByteString data)
@@ -1410,7 +2342,7 @@ public final class TwitterProtos {
     }
     public static net.unto.twitter.TwitterProtos.DirectMessage parseFrom(
         com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
@@ -1421,7 +2353,7 @@ public final class TwitterProtos {
     }
     public static net.unto.twitter.TwitterProtos.DirectMessage parseFrom(
         byte[] data,
-        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
@@ -1432,9 +2364,20 @@ public final class TwitterProtos {
     }
     public static net.unto.twitter.TwitterProtos.DirectMessage parseFrom(
         java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.unto.twitter.TwitterProtos.DirectMessage parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeDelimitedFrom(input).buildParsed();
+    }
+    public static net.unto.twitter.TwitterProtos.DirectMessage parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeDelimitedFrom(input, extensionRegistry)
                .buildParsed();
     }
     public static net.unto.twitter.TwitterProtos.DirectMessage parseFrom(
@@ -1444,42 +2387,49 @@ public final class TwitterProtos {
     }
     public static net.unto.twitter.TwitterProtos.DirectMessage parseFrom(
         com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
     }
     
-    public static Builder newBuilder() { return new Builder(); }
-    public Builder newBuilderForType() { return new Builder(); }
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.unto.twitter.TwitterProtos.DirectMessage prototype) {
-      return new Builder().mergeFrom(prototype);
+      return newBuilder().mergeFrom(prototype);
     }
+    public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
+      private net.unto.twitter.TwitterProtos.DirectMessage result;
+      
       // Construct using net.unto.twitter.TwitterProtos.DirectMessage.newBuilder()
       private Builder() {}
       
-      net.unto.twitter.TwitterProtos.DirectMessage result = new net.unto.twitter.TwitterProtos.DirectMessage();
+      private static Builder create() {
+        Builder builder = new Builder();
+        builder.result = new net.unto.twitter.TwitterProtos.DirectMessage();
+        return builder;
+      }
       
-      @Override
       protected net.unto.twitter.TwitterProtos.DirectMessage internalGetResult() {
         return result;
       }
       
-      @Override
       public Builder clear() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "Cannot call clear() after build().");
+        }
         result = new net.unto.twitter.TwitterProtos.DirectMessage();
         return this;
       }
       
-      @Override
       public Builder clone() {
-        return new Builder().mergeFrom(result);
+        return create().mergeFrom(result);
       }
       
-      @Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.unto.twitter.TwitterProtos.DirectMessage.getDescriptor();
@@ -1489,10 +2439,12 @@ public final class TwitterProtos {
         return net.unto.twitter.TwitterProtos.DirectMessage.getDefaultInstance();
       }
       
+      public boolean isInitialized() {
+        return result.isInitialized();
+      }
       public net.unto.twitter.TwitterProtos.DirectMessage build() {
-        if (!isInitialized()) {
-          throw new com.google.protobuf.UninitializedMessageException(
-            result);
+        if (result != null && !isInitialized()) {
+          throw newUninitializedMessageException(result);
         }
         return buildPartial();
       }
@@ -1500,16 +2452,133 @@ public final class TwitterProtos {
       private net.unto.twitter.TwitterProtos.DirectMessage buildParsed()
           throws com.google.protobuf.InvalidProtocolBufferException {
         if (!isInitialized()) {
-          throw new com.google.protobuf.UninitializedMessageException(
+          throw newUninitializedMessageException(
             result).asInvalidProtocolBufferException();
         }
         return buildPartial();
       }
       
       public net.unto.twitter.TwitterProtos.DirectMessage buildPartial() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "build() has already been called on this Builder.");
+        }
         net.unto.twitter.TwitterProtos.DirectMessage returnMe = result;
         result = null;
         return returnMe;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof net.unto.twitter.TwitterProtos.DirectMessage) {
+          return mergeFrom((net.unto.twitter.TwitterProtos.DirectMessage)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(net.unto.twitter.TwitterProtos.DirectMessage other) {
+        if (other == net.unto.twitter.TwitterProtos.DirectMessage.getDefaultInstance()) return this;
+        if (other.hasId()) {
+          setId(other.getId());
+        }
+        if (other.hasText()) {
+          setText(other.getText());
+        }
+        if (other.hasSenderId()) {
+          setSenderId(other.getSenderId());
+        }
+        if (other.hasRecipientId()) {
+          setRecipientId(other.getRecipientId());
+        }
+        if (other.hasCreatedAt()) {
+          setCreatedAt(other.getCreatedAt());
+        }
+        if (other.hasSenderScreenName()) {
+          setSenderScreenName(other.getSenderScreenName());
+        }
+        if (other.hasRecipientScreenName()) {
+          setRecipientScreenName(other.getRecipientScreenName());
+        }
+        if (other.hasSender()) {
+          mergeSender(other.getSender());
+        }
+        if (other.hasRecipient()) {
+          mergeRecipient(other.getRecipient());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              setId(input.readUInt64());
+              break;
+            }
+            case 18: {
+              setText(input.readString());
+              break;
+            }
+            case 24: {
+              setSenderId(input.readUInt64());
+              break;
+            }
+            case 32: {
+              setRecipientId(input.readUInt64());
+              break;
+            }
+            case 42: {
+              setCreatedAt(input.readString());
+              break;
+            }
+            case 50: {
+              setSenderScreenName(input.readString());
+              break;
+            }
+            case 58: {
+              setRecipientScreenName(input.readString());
+              break;
+            }
+            case 66: {
+              net.unto.twitter.TwitterProtos.User.Builder subBuilder = net.unto.twitter.TwitterProtos.User.newBuilder();
+              if (hasSender()) {
+                subBuilder.mergeFrom(getSender());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setSender(subBuilder.buildPartial());
+              break;
+            }
+            case 74: {
+              net.unto.twitter.TwitterProtos.User.Builder subBuilder = net.unto.twitter.TwitterProtos.User.newBuilder();
+              if (hasRecipient()) {
+                subBuilder.mergeFrom(getRecipient());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setRecipient(subBuilder.buildPartial());
+              break;
+            }
+          }
+        }
       }
       
       
@@ -1539,13 +2608,16 @@ public final class TwitterProtos {
         return result.getText();
       }
       public Builder setText(java.lang.String value) {
-        result.hasText = true;
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasText = true;
         result.text_ = value;
         return this;
       }
       public Builder clearText() {
         result.hasText = false;
-        result.text_ = "";
+        result.text_ = getDefaultInstance().getText();
         return this;
       }
       
@@ -1593,13 +2665,16 @@ public final class TwitterProtos {
         return result.getCreatedAt();
       }
       public Builder setCreatedAt(java.lang.String value) {
-        result.hasCreatedAt = true;
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasCreatedAt = true;
         result.createdAt_ = value;
         return this;
       }
       public Builder clearCreatedAt() {
         result.hasCreatedAt = false;
-        result.createdAt_ = "";
+        result.createdAt_ = getDefaultInstance().getCreatedAt();
         return this;
       }
       
@@ -1611,13 +2686,16 @@ public final class TwitterProtos {
         return result.getSenderScreenName();
       }
       public Builder setSenderScreenName(java.lang.String value) {
-        result.hasSenderScreenName = true;
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasSenderScreenName = true;
         result.senderScreenName_ = value;
         return this;
       }
       public Builder clearSenderScreenName() {
         result.hasSenderScreenName = false;
-        result.senderScreenName_ = "";
+        result.senderScreenName_ = getDefaultInstance().getSenderScreenName();
         return this;
       }
       
@@ -1629,13 +2707,16 @@ public final class TwitterProtos {
         return result.getRecipientScreenName();
       }
       public Builder setRecipientScreenName(java.lang.String value) {
-        result.hasRecipientScreenName = true;
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasRecipientScreenName = true;
         result.recipientScreenName_ = value;
         return this;
       }
       public Builder clearRecipientScreenName() {
         result.hasRecipientScreenName = false;
-        result.recipientScreenName_ = "";
+        result.recipientScreenName_ = getDefaultInstance().getRecipientScreenName();
         return this;
       }
       
@@ -1647,6 +2728,9 @@ public final class TwitterProtos {
         return result.getSender();
       }
       public Builder setSender(net.unto.twitter.TwitterProtos.User value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
         result.hasSender = true;
         result.sender_ = value;
         return this;
@@ -1681,6 +2765,9 @@ public final class TwitterProtos {
         return result.getRecipient();
       }
       public Builder setRecipient(net.unto.twitter.TwitterProtos.User value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
         result.hasRecipient = true;
         result.recipient_ = value;
         return this;
@@ -1711,6 +2798,10 @@ public final class TwitterProtos {
     static {
       net.unto.twitter.TwitterProtos.getDescriptor();
     }
+    
+    static {
+      net.unto.twitter.TwitterProtos.internalForceInit();
+    }
   }
   
   public static final class Trends extends
@@ -1732,7 +2823,6 @@ public final class TwitterProtos {
       return net.unto.twitter.TwitterProtos.internal_static_twitter_Trends_descriptor;
     }
     
-    @Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.unto.twitter.TwitterProtos.internal_static_twitter_Trends_fieldAccessorTable;
@@ -1757,23 +2847,58 @@ public final class TwitterProtos {
         return net.unto.twitter.TwitterProtos.internal_static_twitter_Trends_Trend_descriptor;
       }
       
-      @Override
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return net.unto.twitter.TwitterProtos.internal_static_twitter_Trends_Trend_fieldAccessorTable;
       }
       
       // optional string name = 1;
+      public static final int NAME_FIELD_NUMBER = 1;
       private boolean hasName;
       private java.lang.String name_ = "";
       public boolean hasName() { return hasName; }
       public java.lang.String getName() { return name_; }
       
       // optional string url = 2;
+      public static final int URL_FIELD_NUMBER = 2;
       private boolean hasUrl;
       private java.lang.String url_ = "";
       public boolean hasUrl() { return hasUrl; }
       public java.lang.String getUrl() { return url_; }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        if (hasName()) {
+          output.writeString(1, getName());
+        }
+        if (hasUrl()) {
+          output.writeString(2, getUrl());
+        }
+        getUnknownFields().writeTo(output);
+      }
+      
+      private int memoizedSerializedSize = -1;
+      public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+      
+        size = 0;
+        if (hasName()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeStringSize(1, getName());
+        }
+        if (hasUrl()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeStringSize(2, getUrl());
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
       
       public static net.unto.twitter.TwitterProtos.Trends.Trend parseFrom(
           com.google.protobuf.ByteString data)
@@ -1782,7 +2907,7 @@ public final class TwitterProtos {
       }
       public static net.unto.twitter.TwitterProtos.Trends.Trend parseFrom(
           com.google.protobuf.ByteString data,
-          com.google.protobuf.ExtensionRegistry extensionRegistry)
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return newBuilder().mergeFrom(data, extensionRegistry)
                  .buildParsed();
@@ -1793,7 +2918,7 @@ public final class TwitterProtos {
       }
       public static net.unto.twitter.TwitterProtos.Trends.Trend parseFrom(
           byte[] data,
-          com.google.protobuf.ExtensionRegistry extensionRegistry)
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return newBuilder().mergeFrom(data, extensionRegistry)
                  .buildParsed();
@@ -1804,9 +2929,20 @@ public final class TwitterProtos {
       }
       public static net.unto.twitter.TwitterProtos.Trends.Trend parseFrom(
           java.io.InputStream input,
-          com.google.protobuf.ExtensionRegistry extensionRegistry)
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         return newBuilder().mergeFrom(input, extensionRegistry)
+                 .buildParsed();
+      }
+      public static net.unto.twitter.TwitterProtos.Trends.Trend parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return newBuilder().mergeDelimitedFrom(input).buildParsed();
+      }
+      public static net.unto.twitter.TwitterProtos.Trends.Trend parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return newBuilder().mergeDelimitedFrom(input, extensionRegistry)
                  .buildParsed();
       }
       public static net.unto.twitter.TwitterProtos.Trends.Trend parseFrom(
@@ -1816,42 +2952,49 @@ public final class TwitterProtos {
       }
       public static net.unto.twitter.TwitterProtos.Trends.Trend parseFrom(
           com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistry extensionRegistry)
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         return newBuilder().mergeFrom(input, extensionRegistry)
                  .buildParsed();
       }
       
-      public static Builder newBuilder() { return new Builder(); }
-      public Builder newBuilderForType() { return new Builder(); }
+      public static Builder newBuilder() { return Builder.create(); }
+      public Builder newBuilderForType() { return newBuilder(); }
       public static Builder newBuilder(net.unto.twitter.TwitterProtos.Trends.Trend prototype) {
-        return new Builder().mergeFrom(prototype);
+        return newBuilder().mergeFrom(prototype);
       }
+      public Builder toBuilder() { return newBuilder(this); }
       
       public static final class Builder extends
           com.google.protobuf.GeneratedMessage.Builder<Builder> {
+        private net.unto.twitter.TwitterProtos.Trends.Trend result;
+        
         // Construct using net.unto.twitter.TwitterProtos.Trends.Trend.newBuilder()
         private Builder() {}
         
-        net.unto.twitter.TwitterProtos.Trends.Trend result = new net.unto.twitter.TwitterProtos.Trends.Trend();
+        private static Builder create() {
+          Builder builder = new Builder();
+          builder.result = new net.unto.twitter.TwitterProtos.Trends.Trend();
+          return builder;
+        }
         
-        @Override
         protected net.unto.twitter.TwitterProtos.Trends.Trend internalGetResult() {
           return result;
         }
         
-        @Override
         public Builder clear() {
+          if (result == null) {
+            throw new IllegalStateException(
+              "Cannot call clear() after build().");
+          }
           result = new net.unto.twitter.TwitterProtos.Trends.Trend();
           return this;
         }
         
-        @Override
         public Builder clone() {
-          return new Builder().mergeFrom(result);
+          return create().mergeFrom(result);
         }
         
-        @Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
           return net.unto.twitter.TwitterProtos.Trends.Trend.getDescriptor();
@@ -1861,10 +3004,12 @@ public final class TwitterProtos {
           return net.unto.twitter.TwitterProtos.Trends.Trend.getDefaultInstance();
         }
         
+        public boolean isInitialized() {
+          return result.isInitialized();
+        }
         public net.unto.twitter.TwitterProtos.Trends.Trend build() {
-          if (!isInitialized()) {
-            throw new com.google.protobuf.UninitializedMessageException(
-              result);
+          if (result != null && !isInitialized()) {
+            throw newUninitializedMessageException(result);
           }
           return buildPartial();
         }
@@ -1872,16 +3017,74 @@ public final class TwitterProtos {
         private net.unto.twitter.TwitterProtos.Trends.Trend buildParsed()
             throws com.google.protobuf.InvalidProtocolBufferException {
           if (!isInitialized()) {
-            throw new com.google.protobuf.UninitializedMessageException(
+            throw newUninitializedMessageException(
               result).asInvalidProtocolBufferException();
           }
           return buildPartial();
         }
         
         public net.unto.twitter.TwitterProtos.Trends.Trend buildPartial() {
+          if (result == null) {
+            throw new IllegalStateException(
+              "build() has already been called on this Builder.");
+          }
           net.unto.twitter.TwitterProtos.Trends.Trend returnMe = result;
           result = null;
           return returnMe;
+        }
+        
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof net.unto.twitter.TwitterProtos.Trends.Trend) {
+            return mergeFrom((net.unto.twitter.TwitterProtos.Trends.Trend)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+        
+        public Builder mergeFrom(net.unto.twitter.TwitterProtos.Trends.Trend other) {
+          if (other == net.unto.twitter.TwitterProtos.Trends.Trend.getDefaultInstance()) return this;
+          if (other.hasName()) {
+            setName(other.getName());
+          }
+          if (other.hasUrl()) {
+            setUrl(other.getUrl());
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+        
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder(
+              this.getUnknownFields());
+          while (true) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  this.setUnknownFields(unknownFields.build());
+                  return this;
+                }
+                break;
+              }
+              case 10: {
+                setName(input.readString());
+                break;
+              }
+              case 18: {
+                setUrl(input.readString());
+                break;
+              }
+            }
+          }
         }
         
         
@@ -1893,13 +3096,16 @@ public final class TwitterProtos {
           return result.getName();
         }
         public Builder setName(java.lang.String value) {
-          result.hasName = true;
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasName = true;
           result.name_ = value;
           return this;
         }
         public Builder clearName() {
           result.hasName = false;
-          result.name_ = "";
+          result.name_ = getDefaultInstance().getName();
           return this;
         }
         
@@ -1911,13 +3117,16 @@ public final class TwitterProtos {
           return result.getUrl();
         }
         public Builder setUrl(java.lang.String value) {
-          result.hasUrl = true;
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasUrl = true;
           result.url_ = value;
           return this;
         }
         public Builder clearUrl() {
           result.hasUrl = false;
-          result.url_ = "";
+          result.url_ = getDefaultInstance().getUrl();
           return this;
         }
       }
@@ -1925,15 +3134,21 @@ public final class TwitterProtos {
       static {
         net.unto.twitter.TwitterProtos.getDescriptor();
       }
+      
+      static {
+        net.unto.twitter.TwitterProtos.internalForceInit();
+      }
     }
     
     // optional string as_of = 1;
+    public static final int AS_OF_FIELD_NUMBER = 1;
     private boolean hasAsOf;
     private java.lang.String asOf_ = "";
     public boolean hasAsOf() { return hasAsOf; }
     public java.lang.String getAsOf() { return asOf_; }
     
     // repeated .twitter.Trends.Trend trends = 2;
+    public static final int TRENDS_FIELD_NUMBER = 2;
     private java.util.List<net.unto.twitter.TwitterProtos.Trends.Trend> trends_ =
       java.util.Collections.emptyList();
     public java.util.List<net.unto.twitter.TwitterProtos.Trends.Trend> getTrendsList() {
@@ -1944,6 +3159,40 @@ public final class TwitterProtos {
       return trends_.get(index);
     }
     
+    public final boolean isInitialized() {
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (hasAsOf()) {
+        output.writeString(1, getAsOf());
+      }
+      for (net.unto.twitter.TwitterProtos.Trends.Trend element : getTrendsList()) {
+        output.writeMessage(2, element);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (hasAsOf()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(1, getAsOf());
+      }
+      for (net.unto.twitter.TwitterProtos.Trends.Trend element : getTrendsList()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, element);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
     public static net.unto.twitter.TwitterProtos.Trends parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1951,7 +3200,7 @@ public final class TwitterProtos {
     }
     public static net.unto.twitter.TwitterProtos.Trends parseFrom(
         com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
@@ -1962,7 +3211,7 @@ public final class TwitterProtos {
     }
     public static net.unto.twitter.TwitterProtos.Trends parseFrom(
         byte[] data,
-        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
@@ -1973,9 +3222,20 @@ public final class TwitterProtos {
     }
     public static net.unto.twitter.TwitterProtos.Trends parseFrom(
         java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.unto.twitter.TwitterProtos.Trends parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeDelimitedFrom(input).buildParsed();
+    }
+    public static net.unto.twitter.TwitterProtos.Trends parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeDelimitedFrom(input, extensionRegistry)
                .buildParsed();
     }
     public static net.unto.twitter.TwitterProtos.Trends parseFrom(
@@ -1985,42 +3245,49 @@ public final class TwitterProtos {
     }
     public static net.unto.twitter.TwitterProtos.Trends parseFrom(
         com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
     }
     
-    public static Builder newBuilder() { return new Builder(); }
-    public Builder newBuilderForType() { return new Builder(); }
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.unto.twitter.TwitterProtos.Trends prototype) {
-      return new Builder().mergeFrom(prototype);
+      return newBuilder().mergeFrom(prototype);
     }
+    public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
+      private net.unto.twitter.TwitterProtos.Trends result;
+      
       // Construct using net.unto.twitter.TwitterProtos.Trends.newBuilder()
       private Builder() {}
       
-      net.unto.twitter.TwitterProtos.Trends result = new net.unto.twitter.TwitterProtos.Trends();
+      private static Builder create() {
+        Builder builder = new Builder();
+        builder.result = new net.unto.twitter.TwitterProtos.Trends();
+        return builder;
+      }
       
-      @Override
       protected net.unto.twitter.TwitterProtos.Trends internalGetResult() {
         return result;
       }
       
-      @Override
       public Builder clear() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "Cannot call clear() after build().");
+        }
         result = new net.unto.twitter.TwitterProtos.Trends();
         return this;
       }
       
-      @Override
       public Builder clone() {
-        return new Builder().mergeFrom(result);
+        return create().mergeFrom(result);
       }
       
-      @Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.unto.twitter.TwitterProtos.Trends.getDescriptor();
@@ -2030,10 +3297,12 @@ public final class TwitterProtos {
         return net.unto.twitter.TwitterProtos.Trends.getDefaultInstance();
       }
       
+      public boolean isInitialized() {
+        return result.isInitialized();
+      }
       public net.unto.twitter.TwitterProtos.Trends build() {
-        if (!isInitialized()) {
-          throw new com.google.protobuf.UninitializedMessageException(
-            result);
+        if (result != null && !isInitialized()) {
+          throw newUninitializedMessageException(result);
         }
         return buildPartial();
       }
@@ -2041,13 +3310,17 @@ public final class TwitterProtos {
       private net.unto.twitter.TwitterProtos.Trends buildParsed()
           throws com.google.protobuf.InvalidProtocolBufferException {
         if (!isInitialized()) {
-          throw new com.google.protobuf.UninitializedMessageException(
+          throw newUninitializedMessageException(
             result).asInvalidProtocolBufferException();
         }
         return buildPartial();
       }
       
       public net.unto.twitter.TwitterProtos.Trends buildPartial() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "build() has already been called on this Builder.");
+        }
         if (result.trends_ != java.util.Collections.EMPTY_LIST) {
           result.trends_ =
             java.util.Collections.unmodifiableList(result.trends_);
@@ -2055,6 +3328,65 @@ public final class TwitterProtos {
         net.unto.twitter.TwitterProtos.Trends returnMe = result;
         result = null;
         return returnMe;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof net.unto.twitter.TwitterProtos.Trends) {
+          return mergeFrom((net.unto.twitter.TwitterProtos.Trends)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(net.unto.twitter.TwitterProtos.Trends other) {
+        if (other == net.unto.twitter.TwitterProtos.Trends.getDefaultInstance()) return this;
+        if (other.hasAsOf()) {
+          setAsOf(other.getAsOf());
+        }
+        if (!other.trends_.isEmpty()) {
+          if (result.trends_.isEmpty()) {
+            result.trends_ = new java.util.ArrayList<net.unto.twitter.TwitterProtos.Trends.Trend>();
+          }
+          result.trends_.addAll(other.trends_);
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              setAsOf(input.readString());
+              break;
+            }
+            case 18: {
+              net.unto.twitter.TwitterProtos.Trends.Trend.Builder subBuilder = net.unto.twitter.TwitterProtos.Trends.Trend.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addTrends(subBuilder.buildPartial());
+              break;
+            }
+          }
+        }
       }
       
       
@@ -2066,13 +3398,16 @@ public final class TwitterProtos {
         return result.getAsOf();
       }
       public Builder setAsOf(java.lang.String value) {
-        result.hasAsOf = true;
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasAsOf = true;
         result.asOf_ = value;
         return this;
       }
       public Builder clearAsOf() {
         result.hasAsOf = false;
-        result.asOf_ = "";
+        result.asOf_ = getDefaultInstance().getAsOf();
         return this;
       }
       
@@ -2087,6 +3422,9 @@ public final class TwitterProtos {
         return result.getTrends(index);
       }
       public Builder setTrends(int index, net.unto.twitter.TwitterProtos.Trends.Trend value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
         result.trends_.set(index, value);
         return this;
       }
@@ -2095,6 +3433,9 @@ public final class TwitterProtos {
         return this;
       }
       public Builder addTrends(net.unto.twitter.TwitterProtos.Trends.Trend value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
         if (result.trends_.isEmpty()) {
           result.trends_ = new java.util.ArrayList<net.unto.twitter.TwitterProtos.Trends.Trend>();
         }
@@ -2125,6 +3466,10 @@ public final class TwitterProtos {
     static {
       net.unto.twitter.TwitterProtos.getDescriptor();
     }
+    
+    static {
+      net.unto.twitter.TwitterProtos.internalForceInit();
+    }
   }
   
   public static final class Results extends
@@ -2146,7 +3491,6 @@ public final class TwitterProtos {
       return net.unto.twitter.TwitterProtos.internal_static_twitter_Results_descriptor;
     }
     
-    @Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.unto.twitter.TwitterProtos.internal_static_twitter_Results_fieldAccessorTable;
@@ -2171,83 +3515,198 @@ public final class TwitterProtos {
         return net.unto.twitter.TwitterProtos.internal_static_twitter_Results_Result_descriptor;
       }
       
-      @Override
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return net.unto.twitter.TwitterProtos.internal_static_twitter_Results_Result_fieldAccessorTable;
       }
       
       // optional string created_at = 1;
+      public static final int CREATED_AT_FIELD_NUMBER = 1;
       private boolean hasCreatedAt;
       private java.lang.String createdAt_ = "";
       public boolean hasCreatedAt() { return hasCreatedAt; }
       public java.lang.String getCreatedAt() { return createdAt_; }
       
       // optional string from_user = 2;
+      public static final int FROM_USER_FIELD_NUMBER = 2;
       private boolean hasFromUser;
       private java.lang.String fromUser_ = "";
       public boolean hasFromUser() { return hasFromUser; }
       public java.lang.String getFromUser() { return fromUser_; }
       
       // optional uint64 from_user_id = 3;
+      public static final int FROM_USER_ID_FIELD_NUMBER = 3;
       private boolean hasFromUserId;
       private long fromUserId_ = 0L;
       public boolean hasFromUserId() { return hasFromUserId; }
       public long getFromUserId() { return fromUserId_; }
       
       // optional uint64 id = 4;
+      public static final int ID_FIELD_NUMBER = 4;
       private boolean hasId;
       private long id_ = 0L;
       public boolean hasId() { return hasId; }
       public long getId() { return id_; }
       
       // optional string iso_language_code = 5;
+      public static final int ISO_LANGUAGE_CODE_FIELD_NUMBER = 5;
       private boolean hasIsoLanguageCode;
       private java.lang.String isoLanguageCode_ = "";
       public boolean hasIsoLanguageCode() { return hasIsoLanguageCode; }
       public java.lang.String getIsoLanguageCode() { return isoLanguageCode_; }
       
       // optional string profile_image_url = 6;
+      public static final int PROFILE_IMAGE_URL_FIELD_NUMBER = 6;
       private boolean hasProfileImageUrl;
       private java.lang.String profileImageUrl_ = "";
       public boolean hasProfileImageUrl() { return hasProfileImageUrl; }
       public java.lang.String getProfileImageUrl() { return profileImageUrl_; }
       
       // optional string source = 7;
+      public static final int SOURCE_FIELD_NUMBER = 7;
       private boolean hasSource;
       private java.lang.String source_ = "";
       public boolean hasSource() { return hasSource; }
       public java.lang.String getSource() { return source_; }
       
       // optional string text = 8;
+      public static final int TEXT_FIELD_NUMBER = 8;
       private boolean hasText;
       private java.lang.String text_ = "";
       public boolean hasText() { return hasText; }
       public java.lang.String getText() { return text_; }
       
       // optional string to_user = 9;
+      public static final int TO_USER_FIELD_NUMBER = 9;
       private boolean hasToUser;
       private java.lang.String toUser_ = "";
       public boolean hasToUser() { return hasToUser; }
       public java.lang.String getToUser() { return toUser_; }
       
       // optional uint64 to_user_id = 10;
+      public static final int TO_USER_ID_FIELD_NUMBER = 10;
       private boolean hasToUserId;
       private long toUserId_ = 0L;
       public boolean hasToUserId() { return hasToUserId; }
       public long getToUserId() { return toUserId_; }
       
       // optional sint32 results_per_page = 11;
+      public static final int RESULTS_PER_PAGE_FIELD_NUMBER = 11;
       private boolean hasResultsPerPage;
       private int resultsPerPage_ = 0;
       public boolean hasResultsPerPage() { return hasResultsPerPage; }
       public int getResultsPerPage() { return resultsPerPage_; }
       
       // optional uint64 since_id = 12;
+      public static final int SINCE_ID_FIELD_NUMBER = 12;
       private boolean hasSinceId;
       private long sinceId_ = 0L;
       public boolean hasSinceId() { return hasSinceId; }
       public long getSinceId() { return sinceId_; }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        if (hasCreatedAt()) {
+          output.writeString(1, getCreatedAt());
+        }
+        if (hasFromUser()) {
+          output.writeString(2, getFromUser());
+        }
+        if (hasFromUserId()) {
+          output.writeUInt64(3, getFromUserId());
+        }
+        if (hasId()) {
+          output.writeUInt64(4, getId());
+        }
+        if (hasIsoLanguageCode()) {
+          output.writeString(5, getIsoLanguageCode());
+        }
+        if (hasProfileImageUrl()) {
+          output.writeString(6, getProfileImageUrl());
+        }
+        if (hasSource()) {
+          output.writeString(7, getSource());
+        }
+        if (hasText()) {
+          output.writeString(8, getText());
+        }
+        if (hasToUser()) {
+          output.writeString(9, getToUser());
+        }
+        if (hasToUserId()) {
+          output.writeUInt64(10, getToUserId());
+        }
+        if (hasResultsPerPage()) {
+          output.writeSInt32(11, getResultsPerPage());
+        }
+        if (hasSinceId()) {
+          output.writeUInt64(12, getSinceId());
+        }
+        getUnknownFields().writeTo(output);
+      }
+      
+      private int memoizedSerializedSize = -1;
+      public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+      
+        size = 0;
+        if (hasCreatedAt()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeStringSize(1, getCreatedAt());
+        }
+        if (hasFromUser()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeStringSize(2, getFromUser());
+        }
+        if (hasFromUserId()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeUInt64Size(3, getFromUserId());
+        }
+        if (hasId()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeUInt64Size(4, getId());
+        }
+        if (hasIsoLanguageCode()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeStringSize(5, getIsoLanguageCode());
+        }
+        if (hasProfileImageUrl()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeStringSize(6, getProfileImageUrl());
+        }
+        if (hasSource()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeStringSize(7, getSource());
+        }
+        if (hasText()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeStringSize(8, getText());
+        }
+        if (hasToUser()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeStringSize(9, getToUser());
+        }
+        if (hasToUserId()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeUInt64Size(10, getToUserId());
+        }
+        if (hasResultsPerPage()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeSInt32Size(11, getResultsPerPage());
+        }
+        if (hasSinceId()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeUInt64Size(12, getSinceId());
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
       
       public static net.unto.twitter.TwitterProtos.Results.Result parseFrom(
           com.google.protobuf.ByteString data)
@@ -2256,7 +3715,7 @@ public final class TwitterProtos {
       }
       public static net.unto.twitter.TwitterProtos.Results.Result parseFrom(
           com.google.protobuf.ByteString data,
-          com.google.protobuf.ExtensionRegistry extensionRegistry)
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return newBuilder().mergeFrom(data, extensionRegistry)
                  .buildParsed();
@@ -2267,7 +3726,7 @@ public final class TwitterProtos {
       }
       public static net.unto.twitter.TwitterProtos.Results.Result parseFrom(
           byte[] data,
-          com.google.protobuf.ExtensionRegistry extensionRegistry)
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return newBuilder().mergeFrom(data, extensionRegistry)
                  .buildParsed();
@@ -2278,9 +3737,20 @@ public final class TwitterProtos {
       }
       public static net.unto.twitter.TwitterProtos.Results.Result parseFrom(
           java.io.InputStream input,
-          com.google.protobuf.ExtensionRegistry extensionRegistry)
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         return newBuilder().mergeFrom(input, extensionRegistry)
+                 .buildParsed();
+      }
+      public static net.unto.twitter.TwitterProtos.Results.Result parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return newBuilder().mergeDelimitedFrom(input).buildParsed();
+      }
+      public static net.unto.twitter.TwitterProtos.Results.Result parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return newBuilder().mergeDelimitedFrom(input, extensionRegistry)
                  .buildParsed();
       }
       public static net.unto.twitter.TwitterProtos.Results.Result parseFrom(
@@ -2290,42 +3760,49 @@ public final class TwitterProtos {
       }
       public static net.unto.twitter.TwitterProtos.Results.Result parseFrom(
           com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistry extensionRegistry)
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         return newBuilder().mergeFrom(input, extensionRegistry)
                  .buildParsed();
       }
       
-      public static Builder newBuilder() { return new Builder(); }
-      public Builder newBuilderForType() { return new Builder(); }
+      public static Builder newBuilder() { return Builder.create(); }
+      public Builder newBuilderForType() { return newBuilder(); }
       public static Builder newBuilder(net.unto.twitter.TwitterProtos.Results.Result prototype) {
-        return new Builder().mergeFrom(prototype);
+        return newBuilder().mergeFrom(prototype);
       }
+      public Builder toBuilder() { return newBuilder(this); }
       
       public static final class Builder extends
           com.google.protobuf.GeneratedMessage.Builder<Builder> {
+        private net.unto.twitter.TwitterProtos.Results.Result result;
+        
         // Construct using net.unto.twitter.TwitterProtos.Results.Result.newBuilder()
         private Builder() {}
         
-        net.unto.twitter.TwitterProtos.Results.Result result = new net.unto.twitter.TwitterProtos.Results.Result();
+        private static Builder create() {
+          Builder builder = new Builder();
+          builder.result = new net.unto.twitter.TwitterProtos.Results.Result();
+          return builder;
+        }
         
-        @Override
         protected net.unto.twitter.TwitterProtos.Results.Result internalGetResult() {
           return result;
         }
         
-        @Override
         public Builder clear() {
+          if (result == null) {
+            throw new IllegalStateException(
+              "Cannot call clear() after build().");
+          }
           result = new net.unto.twitter.TwitterProtos.Results.Result();
           return this;
         }
         
-        @Override
         public Builder clone() {
-          return new Builder().mergeFrom(result);
+          return create().mergeFrom(result);
         }
         
-        @Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
           return net.unto.twitter.TwitterProtos.Results.Result.getDescriptor();
@@ -2335,10 +3812,12 @@ public final class TwitterProtos {
           return net.unto.twitter.TwitterProtos.Results.Result.getDefaultInstance();
         }
         
+        public boolean isInitialized() {
+          return result.isInitialized();
+        }
         public net.unto.twitter.TwitterProtos.Results.Result build() {
-          if (!isInitialized()) {
-            throw new com.google.protobuf.UninitializedMessageException(
-              result);
+          if (result != null && !isInitialized()) {
+            throw newUninitializedMessageException(result);
           }
           return buildPartial();
         }
@@ -2346,16 +3825,144 @@ public final class TwitterProtos {
         private net.unto.twitter.TwitterProtos.Results.Result buildParsed()
             throws com.google.protobuf.InvalidProtocolBufferException {
           if (!isInitialized()) {
-            throw new com.google.protobuf.UninitializedMessageException(
+            throw newUninitializedMessageException(
               result).asInvalidProtocolBufferException();
           }
           return buildPartial();
         }
         
         public net.unto.twitter.TwitterProtos.Results.Result buildPartial() {
+          if (result == null) {
+            throw new IllegalStateException(
+              "build() has already been called on this Builder.");
+          }
           net.unto.twitter.TwitterProtos.Results.Result returnMe = result;
           result = null;
           return returnMe;
+        }
+        
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof net.unto.twitter.TwitterProtos.Results.Result) {
+            return mergeFrom((net.unto.twitter.TwitterProtos.Results.Result)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+        
+        public Builder mergeFrom(net.unto.twitter.TwitterProtos.Results.Result other) {
+          if (other == net.unto.twitter.TwitterProtos.Results.Result.getDefaultInstance()) return this;
+          if (other.hasCreatedAt()) {
+            setCreatedAt(other.getCreatedAt());
+          }
+          if (other.hasFromUser()) {
+            setFromUser(other.getFromUser());
+          }
+          if (other.hasFromUserId()) {
+            setFromUserId(other.getFromUserId());
+          }
+          if (other.hasId()) {
+            setId(other.getId());
+          }
+          if (other.hasIsoLanguageCode()) {
+            setIsoLanguageCode(other.getIsoLanguageCode());
+          }
+          if (other.hasProfileImageUrl()) {
+            setProfileImageUrl(other.getProfileImageUrl());
+          }
+          if (other.hasSource()) {
+            setSource(other.getSource());
+          }
+          if (other.hasText()) {
+            setText(other.getText());
+          }
+          if (other.hasToUser()) {
+            setToUser(other.getToUser());
+          }
+          if (other.hasToUserId()) {
+            setToUserId(other.getToUserId());
+          }
+          if (other.hasResultsPerPage()) {
+            setResultsPerPage(other.getResultsPerPage());
+          }
+          if (other.hasSinceId()) {
+            setSinceId(other.getSinceId());
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+        
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder(
+              this.getUnknownFields());
+          while (true) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  this.setUnknownFields(unknownFields.build());
+                  return this;
+                }
+                break;
+              }
+              case 10: {
+                setCreatedAt(input.readString());
+                break;
+              }
+              case 18: {
+                setFromUser(input.readString());
+                break;
+              }
+              case 24: {
+                setFromUserId(input.readUInt64());
+                break;
+              }
+              case 32: {
+                setId(input.readUInt64());
+                break;
+              }
+              case 42: {
+                setIsoLanguageCode(input.readString());
+                break;
+              }
+              case 50: {
+                setProfileImageUrl(input.readString());
+                break;
+              }
+              case 58: {
+                setSource(input.readString());
+                break;
+              }
+              case 66: {
+                setText(input.readString());
+                break;
+              }
+              case 74: {
+                setToUser(input.readString());
+                break;
+              }
+              case 80: {
+                setToUserId(input.readUInt64());
+                break;
+              }
+              case 88: {
+                setResultsPerPage(input.readSInt32());
+                break;
+              }
+              case 96: {
+                setSinceId(input.readUInt64());
+                break;
+              }
+            }
+          }
         }
         
         
@@ -2367,13 +3974,16 @@ public final class TwitterProtos {
           return result.getCreatedAt();
         }
         public Builder setCreatedAt(java.lang.String value) {
-          result.hasCreatedAt = true;
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasCreatedAt = true;
           result.createdAt_ = value;
           return this;
         }
         public Builder clearCreatedAt() {
           result.hasCreatedAt = false;
-          result.createdAt_ = "";
+          result.createdAt_ = getDefaultInstance().getCreatedAt();
           return this;
         }
         
@@ -2385,13 +3995,16 @@ public final class TwitterProtos {
           return result.getFromUser();
         }
         public Builder setFromUser(java.lang.String value) {
-          result.hasFromUser = true;
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasFromUser = true;
           result.fromUser_ = value;
           return this;
         }
         public Builder clearFromUser() {
           result.hasFromUser = false;
-          result.fromUser_ = "";
+          result.fromUser_ = getDefaultInstance().getFromUser();
           return this;
         }
         
@@ -2439,13 +4052,16 @@ public final class TwitterProtos {
           return result.getIsoLanguageCode();
         }
         public Builder setIsoLanguageCode(java.lang.String value) {
-          result.hasIsoLanguageCode = true;
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasIsoLanguageCode = true;
           result.isoLanguageCode_ = value;
           return this;
         }
         public Builder clearIsoLanguageCode() {
           result.hasIsoLanguageCode = false;
-          result.isoLanguageCode_ = "";
+          result.isoLanguageCode_ = getDefaultInstance().getIsoLanguageCode();
           return this;
         }
         
@@ -2457,13 +4073,16 @@ public final class TwitterProtos {
           return result.getProfileImageUrl();
         }
         public Builder setProfileImageUrl(java.lang.String value) {
-          result.hasProfileImageUrl = true;
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasProfileImageUrl = true;
           result.profileImageUrl_ = value;
           return this;
         }
         public Builder clearProfileImageUrl() {
           result.hasProfileImageUrl = false;
-          result.profileImageUrl_ = "";
+          result.profileImageUrl_ = getDefaultInstance().getProfileImageUrl();
           return this;
         }
         
@@ -2475,13 +4094,16 @@ public final class TwitterProtos {
           return result.getSource();
         }
         public Builder setSource(java.lang.String value) {
-          result.hasSource = true;
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasSource = true;
           result.source_ = value;
           return this;
         }
         public Builder clearSource() {
           result.hasSource = false;
-          result.source_ = "";
+          result.source_ = getDefaultInstance().getSource();
           return this;
         }
         
@@ -2493,13 +4115,16 @@ public final class TwitterProtos {
           return result.getText();
         }
         public Builder setText(java.lang.String value) {
-          result.hasText = true;
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasText = true;
           result.text_ = value;
           return this;
         }
         public Builder clearText() {
           result.hasText = false;
-          result.text_ = "";
+          result.text_ = getDefaultInstance().getText();
           return this;
         }
         
@@ -2511,13 +4136,16 @@ public final class TwitterProtos {
           return result.getToUser();
         }
         public Builder setToUser(java.lang.String value) {
-          result.hasToUser = true;
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasToUser = true;
           result.toUser_ = value;
           return this;
         }
         public Builder clearToUser() {
           result.hasToUser = false;
-          result.toUser_ = "";
+          result.toUser_ = getDefaultInstance().getToUser();
           return this;
         }
         
@@ -2579,45 +4207,56 @@ public final class TwitterProtos {
       static {
         net.unto.twitter.TwitterProtos.getDescriptor();
       }
+      
+      static {
+        net.unto.twitter.TwitterProtos.internalForceInit();
+      }
     }
     
     // optional double completed_in = 1;
+    public static final int COMPLETED_IN_FIELD_NUMBER = 1;
     private boolean hasCompletedIn;
     private double completedIn_ = 0D;
     public boolean hasCompletedIn() { return hasCompletedIn; }
     public double getCompletedIn() { return completedIn_; }
     
     // optional uint64 max_id = 2;
+    public static final int MAX_ID_FIELD_NUMBER = 2;
     private boolean hasMaxId;
     private long maxId_ = 0L;
     public boolean hasMaxId() { return hasMaxId; }
     public long getMaxId() { return maxId_; }
     
     // optional string next_page = 3;
+    public static final int NEXT_PAGE_FIELD_NUMBER = 3;
     private boolean hasNextPage;
     private java.lang.String nextPage_ = "";
     public boolean hasNextPage() { return hasNextPage; }
     public java.lang.String getNextPage() { return nextPage_; }
     
     // optional uint32 page = 4;
+    public static final int PAGE_FIELD_NUMBER = 4;
     private boolean hasPage;
     private int page_ = 0;
     public boolean hasPage() { return hasPage; }
     public int getPage() { return page_; }
     
     // optional string query = 5;
+    public static final int QUERY_FIELD_NUMBER = 5;
     private boolean hasQuery;
     private java.lang.String query_ = "";
     public boolean hasQuery() { return hasQuery; }
     public java.lang.String getQuery() { return query_; }
     
     // optional string refresh_url = 6;
+    public static final int REFRESH_URL_FIELD_NUMBER = 6;
     private boolean hasRefreshUrl;
     private java.lang.String refreshUrl_ = "";
     public boolean hasRefreshUrl() { return hasRefreshUrl; }
     public java.lang.String getRefreshUrl() { return refreshUrl_; }
     
     // repeated .twitter.Results.Result results = 7;
+    public static final int RESULTS_FIELD_NUMBER = 7;
     private java.util.List<net.unto.twitter.TwitterProtos.Results.Result> results_ =
       java.util.Collections.emptyList();
     public java.util.List<net.unto.twitter.TwitterProtos.Results.Result> getResultsList() {
@@ -2628,6 +4267,75 @@ public final class TwitterProtos {
       return results_.get(index);
     }
     
+    public final boolean isInitialized() {
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (hasCompletedIn()) {
+        output.writeDouble(1, getCompletedIn());
+      }
+      if (hasMaxId()) {
+        output.writeUInt64(2, getMaxId());
+      }
+      if (hasNextPage()) {
+        output.writeString(3, getNextPage());
+      }
+      if (hasPage()) {
+        output.writeUInt32(4, getPage());
+      }
+      if (hasQuery()) {
+        output.writeString(5, getQuery());
+      }
+      if (hasRefreshUrl()) {
+        output.writeString(6, getRefreshUrl());
+      }
+      for (net.unto.twitter.TwitterProtos.Results.Result element : getResultsList()) {
+        output.writeMessage(7, element);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (hasCompletedIn()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(1, getCompletedIn());
+      }
+      if (hasMaxId()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(2, getMaxId());
+      }
+      if (hasNextPage()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(3, getNextPage());
+      }
+      if (hasPage()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(4, getPage());
+      }
+      if (hasQuery()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(5, getQuery());
+      }
+      if (hasRefreshUrl()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(6, getRefreshUrl());
+      }
+      for (net.unto.twitter.TwitterProtos.Results.Result element : getResultsList()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(7, element);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
     public static net.unto.twitter.TwitterProtos.Results parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2635,7 +4343,7 @@ public final class TwitterProtos {
     }
     public static net.unto.twitter.TwitterProtos.Results parseFrom(
         com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
@@ -2646,7 +4354,7 @@ public final class TwitterProtos {
     }
     public static net.unto.twitter.TwitterProtos.Results parseFrom(
         byte[] data,
-        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
@@ -2657,9 +4365,20 @@ public final class TwitterProtos {
     }
     public static net.unto.twitter.TwitterProtos.Results parseFrom(
         java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.unto.twitter.TwitterProtos.Results parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeDelimitedFrom(input).buildParsed();
+    }
+    public static net.unto.twitter.TwitterProtos.Results parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeDelimitedFrom(input, extensionRegistry)
                .buildParsed();
     }
     public static net.unto.twitter.TwitterProtos.Results parseFrom(
@@ -2669,42 +4388,49 @@ public final class TwitterProtos {
     }
     public static net.unto.twitter.TwitterProtos.Results parseFrom(
         com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
     }
     
-    public static Builder newBuilder() { return new Builder(); }
-    public Builder newBuilderForType() { return new Builder(); }
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.unto.twitter.TwitterProtos.Results prototype) {
-      return new Builder().mergeFrom(prototype);
+      return newBuilder().mergeFrom(prototype);
     }
+    public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
+      private net.unto.twitter.TwitterProtos.Results result;
+      
       // Construct using net.unto.twitter.TwitterProtos.Results.newBuilder()
       private Builder() {}
       
-      net.unto.twitter.TwitterProtos.Results result = new net.unto.twitter.TwitterProtos.Results();
+      private static Builder create() {
+        Builder builder = new Builder();
+        builder.result = new net.unto.twitter.TwitterProtos.Results();
+        return builder;
+      }
       
-      @Override
       protected net.unto.twitter.TwitterProtos.Results internalGetResult() {
         return result;
       }
       
-      @Override
       public Builder clear() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "Cannot call clear() after build().");
+        }
         result = new net.unto.twitter.TwitterProtos.Results();
         return this;
       }
       
-      @Override
       public Builder clone() {
-        return new Builder().mergeFrom(result);
+        return create().mergeFrom(result);
       }
       
-      @Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.unto.twitter.TwitterProtos.Results.getDescriptor();
@@ -2714,10 +4440,12 @@ public final class TwitterProtos {
         return net.unto.twitter.TwitterProtos.Results.getDefaultInstance();
       }
       
+      public boolean isInitialized() {
+        return result.isInitialized();
+      }
       public net.unto.twitter.TwitterProtos.Results build() {
-        if (!isInitialized()) {
-          throw new com.google.protobuf.UninitializedMessageException(
-            result);
+        if (result != null && !isInitialized()) {
+          throw newUninitializedMessageException(result);
         }
         return buildPartial();
       }
@@ -2725,13 +4453,17 @@ public final class TwitterProtos {
       private net.unto.twitter.TwitterProtos.Results buildParsed()
           throws com.google.protobuf.InvalidProtocolBufferException {
         if (!isInitialized()) {
-          throw new com.google.protobuf.UninitializedMessageException(
+          throw newUninitializedMessageException(
             result).asInvalidProtocolBufferException();
         }
         return buildPartial();
       }
       
       public net.unto.twitter.TwitterProtos.Results buildPartial() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "build() has already been called on this Builder.");
+        }
         if (result.results_ != java.util.Collections.EMPTY_LIST) {
           result.results_ =
             java.util.Collections.unmodifiableList(result.results_);
@@ -2739,6 +4471,100 @@ public final class TwitterProtos {
         net.unto.twitter.TwitterProtos.Results returnMe = result;
         result = null;
         return returnMe;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof net.unto.twitter.TwitterProtos.Results) {
+          return mergeFrom((net.unto.twitter.TwitterProtos.Results)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(net.unto.twitter.TwitterProtos.Results other) {
+        if (other == net.unto.twitter.TwitterProtos.Results.getDefaultInstance()) return this;
+        if (other.hasCompletedIn()) {
+          setCompletedIn(other.getCompletedIn());
+        }
+        if (other.hasMaxId()) {
+          setMaxId(other.getMaxId());
+        }
+        if (other.hasNextPage()) {
+          setNextPage(other.getNextPage());
+        }
+        if (other.hasPage()) {
+          setPage(other.getPage());
+        }
+        if (other.hasQuery()) {
+          setQuery(other.getQuery());
+        }
+        if (other.hasRefreshUrl()) {
+          setRefreshUrl(other.getRefreshUrl());
+        }
+        if (!other.results_.isEmpty()) {
+          if (result.results_.isEmpty()) {
+            result.results_ = new java.util.ArrayList<net.unto.twitter.TwitterProtos.Results.Result>();
+          }
+          result.results_.addAll(other.results_);
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              }
+              break;
+            }
+            case 9: {
+              setCompletedIn(input.readDouble());
+              break;
+            }
+            case 16: {
+              setMaxId(input.readUInt64());
+              break;
+            }
+            case 26: {
+              setNextPage(input.readString());
+              break;
+            }
+            case 32: {
+              setPage(input.readUInt32());
+              break;
+            }
+            case 42: {
+              setQuery(input.readString());
+              break;
+            }
+            case 50: {
+              setRefreshUrl(input.readString());
+              break;
+            }
+            case 58: {
+              net.unto.twitter.TwitterProtos.Results.Result.Builder subBuilder = net.unto.twitter.TwitterProtos.Results.Result.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addResults(subBuilder.buildPartial());
+              break;
+            }
+          }
+        }
       }
       
       
@@ -2786,13 +4612,16 @@ public final class TwitterProtos {
         return result.getNextPage();
       }
       public Builder setNextPage(java.lang.String value) {
-        result.hasNextPage = true;
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasNextPage = true;
         result.nextPage_ = value;
         return this;
       }
       public Builder clearNextPage() {
         result.hasNextPage = false;
-        result.nextPage_ = "";
+        result.nextPage_ = getDefaultInstance().getNextPage();
         return this;
       }
       
@@ -2822,13 +4651,16 @@ public final class TwitterProtos {
         return result.getQuery();
       }
       public Builder setQuery(java.lang.String value) {
-        result.hasQuery = true;
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasQuery = true;
         result.query_ = value;
         return this;
       }
       public Builder clearQuery() {
         result.hasQuery = false;
-        result.query_ = "";
+        result.query_ = getDefaultInstance().getQuery();
         return this;
       }
       
@@ -2840,13 +4672,16 @@ public final class TwitterProtos {
         return result.getRefreshUrl();
       }
       public Builder setRefreshUrl(java.lang.String value) {
-        result.hasRefreshUrl = true;
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasRefreshUrl = true;
         result.refreshUrl_ = value;
         return this;
       }
       public Builder clearRefreshUrl() {
         result.hasRefreshUrl = false;
-        result.refreshUrl_ = "";
+        result.refreshUrl_ = getDefaultInstance().getRefreshUrl();
         return this;
       }
       
@@ -2861,6 +4696,9 @@ public final class TwitterProtos {
         return result.getResults(index);
       }
       public Builder setResults(int index, net.unto.twitter.TwitterProtos.Results.Result value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
         result.results_.set(index, value);
         return this;
       }
@@ -2869,6 +4707,9 @@ public final class TwitterProtos {
         return this;
       }
       public Builder addResults(net.unto.twitter.TwitterProtos.Results.Result value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
         if (result.results_.isEmpty()) {
           result.results_ = new java.util.ArrayList<net.unto.twitter.TwitterProtos.Results.Result>();
         }
@@ -2899,6 +4740,10 @@ public final class TwitterProtos {
     static {
       net.unto.twitter.TwitterProtos.getDescriptor();
     }
+    
+    static {
+      net.unto.twitter.TwitterProtos.internalForceInit();
+    }
   }
   
   public static final class Geocode extends
@@ -2920,13 +4765,13 @@ public final class TwitterProtos {
       return net.unto.twitter.TwitterProtos.internal_static_twitter_Geocode_descriptor;
     }
     
-    @Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.unto.twitter.TwitterProtos.internal_static_twitter_Geocode_fieldAccessorTable;
     }
     
-    public static enum Unit {
+    public enum Unit
+        implements com.google.protobuf.ProtocolMessageEnum {
       MILES(0, 0),
       KILOMETERS(1, 1),
       ;
@@ -2941,6 +4786,18 @@ public final class TwitterProtos {
           default: return null;
         }
       }
+      
+      public static com.google.protobuf.Internal.EnumLiteMap<Unit>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<Unit>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<Unit>() {
+              public Unit findValueByNumber(int number) {
+                return Unit.valueOf(number)
+      ;        }
+            };
       
       public final com.google.protobuf.Descriptors.EnumValueDescriptor
           getValueDescriptor() {
@@ -2979,28 +4836,84 @@ public final class TwitterProtos {
     }
     
     // required double latitude = 1;
+    public static final int LATITUDE_FIELD_NUMBER = 1;
     private boolean hasLatitude;
     private double latitude_ = 0D;
     public boolean hasLatitude() { return hasLatitude; }
     public double getLatitude() { return latitude_; }
     
     // required double longitude = 2;
+    public static final int LONGITUDE_FIELD_NUMBER = 2;
     private boolean hasLongitude;
     private double longitude_ = 0D;
     public boolean hasLongitude() { return hasLongitude; }
     public double getLongitude() { return longitude_; }
     
     // required uint32 radius = 3;
+    public static final int RADIUS_FIELD_NUMBER = 3;
     private boolean hasRadius;
     private int radius_ = 0;
     public boolean hasRadius() { return hasRadius; }
     public int getRadius() { return radius_; }
     
     // required .twitter.Geocode.Unit unit = 4;
+    public static final int UNIT_FIELD_NUMBER = 4;
     private boolean hasUnit;
     private net.unto.twitter.TwitterProtos.Geocode.Unit unit_ = net.unto.twitter.TwitterProtos.Geocode.Unit.MILES;
     public boolean hasUnit() { return hasUnit; }
     public net.unto.twitter.TwitterProtos.Geocode.Unit getUnit() { return unit_; }
+    
+    public final boolean isInitialized() {
+      if (!hasLatitude) return false;
+      if (!hasLongitude) return false;
+      if (!hasRadius) return false;
+      if (!hasUnit) return false;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (hasLatitude()) {
+        output.writeDouble(1, getLatitude());
+      }
+      if (hasLongitude()) {
+        output.writeDouble(2, getLongitude());
+      }
+      if (hasRadius()) {
+        output.writeUInt32(3, getRadius());
+      }
+      if (hasUnit()) {
+        output.writeEnum(4, getUnit().getNumber());
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (hasLatitude()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(1, getLatitude());
+      }
+      if (hasLongitude()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(2, getLongitude());
+      }
+      if (hasRadius()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(3, getRadius());
+      }
+      if (hasUnit()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(4, getUnit().getNumber());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
     
     public static net.unto.twitter.TwitterProtos.Geocode parseFrom(
         com.google.protobuf.ByteString data)
@@ -3009,7 +4922,7 @@ public final class TwitterProtos {
     }
     public static net.unto.twitter.TwitterProtos.Geocode parseFrom(
         com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
@@ -3020,7 +4933,7 @@ public final class TwitterProtos {
     }
     public static net.unto.twitter.TwitterProtos.Geocode parseFrom(
         byte[] data,
-        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
@@ -3031,9 +4944,20 @@ public final class TwitterProtos {
     }
     public static net.unto.twitter.TwitterProtos.Geocode parseFrom(
         java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.unto.twitter.TwitterProtos.Geocode parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeDelimitedFrom(input).buildParsed();
+    }
+    public static net.unto.twitter.TwitterProtos.Geocode parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeDelimitedFrom(input, extensionRegistry)
                .buildParsed();
     }
     public static net.unto.twitter.TwitterProtos.Geocode parseFrom(
@@ -3043,42 +4967,49 @@ public final class TwitterProtos {
     }
     public static net.unto.twitter.TwitterProtos.Geocode parseFrom(
         com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
     }
     
-    public static Builder newBuilder() { return new Builder(); }
-    public Builder newBuilderForType() { return new Builder(); }
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.unto.twitter.TwitterProtos.Geocode prototype) {
-      return new Builder().mergeFrom(prototype);
+      return newBuilder().mergeFrom(prototype);
     }
+    public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
+      private net.unto.twitter.TwitterProtos.Geocode result;
+      
       // Construct using net.unto.twitter.TwitterProtos.Geocode.newBuilder()
       private Builder() {}
       
-      net.unto.twitter.TwitterProtos.Geocode result = new net.unto.twitter.TwitterProtos.Geocode();
+      private static Builder create() {
+        Builder builder = new Builder();
+        builder.result = new net.unto.twitter.TwitterProtos.Geocode();
+        return builder;
+      }
       
-      @Override
       protected net.unto.twitter.TwitterProtos.Geocode internalGetResult() {
         return result;
       }
       
-      @Override
       public Builder clear() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "Cannot call clear() after build().");
+        }
         result = new net.unto.twitter.TwitterProtos.Geocode();
         return this;
       }
       
-      @Override
       public Builder clone() {
-        return new Builder().mergeFrom(result);
+        return create().mergeFrom(result);
       }
       
-      @Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.unto.twitter.TwitterProtos.Geocode.getDescriptor();
@@ -3088,10 +5019,12 @@ public final class TwitterProtos {
         return net.unto.twitter.TwitterProtos.Geocode.getDefaultInstance();
       }
       
+      public boolean isInitialized() {
+        return result.isInitialized();
+      }
       public net.unto.twitter.TwitterProtos.Geocode build() {
-        if (!isInitialized()) {
-          throw new com.google.protobuf.UninitializedMessageException(
-            result);
+        if (result != null && !isInitialized()) {
+          throw newUninitializedMessageException(result);
         }
         return buildPartial();
       }
@@ -3099,16 +5032,94 @@ public final class TwitterProtos {
       private net.unto.twitter.TwitterProtos.Geocode buildParsed()
           throws com.google.protobuf.InvalidProtocolBufferException {
         if (!isInitialized()) {
-          throw new com.google.protobuf.UninitializedMessageException(
+          throw newUninitializedMessageException(
             result).asInvalidProtocolBufferException();
         }
         return buildPartial();
       }
       
       public net.unto.twitter.TwitterProtos.Geocode buildPartial() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "build() has already been called on this Builder.");
+        }
         net.unto.twitter.TwitterProtos.Geocode returnMe = result;
         result = null;
         return returnMe;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof net.unto.twitter.TwitterProtos.Geocode) {
+          return mergeFrom((net.unto.twitter.TwitterProtos.Geocode)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(net.unto.twitter.TwitterProtos.Geocode other) {
+        if (other == net.unto.twitter.TwitterProtos.Geocode.getDefaultInstance()) return this;
+        if (other.hasLatitude()) {
+          setLatitude(other.getLatitude());
+        }
+        if (other.hasLongitude()) {
+          setLongitude(other.getLongitude());
+        }
+        if (other.hasRadius()) {
+          setRadius(other.getRadius());
+        }
+        if (other.hasUnit()) {
+          setUnit(other.getUnit());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              }
+              break;
+            }
+            case 9: {
+              setLatitude(input.readDouble());
+              break;
+            }
+            case 17: {
+              setLongitude(input.readDouble());
+              break;
+            }
+            case 24: {
+              setRadius(input.readUInt32());
+              break;
+            }
+            case 32: {
+              int rawValue = input.readEnum();
+              net.unto.twitter.TwitterProtos.Geocode.Unit value = net.unto.twitter.TwitterProtos.Geocode.Unit.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(4, rawValue);
+              } else {
+                setUnit(value);
+              }
+              break;
+            }
+          }
+        }
       }
       
       
@@ -3174,6 +5185,9 @@ public final class TwitterProtos {
         return result.getUnit();
       }
       public Builder setUnit(net.unto.twitter.TwitterProtos.Geocode.Unit value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
         result.hasUnit = true;
         result.unit_ = value;
         return this;
@@ -3187,6 +5201,10 @@ public final class TwitterProtos {
     
     static {
       net.unto.twitter.TwitterProtos.getDescriptor();
+    }
+    
+    static {
+      net.unto.twitter.TwitterProtos.internalForceInit();
     }
   }
   
@@ -3209,35 +5227,86 @@ public final class TwitterProtos {
       return net.unto.twitter.TwitterProtos.internal_static_twitter_RateLimitStatus_descriptor;
     }
     
-    @Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.unto.twitter.TwitterProtos.internal_static_twitter_RateLimitStatus_fieldAccessorTable;
     }
     
     // optional sint32 hourly_limit = 1;
+    public static final int HOURLY_LIMIT_FIELD_NUMBER = 1;
     private boolean hasHourlyLimit;
     private int hourlyLimit_ = 0;
     public boolean hasHourlyLimit() { return hasHourlyLimit; }
     public int getHourlyLimit() { return hourlyLimit_; }
     
     // optional string reset_time = 2;
+    public static final int RESET_TIME_FIELD_NUMBER = 2;
     private boolean hasResetTime;
     private java.lang.String resetTime_ = "";
     public boolean hasResetTime() { return hasResetTime; }
     public java.lang.String getResetTime() { return resetTime_; }
     
     // optional uint64 reset_time_in_seconds = 3;
+    public static final int RESET_TIME_IN_SECONDS_FIELD_NUMBER = 3;
     private boolean hasResetTimeInSeconds;
     private long resetTimeInSeconds_ = 0L;
     public boolean hasResetTimeInSeconds() { return hasResetTimeInSeconds; }
     public long getResetTimeInSeconds() { return resetTimeInSeconds_; }
     
     // optional uint64 remaining_hits = 4;
+    public static final int REMAINING_HITS_FIELD_NUMBER = 4;
     private boolean hasRemainingHits;
     private long remainingHits_ = 0L;
     public boolean hasRemainingHits() { return hasRemainingHits; }
     public long getRemainingHits() { return remainingHits_; }
+    
+    public final boolean isInitialized() {
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (hasHourlyLimit()) {
+        output.writeSInt32(1, getHourlyLimit());
+      }
+      if (hasResetTime()) {
+        output.writeString(2, getResetTime());
+      }
+      if (hasResetTimeInSeconds()) {
+        output.writeUInt64(3, getResetTimeInSeconds());
+      }
+      if (hasRemainingHits()) {
+        output.writeUInt64(4, getRemainingHits());
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (hasHourlyLimit()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeSInt32Size(1, getHourlyLimit());
+      }
+      if (hasResetTime()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(2, getResetTime());
+      }
+      if (hasResetTimeInSeconds()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(3, getResetTimeInSeconds());
+      }
+      if (hasRemainingHits()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(4, getRemainingHits());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
     
     public static net.unto.twitter.TwitterProtos.RateLimitStatus parseFrom(
         com.google.protobuf.ByteString data)
@@ -3246,7 +5315,7 @@ public final class TwitterProtos {
     }
     public static net.unto.twitter.TwitterProtos.RateLimitStatus parseFrom(
         com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
@@ -3257,7 +5326,7 @@ public final class TwitterProtos {
     }
     public static net.unto.twitter.TwitterProtos.RateLimitStatus parseFrom(
         byte[] data,
-        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
@@ -3268,9 +5337,20 @@ public final class TwitterProtos {
     }
     public static net.unto.twitter.TwitterProtos.RateLimitStatus parseFrom(
         java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.unto.twitter.TwitterProtos.RateLimitStatus parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeDelimitedFrom(input).buildParsed();
+    }
+    public static net.unto.twitter.TwitterProtos.RateLimitStatus parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeDelimitedFrom(input, extensionRegistry)
                .buildParsed();
     }
     public static net.unto.twitter.TwitterProtos.RateLimitStatus parseFrom(
@@ -3280,42 +5360,49 @@ public final class TwitterProtos {
     }
     public static net.unto.twitter.TwitterProtos.RateLimitStatus parseFrom(
         com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistry extensionRegistry)
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
     }
     
-    public static Builder newBuilder() { return new Builder(); }
-    public Builder newBuilderForType() { return new Builder(); }
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.unto.twitter.TwitterProtos.RateLimitStatus prototype) {
-      return new Builder().mergeFrom(prototype);
+      return newBuilder().mergeFrom(prototype);
     }
+    public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
+      private net.unto.twitter.TwitterProtos.RateLimitStatus result;
+      
       // Construct using net.unto.twitter.TwitterProtos.RateLimitStatus.newBuilder()
       private Builder() {}
       
-      net.unto.twitter.TwitterProtos.RateLimitStatus result = new net.unto.twitter.TwitterProtos.RateLimitStatus();
+      private static Builder create() {
+        Builder builder = new Builder();
+        builder.result = new net.unto.twitter.TwitterProtos.RateLimitStatus();
+        return builder;
+      }
       
-      @Override
       protected net.unto.twitter.TwitterProtos.RateLimitStatus internalGetResult() {
         return result;
       }
       
-      @Override
       public Builder clear() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "Cannot call clear() after build().");
+        }
         result = new net.unto.twitter.TwitterProtos.RateLimitStatus();
         return this;
       }
       
-      @Override
       public Builder clone() {
-        return new Builder().mergeFrom(result);
+        return create().mergeFrom(result);
       }
       
-      @Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.unto.twitter.TwitterProtos.RateLimitStatus.getDescriptor();
@@ -3325,10 +5412,12 @@ public final class TwitterProtos {
         return net.unto.twitter.TwitterProtos.RateLimitStatus.getDefaultInstance();
       }
       
+      public boolean isInitialized() {
+        return result.isInitialized();
+      }
       public net.unto.twitter.TwitterProtos.RateLimitStatus build() {
-        if (!isInitialized()) {
-          throw new com.google.protobuf.UninitializedMessageException(
-            result);
+        if (result != null && !isInitialized()) {
+          throw newUninitializedMessageException(result);
         }
         return buildPartial();
       }
@@ -3336,16 +5425,88 @@ public final class TwitterProtos {
       private net.unto.twitter.TwitterProtos.RateLimitStatus buildParsed()
           throws com.google.protobuf.InvalidProtocolBufferException {
         if (!isInitialized()) {
-          throw new com.google.protobuf.UninitializedMessageException(
+          throw newUninitializedMessageException(
             result).asInvalidProtocolBufferException();
         }
         return buildPartial();
       }
       
       public net.unto.twitter.TwitterProtos.RateLimitStatus buildPartial() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "build() has already been called on this Builder.");
+        }
         net.unto.twitter.TwitterProtos.RateLimitStatus returnMe = result;
         result = null;
         return returnMe;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof net.unto.twitter.TwitterProtos.RateLimitStatus) {
+          return mergeFrom((net.unto.twitter.TwitterProtos.RateLimitStatus)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(net.unto.twitter.TwitterProtos.RateLimitStatus other) {
+        if (other == net.unto.twitter.TwitterProtos.RateLimitStatus.getDefaultInstance()) return this;
+        if (other.hasHourlyLimit()) {
+          setHourlyLimit(other.getHourlyLimit());
+        }
+        if (other.hasResetTime()) {
+          setResetTime(other.getResetTime());
+        }
+        if (other.hasResetTimeInSeconds()) {
+          setResetTimeInSeconds(other.getResetTimeInSeconds());
+        }
+        if (other.hasRemainingHits()) {
+          setRemainingHits(other.getRemainingHits());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              setHourlyLimit(input.readSInt32());
+              break;
+            }
+            case 18: {
+              setResetTime(input.readString());
+              break;
+            }
+            case 24: {
+              setResetTimeInSeconds(input.readUInt64());
+              break;
+            }
+            case 32: {
+              setRemainingHits(input.readUInt64());
+              break;
+            }
+          }
+        }
       }
       
       
@@ -3375,13 +5536,16 @@ public final class TwitterProtos {
         return result.getResetTime();
       }
       public Builder setResetTime(java.lang.String value) {
-        result.hasResetTime = true;
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasResetTime = true;
         result.resetTime_ = value;
         return this;
       }
       public Builder clearResetTime() {
         result.hasResetTime = false;
-        result.resetTime_ = "";
+        result.resetTime_ = getDefaultInstance().getResetTime();
         return this;
       }
       
@@ -3424,6 +5588,10 @@ public final class TwitterProtos {
     
     static {
       net.unto.twitter.TwitterProtos.getDescriptor();
+    }
+    
+    static {
+      net.unto.twitter.TwitterProtos.internalForceInit();
     }
   }
   
@@ -3485,7 +5653,7 @@ public final class TwitterProtos {
   private static com.google.protobuf.Descriptors.FileDescriptor
       descriptor;
   static {
-    java.lang.String descriptorData =
+    java.lang.String[] descriptorData = {
       "\n\rtwitter.proto\022\007twitter\"\246\004\n\004User\022\n\n\002id\030" +
       "\001 \001(\004\022\014\n\004name\030\002 \001(\t\022\023\n\013screen_name\030\003 \001(\t" +
       "\022\020\n\010location\030\004 \001(\t\022\023\n\013description\030\005 \001(\t\022" +
@@ -3495,7 +5663,7 @@ public final class TwitterProtos {
       "\022\n\ncreated_at\030\013 \001(\t\022\027\n\017favorites_count\030\014" +
       " \001(\r\022\022\n\nutc_offset\030\r \001(\021\022\021\n\ttime_zone\030\016 " +
       "\001(\t\022\021\n\tfollowing\030\017 \001(\010\022\025\n\rnotifications\030" +
-      "\020 \001(\010\022\026\n\016statuses_count\030\021 \001(\r\022\037\n\006status\030" +
+      "\020 \001(\010\022\026\n\016statuses_count\030\021 \001(\r\022\037\n\006status\030",
       "\022 \001(\0132\017.twitter.Status\032\230\001\n\007Profile\022\021\n\tim" +
       "age_url\030\001 \001(\t\022\030\n\020background_color\030\002 \001(\t\022" +
       "\022\n\ntext_color\030\003 \001(\t\022\022\n\nlink_color\030\004 \001(\t\022" +
@@ -3505,7 +5673,7 @@ public final class TwitterProtos {
       "urce\030\004 \001(\t\022\021\n\ttruncated\030\005 \001(\010\022\035\n\025in_repl" +
       "y_to_status_id\030\006 \001(\004\022\033\n\023in_reply_to_user" +
       "_id\030\007 \001(\004\022\021\n\tfavorited\030\010 \001(\010\022\033\n\004user\030\t \001" +
-      "(\0132\r.twitter.User\"\342\001\n\rDirectMessage\022\n\n\002i" +
+      "(\0132\r.twitter.User\"\342\001\n\rDirectMessage\022\n\n\002i",
       "d\030\001 \001(\004\022\014\n\004text\030\002 \001(\t\022\021\n\tsender_id\030\003 \001(\004" +
       "\022\024\n\014recipient_id\030\004 \001(\004\022\022\n\ncreated_at\030\005 \001" +
       "(\t\022\032\n\022sender_screen_name\030\006 \001(\t\022\035\n\025recipi" +
@@ -3515,7 +5683,7 @@ public final class TwitterProtos {
       "s\030\002 \003(\0132\025.twitter.Trends.Trend\032\"\n\005Trend\022" +
       "\014\n\004name\030\001 \001(\t\022\013\n\003url\030\002 \001(\t\"\227\003\n\007Results\022\024" +
       "\n\014completed_in\030\001 \001(\001\022\016\n\006max_id\030\002 \001(\004\022\021\n\t" +
-      "next_page\030\003 \001(\t\022\014\n\004page\030\004 \001(\r\022\r\n\005query\030\005" +
+      "next_page\030\003 \001(\t\022\014\n\004page\030\004 \001(\r\022\r\n\005query\030\005",
       " \001(\t\022\023\n\013refresh_url\030\006 \001(\t\022(\n\007results\030\007 \003" +
       "(\0132\027.twitter.Results.Result\032\366\001\n\006Result\022\022" +
       "\n\ncreated_at\030\001 \001(\t\022\021\n\tfrom_user\030\002 \001(\t\022\024\n" +
@@ -3525,14 +5693,15 @@ public final class TwitterProtos {
       "o_user\030\t \001(\t\022\022\n\nto_user_id\030\n \001(\004\022\030\n\020resu" +
       "lts_per_page\030\013 \001(\021\022\020\n\010since_id\030\014 \001(\004\"\206\001\n" +
       "\007Geocode\022\020\n\010latitude\030\001 \002(\001\022\021\n\tlongitude\030" +
-      "\002 \002(\001\022\016\n\006radius\030\003 \002(\r\022#\n\004unit\030\004 \002(\0162\025.tw" +
+      "\002 \002(\001\022\016\n\006radius\030\003 \002(\r\022#\n\004unit\030\004 \002(\0162\025.tw",
       "itter.Geocode.Unit\"!\n\004Unit\022\t\n\005MILES\020\000\022\016\n" +
       "\nKILOMETERS\020\001\"r\n\017RateLimitStatus\022\024\n\014hour" +
       "ly_limit\030\001 \001(\021\022\022\n\nreset_time\030\002 \001(\t\022\035\n\025re" +
       "set_time_in_seconds\030\003 \001(\004\022\026\n\016remaining_h" +
       "its\030\004 \001(\004*#\n\006Device\022\010\n\004NONE\020\000\022\007\n\003SMS\020\001\022\006" +
       "\n\002IM\020\002B!\n\020net.unto.twitterB\rTwitterProto" +
-      "s";
+      "s"
+    };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
         public com.google.protobuf.ExtensionRegistry assignDescriptors(
@@ -3626,4 +5795,6 @@ public final class TwitterProtos {
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
   }
+  
+  public static void internalForceInit() {}
 }
