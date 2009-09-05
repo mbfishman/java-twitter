@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<metadata>
+<?xml version="1.0" encoding="UTF-8"?><metadata>
   <groupId>net.unto.twitter</groupId>
   <artifactId>java-twitter</artifactId>
   <version>0.9-SNAPSHOT</version>
@@ -7,6 +6,6 @@
     <versions>
       <version>0.9-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20090321230914</lastUpdated>
+    <lastUpdated>20090905180152</lastUpdated>
   </versioning>
 </metadata>
