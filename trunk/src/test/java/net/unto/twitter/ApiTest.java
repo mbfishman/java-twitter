@@ -257,6 +257,40 @@ public class ApiTest {
   }
 
   @Test
+  public void testShowFriendshipsUrl() {
+    Api api = Api.builder().build();
+    Request requestWithoutAuthById = api.showFriendships()
+        .sourceId(673483)
+	.targetId(20)
+	.build();
+    assertEquals("http://twitter.com:80/friendships/show.json",
+		 requestWithoutAuthById.toString());
+    assertHasParameter(requestWithoutAuthById.toUrl(), "source_id", "673483");
+    assertHasParameter(requestWithoutAuthById.toUrl(), "target_id", "20");
+    Request requestWithoutAuthByScreenName = api.showFriendships()
+        .sourceScreenName("dewitt")
+	.targetScreenName("ev")
+	.build();
+    assertEquals("http://twitter.com:80/friendships/show.json",
+		 requestWithoutAuthByScreenName.toString());
+    assertHasParameter(requestWithoutAuthByScreenName.toUrl(), "source_screen_name", "dewitt");
+    assertHasParameter(requestWithoutAuthByScreenName.toUrl(), "target_screen_name", "ev");
+    api = Api.builder().username("test").password("test").build();
+    Request requestWithAuthById = api.showFriendships()
+	.targetId(20)
+	.build();
+    assertEquals("http://twitter.com:80/friendships/show.json",
+		 requestWithAuthById.toString());
+    assertHasParameter(requestWithAuthById.toUrl(), "target_id", "20");
+    Request requestWithAuthByScreenName = api.showFriendships()
+	.targetScreenName("ev")
+	.build();
+    assertEquals("http://twitter.com:80/friendships/show.json",
+		 requestWithAuthByScreenName.toString());
+    assertHasParameter(requestWithAuthByScreenName.toUrl(), "target_screen_name", "ev");
+  }
+
+  @Test
   public void testShowStatusRequestUrl() {
     Api api = Api.builder().username("test").password("test").build();
     Request request = api.showStatus(12345).build();

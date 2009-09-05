@@ -34,6 +34,7 @@ import net.unto.twitter.methods.RepliesRequest;
 import net.unto.twitter.methods.Request;
 import net.unto.twitter.methods.SearchRequest;
 import net.unto.twitter.methods.SentDirectMessagesRequest;
+import net.unto.twitter.methods.ShowFriendshipsRequest;
 import net.unto.twitter.methods.ShowStatusRequest;
 import net.unto.twitter.methods.ShowUserRequest;
 import net.unto.twitter.methods.TestRequest;
@@ -418,6 +419,32 @@ public class Api {
     builder.host(host);
     builder.port(port);
     builder.scheme(scheme);
+  }
+
+  /**
+   * Returns detailed information about the relationship between two users.
+   *
+   * <p>Must be authenticated if neither of sourceId or sourceScreenName are set.
+   *
+   * <p>
+   * Example usage:
+   * </p>
+   * <p>
+   * <code>{@link Relationship} relationship = api.showFriendships()
+   *     .sourceScreenName("dewitt")
+   *     .targetScreenName("ev")
+   *     .build()
+   *     .get();
+   * </code>
+   * </p>
+   * 
+   * @return A {@link net.unto.twitter.methods.ShowFriendshipsRequest.Builder}
+   *         instance.
+   */
+  public ShowFriendshipsRequest.Builder showFriendships() {
+    ShowFriendshipsRequest.Builder builder = ShowFriendshipsRequest.builder();
+    setDefaults(builder);
+    return builder;
   }
 
   /**
