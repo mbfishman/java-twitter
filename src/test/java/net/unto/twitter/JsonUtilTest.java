@@ -10,6 +10,7 @@ import java.nio.CharBuffer;
 import java.util.List;
 
 import net.unto.twitter.TwitterProtos.DirectMessage;
+import net.unto.twitter.TwitterProtos.Relationship;
 import net.unto.twitter.TwitterProtos.RateLimitStatus;
 import net.unto.twitter.TwitterProtos.Results;
 import net.unto.twitter.TwitterProtos.Status;
@@ -96,6 +97,14 @@ public class JsonUtilTest {
     String json = readTestData("rate_limit_status.json");
     RateLimitStatus rateLimitStatus = JsonUtil.newRateLimitStatus(json);
     assertEquals(new Integer(100), new Integer(rateLimitStatus.getHourlyLimit()));
+  }
+
+  @Test
+  public void testNewRelationship() throws IOException {
+    String json = readTestData("friendships.json");
+    Relationship relationship = JsonUtil.newRelationship(json);
+    assertEquals(673483, relationship.getSource().getId());
+    assertEquals(20, relationship.getTarget().getId());
   }
 
   private String TEST_DATA_DIR = "src/test/data/";

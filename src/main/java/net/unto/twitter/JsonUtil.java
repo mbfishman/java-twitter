@@ -6,6 +6,7 @@ import java.util.List;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.unto.twitter.TwitterProtos.DirectMessage;
+import net.unto.twitter.TwitterProtos.Relationship;
 import net.unto.twitter.TwitterProtos.RateLimitStatus;
 import net.unto.twitter.TwitterProtos.Results;
 import net.unto.twitter.TwitterProtos.Status;
@@ -246,6 +247,39 @@ public abstract class JsonUtil {
     builder.setResetTime(jsonObject.optString("reset_time"));
     builder.setResetTimeInSeconds(jsonObject.optLong("reset_time_in_seconds"));
     builder.setRemainingHits(jsonObject.optLong("remaining_hits"));
+    return builder.build();
+  }
+
+  public static Relationship newRelationship(String jsonString) {
+    return newRelationship(JSONObject.fromObject(jsonString));
+  }
+
+  private final static Relationship newRelationship(JSONObject jsonObject) {
+    if (jsonObject == null || jsonObject.isNullObject() || !jsonObject.has("relationship")) {
+      return null;
+    }
+    JSONObject relationshipObject = jsonObject.getJSONObject("relationship");
+    Relationship.Builder builder = Relationship.newBuilder();
+    if (relationshipObject.has("source")) {
+      builder.setSource(newRelationshipUser(relationshipObject.optJSONObject("source")));
+    }
+    if (relationshipObject.has("target")) {
+      builder.setTarget(newRelationshipUser(relationshipObject.optJSONObject("target")));
+    }
+    return builder.build();
+  }
+
+  private final static Relationship.User newRelationshipUser(JSONObject jsonObject) {
+    if (jsonObject == null || jsonObject.isNullObject()) {
+      return null;
+    }
+    Relationship.User.Builder builder = Relationship.User.newBuilder();
+    builder.setId(jsonObject.optLong("id"));
+    builder.setScreenName(jsonObject.optString("screen_name"));
+    builder.setFollowing(jsonObject.optBoolean("following"));
+    builder.setFollowedBy(jsonObject.optBoolean("followed_by"));
+    builder.setNotificationsEnabled(jsonObject.optBoolean("notifications_enabled"));
+    builder.setBlocking(jsonObject.optBoolean("blocking"));
     return builder.build();
   }
 }
